@@ -1,0 +1,5 @@
+*.dSYM
+.DS_Store
+zappy_server
+zappy_ai
+zappy_gui
