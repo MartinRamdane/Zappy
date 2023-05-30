@@ -1,0 +1,69 @@
+name: CI
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Create coding style directory
+        run: mkdir check_codingstyle
+      - name: Download script
+        run: wget --no-check-certificate -O check_codingstyle/coding-style.sh https://uploads.admlbs.fr/coding-style.sh
+      - name: Set permissions
+        run: chmod 0777 check_codingstyle/coding-style.sh
+      - name: Run coding style checker
+        run: ./check_codingstyle/coding-style.sh .. .
+      - name: 'Upload coding style logs'
+        uses: actions/upload-artifact@v3
+        with:
+          name: coding-style-reports.log
+          path: coding-style-reports.log
+          retention-days: 1
+  check_major:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        - name: Download coding style results
+          uses: actions/download-artifact@v3
+          with:
+            name: coding-style-reports.log
+        - name: Check number of "MAJOR:" occurrences
+          run: |
+            major_occurrences=$(grep -c "MAJOR:" coding-style-reports.log)
+            if [ "$major_occurrences" -gt 7 ]; then
+                echo "Too many MAJOR occurrences!"
+                cat coding-style-reports.log
+                exit 1
+            fi
+  check_minor:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        - name: Download coding style results
+          uses: actions/download-artifact@v3
+          with:
+            name: coding-style-reports.log
+        - name: Check number of "MINOR:" occurrences
+          run: |
+            minor_occurrences=$(grep -c "MINOR:" coding-style-reports.log)
+            if [ "$minor_occurrences" -gt 5 ]; then
+              echo "Too many MINOR occurrences!"
+              cat coding-style-reports.log
+              exit 1
+            fi
+  check_compilation:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        - name: Install UUID
+          run: sudo apt-get update && sudo apt-get -y install uuid-dev
+        - name: Run make
+          run: make
