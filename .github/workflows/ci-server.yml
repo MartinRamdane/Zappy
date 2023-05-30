@@ -13,8 +13,6 @@ jobs:
         run: wget --no-check-certificate -O check_codingstyle/coding-style.sh https://uploads.admlbs.fr/coding-style.sh
       - name: Set permissions
         run: chmod 0777 check_codingstyle/coding-style.sh
-      - name: pwd path
-        run: pwd
       - name: Run coding style checker
         run: ./check_codingstyle/coding-style.sh server/ .
       - name: 'Upload coding style logs'
