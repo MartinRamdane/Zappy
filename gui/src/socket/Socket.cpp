@@ -51,13 +51,13 @@ void Socket::sendToServer(std::string message)
 
 std::string Socket::receiveFromServer()
 {
-    char buffer[1] = {0};
-    std::string message;
+    char buffer[2] = {0};
+    std::string message = "";
 
     if (recv(this->_socket, buffer, 1, 0) < 0)
         throw gui::exception("Read failed");
-    message = buffer;
-    return (message);
+    message = std::string(buffer);
+    return message;
 }
 
 void Socket::socketSelect()
