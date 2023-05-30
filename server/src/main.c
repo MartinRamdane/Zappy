@@ -17,8 +17,8 @@ static struct option long_options[] = {
     {0,         0,                 0,  0 }
 };
 
-
-void print_help() {
+void print_help(void)
+{
     printf("USAGE: ./zappy_server -p port -x width -y height -n name1 name2 ");
     printf("... -c clientsNb -f freq\n");
     printf("        port        is the port number\n");
@@ -32,7 +32,7 @@ void print_help() {
 
 void fetch_arguments(server_t *s_infos, int arg, char **av, int ac)
 {
-    switch(arg) {
+    switch (arg) {
         case 'p':
             s_infos->port = atoi(optarg); break;
         case 'x':
@@ -40,8 +40,8 @@ void fetch_arguments(server_t *s_infos, int arg, char **av, int ac)
         case 'y':
             s_infos->height = atoi(optarg); break;
         case 'n':
-            optind--;
-            for (ARG_COND_FOR){
+            optind--; int i = my_arrlen(s_infos->sname);
+            for (ARG_COND){
                 s_infos->sname[i] = strdup(av[optind]); i++;
             } break;
         case 'c':
@@ -53,7 +53,8 @@ void fetch_arguments(server_t *s_infos, int arg, char **av, int ac)
     }
 }
 
-int main(int ac, char **av) {
+int main(int ac, char **av)
+{
     int option_index = 0, arg = 0;
     server_t *s_infos = create_server_struct();
     while (arg != -1) {
