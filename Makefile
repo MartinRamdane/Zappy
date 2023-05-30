@@ -32,9 +32,9 @@ z_gui:
 	@echo "$(COLOUR_RED)gui: Add make command in main makefile$(END_COLOR)"
 
 z_ai:
-	cp ai/main.py ./
-	mv main.py $(AI_NAME)
-	chmod +x $(AI_NAME)
+	echo "#/bin/bash" > zappy_ai
+	echo 'python3 ai/main.py $$1 $$2 $$3 $$4 $$5 $$6' >> zappy_ai
+	chmod +x zappy_ai
 	@echo "$(COLOUR_GREEN)AI build$(COLOUR_GREEN)"
 
 # Clean target
