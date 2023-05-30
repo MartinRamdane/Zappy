@@ -20,6 +20,9 @@ void Gui::loop()
 {
     while (1) {
         this->_socket.socketSelect();
-        this->_message = this->_socket.getMessage();
+        if (this->_socket.getMessage() != "") {
+            //TODO: parse message
+            this->_socket.resetMessage();
+        }
     }
 }

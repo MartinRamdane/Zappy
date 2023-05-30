@@ -51,10 +51,10 @@ void Socket::sendToServer(std::string message)
 
 std::string Socket::receiveFromServer()
 {
-    char buffer[1024] = {0};
+    char buffer[1] = {0};
     std::string message;
 
-    if (read(this->_socket, buffer, 1024) < 0)
+    if (recv(this->_socket, buffer, 1, 0) < 0)
         throw gui::exception("Read failed");
     message = buffer;
     return (message);
@@ -69,7 +69,7 @@ void Socket::socketSelect()
     if (select(this->_socket + 1, &this->_readfds, NULL, NULL, &this->_tv) < 0)
         throw gui::exception("Select failed");
     if (FD_ISSET(this->_socket, &this->_readfds)) {
-        this->_message = this->receiveFromServer();
+        this->_message.append(this->receiveFromServer());
         std::cout << this->_message << std::endl;
     }
 }
@@ -101,5 +101,15 @@ int Socket::getPort() const
 
 std::string Socket::getMessage() const
 {
-    return this->_message;
+    if (this->_message.empty())
+        return "";
+    else if (this->_message.back() != '\n')
+        return "";
+    else
+        return this->_message;
+}
+
+void Socket::resetMessage()
+{
+    this->_message.clear();
 }

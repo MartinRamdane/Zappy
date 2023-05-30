@@ -30,6 +30,7 @@ class Socket {
         std::string receiveFromServer();
         void socketSelect();
         std::string getMessage() const;
+        void resetMessage();
 
     protected:
     private:
