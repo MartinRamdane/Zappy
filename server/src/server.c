@@ -31,6 +31,7 @@ void add_client(server_t *s_info)
         exit(84);
     } else {
         printf("New client connected\n");
+        send(new_client, "WELCOME\n", 8, 0);
     }
     client_t *cli = generate_client(new_client);
     LIST_INSERT_HEAD(&head, cli, next);
