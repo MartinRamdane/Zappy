@@ -9,11 +9,12 @@ SRC = src/*.cpp \
 	src/socket/*.cpp \
 	src/GUI/*.cpp \
 	src/display/*.cpp \
+	src/SFML/*.cpp \
 
 NAME = zappy_gui
 
 all:
-	g++ -o $(NAME) $(SRC) -g3
+	g++ -o $(NAME) $(SRC) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 clean:
 	rm -f $(NAME)

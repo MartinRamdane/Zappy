@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <string>
+#include "../SFML/Display.hpp"
 #include "../socket/Socket.hpp"
 
 class Gui {
@@ -21,4 +22,5 @@ class Gui {
     private:
         Socket _socket;
         std::string _message;
+        Display _display;
 };
