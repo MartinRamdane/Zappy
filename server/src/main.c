@@ -7,7 +7,8 @@
 
 #include "../include/server.h"
 
-void print_help() {
+void print_help(void)
+{
     printf("USAGE: ./zappy_server -p port -x width -y height -n name1 name2 ");
     printf("... -c clientsNb -f freq\n");
     printf("        port        is the port number\n");
@@ -42,7 +43,8 @@ void fetch_arguments(server_t *s_infos, char **av)
     }
 }
 
-int main(int ac, char **av) {
+int main(int ac, char **av)
+{
     if (ac == 1)
         return 0;
     if (strcmp(av[1], "-help") == 0 || strcmp(av[1], "-h") == 0) {
@@ -50,13 +52,5 @@ int main(int ac, char **av) {
     }
     server_t *s_infos = malloc(sizeof(server_t));
     fetch_arguments(s_infos, av);
-    // printf("port: %d\n", s_infos->port);
-    // printf("width: %d\n", s_infos->width);
-    // printf("height: %d\n", s_infos->height);
-    // printf("name: %s\n", s_infos->sname[0]);
-    // printf("name: %s\n", s_infos->sname[1]);
-    // printf("name: %s\n", s_infos->sname[2]);
-    // printf("clientsNb: %d\n", s_infos->clientsNb);
-    // printf("freq: %d\n", s_infos->freq);
     return 0;
 }

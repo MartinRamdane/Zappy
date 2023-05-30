@@ -20,5 +20,5 @@ typedef struct server_s {
     int freq;
 } server_t;
 
-void print_help();
+void print_help(void);
 void fetch_arguments(server_t *s_infos, char **av);
