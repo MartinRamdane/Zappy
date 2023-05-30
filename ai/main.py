@@ -26,7 +26,10 @@ def mainloop(machine, port, name):
     print("Slots: " + str(ai.avaibleSlots))
     print("Map size: " + str(ai.mapSize))
     while True:
+        tmp = input()
+        client.send_message(tmp + "\n")
         message = client.receive_message()
+        print(message)
 
 def main():
     if len(sys.argv) == 2 and sys.argv[1] == '-help':
