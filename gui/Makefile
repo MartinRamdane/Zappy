@@ -5,12 +5,14 @@
 ## Makefile
 ##
 
-SRC = src/*.cpp
+SRC = src/*.cpp \
+	src/socket/*.cpp \
+	src/GUI/*.cpp \
 
 NAME = zappy_gui
 
 all:
-	g++ -o $(NAME) $(SRC) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+	g++ -o $(NAME) $(SRC) -g3
 
 clean:
 	rm -f $(NAME)
