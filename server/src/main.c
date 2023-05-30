@@ -7,8 +7,18 @@
 
 #include "../include/server.h"
 
-void print_help(void)
-{
+static struct option long_options[] = {
+    {"port",     required_argument, 0,  'p' },
+    {"width",  required_argument,       0,  'x' },
+    {"height",  required_argument, 0,  'y' },
+    {"name", required_argument,       0,  'n' },
+    {"clientsNb",  required_argument, 0, 'c'},
+    {"freq",    required_argument, 0,  'f' },
+    {0,         0,                 0,  0 }
+};
+
+
+void print_help() {
     printf("USAGE: ./zappy_server -p port -x width -y height -n name1 name2 ");
     printf("... -c clientsNb -f freq\n");
     printf("        port        is the port number\n");
@@ -20,37 +30,46 @@ void print_help(void)
     printf(" time unit for execution of actions\n");
 }
 
-void fetch_arguments(server_t *s_infos, char **av)
+void fetch_arguments(server_t *s_infos, int arg, char **av, int ac)
 {
-    int i = 0, j = 0, n = 0; s_infos->sname = malloc(sizeof(char *) * 100);
-    while (av[i]) {
-        if (strcmp(av[i], "-p") == 0) {
-            s_infos->port = atoi(av[i + 1]); n = 0;
-        } if (strcmp(av[i], "-x") == 0) {
-            s_infos->width = atoi(av[i + 1]); n = 0;
-        } if (strcmp(av[i], "-y") == 0) {
-            s_infos->height = atoi(av[i + 1]); n = 0;
-        } if (strcmp(av[i], "-c") == 0) {
-            s_infos->clientsNb = atoi(av[i + 1]); n = 0;
-        } if (strcmp(av[i], "-f") == 0) {
-            s_infos->freq = atoi(av[i + 1]); n = 0;
-        } if (strcmp(av[i], "-n") == 0 || (n == 1 && av[i + 1]
-            && av[i + 1][0] != '-')) {
-            n = 1; s_infos->sname[j] = malloc(sizeof(char) * 100);
-            strcpy(s_infos->sname[j], av[i + 1]); j++;
-        }
-        i++;
+    switch(arg) {
+        case 'p':
+            s_infos->port = atoi(optarg); break;
+        case 'x':
+            s_infos->width = atoi(optarg); break;
+        case 'y':
+            s_infos->height = atoi(optarg); break;
+        case 'n':
+            optind--;
+            for (ARG_COND_FOR){
+                s_infos->sname[i] = strdup(av[optind]); i++;
+            } break;
+        case 'c':
+            s_infos->clientsNb = atoi(optarg); break;
+        case 'f':
+            s_infos->freq = atoi(optarg); break;
+        default:
+            print_help(); exit(84);
     }
 }
 
-int main(int ac, char **av)
-{
-    if (ac == 1)
-        return 0;
-    if (strcmp(av[1], "-help") == 0 || strcmp(av[1], "-h") == 0) {
-        print_help(); return 0;
+int main(int ac, char **av) {
+    int option_index = 0, arg = 0;
+    server_t *s_infos = create_server_struct();
+    while (arg != -1) {
+        arg = getopt_long(ac, av, "p:x:y:n:c:f:", long_options, &option_index);
+        if (arg == -1)
+            break;
+        fetch_arguments(s_infos, arg, av, ac);
     }
-    server_t *s_infos = malloc(sizeof(server_t));
-    fetch_arguments(s_infos, av);
+    check_args(s_infos);
+    printf("port: %d\n", s_infos->port);
+    printf("width: %d\n", s_infos->width);
+    printf("height: %d\n", s_infos->height);
+    printf("name: %s\n", s_infos->sname[0]);
+    printf("name: %s\n", s_infos->sname[1]);
+    printf("name: %s\n", s_infos->sname[2]);
+    printf("clientsNb: %d\n", s_infos->clientsNb);
+    printf("freq: %d\n", s_infos->freq);
     return 0;
 }
