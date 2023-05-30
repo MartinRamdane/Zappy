@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2023
+** B-YEP-400-MAR-4-1-zappy-martin.ramdane
+** File description:
+** Display
+*/
+
 #pragma once
 
 #include "Tile.hpp"
@@ -11,10 +18,9 @@
 
 class Display
 {
+    public:
+        Display();
+        ~Display();
     private:
         std::map<std::tuple<double, double>, Tile> tile;
-    public:
-        Display(/* args */);
-        ~Display();
-        
 };

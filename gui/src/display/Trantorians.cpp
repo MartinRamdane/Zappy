@@ -2,15 +2,15 @@
 ** EPITECH PROJECT, 2023
 ** B-YEP-400-MAR-4-1-zappy-martin.ramdane
 ** File description:
-** Tile
+** Trantorians
 */
 
-#include "Tile.hpp"
+#include "Trantorians.hpp"
 
-Tile::Tile(/* args */)
+Trantorian::Trantorian()
 {
 }
 
-Tile::~Tile()
+Trantorian::~Trantorian()
 {
 }

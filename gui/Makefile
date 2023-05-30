@@ -8,6 +8,7 @@
 SRC = src/*.cpp \
 	src/socket/*.cpp \
 	src/GUI/*.cpp \
+	src/display/*.cpp \
 
 NAME = zappy_gui
 

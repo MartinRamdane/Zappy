@@ -2,15 +2,15 @@
 ** EPITECH PROJECT, 2023
 ** B-YEP-400-MAR-4-1-zappy-martin.ramdane
 ** File description:
-** Tile
+** Display
 */
 
-#include "Tile.hpp"
+#include "Display.hpp"
 
-Tile::Tile(/* args */)
+Display::Display(/* args */)
 {
 }
 
-Tile::~Tile()
+Display::~Display()
 {
 }
