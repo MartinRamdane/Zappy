@@ -16,7 +16,7 @@ jobs:
       - name: pwd path
         run: pwd
       - name: Run coding style checker
-        run: ./check_codingstyle/coding-style.sh ../server .
+        run: ./check_codingstyle/coding-style.sh server/ .
       - name: 'Upload coding style logs'
         uses: actions/upload-artifact@v3
         with:
