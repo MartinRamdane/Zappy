@@ -11,7 +11,7 @@ struct list_head head;
 
 void init_server(server_t *s_infos)
 {
-    struct client *tmp = NULL;
+    struct client *tmp = NULL; LIST_INIT(&head);
     s_infos->socket = socket(AF_INET, SOCK_STREAM, 0);
     setsockopt(s_infos->socket, 1, 2, &(int){1}, sizeof(int));
     struct sockaddr_in myaddr;
@@ -21,16 +21,28 @@ void init_server(server_t *s_infos)
     listen(s_infos->socket, s_infos->clientsNb);
 }
 
-void add_client(server_t *s_info, int new_client)
+void add_client(server_t *s_info)
 {
-    LIST_INSERT_HEAD(&head, generate_client(new_client), next);
+    struct sockaddr_in clientaddr; int addrlen = sizeof(clientaddr);
+    int new_client = accept(s_info->socket,
+    (struct sockaddr *)&clientaddr, (socklen_t *)&addrlen);
+    if (new_client < 0) {
+        perror("accept");
+        exit(84);
+    } else {
+        printf("New client connected\n");
+    }
+    client_t *cli = generate_client(new_client);
+    LIST_INSERT_HEAD(&head, cli, next);
 }
 
 void add_clients_to_set(fd_set *set, server_t *s_infos)
 {
-    struct client *tmp = s_infos->clients;
+
+    struct client *tmp = NULL;
     LIST_FOREACH(tmp, &head, next) {
-        FD_SET(tmp->socket, set);
+        if (tmp->socket != -1)
+            FD_SET(tmp->socket, set);
     }
 }
 
@@ -43,16 +55,11 @@ void loop_server(server_t *s_infos)
         int select_val = select(1000, &readfds, NULL, NULL, NULL);
         if (select_val <= 0) {
             
-        }    // Un utilsateur se déco
+        }    // Erreur / timeout sur le select
         if (FD_ISSET(s_infos->socket, &readfds)) {
-            struct sockaddr_in clientaddr; int addrlen = sizeof(clientaddr);
-            int new_client = accept(s_infos->socket,
-            (struct sockaddr *)&clientaddr, (socklen_t *)&addrlen);
-            if (new_client < 0) {
-                perror("accept");
-                exit(84);
-            }
-            add_client(s_infos, new_client);
+            add_client(s_infos);
+        } else {
+            handle_client_data(s_infos, &readfds);
         }
     }
 }
