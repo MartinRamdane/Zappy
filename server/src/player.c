@@ -23,8 +23,7 @@ void generate_player(client_t *cli, int socket, char *team_name)
     cli->player->inv->thystame = 0;
     cli->player->is_dead = 0;
     cli->player->orientation = 'N';
-    // TODO add team here
-    //cli->player->team_name = strdup(team_name);
+    cli->player->team_name = strdup(team_name);
     cli->player->socket = socket;
 }
 
