@@ -71,6 +71,8 @@ void Display::eventHandler()
     while (this->_window->pollEvent(this->_event)) {
         if (this->_event.type == sf::Event::Closed)
             this->_window->close();
+        for (auto &sprite : this->_map)
+            sprite->eventHandler(this->_event, *this->_window);
     }
 }
 

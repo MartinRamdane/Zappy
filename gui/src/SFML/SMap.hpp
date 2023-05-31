@@ -22,6 +22,7 @@ class SMap : public IEntity {
         void setSpriteRotation(float angle);
         void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
         void draw(sf::RenderWindow &window);
+        void eventHandler(sf::Event event, sf::RenderWindow &window);
 
     protected:
     private:

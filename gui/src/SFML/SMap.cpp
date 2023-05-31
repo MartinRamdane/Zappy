@@ -91,3 +91,18 @@ void SMap::draw(sf::RenderWindow &window)
 {
     window.draw(this->_sprite);
 }
+
+void SMap::eventHandler(sf::Event event, sf::RenderWindow &window)
+{
+    if (event.type == sf::Event::MouseMoved) {
+        if (this->_type == 9) {
+            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+            sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+            if (this->_sprite.getGlobalBounds().contains(sf::Vector2f(worldPos.x, worldPos.y))) {
+                this->_sprite.setColor(sf::Color(255, 255, 255, 128));
+            } else {
+                this->_sprite.setColor(sf::Color(255, 255, 255, 255));
+            }
+        }
+    }
+}
