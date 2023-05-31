@@ -64,14 +64,9 @@ int main(int ac, char **av)
         fetch_arguments(s_infos, arg, av, ac);
     }
     check_args(s_infos);
-    // printf("port: %d\n", s_infos->port);
-    // printf("width: %d\n", s_infos->width);
-    // printf("height: %d\n", s_infos->height);
-    // printf("name: %s\n", s_infos->sname[0]);
-    // printf("name: %s\n", s_infos->sname[1]);
-    // printf("name: %s\n", s_infos->sname[2]);
-    // printf("clientsNb: %d\n", s_infos->clientsNb);
-    // printf("freq: %d\n", s_infos->freq);
+    s_infos->game->map = generate_map(s_infos);
+    fill_map(*s_infos, s_infos->game->map);
+    debug_print_map(s_infos, s_infos->game->map);
     init_server(s_infos);
     loop_server(s_infos);
     return 0;

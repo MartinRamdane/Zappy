@@ -27,6 +27,7 @@
 #include <stdbool.h>
 #include <uuid/uuid.h>
 #include <time.h>
+#include <math.h>
 
 #define ARG_COND ; optind < ac \
 && av[optind][0] != '-'; optind++
@@ -64,7 +65,6 @@ typedef struct egg {
 } egg;
 
 typedef struct player {
-    char *uuid;
     int x;
     int y;
     int level;
@@ -107,6 +107,9 @@ typedef struct team {
 
 extern LIST_HEAD(list_head, client) head;
 extern LIST_HEAD(team_listhead, team) team_head;
+typedef struct game {
+    tile **map;
+} game_t;
 
 typedef struct server_s {
     int port;
@@ -118,17 +121,27 @@ typedef struct server_s {
     int socket;
     struct list_head head;
     struct team_listhead team_head;
+    client_t *clients;
+    game_t *game;
+    team_t *teams; // TODO: Implement teams when the server loads
 } server_t;
 
 
+// MISC
 void print_help(void);
 void fetch_arguments(server_t *s_infos, int arg, char **av, int ac);
 void check_args(server_t *s_infos);
-server_t *create_server_struct(void);
 int my_arrlen(char **arr);
+int *create_tuple(int x, int y);
+
+// SERVER
+server_t *create_server_struct(void);
 void init_server(server_t *s_infos);
 void add_client(server_t *s_infos);
 void loop_server(server_t *s_infos);
+
+// CLIENT
+void add_client(server_t *s_infos);
 client_t *generate_client(int socket);
 void check_command(client_t *cli, server_t *s_infos);
 void handle_client_data(server_t *s_infos, fd_set *readfds);
@@ -140,3 +153,30 @@ int get_available_slots_in_team(server_t *s_infos, char *team);
 int does_team_has_space(server_t *s_infos, char *team);
 int does_team_exists(server_t *s_infos, char *team);
 void remove_client_from_team(client_t *cli, server_t *s_infos);
+
+// MAP
+tile **generate_map(server_t *infos);
+void fill_map(server_t infos, tile **map);
+
+// MAP RESOURCES
+int *get_resources_quantities(int *ratio, server_t infos);
+int *get_remaining_resources(int *ratio, server_t infos);
+void put_food_resource(server_t infos, tile **map, int r);
+void put_linemate_resource(server_t infos, tile **map, int r);
+void put_deraumere_resource(server_t infos, tile **map, int r);
+void put_sibur_resource(server_t infos, tile **map, int r);
+void put_mendiane_resource(server_t infos, tile **map, int r);
+void put_phiras_resource(server_t infos, tile **map, int r);
+void put_thystame_resource(server_t infos, tile **map, int r);
+
+// CMD
+void move_player(player *p, tile **map, int *pos, server_t *s_infos);
+
+// PLAYER
+void generate_player(client_t *cli, int socket, char *team_name);
+void generate_gui_player(client_t *cli, int socket);
+
+// DEBUG
+void debug_print_map(server_t *s_infos, tile **map);
+void debug_print_gui_player(client_t *cli);
+void debug_print_player(client_t *cli);
