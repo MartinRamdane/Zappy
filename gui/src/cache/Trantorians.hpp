@@ -1,0 +1,49 @@
+/*
+** EPITECH PROJECT, 2023
+** B-YEP-400-MAR-4-1-zappy-martin.ramdane
+** File description:
+** Trantorians
+*/
+
+#pragma once
+
+#include "Stock.hpp"
+#include "Teams.hpp"
+#include <string>
+
+class Trantorian
+{
+    private:
+        Stock stock;
+        int id;
+        char orientation;
+        int lvl;
+        bool canEvolve;
+        int x;
+        int y;
+        std::string team;
+        std::string message;
+
+    public:
+        Trantorian();
+        Trantorian(Stock stock, int id, char orientation, int lvl, bool canEvolve, int x, int y, std::string team);
+        ~Trantorian();
+        void setStock(Stock stock);
+        void setId(int id);
+        void setOrientation(char orientation);
+        void setLvl(int lvl);
+        void setCanEvolve(bool canEvolve);
+        void setX(int x);
+        void setY(int y);
+        void setTeam(std::string team);
+        void setMessage(std::string message);
+        Stock getStock();
+        int getId();
+        char getOrientation();
+        int getLvl();
+        bool getCanEvolve();
+        int getX();
+        int getY();
+        std::string getTeam();
+        std::string getMessage();
+};
