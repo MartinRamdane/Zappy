@@ -7,11 +7,12 @@
 
 #include "../include/server.h"
 
-void remove_client(int socket)
+void remove_client(int socket, server_t *s_infos)
 {
     struct client *tmp;
-    LIST_FOREACH(tmp, &head, next) {
+    LIST_FOREACH(tmp, &s_infos->head, next) {
         if (tmp->socket == socket) {
+            remove_client_from_team(tmp, s_infos);
             if (tmp->socket != -1)
                 close(tmp->socket);
             if (tmp->buffer)
@@ -33,18 +34,18 @@ void remove_client(int socket)
 void handle_client_data(server_t *s_infos, fd_set *readfds)
 {
     struct client *tmp = NULL;
-    LIST_FOREACH(tmp, &head, next) {
+    LIST_FOREACH(tmp, &s_infos->head, next) {
         if (FD_ISSET(tmp->socket, readfds)) {
-            check_command(tmp);
+            check_command(tmp, s_infos);
         }
     }
 }
 
-void check_command(client_t *cli)
+void check_command(client_t *cli, server_t *s_infos)
 {
     int valread; char buffer[MAX_BODY_LENGTH] = {0};
     if ((valread = recv(cli->socket, buffer, 1, 0)) <= 0) {
-        remove_client(cli->socket); return;
+        remove_client(cli->socket, s_infos); return;
     } else {
         if (cli->buffer[0] != '\0')
             strcat(cli->buffer, buffer);
@@ -55,8 +56,8 @@ void check_command(client_t *cli)
         cli->buffer[strlen((cli->buffer)) - 1] = '\0';
         printf("Client %d sent: %s\n", cli->socket, cli->buffer);
         send(cli->socket, "ok\n", 3, 0); //TODO : remove
-        // if (commands(cli, cli->buffer) == 1)
-        //     return 1;
+        if (commands(s_infos, cli, cli->buffer) == 1)
+            return;
         free(cli->buffer);
         cli->buffer = malloc(sizeof(char) * MAX_BODY_LENGTH);
         memset(cli->buffer, 0, MAX_BODY_LENGTH);

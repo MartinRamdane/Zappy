@@ -102,8 +102,11 @@ typedef struct team {
     char *name;
     int max_clients;
     int clients;
+    LIST_ENTRY(team) next;
 } team_t;
 
+extern LIST_HEAD(list_head, client) head;
+extern LIST_HEAD(team_listhead, team) team_head;
 
 typedef struct server_s {
     int port;
@@ -113,11 +116,10 @@ typedef struct server_s {
     int clientsNb;
     int freq;
     int socket;
-    client_t *clients;
-    team_t *teams; // TODO: Implement teams when the server loads
+    struct list_head head;
+    struct team_listhead team_head;
 } server_t;
 
-extern LIST_HEAD(list_head, client) head;
 
 void print_help(void);
 void fetch_arguments(server_t *s_infos, int arg, char **av, int ac);
@@ -125,8 +127,16 @@ void check_args(server_t *s_infos);
 server_t *create_server_struct(void);
 int my_arrlen(char **arr);
 void init_server(server_t *s_infos);
-void add_client(server_t *s_info);
+void add_client(server_t *s_infos);
 void loop_server(server_t *s_infos);
 client_t *generate_client(int socket);
-void check_command(client_t *cli);
+void check_command(client_t *cli, server_t *s_infos);
 void handle_client_data(server_t *s_infos, fd_set *readfds);
+void generate_teams(server_t *server, struct team_listhead *team_head);
+team_t *generate_team(char *name, int maxclient);
+int commands(server_t *server, client_t *client, char *buffer);
+int add_client_to_team(server_t *s_infos, char *team, client_t *cli);
+int get_available_slots_in_team(server_t *s_infos, char *team);
+int does_team_has_space(server_t *s_infos, char *team);
+int does_team_exists(server_t *s_infos, char *team);
+void remove_client_from_team(client_t *cli, server_t *s_infos);
