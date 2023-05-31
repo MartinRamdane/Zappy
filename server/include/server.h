@@ -111,6 +111,14 @@ typedef struct game {
     tile **map;
 } game_t;
 
+typedef struct task {
+    char *cmd;
+    int id;
+    int time;
+    LIST_ENTRY(task) next;
+} task_t;
+extern LIST_HEAD(task_listhead, task) task_head;
+
 typedef struct server_s {
     int port;
     int width;
@@ -119,10 +127,14 @@ typedef struct server_s {
     int clientsNb;
     int freq;
     int socket;
+    int task_id;
+    int task_stack;
     struct list_head head;
     struct team_listhead team_head;
+    struct task_listhead task_head;
     client_t *clients;
     game_t *game;
+    task_t *tasks;
     team_t *teams; // TODO: Implement teams when the server loads
 } server_t;
 
