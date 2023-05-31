@@ -151,7 +151,7 @@ void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
 
 // CMD
-void move_player(player *p, tile **map, int x, int y);
+void move_player(player *p, tile **map, int *pos, server_t *s_infos);
 
 // PLAYER
 void generate_player(client_t *cli, int socket, char *team_name);
