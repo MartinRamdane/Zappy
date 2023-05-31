@@ -2,7 +2,7 @@
 
 import sys
 from Ai import Ai
-
+import os
 
 def print_help():
     print('USAGE: ./zappy_ai -p port -n name -h machine')
@@ -26,7 +26,15 @@ def main():
     ai = Ai(name, machine, port)
     ai.joinGame()
     while True:
-        ai.comunication()
+        canFork = ai.comunication()
+        if canFork:
+            f = os.fork()
+            if f == 0:
+                ai = Ai(name, machine, port)
+                ai.joinGame()
+        canFork = False
+
+
 
 
 if __name__ == '__main__':

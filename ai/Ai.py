@@ -15,6 +15,7 @@ class Ai:
         self.lookInventoryFood = 0
         self.message = "Look\n"
         self.receive = ""
+        self.canFork = False
 
     def joinGame(self):
         self.client = Client(self.machine, self.port)
@@ -28,6 +29,7 @@ class Ai:
         self.setMapSize(arr[1])
 
     def comunication(self):
+        self.canFork = False
         if self.path:
             self.message = self.path.pop(0)
         elif self.seachFood and not self.path:
@@ -42,6 +44,7 @@ class Ai:
         if not self.path:
             self.lookInventoryFood += 1
         self.message = "Look\n"
+        return self.canFork
 
     def setMapSize(self, arr):
         tmp = arr.split(' ')
