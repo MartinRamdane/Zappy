@@ -16,5 +16,7 @@ client_t *generate_client(int socket)
     client->team_name = NULL;
     client->player = NULL;
     client->gui_player = NULL;
+    client->buffer = malloc(sizeof(char) * MAX_BODY_LENGTH);
+    memset(client->buffer, 0, MAX_BODY_LENGTH);
     return client;
 }

@@ -14,7 +14,6 @@ void remove_client(int socket)
         if (tmp->socket == socket) {
             if (tmp->socket != -1)
                 close(tmp->socket);
-            LIST_REMOVE(tmp, next);
             if (tmp->buffer)
                 free(tmp->buffer);
             if (tmp->uid)
@@ -25,7 +24,7 @@ void remove_client(int socket)
                 free(tmp->player);
             if (tmp->gui_player)
                 free(tmp->gui_player);
-            free(tmp);
+            LIST_REMOVE(tmp, next);
             return;
         }
     }
@@ -33,7 +32,7 @@ void remove_client(int socket)
 
 void handle_client_data(server_t *s_infos, fd_set *readfds)
 {
-    struct client *tmp;
+    struct client *tmp = NULL;
     LIST_FOREACH(tmp, &head, next) {
         if (FD_ISSET(tmp->socket, readfds)) {
             check_command(tmp);
@@ -55,6 +54,7 @@ void check_command(client_t *cli)
     if (cli->buffer[strlen(cli->buffer) - 1] == '\n') {
         cli->buffer[strlen((cli->buffer)) - 1] = '\0';
         printf("Client %d sent: %s\n", cli->socket, cli->buffer);
+        send(cli->socket, "ok\n", 3, 0); //TODO : remove
         // if (commands(cli, cli->buffer) == 1)
         //     return 1;
         free(cli->buffer);

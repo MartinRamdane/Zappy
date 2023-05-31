@@ -99,6 +99,12 @@ typedef struct client {
     LIST_ENTRY(client) next;
 } client_t;
 
+typedef struct team {
+    char *name;
+    int max_clients;
+    int clients;
+} team_t;
+
 
 typedef struct server_s {
     int port;
@@ -109,6 +115,7 @@ typedef struct server_s {
     int freq;
     int socket;
     client_t *clients;
+    team_t *teams; // TODO: Implement teams when the server loads
 } server_t;
 
 extern LIST_HEAD(list_head, client) head;
@@ -123,7 +130,7 @@ server_t *create_server_struct(void);
 void init_server(server_t *s_infos);
 void loop_server(server_t *s_infos);
 // client
-void add_client(server_t *s_info, int new_client);
+void add_client(server_t *s_info);
 client_t *generate_client(int socket);
 void check_command(client_t *cli);
 // map
