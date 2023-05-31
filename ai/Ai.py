@@ -38,6 +38,9 @@ class Ai:
         print("Send: " + self.message)
         self.client.send_message(self.message)
         self.receive = self.client.receive_message()
+        if self.message == "Incantation\n" and self.receive != "ko\n":
+            print(self.receive)
+            self.receive = self.client.receive_message()
         self.parseCommands(self.message, self.receive)
         if not self.path:
             self.lookInventoryFood += 1
@@ -78,17 +81,20 @@ class Ai:
             inventory = self.getInventory(receive)
             if inventory["food"] < 5:
                 self.seachFood = True
+        elif message == "Look\n" and self.path and self.path[-1] == "Incantation\n":
+            if not self.checkTileForIncantation(self.getObjectsAround(receive)[0], self.level):
+                self.path = []
         elif message == "Look\n" and receive != "ko\n":
             getobjects = self.getObjectsAround(receive)
             if self.seachFood:
-                nearestFood = self.getNearestObject("food", getobjects)
-                if nearestFood is None:
-                    self.path = ["Forward\n"]
-                    return
-                self.path = self.getPathtoObject(nearestFood, "food")
-                self.seachFood = False
+                self.getFood(getobjects)
+            else:
+                self.makeIncantation(getobjects)
         elif message == "dead\n":
             sys.exit()
+        elif receive.find("Current level:") != -1:
+            self.level = int(receive[15])
+            print("Level: " + str(self.level))
 
     def getNearestObject(self, name, objects):
         indexes = []
@@ -111,14 +117,13 @@ class Ai:
                 nearest = i
         return nearest
 
-    def getPathtoObject(self, case, item):
+    def getPathtoObject(self, case):
         centers = [0, 2, 6, 12, 20, 30, 42, 56]
         path = []
         if case in centers:
             index = centers.index(case)
             for i in range(index):
                 path.append("Forward\n")
-            path.append("Take " + item + "\n")
             return path
         nearestNumber = self.getNearestNumberInList(case, centers)
         index = centers.index(nearestNumber)
@@ -130,14 +135,37 @@ class Ai:
             path.append("Left\n")
         for i in range(abs(case - nearestNumber)):
             path.append("Forward\n")
-        path.append("Take " + item + "\n")
         return path
 
-    # def checkTileForIncantation(self, tile, level):
-    #     match level:
-    #         case 1:
-    #             if len(tile) == 2 and "player" in tile and "linemate" in tile:
-    #                 return True
-    #         case _:
-    #             return False
-    #     return False
+    def checkTileForIncantation(self, tile, level):
+        if level == 1:
+            if len(tile) == 2 and "player" in tile and "linemate" in tile:
+                return True
+        return False
+
+    def getFood(self, objects):
+        nearestFood = self.getNearestObject("food", objects)
+        if nearestFood is None:
+            self.path = ["Forward\n"]
+            return
+        self.path = self.getPathtoObject(nearestFood)
+        self.path.append("Take " + "food" + "\n")
+        self.seachFood = False
+
+    def makeIncantation(self, objects):
+        if self.level == 1:
+            nearestIncantation = self.getNearestObject("linemate", objects)
+            if nearestIncantation is None:
+                self.path = ["Forward\n"]
+                return
+            self.path = self.getPathtoObject(nearestIncantation)
+            nbLinemate = 0
+            for item in objects[nearestIncantation]:
+                if item == "linemate":
+                    if nbLinemate >= 1:
+                        self.path.append("Take " + item + "\n")
+                    nbLinemate += 1
+                elif item != "player" and item != "linemate":
+                    self.path.append("Take " + item + "\n")
+            self.path.append("Look\n")
+            self.path.append("Incantation\n")
