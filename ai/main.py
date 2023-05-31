@@ -25,7 +25,8 @@ def main():
     machine = sys.argv[6]
     ai = Ai(name, machine, port)
     ai.joinGame()
-    ai.mainloop()
+    while True:
+        ai.comunication()
 
 
 if __name__ == '__main__':

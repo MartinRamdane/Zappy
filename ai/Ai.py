@@ -12,6 +12,9 @@ class Ai:
         self.path = []
         self.level = 1
         self.client = None
+        self.lookInventoryFood = 0
+        self.message = "Look\n"
+        self.receive = ""
 
     def joinGame(self):
         self.client = Client(self.machine, self.port)
@@ -24,25 +27,21 @@ class Ai:
         self.setAvaibleSlots(int(arr[0]))
         self.setMapSize(arr[1])
 
-    def mainloop(self):
-        lookInventoryFood = 0
-        message = "Look\n"
-        receive = ""
-        while True:
-            if self.path:
-                message = self.path.pop(0)
-            elif self.seachFood and not self.path:
-                message = "Look\n"
-            elif lookInventoryFood >= 3 and not self.path:
-                message = "Inventory\n"
-                lookInventoryFood = 0
-            print("Send: " + message)
-            self.client.send_message(message)
-            receive = self.client.receive_message()
-            self.parseCommands(message, receive)
-            if not self.path:
-                lookInventoryFood += 1
-            message = "Look\n"
+    def comunication(self):
+        if self.path:
+            self.message = self.path.pop(0)
+        elif self.seachFood and not self.path:
+            self.message = "Look\n"
+        elif self.lookInventoryFood >= 3 and not self.path:
+            self.message = "Inventory\n"
+            self.lookInventoryFood = 0
+        print("Send: " + self.message)
+        self.client.send_message(self.message)
+        self.receive = self.client.receive_message()
+        self.parseCommands(self.message, self.receive)
+        if not self.path:
+            self.lookInventoryFood += 1
+        self.message = "Look\n"
 
     def setMapSize(self, arr):
         tmp = arr.split(' ')
@@ -133,3 +132,12 @@ class Ai:
             path.append("Forward\n")
         path.append("Take " + item + "\n")
         return path
+
+    # def checkTileForIncantation(self, tile, level):
+    #     match level:
+    #         case 1:
+    #             if len(tile) == 2 and "player" in tile and "linemate" in tile:
+    #                 return True
+    #         case _:
+    #             return False
+    #     return False
