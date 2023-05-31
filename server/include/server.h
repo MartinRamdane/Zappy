@@ -65,7 +65,6 @@ typedef struct egg {
 } egg;
 
 typedef struct player {
-    char *uuid;
     int x;
     int y;
     int level;
@@ -153,6 +152,10 @@ void put_thystame_resource(server_t infos, tile **map, int r);
 
 // CMD
 void move_player(player *p, tile **map, int x, int y);
+
+// PLAYER
+void generate_player(client_t *cli, int socket, char *team_name);
+void generate_gui_player(client_t *cli, int socket);
 
 // DEBUG
 void debug_print_map(server_t *s_infos, tile **map);
