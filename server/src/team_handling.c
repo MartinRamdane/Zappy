@@ -67,6 +67,7 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
 
 void remove_client_from_team(client_t *cli, server_t *s_infos)
 {
+    if (cli->team_name == NULL) return;
     team_t *tmp = NULL;
     LIST_FOREACH(tmp, &s_infos->team_head, next) {
         if (strcmp(tmp->name, cli->team_name) == 0) {
