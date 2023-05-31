@@ -64,9 +64,9 @@ int main(int ac, char **av)
         fetch_arguments(s_infos, arg, av, ac);
     }
     check_args(s_infos);
-    tile **map = generate_map(s_infos);
-    fill_map(*s_infos, map);
-    debug_print_map(s_infos, map);
+    s_infos->game->map = generate_map(s_infos);
+    fill_map(*s_infos, s_infos->game->map);
+    debug_print_map(s_infos, s_infos->game->map);
     init_server(s_infos);
     loop_server(s_infos);
     return 0;

@@ -65,7 +65,6 @@ typedef struct egg {
 } egg;
 
 typedef struct player {
-    char *uuid;
     int x;
     int y;
     int level;
@@ -105,6 +104,9 @@ typedef struct team {
     int clients;
 } team_t;
 
+typedef struct game {
+    tile **map;
+} game_t;
 
 typedef struct server_s {
     int port;
@@ -115,6 +117,7 @@ typedef struct server_s {
     int freq;
     int socket;
     client_t *clients;
+    game_t *game;
     team_t *teams; // TODO: Implement teams when the server loads
 } server_t;
 
@@ -125,6 +128,7 @@ void print_help(void);
 void fetch_arguments(server_t *s_infos, int arg, char **av, int ac);
 void check_args(server_t *s_infos);
 int my_arrlen(char **arr);
+int *create_tuple(int x, int y);
 
 // SERVER
 server_t *create_server_struct(void);
@@ -134,7 +138,7 @@ void loop_server(server_t *s_infos);
 // CLIENT
 void add_client(server_t *s_info);
 client_t *generate_client(int socket);
-void check_command(client_t *cli);
+void check_command(client_t *cli, server_t *s_infos);
 
 // MAP
 tile **generate_map(server_t *infos);
@@ -152,7 +156,13 @@ void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
 
 // CMD
-void move_player(player *p, tile **map, int x, int y);
+void move_player(player *p, tile **map, int *pos, server_t *s_infos);
+
+// PLAYER
+void generate_player(client_t *cli, int socket, char *team_name);
+void generate_gui_player(client_t *cli, int socket);
 
 // DEBUG
 void debug_print_map(server_t *s_infos, tile **map);
+void debug_print_gui_player(client_t *cli);
+void debug_print_player(client_t *cli);

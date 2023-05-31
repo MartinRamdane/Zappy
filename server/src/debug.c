@@ -18,3 +18,26 @@ void debug_print_map(server_t *s_infos, tile **map)
         }
     }
 }
+
+void debug_print_gui_player(client_t *cli)
+{
+    if (!cli->gui_player) {
+        printf("Error: no gui player for this client\n");
+        return;
+    }
+    printf("[DEBUG] client socket: %d | x: %d y: %d\n",
+    cli->socket, cli->gui_player->x, cli->gui_player->y);
+}
+
+void debug_print_player(client_t *cli)
+{
+    if (!cli->player) {
+        printf("Error: no player for this client\n");
+        return;
+    }
+    printf("[DEBUG] client socket: %d | x: %d y: %d level: %d is_dead: %d ",
+    cli->socket, cli->player->x, cli->player->y, cli->player->level,
+    cli->player->is_dead);
+    printf("orientation: %c team name: %s\n",
+    cli->player->orientation, cli->player->team_name);
+}

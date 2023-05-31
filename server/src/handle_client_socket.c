@@ -35,12 +35,12 @@ void handle_client_data(server_t *s_infos, fd_set *readfds)
     struct client *tmp = NULL;
     LIST_FOREACH(tmp, &head, next) {
         if (FD_ISSET(tmp->socket, readfds)) {
-            check_command(tmp);
+            check_command(tmp, s_infos);
         }
     }
 }
 
-void check_command(client_t *cli)
+void check_command(client_t *cli, server_t *s_infos)
 {
     int valread; char buffer[MAX_BODY_LENGTH] = {0};
     if ((valread = recv(cli->socket, buffer, 1, 0)) <= 0) {
