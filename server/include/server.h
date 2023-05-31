@@ -27,6 +27,7 @@
 #include <stdbool.h>
 #include <uuid/uuid.h>
 #include <time.h>
+#include <math.h>
 
 #define ARG_COND ; optind < ac \
 && av[optind][0] != '-'; optind++
@@ -112,13 +113,31 @@ typedef struct server_s {
 
 extern LIST_HEAD(list_head, client) head;
 
+// misc
 void print_help(void);
 void fetch_arguments(server_t *s_infos, int arg, char **av, int ac);
 void check_args(server_t *s_infos);
-server_t *create_server_struct(void);
 int my_arrlen(char **arr);
+// server
+server_t *create_server_struct(void);
 void init_server(server_t *s_infos);
-void add_client(server_t *s_info, int new_client);
 void loop_server(server_t *s_infos);
+// client
+void add_client(server_t *s_info, int new_client);
 client_t *generate_client(int socket);
 void check_command(client_t *cli);
+// map
+tile **generate_map(server_t *infos);
+void fill_map(server_t infos, tile **map);
+// map ressources
+int *get_resources_quantities(int *ratio, server_t infos);
+int *get_remaining_resources(int *ratio, server_t infos);
+void put_food_resource(server_t infos, tile **map, int r);
+void put_linemate_resource(server_t infos, tile **map, int r);
+void put_deraumere_resource(server_t infos, tile **map, int r);
+void put_sibur_resource(server_t infos, tile **map, int r);
+void put_mendiane_resource(server_t infos, tile **map, int r);
+void put_phiras_resource(server_t infos, tile **map, int r);
+void put_thystame_resource(server_t infos, tile **map, int r);
+// DEBUG
+void debug_print_map(server_t *s_infos, tile **map);
