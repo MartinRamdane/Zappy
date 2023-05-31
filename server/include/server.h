@@ -120,23 +120,27 @@ typedef struct server_s {
 
 extern LIST_HEAD(list_head, client) head;
 
-// misc
+// MISC
 void print_help(void);
 void fetch_arguments(server_t *s_infos, int arg, char **av, int ac);
 void check_args(server_t *s_infos);
 int my_arrlen(char **arr);
-// server
+
+// SERVER
 server_t *create_server_struct(void);
 void init_server(server_t *s_infos);
 void loop_server(server_t *s_infos);
-// client
+
+// CLIENT
 void add_client(server_t *s_info);
 client_t *generate_client(int socket);
 void check_command(client_t *cli);
-// map
+
+// MAP
 tile **generate_map(server_t *infos);
 void fill_map(server_t infos, tile **map);
-// map ressources
+
+// MAP RESOURCES
 int *get_resources_quantities(int *ratio, server_t infos);
 int *get_remaining_resources(int *ratio, server_t infos);
 void put_food_resource(server_t infos, tile **map, int r);
@@ -146,5 +150,9 @@ void put_sibur_resource(server_t infos, tile **map, int r);
 void put_mendiane_resource(server_t infos, tile **map, int r);
 void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
+
+// CMD
+void move_player(player *p, tile **map, int x, int y);
+
 // DEBUG
 void debug_print_map(server_t *s_infos, tile **map);
