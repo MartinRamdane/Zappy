@@ -61,6 +61,8 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
             cli->team_name = strdup(team);
             send(cli->socket, buff, strlen(buff), 0);
             generate_player(cli, cli->socket, team);
+            sprintf(buff, "%d %d\n", s_infos->width, s_infos->height);
+            send(cli->socket, buff, strlen(buff), 0);
             return 1;
         }
     } return 0;
