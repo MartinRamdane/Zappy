@@ -159,3 +159,5 @@ void generate_gui_player(client_t *cli, int socket);
 
 // DEBUG
 void debug_print_map(server_t *s_infos, tile **map);
+void debug_print_gui_player(client_t *cli);
+void debug_print_player(client_t *cli);

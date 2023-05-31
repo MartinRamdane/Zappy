@@ -9,30 +9,29 @@
 
 void generate_player(client_t *cli, int socket, char *team_name)
 {
-    player *new_player = malloc(sizeof(player));
-    new_player->x = rand() % 10; // TODO: Check if the start position is random or not
-    new_player->y = rand() % 10;
-    new_player->level = 1;
-    new_player->inv = malloc(sizeof(inventory));
-    new_player->inv->food = 10;
-    new_player->inv->linemate = 0;
-    new_player->inv->deraumere = 0;
-    new_player->inv->sibur = 0;
-    new_player->inv->mendiane = 0;
-    new_player->inv->phiras = 0;
-    new_player->inv->thystame = 0;
-    new_player->is_dead = 0;
-    new_player->orientation = 'N';
-    new_player->team_name = strdup(team_name);
-    new_player->socket = socket;
-    cli->player = new_player;
+    cli->player = malloc(sizeof(player));
+    cli->player->x = 0; // TODO: Check if the start position is random or not
+    cli->player->y = 0;
+    cli->player->level = 1;
+    cli->player->inv = malloc(sizeof(inventory));
+    cli->player->inv->food = 10;
+    cli->player->inv->linemate = 0;
+    cli->player->inv->deraumere = 0;
+    cli->player->inv->sibur = 0;
+    cli->player->inv->mendiane = 0;
+    cli->player->inv->phiras = 0;
+    cli->player->inv->thystame = 0;
+    cli->player->is_dead = 0;
+    cli->player->orientation = 'N';
+    // TODO add team here
+    //cli->player->team_name = strdup(team_name);
+    cli->player->socket = socket;
 }
 
 void generate_gui_player(client_t *cli, int socket)
 {
-    gui_player *new_gui_player = malloc(sizeof(gui_player));
-    new_gui_player->x = cli->player->x;
-    new_gui_player->y = cli->player->y;
-    new_gui_player->socket = socket;
-    cli->gui_player = new_gui_player;
+    cli->gui_player = malloc(sizeof(gui_player));
+    cli->gui_player->x = 0;
+    cli->gui_player->y = 0;
+    cli->gui_player->socket = socket;
 }
