@@ -23,11 +23,13 @@ class SMap : public IEntity {
         void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
         void draw(sf::RenderWindow &window);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
+        void update();
 
     protected:
     private:
         sf::Sprite _sprite;
         sf::Texture _texture;
+        sf::IntRect _rect;
         int _x;
         int _y;
         int _type;

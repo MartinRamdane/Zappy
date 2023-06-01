@@ -10,6 +10,10 @@
 SMap::SMap(int x, int y, int type) : _x(x), _y(y), _type(type)
 {
     this->createSprite();
+    this->_rect = sf::IntRect(0, 0, 32, 32);
+    // ? keep of remove this if
+    // if (this->_type == 0)
+        this->setSpriteRect(this->_rect);
 }
 
 SMap::~SMap()
@@ -50,6 +54,8 @@ void SMap::createSprite()
             this->_texture.loadFromFile("gui/assets/map/grass.png");
             break;
         default:
+            this->_texture.loadFromFile("gui/assets/map/ocean_wave.png");
+            this->_type = 10;
             break;
     }
     this->_sprite.setTexture(this->_texture);
@@ -104,5 +110,17 @@ void SMap::eventHandler(sf::Event event, sf::RenderWindow &window)
                 this->_sprite.setColor(sf::Color(255, 255, 255, 255));
             }
         }
+    }
+}
+
+void SMap::update()
+{
+    if (this->_type == 10) {
+        this->_rect.left += 32;
+        if (this->_rect.left >= 96)
+            this->_rect.left = 0;
+        std::cout << "update" << std::endl;
+        std::cout << this->_rect.left << std::endl;
+        this->setSpriteRect(this->_rect);
     }
 }

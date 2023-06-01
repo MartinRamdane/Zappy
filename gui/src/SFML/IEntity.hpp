@@ -30,6 +30,7 @@ class IEntity {
         virtual void setSpriteTexture(std::shared_ptr<sf::Texture> texture) = 0;
         virtual void draw(sf::RenderWindow &window) = 0;
         virtual void eventHandler(sf::Event event, sf::RenderWindow &window) = 0;
+        virtual void update() = 0;
 
     protected:
     private:

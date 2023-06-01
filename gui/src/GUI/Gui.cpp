@@ -25,6 +25,7 @@ void Gui::loop()
             this->_socket.resetMessage();
         }
         this->_display.eventHandler();
+        this->_display.update();
         this->_display.render();
     }
 }

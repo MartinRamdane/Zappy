@@ -24,6 +24,7 @@ class STrantorian : public IEntity {
         void draw(sf::RenderWindow &window);
         void setOrientation(int orientation);
         void eventHandler(sf::Event event, sf::RenderWindow &window){};
+        void update(){};
 
     protected:
     private:

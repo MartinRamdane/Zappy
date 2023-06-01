@@ -25,6 +25,8 @@ class Display {
         void eventHandler();
         void createMap(int width, int height);
         void createTrantorians();
+        void update();
+        void keyHandler();
 
     protected:
     private:
@@ -33,4 +35,9 @@ class Display {
         std::map<std::string, std::unique_ptr<IEntity>> _trantorians;
         std::vector<std::unique_ptr<IEntity>> _map;
         sf::View _view;
+        sf::Clock _clock;
+        sf::Time _time;
+        int _width;
+        int _height;
+        sf::Vector2f _mapCenter;
 };
