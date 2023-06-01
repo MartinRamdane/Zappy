@@ -115,6 +115,7 @@ typedef struct task {
     char *cmd;
     int id;
     int time;
+    client_t *client;
     LIST_ENTRY(task) next;
 } task_t;
 extern LIST_HEAD(task_listhead, task) task_head;
@@ -182,7 +183,7 @@ void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
 
 // TASK
-void add_task(server_t *server, char *cmd, int time);
+void add_task(server_t *server, char *cmd, int time, client_t *cli);
 void remove_first_task(server_t *server);
 
 // CMD

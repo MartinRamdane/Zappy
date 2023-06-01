@@ -7,11 +7,12 @@
 
 #include "../include/server.h"
 
-void add_task(server_t *server, char *cmd, int time)
+void add_task(server_t *server, char *cmd, int time, client_t *cli)
 {
     task_t *new_task = malloc(sizeof(task_t));
     new_task->cmd = strdup(cmd);
     new_task->time = time;
+    new_task->client = cli;
     new_task->id = server->task_id;
     server->task_id++;
     new_task->next.le_next = NULL;
