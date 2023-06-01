@@ -35,7 +35,6 @@ class Parsing
         void pgt(std::string arg);
         void pdi(std::string arg);
         void enw(std::string arg);
-        void eht(std::string arg);
         void ebo(std::string arg);
         void edi(std::string arg);
         void sgt(std::string arg);

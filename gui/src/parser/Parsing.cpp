@@ -53,8 +53,6 @@ void Parsing::parse(std::string str)
         pdi(arg);
     if (cmd == "enw")
         enw(arg);
-    if (cmd == "eht")
-        eht(arg);
     if (cmd == "ebo")
         ebo(arg);
     if (cmd == "edi")
@@ -100,6 +98,7 @@ void Parsing::tna(std::string arg)
 
 void Parsing::pnw(std::string arg)
 {
+    arg = arg.substr(1, arg.length());
     std::vector<std::string> parts;
     std::stringstream ss(arg);
     std::string part;
@@ -209,5 +208,118 @@ void Parsing::pie(std::string arg)
 void Parsing::pfk(std::string arg)
 {
     std::cout << "inutile" << std::endl;
+}
+
+void Parsing::pdr(std::string arg)
+{
+    std::vector<std::string> parts;
+    std::stringstream ss(arg);
+    std::string part;
+    std::tuple<double, double> tuple;
+    while (ss >> part) {
+        parts.push_back(part);
+    }
+    Stock stock = mapt.getTrantorian(std::stoi(parts[0])).getStock();
+    if (parts[1] == "0")
+        stock.linemate --;
+    if (parts[1] == "1")
+        stock.deraumere --;
+    if (parts[1] == "2")
+        stock.sibur --;
+    if (parts[1] == "3")
+        stock.mendiane --;
+    if (parts[1] == "4")
+        stock.phiras --;
+    if (parts[1] == "5")
+        stock.thystame --;
+    if (parts[1] == "6")
+        stock.food --;
+    mapt.getTrantorian(std::stoi(parts[0])).setStock(stock);
+}
+
+void Parsing::pgt(std::string arg)
+{
+    std::vector<std::string> parts;
+    std::stringstream ss(arg);
+    std::string part;
+    std::tuple<double, double> tuple;
+    while (ss >> part) {
+        parts.push_back(part);
+    }
+    int x = mapt.getTrantorian(std::stoi(parts[0])).getX();
+    int y = mapt.getTrantorian(std::stoi(parts[0])).getY();
+    Stock stockT = mapt.getTile(x, y).getStock();
+    Stock stock = mapt.getTrantorian(std::stoi(parts[0])).getStock();
+    if (parts[1] == "0") {
+        stockT.linemate --;
+        stock.linemate ++;
+    }
+    if (parts[1] == "1") {
+        stockT.deraumere --;
+        stock.deraumere ++;
+    }
+    if (parts[1] == "2") {
+        stockT.sibur --;
+        stock.sibur ++;
+    }
+    if (parts[1] == "3") {
+        stockT.mendiane --;
+        stock.mendiane ++;
+    }
+    if (parts[1] == "4") {
+        stockT.phiras --;
+        stock.phiras ++;
+    }
+    if (parts[1] == "5") {
+        stockT.thystame --;
+        stock.thystame ++;
+    }
+    if (parts[1] == "6") {
+        stockT.food --;
+        stock.food ++;
+    }
+    mapt.getTrantorian(std::stoi(parts[0])).setStock(stock);
+}
+
+void Parsing::pdi(std::string arg)
+{
+    mapt.removeTrantorian(std::stoi(arg));
+    std::cout << "mort" << std::endl;
+}
+
+void Parsing::enw(std::string arg)
+{
+    std::vector<std::string> parts;
+    std::stringstream ss(arg);
+    std::string part;
+    std::tuple<double, double> tuple;
+    while (ss >> part) {
+        parts.push_back(part);
+    }
+    Egg e(std::stoi(parts[0]), std::stoi(parts[2]), std::stoi(parts[3]));
+    mapt.addEgg(e);
+    std::cout << "egg spawn" << std::endl;
+}
+
+void Parsing::ebo(std::string arg)
+{
+    mapt.removeEgg(std::stoi(arg));
+    std::cout << "egg born" << std::endl;
+}
+
+void Parsing::edi(std::string arg)
+{
+    mapt.removeEgg(std::stoi(arg));
+    std::cout << "egg dead" << std::endl;
+}
+
+void Parsing::sgt(std::string arg)
+{
+    std::cout << "pas compris" << std::endl;
+}
+
+void Parsing::seg(std::string arg)
+{
+    std::cout << "pas compris" << std::endl;
 }
 

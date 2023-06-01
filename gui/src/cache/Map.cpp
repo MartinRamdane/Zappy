@@ -113,3 +113,31 @@ void MapT::setTrantorianMessage(int id, std::string message)
         }
     }
 }
+
+Trantorian MapT::getTrantorian(int id)
+{
+    for (int i = 0; i < this->trantorians.size(); i++) {
+        if (this->trantorians[i].getId() == id) {
+            return (this->trantorians[i]);
+        }
+    }
+}
+
+void MapT::addEgg(Egg egg)
+{
+    this->eggs.push_back(egg);
+}
+
+void MapT::removeEgg(int e)
+{
+    for (int i = 0; i < this->eggs.size(); i++) {
+        if (this->eggs[i].getId() == e) {
+            this->eggs.erase(this->eggs.begin() + i);
+        }
+    }
+}
+
+std::vector<Egg> MapT::getEggs()
+{
+    return (this->eggs);
+}

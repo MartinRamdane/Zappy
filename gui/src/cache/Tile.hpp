@@ -33,4 +33,3 @@ class Tile
         int getLvlEvo();
         std::vector<int> getPlayers();
 };
-

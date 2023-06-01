@@ -10,6 +10,7 @@
 #include "Tile.hpp"
 #include "Teams.hpp"
 #include "Trantorians.hpp"
+#include "Egg.hpp"
 #include <tuple>
 #include <map>
 #include <iostream>
@@ -27,6 +28,7 @@ class MapT
         std::map<std::tuple<double, double>, Tile> tile;
         std::vector<Teams> teams;
         std::vector<Trantorian> trantorians;
+        std::vector<Egg> eggs;
     public:
         MapT();
         ~MapT();
@@ -38,11 +40,15 @@ class MapT
         Tile getTile(int x, int y);
         void addTeam(Teams team);
         void addTrantorian(Trantorian trantorian);
+        void addEgg(Egg egg);
+        void removeEgg(int egg);
         void removeTrantorian(int id);
         void setTrantorianPos(int id, int x, int y, char orientation);
         void setTrantorianLvl(int id, int lvl);
         void setTrantorianStock(int id, int x, int y, Stock stock);
         void setTrantorianMessage(int id, std::string message);
+        std::vector<Egg> getEggs();
         std::vector<Teams> getTeams();
         std::vector<Trantorian> getTrantorians();
+        Trantorian getTrantorian(int id);
 };
