@@ -57,6 +57,8 @@ void Parsing::parse(std::string str)
         ebo(arg);
     if (cmd == "edi")
         edi(arg);
+    if (cmd == "sst")
+        sst(arg);
     if (cmd == "sgt")
         sgt(arg);
     if (cmd == "seg")
@@ -318,8 +320,28 @@ void Parsing::sgt(std::string arg)
     std::cout << "pas compris" << std::endl;
 }
 
-void Parsing::seg(std::string arg)
+void Parsing::sst(std::string arg)
 {
     std::cout << "pas compris" << std::endl;
 }
 
+void Parsing::seg(std::string arg)
+{
+    mapt.removeTeam(arg);
+    std::cout << "team " << arg << " dead" << std::endl;
+}
+
+void Parsing::smg(std::string arg)
+{
+    std::cout << "message : " << arg << std::endl;
+}
+
+void Parsing::suc(std::string arg)
+{
+    std::cout << "unknow command" << std::endl;
+}
+
+void Parsing::sbp(std::string arg)
+{
+    std::cout << "bad parameter" << std::endl;
+}

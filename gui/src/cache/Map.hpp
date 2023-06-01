@@ -43,6 +43,7 @@ class MapT
         void addEgg(Egg egg);
         void removeEgg(int egg);
         void removeTrantorian(int id);
+        void removeTeam(std::string id);
         void setTrantorianPos(int id, int x, int y, char orientation);
         void setTrantorianLvl(int id, int lvl);
         void setTrantorianStock(int id, int x, int y, Stock stock);

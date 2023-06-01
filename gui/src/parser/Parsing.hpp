@@ -38,6 +38,7 @@ class Parsing
         void ebo(std::string arg);
         void edi(std::string arg);
         void sgt(std::string arg);
+        void sst(std::string arg);
         void seg(std::string arg);
         void smg(std::string arg);
         void suc(std::string arg);

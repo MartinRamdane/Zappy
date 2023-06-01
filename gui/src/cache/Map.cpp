@@ -141,3 +141,12 @@ std::vector<Egg> MapT::getEggs()
 {
     return (this->eggs);
 }
+
+void MapT::removeTeam(std::string team)
+{
+    for (int i = 0; i < this->teams.size(); i++) {
+        if (this->teams[i].getName() == team) {
+            this->teams.erase(this->teams.begin() + i);
+        }
+    }
+}
