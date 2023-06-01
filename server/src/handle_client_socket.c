@@ -55,6 +55,13 @@ void check_command(client_t *cli, server_t *s_infos)
     if (cli->buffer[strlen(cli->buffer) - 1] == '\n') {
         cli->buffer[strlen((cli->buffer)) - 1] = '\0';
         printf("Client %d sent: %s\n", cli->socket, cli->buffer);
+        if (strcmp(cli->buffer, "remove task") == 0) {
+            printf("ca REMOVE ici\n");
+            remove_client(cli->socket, s_infos);
+        } else {
+            add_task(s_infos, cli->buffer, 5);
+        }
+        debug_print_task_queue(s_infos);
         send(cli->socket, "ok\n", 3, 0); //TODO : remove
         if (commands(s_infos, cli, cli->buffer) == 1)
             return;

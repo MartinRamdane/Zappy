@@ -41,3 +41,12 @@ void debug_print_player(client_t *cli)
     printf("orientation: %c team name: %s\n",
     cli->player->orientation, cli->player->team_name);
 }
+
+void debug_print_task_queue(server_t *server)
+{
+    task_t *tmp;
+    LIST_FOREACH(tmp, &server->task_head, next) {
+        printf("task id: %d | cmd: %s | time: %d\n",
+        tmp->id, tmp->cmd, tmp->time);
+    }
+}

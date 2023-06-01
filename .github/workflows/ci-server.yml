@@ -34,7 +34,7 @@ jobs:
         - name: Check number of "MAJOR:" occurrences
           run: |
             major_occurrences=$(grep -c "MAJOR:" coding-style-reports.log)
-            if [ "$major_occurrences" -gt 7 ]; then
+            if [ "$major_occurrences" -gt 0 ]; then
                 echo "Too many MAJOR occurrences!"
                 cat coding-style-reports.log
                 exit 1
@@ -52,7 +52,7 @@ jobs:
         - name: Check number of "MINOR:" occurrences
           run: |
             minor_occurrences=$(grep -c "MINOR:" coding-style-reports.log)
-            if [ "$minor_occurrences" -gt 5 ]; then
+            if [ "$minor_occurrences" -gt 0 ]; then
               echo "Too many MINOR occurrences!"
               cat coding-style-reports.log
               exit 1

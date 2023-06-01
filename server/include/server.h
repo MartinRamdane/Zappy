@@ -181,6 +181,10 @@ void put_mendiane_resource(server_t infos, tile **map, int r);
 void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
 
+// TASK
+void add_task(server_t *server, char *cmd, int time);
+void remove_first_task(server_t *server);
+
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
 
@@ -192,3 +196,4 @@ void generate_gui_player(client_t *cli, int socket);
 void debug_print_map(server_t *s_infos, tile **map);
 void debug_print_gui_player(client_t *cli);
 void debug_print_player(client_t *cli);
+void debug_print_task_queue(server_t *server);
