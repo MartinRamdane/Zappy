@@ -44,9 +44,10 @@ void debug_print_player(client_t *cli)
 
 void debug_print_task_queue(server_t *server)
 {
-    task_t *tmp;
+    task_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->task_head, next) {
-        printf("task id: %d | cmd: %s | time: %d\n",
-        tmp->id, tmp->cmd, tmp->time);
+        printf("task id: %d", tmp->id);
+        printf(" | cmd: %s", tmp->cmd);
+        printf(" | time: %d\n", tmp->time);
     }
 }
