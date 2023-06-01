@@ -7,7 +7,7 @@
 
 #include "../include/server.h"
 
-void add_task(server_t *server, char *cmd, int time, client_t *cli)
+void add_task(server_t *server, char *cmd, double time, client_t *cli)
 {
     task_t *new_task = malloc(sizeof(task_t));
     new_task->cmd = strdup(cmd);
@@ -29,14 +29,30 @@ void add_task(server_t *server, char *cmd, int time, client_t *cli)
     }
 }
 
-
-void remove_first_task(server_t *server)
+double calculate_time_for_task(server_t *server, char *buffer)
 {
-    if (LIST_EMPTY(&server->task_head)) {
-        return;
+    struct timespec ts;
+    clock_gettime(0, &ts);
+    if (strcmp(buffer, "Forward") == 0) {
+        printf("added forward with time : %f\n", (ts.tv_sec - server->server_time.tv_sec) + (7.0 / server->freq));
+        return (ts.tv_sec - server->server_time.tv_sec) + (7.0 / server->freq);
+    } else {
+        return (ts.tv_sec - server->server_time.tv_sec) + (1.0 / server->freq);
     }
-
-    task_t *first_task = LIST_FIRST(&server->task_head);
-    LIST_REMOVE(first_task, next);
 }
 
+void execute_tasks(server_t *server)
+{
+    struct timespec ts;
+    task_t *tmp;
+    clock_gettime(0, &ts);
+    LIST_FOREACH(tmp, &server->task_head, next) {
+        double value = (double)((ts.tv_sec - server->server_time.tv_sec));
+        if (value >= tmp->time) {
+            printf("Removing task %d\n", tmp->id);
+            printf("time: %f\n", tmp->time);
+            LIST_REMOVE(tmp, next);
+        }
+    }
+    return;
+}

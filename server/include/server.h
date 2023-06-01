@@ -114,7 +114,7 @@ typedef struct game {
 typedef struct task {
     char *cmd;
     int id;
-    int time;
+    double time;
     client_t *client;
     LIST_ENTRY(task) next;
 } task_t;
@@ -133,6 +133,7 @@ typedef struct server_s {
     struct list_head head;
     struct team_listhead team_head;
     struct task_listhead task_head;
+    struct timespec server_time;
     client_t *clients;
     game_t *game;
     task_t *tasks;
@@ -183,8 +184,8 @@ void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
 
 // TASK
-void add_task(server_t *server, char *cmd, int time, client_t *cli);
-void remove_first_task(server_t *server);
+void add_task(server_t *server, char *cmd, double time, client_t *cli);
+void execute_tasks(server_t *server);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
@@ -198,3 +199,6 @@ void debug_print_map(server_t *s_infos, tile **map);
 void debug_print_gui_player(client_t *cli);
 void debug_print_player(client_t *cli);
 void debug_print_task_queue(server_t *server);
+
+//TIME
+double calculate_time_for_task(server_t *server, char *buffer);
