@@ -121,6 +121,7 @@ Trantorian MapT::getTrantorian(int id)
             return (this->trantorians[i]);
         }
     }
+    return Trantorian();
 }
 
 void MapT::addEgg(Egg egg)

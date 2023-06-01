@@ -19,6 +19,8 @@ class Parsing
 {
     private:
         MapT mapt;
+
+    public:
         void msz(std::string arg);
         void bct(std::string arg);
         void tna(std::string arg);
@@ -43,8 +45,6 @@ class Parsing
         void smg(std::string arg);
         void suc(std::string arg);
         void sbp(std::string arg);
-
-    public:
         Parsing();
         ~Parsing();
         void parse(std::string str);
