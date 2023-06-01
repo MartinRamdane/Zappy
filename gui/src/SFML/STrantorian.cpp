@@ -10,8 +10,9 @@
 STrantorian::STrantorian()
 {
     this->createSprite();
-    this->setSpritePosition(sf::Vector2f(10 * 96, 10 * 96));
+    this->setSpritePosition(sf::Vector2f(0, 0));
     this->setOrientation(3);
+    this->setSpriteScale(sf::Vector2f(1.5, 1.5));
 }
 
 STrantorian::STrantorian(Trantorian trantorian)
@@ -90,7 +91,7 @@ void STrantorian::setOrientation(int orientation)
     }
 }
 
-void STrantorian::draw(sf::RenderWindow &window)
+void STrantorian::draw(sf::RenderWindow &window, sf::View &view)
 {
     window.draw(this->_sprite);
 }

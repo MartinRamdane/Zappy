@@ -19,7 +19,7 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_window->setFramerateLimit(60);
     this->_view.setSize(sf::Vector2f(w_width, w_height));
     this->createTrantorians();
-    this->createMap(10, 10);
+    this->createMap(20, 20);
     this->_clock.restart();
 }
 
@@ -33,38 +33,58 @@ void Display::createTrantorians()
     this->_trantorians.insert(std::make_pair("trantorian1", std::make_unique<STrantorian>()));
 }
 
-//*TODO: remove it later
-#include <fstream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 void Display::createMap(int width, int height)
 {
-    std::ifstream inputFile("gui/src/SFML/map.txt");
 
-    std::string line;
-    std::vector<std::string> array;
-    while (std::getline(inputFile, line)) {
-        array.push_back(line);
+    std::vector<std::string> array(height);
+    for (int i = 0; i < height; i++) {
+        array[i] = std::string(width, '9');
+        for (int j = 0; j < width; j++) {
+            if (i == 0 && j == 0) {
+                array[i][j] = '1';
+            } else if (i == 0 && j == width - 1) {
+                array[i][j] = '3';
+            } else if (i == 0 && j != 0) {
+                array[i][j] = '2';
+            } else if (i == height - 1 && j == 0) {
+                array[i][j] = '7';
+            } else if (i == height - 1 && j == width - 1) {
+                array[i][j] = '5';
+            } else if (i == height - 1 && j != 0) {
+                array[i][j] = '6';
+            } else if (i != 0 && j == 0) {
+                array[i][j] = '8';
+            } else if (i != 0 && j == width - 1) {
+                array[i][j] = '4';
+            }
+        }
     }
+    array.push_back("");
 
-    inputFile.close();
-    for (int y = 0; y < array.size(); y++) {
-        for (int x = 0; x < array[y].size(); x++)
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++)
             this->_map.push_back(std::make_unique<SMap>(x, y, array[y][x] - '0'));
     }
-    this->_view.setCenter(sf::Vector2f(array[0].size() * 96 / 2, array.size() * 96 / 2));
-    this->_mapCenter = sf::Vector2f(array[0].size() * 96 / 2, array.size() * 96 / 2);
+    this->_view.setSize(sf::Vector2f(1920, 1080));
+    this->_view.setCenter(sf::Vector2f(width * 96 / 2, height * 96 / 2));
+    this->_mapCenter = sf::Vector2f(width * 96 / 2, height * 96 / 2);
     this->_view.zoom(2);
 }
 
 void Display::render()
 {
     this->_window->clear(sf::Color::Black);
-    this->_window->setView(_view);
+    this->_window->setView(this->_view);
     for (auto &sprite : this->_map) {
-       sprite->draw(*this->_window);
+       sprite->draw(*this->_window, this->_view);
     }
     for (auto &sprite : this->_trantorians)
-        sprite.second->draw(*this->_window);
+        sprite.second->draw(*this->_window, this->_view);
     this->_window->display();
 }
 

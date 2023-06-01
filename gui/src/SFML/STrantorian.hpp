@@ -21,7 +21,7 @@ class STrantorian : public IEntity {
         void setSpriteOrigin(sf::Vector2f origin);
         void setSpriteRotation(float angle);
         void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
-        void draw(sf::RenderWindow &window);
+        void draw(sf::RenderWindow &window, sf::View &view);
         void setOrientation(int orientation);
         void eventHandler(sf::Event event, sf::RenderWindow &window){};
         void update(){};

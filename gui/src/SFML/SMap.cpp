@@ -9,23 +9,27 @@
 
 SMap::SMap(int x, int y, int type) : _x(x), _y(y), _type(type)
 {
+    this->createOcean();
     this->createSprite();
     this->_rect = sf::IntRect(0, 0, 32, 32);
-    // ? keep of remove this if
-    // if (this->_type == 0)
-        this->setSpriteRect(this->_rect);
+    this->setSpriteRect(this->_rect);
 }
 
 SMap::~SMap()
 {
 }
 
+void SMap::createOcean()
+{
+    this->_oceanTexture.loadFromFile("gui/assets/map/ocean.png");
+    this->_oceanTile.setTexture(this->_oceanTexture);
+    this->_oceanTile.setScale(sf::Vector2f(3, 3));
+    this->_oceanTile.setPosition(sf::Vector2f(-100, -100));
+}
+
 void SMap::createSprite()
 {
     switch(this->_type) {
-        case 0:
-            this->_texture.loadFromFile("gui/assets/map/ocean.png");
-            break;
         case 1:
             this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_left.png");
             break;
@@ -54,8 +58,6 @@ void SMap::createSprite()
             this->_texture.loadFromFile("gui/assets/map/grass.png");
             break;
         default:
-            this->_texture.loadFromFile("gui/assets/map/ocean_wave.png");
-            this->_type = 10;
             break;
     }
     this->_sprite.setTexture(this->_texture);
@@ -93,7 +95,7 @@ void SMap::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
     this->_sprite.setTexture(*texture);
 }
 
-void SMap::draw(sf::RenderWindow &window)
+void SMap::draw(sf::RenderWindow &window, sf::View &view)
 {
     window.draw(this->_sprite);
 }
