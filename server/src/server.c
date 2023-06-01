@@ -11,6 +11,8 @@
 void init_server(server_t *s_infos)
 {
     LIST_INIT(&s_infos->head); LIST_INIT(&s_infos->team_head);
+    s_infos->task_id = 0;
+    LIST_INIT(&s_infos->task_head);
     generate_teams(s_infos, &s_infos->team_head);
     s_infos->socket = socket(AF_INET, SOCK_STREAM, 0);
     setsockopt(s_infos->socket, 1, 2, &(int){1}, sizeof(int));

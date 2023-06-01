@@ -58,8 +58,6 @@ void check_command(client_t *cli, server_t *s_infos)
         send(cli->socket, "ok\n", 3, 0); //TODO : remove
         if (commands(s_infos, cli, cli->buffer) == 1)
             return;
-        free(cli->buffer);
-        cli->buffer = malloc(sizeof(char) * MAX_BODY_LENGTH);
         memset(cli->buffer, 0, MAX_BODY_LENGTH);
     }
     return;

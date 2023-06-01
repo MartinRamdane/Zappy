@@ -111,6 +111,14 @@ typedef struct game {
     tile **map;
 } game_t;
 
+typedef struct task {
+    char *cmd;
+    int id;
+    int time;
+    LIST_ENTRY(task) next;
+} task_t;
+extern LIST_HEAD(task_listhead, task) task_head;
+
 typedef struct server_s {
     int port;
     int width;
@@ -119,10 +127,14 @@ typedef struct server_s {
     int clientsNb;
     int freq;
     int socket;
+    int task_id;
+    int task_stack;
     struct list_head head;
     struct team_listhead team_head;
+    struct task_listhead task_head;
     client_t *clients;
     game_t *game;
+    task_t *tasks;
     team_t *teams; // TODO: Implement teams when the server loads
 } server_t;
 
@@ -169,6 +181,10 @@ void put_mendiane_resource(server_t infos, tile **map, int r);
 void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
 
+// TASK
+void add_task(server_t *server, char *cmd, int time);
+void remove_first_task(server_t *server);
+
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
 
@@ -180,3 +196,4 @@ void generate_gui_player(client_t *cli, int socket);
 void debug_print_map(server_t *s_infos, tile **map);
 void debug_print_gui_player(client_t *cli);
 void debug_print_player(client_t *cli);
+void debug_print_task_queue(server_t *server);
