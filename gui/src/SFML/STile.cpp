@@ -118,6 +118,15 @@ void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
             }
         }
     }
+    if (event.type == sf::Event::MouseButtonPressed) {
+        if (this->_type == 9) {
+            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+            sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+            if (this->_sprite.getGlobalBounds().contains(sf::Vector2f(worldPos.x, worldPos.y))) {
+                
+            }
+        }
+    }
 }
 
 void STile::createGem(std::string name, int quantity)

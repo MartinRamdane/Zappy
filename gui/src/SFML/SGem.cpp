@@ -93,6 +93,5 @@ void SGem::update(MapT cache)
     this->_rect.left += 53;
     if (this->_rect.left >= 53 * 6)
         this->_rect.left = 0;
-    std::cout << this->_rect.left << std::endl;
     this->setSpriteRect(this->_rect);
 }
