@@ -7,19 +7,13 @@
 
 #include "Display.hpp"
 
-// *! IMPORTANT !*
-// sf::Vector2i pixelPos = sf::Mouse::getPosition(*this->_window);
-// sf::Vector2f worldPos = this->_window->mapPixelToCoords(pixelPos);
-// std::cout << "Mouse x: " << worldPos.x << std::endl;
-// std::cout << "Mouse y: " << worldPos.y << std::endl;
-
 Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
 {
     this->_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w_width, w_height), "Zappy");
     this->_window->setFramerateLimit(60);
     this->_view.setSize(sf::Vector2f(w_width, w_height));
     this->createTrantorians();
-    this->createMap(20, 20);
+    this->createMap(10, 10);
     this->_clock.restart();
 }
 
@@ -27,19 +21,14 @@ Display::~Display()
 {
 }
 
-
 void Display::createTrantorians()
 {
     this->_trantorians.insert(std::make_pair("trantorian1", std::make_unique<STrantorian>()));
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
 void Display::createMap(int width, int height)
 {
-
+    width += 2; height += 2;
     std::vector<std::string> array(height);
     for (int i = 0; i < height; i++) {
         array[i] = std::string(width, '9');
@@ -65,7 +54,6 @@ void Display::createMap(int width, int height)
     }
     array.push_back("");
 
-
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++)
             this->_map.push_back(std::make_unique<SMap>(x, y, array[y][x] - '0'));
@@ -73,7 +61,7 @@ void Display::createMap(int width, int height)
     this->_view.setSize(sf::Vector2f(1920, 1080));
     this->_view.setCenter(sf::Vector2f(width * 96 / 2, height * 96 / 2));
     this->_mapCenter = sf::Vector2f(width * 96 / 2, height * 96 / 2);
-    this->_view.zoom(2);
+    // this->_view.zoom(1);
 }
 
 void Display::render()
