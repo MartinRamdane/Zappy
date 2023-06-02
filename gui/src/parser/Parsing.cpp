@@ -77,6 +77,7 @@ void Parsing::msz(std::string arg)
     int pos = arg.find(delimiter);
     mapt.setX(std::stoi(arg.substr(0, pos)));
     mapt.setY(std::stoi(arg.substr(pos + 1, arg.length())));
+    std::cout << "Map size: " << arg.substr(0, pos) << " " << arg.substr(pos + 1, arg.length()) << std::endl;
 }
 
 void Parsing::bct(std::string arg)
@@ -91,6 +92,7 @@ void Parsing::bct(std::string arg)
     Tile tile(stock);
     std::tuple<double, double> tuple = std::make_tuple(std::stoi(parts[0]), std::stoi(parts[1]));
     mapt.setTile(tuple, tile);
+    std::cout << "Tile " << parts[0] << " " << parts[1] << " has " << parts[2] << " " << parts[3] << " " << parts[4] << " " << parts[5] << " " << parts[6] << " " << parts[7] << " " << parts[8] << std::endl;
 }
 
 void Parsing::tna(std::string arg)
@@ -110,6 +112,7 @@ void Parsing::pnw(std::string arg)
     Stock stock(0, 0, 0, 0, 0, 0, 0);
     Trantorian trantorian(stock, std::stoi(parts[0]), parts[3][0], 1, false, std::stoi(parts[1]), std::stoi(parts[2]), parts[4]);
     mapt.addTrantorian(trantorian);
+    std::cout << "Trantorian " << parts[0] << " is born" << std::endl;
 }
 
 void Parsing::ppo(std::string arg)
@@ -121,6 +124,7 @@ void Parsing::ppo(std::string arg)
         parts.push_back(part);
     }
     mapt.setTrantorianPos(std::stoi(parts[0]), std::stoi(parts[1]), std::stoi(parts[2]), parts[3][0]);
+    std::cout << "Trantorian " << parts[0] << " is at " << parts[1] << " " << parts[2] << " " << parts[3] << std::endl;
 }
 
 void Parsing::plv(std::string arg)
@@ -132,6 +136,7 @@ void Parsing::plv(std::string arg)
         parts.push_back(part);
     }
     mapt.setTrantorianLvl(std::stoi(parts[0]), std::stoi(parts[1]));
+    std::cout << "lvl of " << parts[0] << " is " << parts[1] << std::endl;
 }
 
 void Parsing::pin(std::string arg)
@@ -144,11 +149,13 @@ void Parsing::pin(std::string arg)
     }
     Stock stock(std::stoi(parts[3]), std::stoi(parts[4]), std::stoi(parts[5]), std::stoi(parts[6]), std::stoi(parts[7]), std::stoi(parts[8]), std::stoi(parts[10]));
     mapt.setTrantorianStock(std::stoi(parts[0]), std::stoi(parts[1]), std::stoi(parts[2]), stock);
+    std::cout << "inventory of" << parts[0] << std::endl;
 }
 
 void Parsing::pex(std::string arg)
 {
     mapt.removeTrantorian(std::stoi(arg));
+    std::cout << "Trantorian " << arg << " is explused" << std::endl;
 }
 
 void Parsing::pbc(std::string arg)
@@ -160,6 +167,7 @@ void Parsing::pbc(std::string arg)
         parts.push_back(part);
     }
     mapt.setTrantorianMessage(std::stoi(parts[0]), parts[1]);
+    std::cout << "message envoyé par " << part[0] << std::endl;
 }
 
 void Parsing::pic(std::string arg)
@@ -204,7 +212,7 @@ void Parsing::pie(std::string arg)
     }
     tile.setLvlEvo(0);
     tile.setPlayers({});
-    std::cout << std::endl;
+    std::cout << "fin incantation" << std::endl;
 }
 
 void Parsing::pfk(std::string arg)
@@ -221,22 +229,40 @@ void Parsing::pdr(std::string arg)
     while (ss >> part) {
         parts.push_back(part);
     }
+    int x = mapt.getTrantorian(std::stoi(parts[0])).getX();
+    int y = mapt.getTrantorian(std::stoi(parts[0])).getY();
+    Stock stockT = mapt.getTile(x, y).getStock();
     Stock stock = mapt.getTrantorian(std::stoi(parts[0])).getStock();
-    if (parts[1] == "0")
+    if (parts[1] == "0") {
+        stockT.linemate ++;
         stock.linemate --;
-    if (parts[1] == "1")
+    }
+    if (parts[1] == "1") {
+        stockT.deraumere ++;
         stock.deraumere --;
-    if (parts[1] == "2")
+    }
+    if (parts[1] == "2") {
+        stockT.sibur ++;
         stock.sibur --;
-    if (parts[1] == "3")
+    }
+    if (parts[1] == "3") {
+        stockT.mendiane ++;
         stock.mendiane --;
-    if (parts[1] == "4")
+    }
+    if (parts[1] == "4") {
+        stockT.phiras ++;
         stock.phiras --;
-    if (parts[1] == "5")
+    }
+    if (parts[1] == "5") {
+        stockT.thystame ++;
         stock.thystame --;
-    if (parts[1] == "6")
+    }
+    if (parts[1] == "6") {
+        stockT.food ++;
         stock.food --;
+    }
     mapt.getTrantorian(std::stoi(parts[0])).setStock(stock);
+    std::cout << "item recupéré" << std::endl;
 }
 
 void Parsing::pgt(std::string arg)
@@ -281,6 +307,7 @@ void Parsing::pgt(std::string arg)
         stock.food ++;
     }
     mapt.getTrantorian(std::stoi(parts[0])).setStock(stock);
+    std::cout << "item posé" << std::endl;
 }
 
 void Parsing::pdi(std::string arg)

@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include "../socket/Socket.hpp"
+#include "../parser/Parsing.hpp"
 
 class Gui {
     public:
@@ -21,4 +22,5 @@ class Gui {
     private:
         Socket _socket;
         std::string _message;
+        Parsing p;
 };

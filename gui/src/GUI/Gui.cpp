@@ -10,6 +10,7 @@
 Gui::Gui(int port, std::string ip) : _socket(port, ip)
 {
     this->_socket.connectToServer();
+    this->p = Parsing();
 }
 
 Gui::~Gui()
@@ -20,8 +21,13 @@ void Gui::loop()
 {
     while (1) {
         this->_socket.socketSelect();
-        if (this->_socket.getMessage() != "") {
-            //TODO: parse message
+        std::string msg = this->_socket.getMessage();
+        if (msg != "") {
+            if (msg == "WELCOME\n")
+                _socket.sendToServer("GRAPHIC\n");
+            else if (msg.back() == '\n') {
+                p.parse(msg);
+            }
             this->_socket.resetMessage();
         }
     }
