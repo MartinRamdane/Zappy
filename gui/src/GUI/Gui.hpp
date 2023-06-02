@@ -12,6 +12,7 @@
 #include "../SFML/Display.hpp"
 #include "../socket/Socket.hpp"
 #include "../parser/Parsing.hpp"
+#include "../cache/Map.hpp"
 
 class Gui {
     public:

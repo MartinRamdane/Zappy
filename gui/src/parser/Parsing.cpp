@@ -372,3 +372,8 @@ void Parsing::sbp(std::string arg)
 {
     std::cout << "bad parameter" << std::endl;
 }
+
+MapT Parsing::getMap()
+{
+    return mapt;
+}

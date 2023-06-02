@@ -7,10 +7,9 @@
 
 #include "Gui.hpp"
 
-Gui::Gui(int port, std::string ip) : _socket(port, ip), _display(1920, 1080)
+Gui::Gui(int port, std::string ip) : _socket(port, ip), _display(1920, 1080), _p()
 {
     this->_socket.connectToServer();
-    this->_p = Parsing();
 }
 
 Gui::~Gui()
@@ -25,13 +24,12 @@ void Gui::loop()
         if (msg != "") {
             if (msg == "WELCOME\n")
                 this->_socket.sendToServer("GRAPHIC\n");
-            else if (msg.back() == '\n') {
+            else if (msg.back() == '\n')
                 this->_p.parse(msg);
-            }
             this->_socket.resetMessage();
         }
         this->_display.eventHandler();
-        this->_display.update();
+        this->_display.update(this->_p.getMap());
         this->_display.render();
     }
 }

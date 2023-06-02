@@ -2,32 +2,32 @@
 ** EPITECH PROJECT, 2023
 ** B-YEP-400-MAR-4-1-zappy-martin.ramdane
 ** File description:
-** SMap
+** STile
 */
 
-#include "SMap.hpp"
+#include "STile.hpp"
 
-SMap::SMap(int x, int y, int type) : _x(x), _y(y), _type(type)
+STile::STile(int x, int y, int type) : _x(x), _y(y), _type(type)
 {
-    this->createOcean();
+    // this->createOcean();
     this->createSprite();
     this->_rect = sf::IntRect(0, 0, 32, 32);
     this->setSpriteRect(this->_rect);
 }
 
-SMap::~SMap()
+STile::~STile()
 {
 }
 
-void SMap::createOcean()
-{
-    this->_oceanTexture.loadFromFile("gui/assets/map/ocean.png");
-    this->_oceanTile.setTexture(this->_oceanTexture);
-    this->_oceanTile.setScale(sf::Vector2f(3, 3));
-    this->_oceanTile.setPosition(sf::Vector2f(-100, -100));
-}
+// void STile::createOcean()
+// {
+//     this->_oceanTexture.loadFromFile("gui/assets/map/ocean.png");
+//     this->_oceanTile.setTexture(this->_oceanTexture);
+//     this->_oceanTile.setScale(sf::Vector2f(3, 3));
+//     this->_oceanTile.setPosition(sf::Vector2f(-100, -100));
+// }
 
-void SMap::createSprite()
+void STile::createSprite()
 {
     switch(this->_type) {
         case 1:
@@ -65,42 +65,47 @@ void SMap::createSprite()
     this->_sprite.setScale(sf::Vector2f(3, 3));
 }
 
-void SMap::setSpriteRect(sf::IntRect rect)
+void STile::setSpriteRect(sf::IntRect rect)
 {
     this->_sprite.setTextureRect(rect);
 }
 
-void SMap::setSpritePosition(sf::Vector2f pos)
+void STile::setSpritePosition(sf::Vector2f pos)
 {
     this->_sprite.setPosition(pos);
 }
 
-void SMap::setSpriteScale(sf::Vector2f scale)
+void STile::setSpriteScale(sf::Vector2f scale)
 {
     this->_sprite.setScale(scale);
 }
 
-void SMap::setSpriteOrigin(sf::Vector2f origin)
+void STile::setSpriteOrigin(sf::Vector2f origin)
 {
     this->_sprite.setOrigin(origin);
 }
 
-void SMap::setSpriteRotation(float angle)
+void STile::setSpriteRotation(float angle)
 {
     this->_sprite.setRotation(angle);
 }
 
-void SMap::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
+void STile::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
 {
     this->_sprite.setTexture(*texture);
 }
 
-void SMap::draw(sf::RenderWindow &window, sf::View &view)
+void STile::draw(sf::RenderWindow &window, sf::View &view)
 {
     window.draw(this->_sprite);
+    if (this->_gems.size() > 0) {
+        for (auto &gem : this->_gems) {
+            gem->draw(window, view);
+        }
+    }
 }
 
-void SMap::eventHandler(sf::Event event, sf::RenderWindow &window)
+void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
 {
     if (event.type == sf::Event::MouseMoved) {
         if (this->_type == 9) {
@@ -115,8 +120,16 @@ void SMap::eventHandler(sf::Event event, sf::RenderWindow &window)
     }
 }
 
-void SMap::update()
+void STile::update(MapT cache)
 {
+    if (this->_type == 9) {
+        // if (this->_gems.size() != cache.getTile(this->_x - 1, this->_y - 1).getStock().getTotalGem()) {
+        //     this->_gems.clear();
+            // for (auto &gem : cache->getGems(this->_x, this->_y)) {
+            //     this->_gems.push_back(std::make_unique<SGem>(gem));
+            // }
+        // }
+    }
     if (this->_type == 10) {
         this->_rect.left += 32;
         if (this->_rect.left >= 96)
@@ -124,5 +137,10 @@ void SMap::update()
         std::cout << "update" << std::endl;
         std::cout << this->_rect.left << std::endl;
         this->setSpriteRect(this->_rect);
+    }
+    if (this->_gems.size() > 0) {
+        for (auto &gem : this->_gems) {
+            gem->update(cache);
+        }
     }
 }

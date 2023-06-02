@@ -14,7 +14,8 @@
 #include <memory>
 #include "IEntity.hpp"
 #include "STrantorian.hpp"
-#include "SMap.hpp"
+#include "STile.hpp"
+#include "../cache/Map.hpp"
 
 class Display {
     public:
@@ -25,7 +26,7 @@ class Display {
         void eventHandler();
         void createMap(int width, int height);
         void createTrantorians();
-        void update();
+        void update(MapT cache);
         void keyHandler();
 
     protected:
@@ -40,4 +41,5 @@ class Display {
         int _width;
         int _height;
         sf::Vector2f _mapCenter;
+        bool _mapCreated = false;
 };

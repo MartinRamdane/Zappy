@@ -23,8 +23,8 @@
 class MapT
 {
     private:
-        int x;
-        int y;
+        int x = 0;
+        int y = 0;
         std::map<std::tuple<double, double>, Tile> tile;
         std::vector<Teams> teams;
         std::vector<Trantorian> trantorians;

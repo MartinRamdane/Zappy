@@ -2,18 +2,17 @@
 ** EPITECH PROJECT, 2023
 ** B-YEP-400-MAR-4-1-zappy-martin.ramdane
 ** File description:
-** SMap
+** SGem
 */
 
 #pragma once
 
 #include "IEntity.hpp"
 
-class SMap : public IEntity {
-
+class SGem : public IEntity {
     public:
-        SMap(int x, int y, int type);
-        ~SMap();
+        SGem(enum GemType type);
+        ~SGem();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
         void setSpritePosition(sf::Vector2f pos);
@@ -23,17 +22,12 @@ class SMap : public IEntity {
         void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
         void draw(sf::RenderWindow &window, sf::View &view);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
-        void update();
-        void createOcean();
+        void update(MapT cache);
 
     protected:
     private:
         sf::Sprite _sprite;
         sf::Texture _texture;
         sf::IntRect _rect;
-        sf::Texture _oceanTexture;
-        sf::Sprite _oceanTile;
-        int _x;
-        int _y;
-        int _type;
+        enum GemType _type;
 };

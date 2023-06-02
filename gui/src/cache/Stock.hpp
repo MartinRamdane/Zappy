@@ -19,4 +19,5 @@ class Stock {
         Stock(int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame);
         Stock(/* args */);
         ~Stock();
+        int getTotalGem();
 };
