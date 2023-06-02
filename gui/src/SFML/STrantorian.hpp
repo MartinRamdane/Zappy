@@ -25,6 +25,7 @@ class STrantorian : public IEntity {
         void setOrientation(int orientation);
         void eventHandler(sf::Event event, sf::RenderWindow &window){};
         void update(MapT cache){};
+        sf::Vector2i getClicked(){};
 
     protected:
     private:

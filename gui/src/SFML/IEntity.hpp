@@ -31,6 +31,7 @@ class IEntity {
         virtual void draw(sf::RenderWindow &window, sf::View &view) = 0;
         virtual void eventHandler(sf::Event event, sf::RenderWindow &window) = 0;
         virtual void update(MapT cache) = 0;
+        virtual sf::Vector2i getClicked() = 0;
 
     protected:
         enum GemType {

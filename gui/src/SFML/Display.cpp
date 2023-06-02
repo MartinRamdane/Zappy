@@ -103,6 +103,19 @@ void Display::keyHandler()
     }
 }
 
+void Display::clickHandler()
+{
+    if (this->_event.type == sf::Event::MouseButtonPressed) {
+        if (this->_event.mouseButton.button == sf::Mouse::Left) {
+            for (auto &sprite : this->_map) {
+                sf::Vector2i click_pos = sprite->getClicked();
+                if (click_pos.x != -1 && click_pos.y != -1)
+                    std::cout << "Tile clicked " << click_pos.x << " " << click_pos.y << std::endl;
+            }
+        }
+    }
+}
+
 void Display::eventHandler()
 {
     while (this->_window->pollEvent(this->_event)) {
@@ -111,6 +124,7 @@ void Display::eventHandler()
         for (auto &sprite : this->_map)
             sprite->eventHandler(this->_event, *this->_window);
         this->keyHandler();
+        this->clickHandler();
     }
 }
 

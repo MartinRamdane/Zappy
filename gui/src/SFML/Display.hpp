@@ -28,6 +28,7 @@ class Display {
         void createTrantorians();
         void update(MapT cache);
         void keyHandler();
+        void clickHandler();
 
     protected:
     private:

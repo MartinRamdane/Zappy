@@ -123,7 +123,7 @@ void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
             sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
             sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
             if (this->_sprite.getGlobalBounds().contains(sf::Vector2f(worldPos.x, worldPos.y))) {
-                
+                this->_isClicked = true;
             }
         }
     }
@@ -156,6 +156,16 @@ void STile::createGem(std::string name, int quantity)
         }
     }
 
+}
+
+sf::Vector2i STile::getClicked()
+{
+    if (this->_isClicked) {
+        this->_isClicked = false;
+        return sf::Vector2i(this->_x, this->_y);
+    } else {
+        return sf::Vector2i(-1, -1);
+    }
 }
 
 void STile::update(MapT cache)

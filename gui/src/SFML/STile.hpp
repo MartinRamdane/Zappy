@@ -26,6 +26,7 @@ class STile : public IEntity {
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         void update(MapT cache);
         void createGem(std::string type, int quantity);
+        sf::Vector2i getClicked();
 
     protected:
     private:
@@ -38,4 +39,5 @@ class STile : public IEntity {
         int _x;
         int _y;
         int _type;
+        bool _isClicked = false;
 };

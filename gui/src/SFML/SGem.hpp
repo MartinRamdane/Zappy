@@ -23,6 +23,7 @@ class SGem : public IEntity {
         void draw(sf::RenderWindow &window, sf::View &view);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         void update(MapT cache);
+        sf::Vector2i getClicked(){};
 
     protected:
     private:
