@@ -3,6 +3,7 @@ import sys
 
 class Ai:
     def __init__(self, teamName, machine, port):
+        print("LALALALALALLALOALAO " + teamName)
         self.teamName = teamName
         self.mapSize = (0, 0)
         self.avaibleSlots = 0
@@ -16,6 +17,13 @@ class Ai:
         self.message = "Look\n"
         self.receive = ""
         self.canFork = False
+        self.haveBroadcast = False
+        self.waitingForReponse = False
+        self.canIncantation = False
+        self.nbMatesAvailable = 1
+        self.count = 0
+        self.sourceFile = open(self.teamName + '.log', 'w')
+        self.nbFork = 0
 
     def joinGame(self):
         self.client = Client(self.machine, self.port)
@@ -28,7 +36,8 @@ class Ai:
         self.setAvaibleSlots(int(arr[0]))
         self.setMapSize(arr[1])
 
-    def comunication(self):
+    def communication(self):
+        print("Self level = ", self.level, file = self.sourceFile)
         self.canFork = False
         if self.path:
             self.message = self.path.pop(0)
@@ -37,11 +46,11 @@ class Ai:
         elif self.lookInventoryFood >= 3 and not self.path:
             self.message = "Inventory\n"
             self.lookInventoryFood = 0
-        print("Send: " + self.message)
+        print("Send to " + self.teamName + ": " + self.message, file = self.sourceFile)
         self.client.send_message(self.message)
         self.receive = self.client.receive_message()
         if self.message == "Incantation\n" and self.receive != "ko\n":
-            print(self.receive)
+            print("Receive: ", self.receive, file = self.sourceFile)
             self.receive = self.client.receive_message()
         self.parseCommands(self.message, self.receive)
         if not self.path:
@@ -78,26 +87,99 @@ class Ai:
                 result_list.append([])
         return result_list
 
+    def encrypt(self, message, key):
+        encrypted_message = ""
+        for char in message:
+            if char.isalpha():
+                if char.isupper():
+                    encrypted_char = chr((ord(char) - 65 + key) % 26 + 65)
+                else:
+                    encrypted_char = chr((ord(char) - 97 + key) % 26 + 97)
+                encrypted_message += encrypted_char
+            else:
+                encrypted_message += char
+        return encrypted_message
+
+    def decrypt(self, message, key):
+        decrypted_message = ""
+        for char in message:
+            if char.isalpha():
+                if char.isupper():
+                    decrypted_char = chr((ord(char) - 65 - key) % 26 + 65)
+                else:
+                    decrypted_char = chr((ord(char) - 97 - key) % 26 + 97)
+                decrypted_message += decrypted_char
+            else:
+                decrypted_message += char
+        return decrypted_message
+
+    def parseResponse(self, receive):
+        print("MESSAGE RECU", file = self.sourceFile)
+        tmpList = receive.split(",")
+        print(tmpList[1], file = self.sourceFile)
+        decrypted = self.decrypt(tmpList[1], ord(self.teamName[0]))
+        self.count = 0
+        print("DECRYPT:" + decrypted, file = self.sourceFile)
+        if "Is anyone is level" in decrypted:
+            print("MESSAGE DECRYPTED", file = self.sourceFile)
+            code = decrypted.split(" ")
+            wantedLevel = int(code[5])
+            if self.level == wantedLevel:
+                encode = self.encrypt("Yes I'm level " + self.level, ord(self.teamName[0]))
+                self.path.append("Broadcast " + encode + "\n")
+                self.nbMatesAvailable += 1
+
+    def getNbMatesNeeded(self, level):
+        if level == 1:
+            return 1
+        elif level == 2:
+            return 2
+        elif level == 3:
+            return 2
+        elif level == 4:
+            return 4
+        elif level == 5:
+            return 4
+        elif level == 6:
+            return 6
+        elif level == 7:
+            return 6
+
     def parseCommands(self, message, receive):
-        print("Receive: " + receive)
-        if message == "Inventory\n" and receive != "ko\n":
+        print("Receive to " + self.teamName + ": " + receive, file = self.sourceFile)
+        if "message" in self.receive:
+            self.parseResponse(receive)
+        if message == "Look\n" and self.count >= 2:
+            self.count = 0
+            self.waitingForReponse = False
+            if self.nbMatesAvailable >= self.getNbMatesNeeded(self.level):
+                self.canIncantation = True
+                self.nbMatesAvailable = 1
+        elif message == "Inventory\n" and receive != "ko\n":
             inventory = self.getInventory(receive)
             if inventory["food"] < 5:
                 self.seachFood = True
         elif message == "Look\n" and self.path and self.path[-1] == "Incantation\n":
             if not self.checkTileForIncantation(self.getObjectsAround(receive)[0], self.level):
                 self.path = []
-        elif message == "Look\n" and receive != "ko\n":
+        if message == "Look\n" and receive != "ko\n":
             getobjects = self.getObjectsAround(receive)
+            if self.haveBroadcast:
+                self.count += 1
             if self.seachFood:
                 self.getFood(getobjects)
-            else:
+            elif not self.waitingForReponse:
                 self.makeIncantation(getobjects)
         elif message == "dead\n":
             sys.exit()
         elif receive.find("Current level:") != -1:
             self.level = int(receive[15])
-            print("Level: " + str(self.level))
+            print("Level: " + str(self.level), file = self.sourceFile)
+            self.haveBroadcast = False
+            self.nbFork = 0
+        elif message == "Fork\n" and receive == "ok\n":
+            self.nbFork += 1
+            self.canFork = True
 
     def getNearestObject(self, name, objects):
         indexes = []
@@ -170,5 +252,17 @@ class Ai:
                     nbLinemate += 1
                 elif item != "player" and item != "linemate":
                     self.path.append("Take " + item + "\n")
-            self.path.append("Look\n")
+            # self.path.append("Look\n")
             self.path.append("Incantation\n")
+        elif self.level == 2:
+            if not self.haveBroadcast and not self.waitingForReponse and not self.canIncantation:
+                self.path = ["Broadcast " + self.encrypt("Is anyone is level 2 ?", ord(self.teamName[0])) + "\n"]
+                self.haveBroadcast = True
+                self.waitingForReponse = True
+            elif not self.canIncantation and not self.waitingForReponse:
+                if self.nbFork < 1:
+                    self.path = ["Fork\n"]
+                self.haveBroadcast = False
+                self.waitingForReponse = False
+            else:
+                print("HE CAN INCANT NOW", file = self.sourceFile)

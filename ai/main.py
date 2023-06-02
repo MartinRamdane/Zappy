@@ -3,6 +3,7 @@
 import sys
 from Ai import Ai
 import os
+import multiprocessing
 
 def print_help():
     print('USAGE: ./zappy_ai -p port -n name -h machine')
@@ -26,15 +27,24 @@ def main():
     ai = Ai(name, machine, port)
     ai.joinGame()
     while True:
-        canFork = ai.comunication()
+        canFork = ai.communication()
         if canFork:
-            f = os.fork()
-            if f == 0:
-                ai = Ai(name, machine, port)
-                ai.joinGame()
+            # FORK HERE
+            p = multiprocessing.Process(target=ai_computation, args=("toto", machine, port))
+            p.start()
         canFork = False
 
-
+def ai_computation(name, machine, port):
+    # Code pour le traitement de l'IA forkée
+    ai = Ai(name, machine, port)
+    ai.joinGame()
+    while True:
+        canFork = ai.communication()
+        if canFork:
+            # FORK HERE
+            p = multiprocessing.Process(target=ai_computation, args=("toto", machine, port))
+            p.start()
+        canFork = False
 
 
 if __name__ == '__main__':
