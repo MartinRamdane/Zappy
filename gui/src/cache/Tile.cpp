@@ -49,3 +49,31 @@ std::vector<int> Tile::getPlayers()
 {
     return (this->players);
 }
+
+std::map<std::string, int> Tile::getStocks()
+{
+    std::map<std::string, int> stocks;
+
+    if (this->stock.food != 0) {
+        stocks["food"] = this->stock.food;
+    }
+    if (this->stock.linemate != 0) {
+        stocks["linemate"] = this->stock.linemate;
+    }
+    if (this->stock.deraumere != 0) {
+        stocks["deraumere"] = this->stock.deraumere;
+    }
+    if (this->stock.sibur != 0) {
+        stocks["sibur"] = this->stock.sibur;
+    }
+    if (this->stock.mendiane != 0) {
+        stocks["mendiane"] = this->stock.mendiane;
+    }
+    if (this->stock.phiras != 0) {
+        stocks["phiras"] = this->stock.phiras;
+    }
+    if (this->stock.thystame != 0) {
+        stocks["thystame"] = this->stock.thystame;
+    }
+    return (stocks);
+}
