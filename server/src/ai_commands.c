@@ -21,6 +21,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strcmp(cmd, "Inventory") == 0) {
         inventory_command(task->client); return;
     }
+    if (strcmp(cmd, "Look") == 0) {
+        look_command(server, task->client); return;
+    }
 }
 
 void forward_command(server_t *server, client_t *client)

@@ -7,7 +7,7 @@
 
 #include "../include/server.h"
 
-void generate_player(client_t *cli, int socket, char *team_name)
+void generate_player(server_t *server, client_t *cli, int socket, char *team_name)
 {
     cli->player = malloc(sizeof(player));
     cli->player->x = 0; // TODO: Check if the start position is random or not
@@ -26,6 +26,7 @@ void generate_player(client_t *cli, int socket, char *team_name)
     cli->player->team_name = strdup(team_name);
     cli->player->socket = socket;
     cli->player->state = ALIVE;
+    server->game->map[0][0].player = cli->player;
 }
 
 void generate_gui_player(client_t *cli, int socket)

@@ -85,7 +85,7 @@ typedef struct tile {
     int mendiane;
     int phiras;
     int thystame;
-    player *player; // if a player is on the tile
+    player *player; // TODO: Change to get ALL players on the tile
 } tile;
 
 typedef struct client {
@@ -191,12 +191,18 @@ void forward_command(server_t *server, client_t *client);
 void right_command(client_t *client);
 void left_command(client_t *client);
 void inventory_command(client_t *client);
+void look_command(server_t *server, client_t *client);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
+int get_case(server_t *server, char dir, int tile, int diff);
+int get_nb_tiles_per_level(int level);
+int get_first_case_id_per_level(server_t *server, int tile, char dir, int level);
+char *get_all_tile_infos(tile *target);
+char *get_all_tiles_per_level(server_t *server, client_t *client, int level);
 
 // PLAYER
-void generate_player(client_t *cli, int socket, char *team_name);
+void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
 void generate_gui_player(client_t *cli, int socket);
 
 // DEBUG

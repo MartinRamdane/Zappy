@@ -59,7 +59,7 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
         if (strcmp(tmp->name, team) == 0) {
             tmp->clients++; cli->team_name = strdup(team);
             send(cli->socket, buff, strlen(buff), 0);
-            generate_player(cli, cli->socket, team);
+            generate_player(s_infos, cli, cli->socket, team);
             sprintf(buff, "%d %d\n", s_infos->width, s_infos->height);
             send(cli->socket, buff, strlen(buff), 0); return 1;
         }
