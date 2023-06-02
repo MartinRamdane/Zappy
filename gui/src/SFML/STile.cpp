@@ -124,7 +124,8 @@ void STile::createGem(std::string name, int quantity)
 {
     for (int i = 0; i < quantity; i++) {
         std::unique_ptr<SGem> gem;
-        sf::Vector2f position(this->_x * 96 + 20, this->_y * 96 + 20);
+        std::cout << this->_sprite.getPosition().x << " " << this->_sprite.getPosition().y << std::endl;
+        sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 64), this->_sprite.getGlobalBounds().top + 10 + (rand() % 64));
 
         if (name == "linemate") {
             gem = std::make_unique<SGem>(LINEMATE);
@@ -153,7 +154,6 @@ void STile::update(MapT cache)
     if (this->_type == 9) {
         int totalGems = cache.getTile(this->_x - 1, this->_y - 1).getNbrTotalGems();
         std::map<std::string, int> stocks = cache.getTile(this->_x - 1, this->_y - 1).getStocks();
-        std::cout << this->_gems.size() <<" "<< totalGems << std::endl;
         if (this->_gems.size() != totalGems) {
             this->_gems.clear();
             for (auto &gem : stocks) {
@@ -165,8 +165,6 @@ void STile::update(MapT cache)
         this->_rect.left += 32;
         if (this->_rect.left >= 96)
             this->_rect.left = 0;
-        std::cout << "update" << std::endl;
-        std::cout << this->_rect.left << std::endl;
         this->setSpriteRect(this->_rect);
     }
     if (this->_gems.size() > 0) {

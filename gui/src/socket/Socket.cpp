@@ -64,9 +64,7 @@ void Socket::socketSelect()
 {
     FD_ZERO(&this->_readfds);
     FD_SET(this->_socket, &this->_readfds);
-    this->_tv.tv_sec = 0;
-    this->_tv.tv_usec = 1;
-    if (select(this->_socket + 1, &this->_readfds, NULL, NULL, &this->_tv) < 0)
+    if (select(this->_socket + 1, &this->_readfds, NULL, NULL, NULL) < 0)
         throw gui::exception("Select failed");
     if (FD_ISSET(this->_socket, &this->_readfds)) {
         this->_message.append(this->receiveFromServer());
