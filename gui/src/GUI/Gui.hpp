@@ -13,12 +13,15 @@
 #include "../socket/Socket.hpp"
 #include "../parser/Parsing.hpp"
 #include "../cache/Map.hpp"
+#include <thread>
 
 class Gui {
     public:
         Gui(int port, std::string ip);
         ~Gui();
         void loop();
+        void socketThread();
+        void displayThread();
 
     protected:
     private:

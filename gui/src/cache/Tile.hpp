@@ -34,4 +34,5 @@ class Tile
         int getLvlEvo();
         std::map<std::string, int> getStocks();
         std::vector<int> getPlayers();
+        int getNbrTotalGems();
 };

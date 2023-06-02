@@ -22,27 +22,29 @@ void SGem::createSprite()
     switch (this->_type)
     {
         case LINEMATE:
-            this->_texture.loadFromFile("gui/assets/map/linemate.png");
+            this->_texture.loadFromFile("gui/assets/gems/linemate.png");
             break;
         case DERAUMERE:
-            this->_texture.loadFromFile("gui/assets/map/deraumere.png");
+            this->_texture.loadFromFile("gui/assets/gems/deraumere.png");
             break;
         case SIBUR:
-            this->_texture.loadFromFile("gui/assets/map/sibur.png");
+            this->_texture.loadFromFile("gui/assets/gems/sibur.png");
             break;
         case MENDIANE:
-            this->_texture.loadFromFile("gui/assets/map/mendiane.png");
+            this->_texture.loadFromFile("gui/assets/gems/mendiane.png");
             break;
         case PHIRAS:
-            this->_texture.loadFromFile("gui/assets/map/phiras.png");
+            this->_texture.loadFromFile("gui/assets/gems/phiras.png");
             break;
-        //TODO: Add thystame texture
-        // case THYSTAME:
-        //     this->_texture.loadFromFile("gui/assets/map/thystame.png");
-        //     break;
+        case THYSTAME:
+            this->_texture.loadFromFile("gui/assets/gems/thystame.png");
+            break;
         default:
             break;
     }
+    this->_sprite.setTexture(this->_texture);
+    this->_sprite.setScale(sf::Vector2f(0.5, 0.5));
+    this->_sprite.setTextureRect(sf::IntRect(0, 0, 53, 50));
 }
 
 void SGem::setSpriteRect(sf::IntRect rect)

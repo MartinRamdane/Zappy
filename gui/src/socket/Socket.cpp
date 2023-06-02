@@ -70,6 +70,7 @@ void Socket::socketSelect()
         throw gui::exception("Select failed");
     if (FD_ISSET(this->_socket, &this->_readfds)) {
         this->_message.append(this->receiveFromServer());
+        std::cout << this->_message << std::endl;
     }
 }
 

@@ -16,7 +16,7 @@ Gui::~Gui()
 {
 }
 
-void Gui::loop()
+void Gui::socketThread()
 {
     while (this->_display.getWindow()->isOpen()) {
         this->_socket.socketSelect();
@@ -28,8 +28,23 @@ void Gui::loop()
                 this->_p.parse(msg);
             this->_socket.resetMessage();
         }
+    }
+}
+
+void Gui::displayThread()
+{
+    while (this->_display.getWindow()->isOpen()) {
         this->_display.eventHandler();
         this->_display.update(this->_p.getMap());
         this->_display.render();
     }
+}
+
+void Gui::loop()
+{
+    std::thread socketThread(&Gui::socketThread, this);
+    std::thread displayThread(&Gui::displayThread, this);
+
+    socketThread.join();
+    displayThread.join();
 }

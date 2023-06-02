@@ -50,6 +50,19 @@ std::vector<int> Tile::getPlayers()
     return (this->players);
 }
 
+int Tile::getNbrTotalGems()
+{
+    int nbr = 0;
+
+    nbr += stock.linemate;
+    nbr += stock.deraumere;
+    nbr += stock.sibur;
+    nbr += stock.mendiane;
+    nbr += stock.phiras;
+    nbr += stock.thystame;
+    return (nbr);
+}
+
 std::map<std::string, int> Tile::getStocks()
 {
     std::map<std::string, int> stocks;

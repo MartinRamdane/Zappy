@@ -120,15 +120,46 @@ void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
     }
 }
 
+void STile::createGem(std::string name, int quantity)
+{
+    for (int i = 0; i < quantity; i++) {
+        std::unique_ptr<SGem> gem;
+        sf::Vector2f position(this->_x * 96 + 20, this->_y * 96 + 20);
+
+        if (name == "linemate") {
+            gem = std::make_unique<SGem>(LINEMATE);
+        } else if (name == "deraumere") {
+            gem = std::make_unique<SGem>(DERAUMERE);
+        } else if (name == "sibur") {
+            gem = std::make_unique<SGem>(SIBUR);
+        } else if (name == "mendiane") {
+            gem = std::make_unique<SGem>(MENDIANE);
+        } else if (name == "phiras") {
+            gem = std::make_unique<SGem>(PHIRAS);
+        } else if (name == "thystame") {
+            gem = std::make_unique<SGem>(THYSTAME);
+        }
+
+        if (gem) {
+            gem->setSpritePosition(position);
+            this->_gems.push_back(std::move(gem));
+        }
+    }
+
+}
+
 void STile::update(MapT cache)
 {
     if (this->_type == 9) {
-        // if (this->_gems.size() != cache.getTile(this->_x - 1, this->_y - 1).getStock().getTotalGem()) {
-        //     this->_gems.clear();
-            // for (auto &gem : cache->getGems(this->_x, this->_y)) {
-            //     this->_gems.push_back(std::make_unique<SGem>(gem));
-            // }
-        // }
+        int totalGems = cache.getTile(this->_x - 1, this->_y - 1).getNbrTotalGems();
+        std::map<std::string, int> stocks = cache.getTile(this->_x - 1, this->_y - 1).getStocks();
+        std::cout << this->_gems.size() <<" "<< totalGems << std::endl;
+        if (this->_gems.size() != totalGems) {
+            this->_gems.clear();
+            for (auto &gem : stocks) {
+                createGem(gem.first, gem.second);
+            }
+        }
     }
     if (this->_type == 10) {
         this->_rect.left += 32;
