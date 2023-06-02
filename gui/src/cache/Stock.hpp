@@ -8,8 +8,7 @@
 #pragma once
 
 class Stock {
-    private:
-        /* data */
+    public:
         int food;
         int linemate;
         int deraumere;
@@ -17,7 +16,7 @@ class Stock {
         int mendiane;
         int phiras;
         int thystame;
-    public:
+        Stock(int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame);
         Stock(/* args */);
         ~Stock();
 };

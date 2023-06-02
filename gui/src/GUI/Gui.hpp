@@ -11,6 +11,7 @@
 #include <string>
 #include "../SFML/Display.hpp"
 #include "../socket/Socket.hpp"
+#include "../parser/Parsing.hpp"
 
 class Gui {
     public:
@@ -23,4 +24,5 @@ class Gui {
         Socket _socket;
         std::string _message;
         Display _display;
+        Parsing _p;
 };

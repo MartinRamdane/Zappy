@@ -16,7 +16,7 @@
 #include <map>
 #include <string>
 #include <iostream>
-#include "../display/Trantorians.hpp"
+#include "../cache/Map.hpp"
 
 class IEntity {
     public:
