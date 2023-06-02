@@ -24,6 +24,7 @@ class Ai:
         self.count = 0
         self.sourceFile = open(self.teamName + '.log', 'w')
         self.nbFork = 0
+        self.skipSend = False
 
     def joinGame(self):
         self.client = Client(self.machine, self.port)
@@ -39,23 +40,31 @@ class Ai:
     def communication(self):
         print("Self level = ", self.level, file = self.sourceFile)
         self.canFork = False
-        if self.path:
-            self.message = self.path.pop(0)
-        elif self.seachFood and not self.path:
-            self.message = "Look\n"
-        elif self.lookInventoryFood >= 3 and not self.path:
-            self.message = "Inventory\n"
-            self.lookInventoryFood = 0
-        print("Send to " + self.teamName + ": " + self.message, file = self.sourceFile)
-        self.client.send_message(self.message)
+        if not self.skipSend:
+            if self.path:
+                self.message = self.path.pop(0)
+            elif self.seachFood and not self.path:
+                self.message = "Look\n"
+            elif self.lookInventoryFood >= 3 and not self.path:
+                self.message = "Inventory\n"
+                self.lookInventoryFood = 0
+            print("Send to " + self.teamName + ": " + self.message, file = self.sourceFile)
+            self.client.send_message(self.message)
         self.receive = self.client.receive_message()
         if self.message == "Incantation\n" and self.receive != "ko\n":
             print("Receive: ", self.receive, file = self.sourceFile)
-            self.receive = self.client.receive_message()
-        self.parseCommands(self.message, self.receive)
+            if "dead" in self.receive:
+                sys.exit()
+            self.receive += self.client.receive_message()
+        tmp = self.receive.split('\n')
+        for item in tmp:
+            if item != "":
+                self.receive = item
+                self.parseCommands(self.message, item)
         if not self.path:
             self.lookInventoryFood += 1
-        self.message = "Look\n"
+        if not "message" in self.receive:
+            self.message = "Look\n"
         return self.canFork
 
     def setMapSize(self, arr):
@@ -125,9 +134,11 @@ class Ai:
             code = decrypted.split(" ")
             wantedLevel = int(code[5])
             if self.level == wantedLevel:
-                encode = self.encrypt("Yes I'm level " + self.level, ord(self.teamName[0]))
+                encode = self.encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0]))
                 self.path.append("Broadcast " + encode + "\n")
                 self.nbMatesAvailable += 1
+                return True
+        return False
 
     def getNbMatesNeeded(self, level):
         if level == 1:
@@ -146,23 +157,24 @@ class Ai:
             return 6
 
     def parseCommands(self, message, receive):
-        print("Receive to " + self.teamName + ": " + receive, file = self.sourceFile)
+        print("Mess: " + self.message + " Receive to " + self.teamName + ": " + receive, file = self.sourceFile)
+        self.skipSend = False
         if "message" in self.receive:
-            self.parseResponse(receive)
-        if message == "Look\n" and self.count >= 2:
+            self.skipSend = not self.parseResponse(self.receive)
+        if message == "Look\n" and self.count >= 3:
             self.count = 0
             self.waitingForReponse = False
             if self.nbMatesAvailable >= self.getNbMatesNeeded(self.level):
                 self.canIncantation = True
                 self.nbMatesAvailable = 1
-        elif message == "Inventory\n" and receive != "ko\n":
+        elif message == "Inventory\n" and receive != "ko":
             inventory = self.getInventory(receive)
             if inventory["food"] < 5:
                 self.seachFood = True
         elif message == "Look\n" and self.path and self.path[-1] == "Incantation\n":
             if not self.checkTileForIncantation(self.getObjectsAround(receive)[0], self.level):
                 self.path = []
-        if message == "Look\n" and receive != "ko\n":
+        if message == "Look\n" and receive != "ko":
             getobjects = self.getObjectsAround(receive)
             if self.haveBroadcast:
                 self.count += 1
@@ -172,12 +184,14 @@ class Ai:
                 self.makeIncantation(getobjects)
         elif message == "dead\n":
             sys.exit()
-        elif receive.find("Current level:") != -1:
+        elif "Current level: " in receive:
+            print("HEREE", file = self.sourceFile)
             self.level = int(receive[15])
             print("Level: " + str(self.level), file = self.sourceFile)
             self.haveBroadcast = False
             self.nbFork = 0
-        elif message == "Fork\n" and receive == "ok\n":
+        elif message == "Fork\n" and receive == "ok":
+            print("FORK OK", file = self.sourceFile)
             self.nbFork += 1
             self.canFork = True
 
