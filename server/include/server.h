@@ -33,11 +33,10 @@
 && av[optind][0] != '-'; optind++
 #define MAX_BODY_LENGTH 1024
 enum state {
-    NONE,
     DEAD,
-    FORK,
-    EJECT,
     EGG,
+    INCANTATION,
+    ALIVE,
 };
 
 typedef struct inventory {
@@ -73,6 +72,7 @@ typedef struct player {
     char orientation;
     char *team_name;
     int socket;
+    enum state state;
 } player;
 
 typedef struct tile {
@@ -186,6 +186,8 @@ void put_thystame_resource(server_t infos, tile **map, int r);
 // TASK
 void add_task(server_t *server, char *cmd, double time, client_t *cli);
 void execute_tasks(server_t *server);
+void send_task_response(server_t *server, task_t *task, char *cmd);
+void forward_command(server_t *server, client_t *client);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);

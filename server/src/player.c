@@ -25,6 +25,7 @@ void generate_player(client_t *cli, int socket, char *team_name)
     cli->player->orientation = 'N';
     cli->player->team_name = strdup(team_name);
     cli->player->socket = socket;
+    cli->player->state = ALIVE;
 }
 
 void generate_gui_player(client_t *cli, int socket)

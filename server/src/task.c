@@ -58,8 +58,10 @@ void execute_tasks(server_t *server)
     LIST_FOREACH(tmp, &server->task_head, next) {
         double value = (double)((ts.tv_sec - server->server_time.tv_sec));
         if (value >= tmp->time) {
+            printf("command when removing : %s\n", tmp->cmd);
             printf("Removing task %d\n", tmp->id);
             printf("time: %f\n", tmp->time);
+            send_task_response(server, tmp, tmp->cmd);
             LIST_REMOVE(tmp, next);
         }
     }
