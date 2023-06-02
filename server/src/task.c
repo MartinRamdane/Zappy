@@ -33,12 +33,21 @@ double calculate_time_for_task(server_t *server, char *buffer)
 {
     struct timespec ts;
     clock_gettime(0, &ts);
-    if (strcmp(buffer, "Forward") == 0) {
-        printf("added forward with time : %f\n", (ts.tv_sec - server->server_time.tv_sec) + (7.0 / server->freq));
-        return (ts.tv_sec - server->server_time.tv_sec) + (7.0 / server->freq);
-    } else {
-        return (ts.tv_sec - server->server_time.tv_sec) + (1.0 / server->freq);
-    }
+    time_t diff = ts.tv_sec - server->server_time.tv_sec;
+    if (strcmp(buffer, "Forward") == 0) return diff + (7.0 / server->freq);
+    else if (strcmp(buffer, "Right") == 0) return diff + (7.0 / server->freq);
+    else if (strcmp(buffer, "Left") == 0) return diff + (7.0 / server->freq);
+    else if (strcmp(buffer, "Look") == 0) return diff + (7.0 / server->freq);
+    else if (strcmp(buffer, "Inventory") == 0)
+        return diff + (1.0 / server->freq);
+    else if (strstr(buffer, "Broadcast")) return diff + (7.0 / server->freq);
+    else if (strcmp(buffer, "Fork") == 0) return diff + (42.0 / server->freq);
+    else if (strcmp(buffer, "Eject") == 0) return diff + (7.0 / server->freq);
+    else if (strstr(buffer, "Take")) return diff + (7.0 / server->freq);
+    else if (strstr(buffer, "Set")) return diff + (7.0 / server->freq);
+    else if (strcmp(buffer, "Incantation") == 0)
+        return diff + (300.0 / server->freq);
+    else return 0.0;
 }
 
 void execute_tasks(server_t *server)
