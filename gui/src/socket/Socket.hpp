@@ -40,4 +40,5 @@ class Socket {
         struct sockaddr_in _address;
         fd_set _readfds;
         std::string _message;
+        struct timeval _tv;
 };

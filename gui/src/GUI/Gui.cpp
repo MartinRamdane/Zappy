@@ -47,4 +47,6 @@ void Gui::loop()
 
     socketThread.join();
     displayThread.join();
+    this->_socket.sendToServer("QUIT\n");
+    this->_socket.closeSocket();
 }
