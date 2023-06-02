@@ -12,6 +12,12 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strcmp(cmd, "Forward") == 0) {
         forward_command(server, task->client); return;
     }
+    if (strcmp(cmd, "Right") == 0) {
+        right_command(task->client); return;
+    }
+    if (strcmp(cmd, "Left") == 0) {
+        left_command(task->client); return;
+    }
 }
 
 void forward_command(server_t *server, client_t *client)
@@ -27,5 +33,37 @@ void forward_command(server_t *server, client_t *client)
     else if (client->player->orientation == 'W')
         pos[0]--;
     move_player(client->player, server->game->map, pos, server);
+    send(client->socket, "ok\n", 3, 0);
+}
+
+void right_command(client_t *client)
+{
+    if (client->player->state == INCANTATION) return;
+    printf("player orientation: %c\n", client->player->orientation);
+    if (client->player->orientation == 'N')
+        client->player->orientation = 'E';
+    else if (client->player->orientation == 'E')
+        client->player->orientation = 'S';
+    else if (client->player->orientation == 'S')
+        client->player->orientation = 'W';
+    else if (client->player->orientation == 'W')
+        client->player->orientation = 'N';
+    printf("new player orientation: %c\n", client->player->orientation);
+    send(client->socket, "ok\n", 3, 0);
+}
+
+void left_command(client_t *client)
+{
+    if (client->player->state == INCANTATION) return;
+    printf("player orientation: %c\n", client->player->orientation);
+    if (client->player->orientation == 'N')
+        client->player->orientation = 'W';
+    else if (client->player->orientation == 'E')
+        client->player->orientation = 'N';
+    else if (client->player->orientation == 'S')
+        client->player->orientation = 'E';
+    else if (client->player->orientation == 'W')
+        client->player->orientation = 'S';
+    printf("new player orientation: %c\n", client->player->orientation);
     send(client->socket, "ok\n", 3, 0);
 }
