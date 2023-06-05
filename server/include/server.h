@@ -150,6 +150,7 @@ int *create_tuple(int x, int y);
 int get_diff_y_per_level(int level, char dir);
 int get_diff_x_per_level(int level, char dir);
 int get_nb_tiles_per_level(int level);
+int check_if_is_resources(char *cmd);
 
 // SERVER
 server_t *create_server_struct(void);
@@ -196,6 +197,8 @@ void left_command(client_t *client);
 bool check_task_nb(server_t *server, client_t *client);
 void inventory_command(client_t *client);
 void look_command(server_t *server, client_t *client);
+void set_command(server_t *server, client_t *client, char *buffer);
+void take_command(server_t *server, client_t *client, char *buffer);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
@@ -204,6 +207,8 @@ int get_nb_tiles_per_level(int level);
 int get_first_case_id_per_level(server_t *server, int tile, char dir, int level);
 char *get_all_tile_infos(tile *target);
 char *get_all_tiles_per_level(server_t *server, client_t *client, int level);
+int set_object(server_t *server, client_t *client, char *buffer);
+int take_object(server_t *server, client_t *client, char *buffer);
 
 // PLAYER
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
@@ -214,6 +219,7 @@ void debug_print_map(server_t *s_infos, tile **map);
 void debug_print_gui_player(client_t *cli);
 void debug_print_player(client_t *cli);
 void debug_print_task_queue(server_t *server);
+void debug_print_player_inventory(client_t *cli);
 
 //TIME
 double calculate_time_for_task(server_t *server, char *buffer);

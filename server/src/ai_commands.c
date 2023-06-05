@@ -24,6 +24,12 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strcmp(cmd, "Look") == 0) {
         look_command(server, task->client); return;
     }
+    if (strstr(cmd, "Set")) {
+        set_command(server, task->client, cmd); return;
+    }
+    if (strstr(cmd, "Take")) {
+        take_command(server, task->client, cmd); return;
+    }
 }
 
 void forward_command(server_t *server, client_t *client)
