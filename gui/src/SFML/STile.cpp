@@ -133,7 +133,6 @@ void STile::createGem(std::string name, int quantity)
 {
     for (int i = 0; i < quantity; i++) {
         std::unique_ptr<SGem> gem;
-        std::cout << this->_sprite.getPosition().x << " " << this->_sprite.getPosition().y << std::endl;
         sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 55), this->_sprite.getGlobalBounds().top + 10 + (rand() % 53));
 
         if (name == "linemate") {

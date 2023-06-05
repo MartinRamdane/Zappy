@@ -13,6 +13,7 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_window->setFramerateLimit(60);
     this->_window->setActive(false);
     this->_view.setSize(sf::Vector2f(w_width, w_height));
+    this->_bottomMenu = std::make_unique<SBottom_menu>(w_width, w_height);
     this->_clock.restart();
 }
 
@@ -57,22 +58,31 @@ void Display::createMap(int width, int height)
         for (int x = 0; x < width; x++)
             this->_map.push_back(std::make_unique<STile>(x, y, array[y][x] - '0'));
     }
-    this->_view.setSize(sf::Vector2f(1920, 1080));
-    this->_view.setCenter(sf::Vector2f(width * 96 / 2, height * 96 / 2));
-    this->_mapCenter = sf::Vector2f(width * 96 / 2, height * 96 / 2);
-    // this->_view.zoom(1);
+}
+
+void Display::createViews(int map_width, int map_height)
+{
+    this->_view.setSize(sf::Vector2f(this->_width, this->_height));
+    this->_view.setCenter(sf::Vector2f(map_width * 96 / 2, map_height * 96 / 2));
+    this->_mapCenter = sf::Vector2f(map_width * 96 / 2, map_height * 96 / 2);
+
+    this->_bottomMenuView.setSize(sf::Vector2f(this->_width, this->_height));
+    this->_bottomMenuView.setCenter(sf::Vector2f(this->_width / 2, this->_height / 2));
 }
 
 void Display::render()
 {
     this->_window->clear(sf::Color::Black);
-    this->_window->setView(this->_view);
-    for (auto &sprite : this->_map) {
+    for (auto &sprite : this->_map)
        sprite->draw(*this->_window, this->_view);
-    }
     for (auto &sprite : this->_trantorians)
         sprite.second->draw(*this->_window, this->_view);
+    this->_window->setView(this->_bottomMenuView);
+    if (this->_ShowBottomMenu == true) {
+        this->_bottomMenu->draw(*this->_window);
+    }
     this->_window->display();
+    this->_window->setView(this->_view);
 }
 
 void Display::keyHandler()
@@ -108,13 +118,10 @@ void Display::clickHandler(MapT cache)
     if (this->_event.type == sf::Event::MouseButtonPressed) {
         if (this->_event.mouseButton.button == sf::Mouse::Left) {
             for (auto &sprite : this->_map) {
-                sf::Vector2i click_pos = sprite->getClicked();
-                if (click_pos.x != -1 && click_pos.y != -1) {
-                    std::cout << "Tile clicked " << click_pos.x << " " << click_pos.y << std::endl;
-                    std::map<std::string, int> stocks = cache.getTile(click_pos.x, click_pos.y).getStocks();
-                    for (auto &stock : stocks) {
-                        std::cout << stock.first << " " << stock.second << std::endl;
-                    }
+                this->_click_pos = sprite->getClicked();
+                if (this->_click_pos.x != -1 && this->_click_pos.y != -1) {
+                    this->_ShowBottomMenu = true;
+                    this->_bottomMenu->update(cache.getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
                 }
             }
         }
@@ -137,6 +144,7 @@ void Display::update(MapT cache)
 {
     if (this->_mapCreated == false && cache.getX() != 0 && cache.getY() != 0) {
         this->createMap(cache.getX(), cache.getY());
+        this->createViews(cache.getX(), cache.getY());
         this->_mapCreated = true;
     }
     if (this->_clock.getElapsedTime().asSeconds() > 0.15) {
