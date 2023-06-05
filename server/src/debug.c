@@ -52,3 +52,12 @@ void debug_print_task_queue(server_t *server)
         debug_print_player(tmp->client);
     }
 }
+
+void debug_print_player_inventory(client_t *cli)
+{
+    printf("[DEBUG] client socket: %d | food: %d linemate: %d deraumere: %d sibur: %d mendiane: %d phiras: %d thystame: %d\n", cli->socket,
+    cli->player->inv->food, cli->player->inv->linemate,
+    cli->player->inv->deraumere, cli->player->inv->sibur,
+    cli->player->inv->mendiane, cli->player->inv->phiras,
+    cli->player->inv->thystame);
+}
