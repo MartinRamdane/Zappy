@@ -191,6 +191,7 @@ void forward_command(server_t *server, client_t *client);
 void right_command(client_t *client);
 void left_command(client_t *client);
 bool check_task_nb(server_t *server, client_t *client);
+void inventory_command(client_t *client);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);

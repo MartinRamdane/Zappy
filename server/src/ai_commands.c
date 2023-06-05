@@ -18,6 +18,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strcmp(cmd, "Left") == 0) {
         left_command(task->client); return;
     }
+    if (strcmp(cmd, "Inventory") == 0) {
+        inventory_command(task->client); return;
+    }
 }
 
 void forward_command(server_t *server, client_t *client)
@@ -39,7 +42,6 @@ void forward_command(server_t *server, client_t *client)
 void right_command(client_t *client)
 {
     if (client->player->state == INCANTATION) return;
-    printf("player orientation: %c\n", client->player->orientation);
     if (client->player->orientation == 'N')
         client->player->orientation = 'E';
     else if (client->player->orientation == 'E')
@@ -48,14 +50,12 @@ void right_command(client_t *client)
         client->player->orientation = 'W';
     else if (client->player->orientation == 'W')
         client->player->orientation = 'N';
-    printf("new player orientation: %c\n", client->player->orientation);
     send(client->socket, "ok\n", 3, 0);
 }
 
 void left_command(client_t *client)
 {
     if (client->player->state == INCANTATION) return;
-    printf("player orientation: %c\n", client->player->orientation);
     if (client->player->orientation == 'N')
         client->player->orientation = 'W';
     else if (client->player->orientation == 'E')
@@ -64,6 +64,5 @@ void left_command(client_t *client)
         client->player->orientation = 'E';
     else if (client->player->orientation == 'W')
         client->player->orientation = 'S';
-    printf("new player orientation: %c\n", client->player->orientation);
     send(client->socket, "ok\n", 3, 0);
 }
