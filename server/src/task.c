@@ -9,6 +9,8 @@
 
 void add_task(server_t *server, char *cmd, double time, client_t *cli)
 {
+    if (check_task_nb(server, cli) == false)
+        return;
     task_t *new_task = malloc(sizeof(task_t));
     new_task->cmd = strdup(cmd);
     new_task->time = time;
@@ -27,6 +29,21 @@ void add_task(server_t *server, char *cmd, double time, client_t *cli)
             break;
         }
     }
+}
+
+bool check_task_nb(server_t *server, client_t *client)
+{
+    int counter = 0;
+    task_t *tmp;
+    LIST_FOREACH(tmp, &server->task_head, next) {
+        if (tmp->client->socket == client->socket) {
+            counter++;
+        }
+    }
+    if (counter < 10) {
+        return true;
+    }
+    return false;
 }
 
 double calculate_time_for_task(server_t *server, char *buffer)
