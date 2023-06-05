@@ -17,3 +17,10 @@ void inventory_command(client_t *client)
     client->player->inv->phiras, client->player->inv->thystame);
     send(client->socket, response, strlen(response), 0);
 }
+
+void look_command(server_t *server, client_t *client)
+{
+    char *buff = get_all_tiles_per_level(server, client, client->player->level);
+    send(client->socket, buff, strlen(buff), 0);
+    send(client->socket, "\n", 1, 0);
+}
