@@ -26,7 +26,7 @@ class Display {
         std::unique_ptr<sf::RenderWindow> &getWindow();
         void eventHandler(MapT cache);
         void createMap(int width, int height);
-        void createTrantorians();
+        // void createTrantorians();
         void update(MapT cache);
         void keyHandler();
         void clickHandler(MapT cache);
@@ -36,7 +36,7 @@ class Display {
     private:
         std::unique_ptr<sf::RenderWindow> _window;
         sf::Event _event;
-        std::map<std::string, std::unique_ptr<IEntity>> _trantorians;
+        std::map<int, std::unique_ptr<IEntity>> _trantorians;
         std::vector<std::unique_ptr<IEntity>> _map;
         std::unique_ptr<SBottom_menu> _bottomMenu;
         sf::View _view;

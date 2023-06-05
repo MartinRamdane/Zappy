@@ -24,11 +24,13 @@ class STrantorian : public IEntity {
         void draw(sf::RenderWindow &window, sf::View &view);
         void setOrientation(int orientation);
         void eventHandler(sf::Event event, sf::RenderWindow &window){};
-        void update(MapT cache){};
+        void update(MapT cache);
+        void update(MapT cache, int id);
         sf::Vector2i getClicked(){};
 
     protected:
     private:
+        int id;
         sf::Sprite _sprite;
         std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
 };

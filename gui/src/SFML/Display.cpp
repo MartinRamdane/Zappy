@@ -21,10 +21,10 @@ Display::~Display()
 {
 }
 
-void Display::createTrantorians()
-{
-    this->_trantorians.insert(std::make_pair("trantorian1", std::make_unique<STrantorian>()));
-}
+// void Display::createTrantorians()
+// {
+//     this->_trantorians.insert(std::make_pair("trantorian1", std::make_unique<STrantorian>()));
+// }
 
 void Display::createMap(int width, int height)
 {
@@ -154,18 +154,15 @@ void Display::update(MapT cache)
     }
     for (auto &sprite : this->_trantorians)
         sprite.second->update(cache);
-    // if (this->_trantorians.size() != cache.getTrantorians().size()) {
-    //     this->_trantorians.clear();
-    //     for (auto &trantor : cache.getTrantorians()) {
-    //         createTrantorian(trantor.first, trantor.second);
-    //     }
-    // }
-    // if (this->_gems.size() != totalGems) {
-    //     this->_gems.clear();
-    //     for (auto &gem : stocks) {
-    //         createGem(gem.first, gem.second);
-    //     }
-    // }
+    if (this->_trantorians.size() != cache.getTrantorians().size()) {
+        this->_trantorians.clear();
+        for (auto &trantor : cache.getTrantorians()) {
+            this->_trantorians[trantor.getId()] = std::make_unique<STrantorian>(trantor);
+        }
+    }
+    for (auto &trantor : cache.getTrantorians()) {
+        this->_trantorians[trantor.getId()]->update(cache);
+    }
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()

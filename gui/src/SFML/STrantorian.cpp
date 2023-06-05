@@ -7,16 +7,22 @@
 
 #include "STrantorian.hpp"
 
-STrantorian::STrantorian()
-{
-    this->createSprite();
-    this->setSpritePosition(sf::Vector2f(0, 0));
-    this->setOrientation(3);
-    this->setSpriteScale(sf::Vector2f(1.5, 1.5));
-}
+// STrantorian::STrantorian()
+// {
+//     this->createSprite();
+//     this->setSpritePosition(sf::Vector2f(0, 0));
+//     this->setOrientation(3);
+//     this->setSpriteScale(sf::Vector2f(1.5, 1.5));
+// }
 
 STrantorian::STrantorian(Trantorian trantorian)
 {
+    this->createSprite();
+    std::cout << "creer Tranto x: " << trantorian.getX() << " y: " << trantorian.getY() << std::endl;
+    this->setSpritePosition(sf::Vector2f(45 + (96 * (trantorian.getX() - 1)), 45 + (96 * (trantorian.getY() - 1))));
+    this->setOrientation(trantorian.getOrientation() - 48);
+    this->setSpriteScale(sf::Vector2f(1.5, 1.5));
+    id = trantorian.getId();
     //TODO: create sprite with trantorian infos
     // this->createSprite();
     // this->setSpritePosition(sf::Vector2f(100, 100));
@@ -37,6 +43,13 @@ void STrantorian::createSprite()
     _textures["up"]->loadFromFile("gui/assets/trantorian/trantorian_up.png");
     _textures["right"] = std::make_shared<sf::Texture>();
     _textures["right"]->loadFromFile("gui/assets/trantorian/trantorian_right.png");
+}
+
+void STrantorian::update(MapT cache)
+{
+    Trantorian t = cache.getTrantorian(id);
+    this->setSpritePosition(sf::Vector2f(45 + (96 * (t.getX())), 45 + (96 * (t.getY()))));
+    this->setOrientation(t.getOrientation() - 48);
 }
 
 void STrantorian::setSpriteRect(sf::IntRect rect)
