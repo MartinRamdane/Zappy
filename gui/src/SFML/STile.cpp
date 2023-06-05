@@ -171,8 +171,8 @@ sf::Vector2i STile::getClicked()
 void STile::update(MapT cache)
 {
     if (this->_type == 9) {
-        int totalGems = cache.getTile(this->_x - 1, this->_y - 1).getNbrTotalGems();
-        std::map<std::string, int> stocks = cache.getTile(this->_x - 1, this->_y - 1).getStocks();
+        int totalGems = cache.getTile(this->_x, this->_y).getNbrTotalGems();
+        std::map<std::string, int> stocks = cache.getTile(this->_x, this->_y).getStocks();
         if (this->_gems.size() != totalGems) {
             this->_gems.clear();
             for (auto &gem : stocks) {
