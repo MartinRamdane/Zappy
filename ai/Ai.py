@@ -25,6 +25,7 @@ class Ai:
         self.sourceFile = open(self.teamName + '.log', 'w')
         self.nbFork = 0
         self.skipSend = False
+        self.messagesQueue = []
 
     def joinGame(self):
         self.client = Client(self.machine, self.port)
@@ -49,6 +50,7 @@ class Ai:
                 self.message = "Inventory\n"
                 self.lookInventoryFood = 0
             print("Send to " + self.teamName + ": " + self.message, file = self.sourceFile)
+            self.messagesQueue.append(self.message)
             self.client.send_message(self.message)
         self.receive = self.client.receive_message()
         if self.message == "Incantation\n" and self.receive != "ko\n":
@@ -60,7 +62,7 @@ class Ai:
         for item in tmp:
             if item != "":
                 self.receive = item
-                self.parseCommands(self.message, item)
+                self.parseCommands(self.messagesQueue[0] if self.message else "", self.receive)
         if not self.path:
             self.lookInventoryFood += 1
         if not "message" in self.receive:
@@ -157,7 +159,7 @@ class Ai:
             return 6
 
     def parseCommands(self, message, receive):
-        print("Mess: " + self.message + " Receive to " + self.teamName + ": " + receive, file = self.sourceFile)
+        print("Mess: " + message + " Receive to " + self.teamName + ": " + receive, file = self.sourceFile)
         self.skipSend = False
         if "message" in self.receive:
             self.skipSend = not self.parseResponse(self.receive)
@@ -194,6 +196,8 @@ class Ai:
             print("FORK OK", file = self.sourceFile)
             self.nbFork += 1
             self.canFork = True
+        if not "message" in receive and not "Elevation underway" in receive:
+            self.messagesQueue.pop(0)
 
     def getNearestObject(self, name, objects):
         indexes = []

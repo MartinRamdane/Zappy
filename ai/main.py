@@ -42,7 +42,7 @@ def ai_computation(name, machine, port):
         canFork = ai.communication()
         if canFork:
             # FORK HERE
-            p = multiprocessing.Process(target=ai_computation, args=("toto", machine, port))
+            p = multiprocessing.Process(target=ai_computation, args=("tota", machine, port))
             p.start()
         canFork = False
 
