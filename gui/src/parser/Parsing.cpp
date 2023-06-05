@@ -102,7 +102,7 @@ void Parsing::tna(std::string arg)
 
 void Parsing::pnw(std::string arg)
 {
-    arg = arg.substr(1, arg.length());
+    arg = arg.substr(0, arg.length());
     std::vector<std::string> parts;
     std::stringstream ss(arg);
     std::string part;
