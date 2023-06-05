@@ -147,6 +147,9 @@ void fetch_arguments(server_t *s_infos, int arg, char **av, int ac);
 void check_args(server_t *s_infos);
 int my_arrlen(char **arr);
 int *create_tuple(int x, int y);
+int get_diff_y_per_level(int level, char dir);
+int get_diff_x_per_level(int level, char dir);
+int get_nb_tiles_per_level(int level);
 
 // SERVER
 server_t *create_server_struct(void);

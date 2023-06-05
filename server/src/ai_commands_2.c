@@ -20,5 +20,7 @@ void inventory_command(client_t *client)
 
 void look_command(server_t *server, client_t *client)
 {
-    get_all_tiles_per_level(server, client, client->player->level);
+    char *buff = get_all_tiles_per_level(server, client, client->player->level);
+    send(client->socket, buff, strlen(buff), 0);
+    send(client->socket, "\n", 1, 0);
 }
