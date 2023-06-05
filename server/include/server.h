@@ -198,6 +198,7 @@ bool check_task_nb(server_t *server, client_t *client);
 void inventory_command(client_t *client);
 void look_command(server_t *server, client_t *client);
 void set_command(server_t *server, client_t *client, char *buffer);
+void take_command(server_t *server, client_t *client, char *buffer);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
@@ -207,6 +208,7 @@ int get_first_case_id_per_level(server_t *server, int tile, char dir, int level)
 char *get_all_tile_infos(tile *target);
 char *get_all_tiles_per_level(server_t *server, client_t *client, int level);
 int set_object(server_t *server, client_t *client, char *buffer);
+int take_object(server_t *server, client_t *client, char *buffer);
 
 // PLAYER
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
