@@ -65,7 +65,7 @@ char *get_all_tile_infos(tile *target)
 {
     char *buffer = malloc(sizeof(char) * MAX_BODY_LENGTH);
     buffer = memset(buffer, '\0', MAX_BODY_LENGTH); int len = 0;
-    if (target->player) {
+    if (target->players) {
         strcat(buffer, " player"); len += 7;
     }
     if (target->food > 0) {

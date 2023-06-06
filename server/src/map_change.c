@@ -18,8 +18,8 @@ void move_player(player *p, tile **map, int *pos, server_t *s_infos)
         new_y = 0;
     if (new_y < 0)
         new_y = s_infos->height - 1;
-    map[p->x][p->y].player = NULL;
+    remove_player_from_queue(&map[p->x][p->y], p);
     p->x = new_x;
     p->y = new_y;
-    map[new_x][new_y].player = p;
+    add_player_from_queue(&map[new_x][new_y], p);
 }

@@ -21,7 +21,8 @@ tile **generate_map(server_t *infos)
             map[x][y].mendiane = 0;
             map[x][y].phiras = 0;
             map[x][y].thystame = 0;
-            map[x][y].player = NULL;
+            LIST_INIT(&map[x][y].player_head);
+            map[x][y].players = NULL;
         }
     }
     return map;

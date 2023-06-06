@@ -76,6 +76,13 @@ typedef struct player {
     char *uid;
 } player;
 
+typedef struct player_queue {
+    player *player;
+    LIST_ENTRY(player_queue) next;
+} player_queue;
+
+extern LIST_HEAD(player_listhead, player_queue) player_head;
+
 typedef struct tile {
     int x;
     int y;
@@ -86,8 +93,8 @@ typedef struct tile {
     int mendiane;
     int phiras;
     int thystame;
-    int nb_players;
-    player **players; // TODO: Change to get ALL players on the tile
+    struct player_listhead player_head;
+    player_queue *players;
 } tile;
 
 typedef struct client {
@@ -211,11 +218,15 @@ char *get_all_tile_infos(tile *target);
 char *get_all_tiles_per_level(server_t *server, client_t *client, int level);
 int set_object(server_t *server, client_t *client, char *buffer);
 int take_object(server_t *server, client_t *client, char *buffer);
+void eject_all_players(server_t *server, client_t *client, int x, int y);
+int eject_player(server_t *server, client_t *client);
 
 // PLAYER
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
 void generate_gui_player(client_t *cli, int socket);
 int check_if_solo_on_tile(server_t *server, client_t *cli);
+void add_player_from_queue(tile *tile, player *player);
+void remove_player_from_queue(tile *tile, player *player);
 
 // DEBUG
 void debug_print_map(server_t *s_infos, tile **map);
