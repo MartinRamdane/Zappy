@@ -36,7 +36,7 @@ int get_available_slots_in_team(server_t *s_infos, char *team)
         if (strcmp(tmp->name, team) == 0) {
             if (tmp->clients == tmp->max_clients)
                 tmp->max_clients++;
-            return (tmp->max_clients - tmp->clients) - 1;
+            return (tmp->max_clients - tmp->clients);
         }
     }
     return (0);
@@ -49,7 +49,7 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
         return 1;
     }
     if (cli->team_name != NULL) return 0;
-    int available_slots = get_available_slots_in_team(s_infos, team);
+    int available_slots = get_available_slots_in_team(s_infos, team) - 1;
     char *buff = malloc(sizeof(char) * 100);
     sprintf(buff, "%d\n", available_slots);
     if (does_team_exists(s_infos, team) == 0) return -1;

@@ -220,6 +220,7 @@ int set_object(server_t *server, client_t *client, char *buffer);
 int take_object(server_t *server, client_t *client, char *buffer);
 void eject_all_players(server_t *server, client_t *client, int x, int y);
 int eject_player(server_t *server, client_t *client);
+int check_instant_commands(char *buffer, client_t *client, server_t *server);
 
 // PLAYER
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
