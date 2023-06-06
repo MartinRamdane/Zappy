@@ -109,6 +109,8 @@ void Display::keyHandler()
         } else if (this->_event.key.code == sf::Keyboard::Space) {
             this->_view.reset(sf::FloatRect(0, 0, this->_width, this->_height));
             this->_view.setCenter(this->_mapCenter);
+        } else if (this->_event.key.code == sf::Keyboard::B) {
+            this->_ShowBottomMenu = !this->_ShowBottomMenu;
         }
     }
 }
