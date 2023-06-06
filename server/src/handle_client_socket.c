@@ -7,30 +7,6 @@
 
 #include "../include/server.h"
 
-void remove_client(int socket, server_t *s_infos)
-{
-    struct client *tmp;
-    LIST_FOREACH(tmp, &s_infos->head, next) {
-        if (tmp->socket == socket) {
-            remove_client_from_team(tmp, s_infos);
-            if (tmp->socket != -1)
-                close(tmp->socket);
-            if (tmp->buffer)
-                free(tmp->buffer);
-            if (tmp->uid)
-                free(tmp->uid);
-            if (tmp->team_name)
-                free(tmp->team_name);
-            if (tmp->player)
-                free(tmp->player);
-            if (tmp->gui_player)
-                free(tmp->gui_player);
-            LIST_REMOVE(tmp, next);
-            return;
-        }
-    }
-}
-
 void handle_client_data(server_t *s_infos, fd_set *readfds)
 {
     struct client *tmp = NULL;

@@ -161,7 +161,8 @@ int get_diff_x_per_level(int level, char dir);
 int get_nb_tiles_per_level(int level);
 int check_if_is_resources(char *cmd);
 char *generate_uuid(void);
-
+void remove_player_from_tile(client_t *cli, server_t *s_infos);
+void remove_client(int socket, server_t *s_infos);
 // SERVER
 server_t *create_server_struct(void);
 void init_server(server_t *s_infos);
