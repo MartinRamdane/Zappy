@@ -11,7 +11,7 @@ class Level():
                     8: ["linemate", "linemate", "deraumere", "deraumere", "sibur", "sibur", "mendiane", "mendiane",  "phiras",  "phiras", "thystame"]}
         self.matesNeeded = {1: 1, 2: 1, 3: 2, 4: 2, 5: 4, 6: 4, 7: 6, 8: 6}
 
-    def checkIfCanLevelUp(self, inventory, level, file):
+    def checkIfCanLevelUp(self, inventory, level):
         tohave = {}
         for i in self.getLevel[level]:
             if i in tohave:
@@ -20,5 +20,30 @@ class Level():
                 tohave[i] = 1
         for i in tohave:
             if i not in inventory or inventory[i] < tohave[i]:
+                return False
+        return True
+
+    def getNbElemOnTile(self, tile, elem):
+        nb = 0
+        for i in tile:
+            if i == elem:
+                nb += 1
+        return nb
+
+    def getNbElemForLevel(self, level, item):
+        nb = 0
+        for i in self.getLevel[level]:
+            if i == item:
+                nb += 1
+        return nb
+
+
+    def checkTileForIncanation(self, tile, level):
+        nbPlayersOnTile = self.getNbElemOnTile(tile, "player")
+        if nbPlayersOnTile != self.matesNeeded[level]:
+            return False
+        for i in self.getLevel[level]:
+            nbElemForLevel = self.getNbElemForLevel(level, i)
+            if self.getNbElemOnTile(tile, i) != nbElemForLevel:
                 return False
         return True
