@@ -39,7 +39,7 @@ int check_instant_commands(char *buffer, client_t *client, server_t *server)
 
 int commands(server_t *server, client_t *client, char *buffer)
 {
-    if (add_client_to_team(server, buffer, client) == -1)
+    if (add_client_to_team(server, buffer, client) != 0)
         return 0;
     if (check_instant_commands(buffer, client, server) == 1)
         return 0;

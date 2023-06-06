@@ -9,7 +9,7 @@ NAME = zappy_server
 
 SRC = src/*.c
 
-FLAGS = -Wall -Wextra -g3 -lm
+FLAGS = -Wall -Wextra -g3 -lm -luuid
 
 all:
 	gcc -o $(NAME) $(SRC) $(FLAGS)

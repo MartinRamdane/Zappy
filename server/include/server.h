@@ -160,6 +160,7 @@ int get_diff_y_per_level(int level, char dir);
 int get_diff_x_per_level(int level, char dir);
 int get_nb_tiles_per_level(int level);
 int check_if_is_resources(char *cmd);
+char *generate_uuid(void);
 
 // SERVER
 server_t *create_server_struct(void);
