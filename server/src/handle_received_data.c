@@ -47,6 +47,7 @@ int commands(server_t *server, client_t *client, char *buffer)
         double task_time = calculate_time_for_task(server, buffer);
         add_task(server, buffer, task_time, client);
     } else {
+        send(client->socket, "ko\n", 3, 0);
         printf("no AI command\n"); // TODO: Implement GUI commands
     }
     return 0;
