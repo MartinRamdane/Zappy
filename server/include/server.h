@@ -73,6 +73,7 @@ typedef struct player {
     char *team_name;
     int socket;
     enum state state;
+    char *uid;
 } player;
 
 typedef struct tile {
@@ -85,7 +86,8 @@ typedef struct tile {
     int mendiane;
     int phiras;
     int thystame;
-    player *player; // TODO: Change to get ALL players on the tile
+    int nb_players;
+    player **players; // TODO: Change to get ALL players on the tile
 } tile;
 
 typedef struct client {
@@ -208,6 +210,7 @@ char *get_all_tiles_per_level(server_t *server, client_t *client, int level);
 // PLAYER
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
 void generate_gui_player(client_t *cli, int socket);
+int check_if_solo_on_tile(server_t *server, client_t *cli);
 
 // DEBUG
 void debug_print_map(server_t *s_infos, tile **map);
