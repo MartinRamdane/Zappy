@@ -25,7 +25,7 @@ int check_is_ai_commands(char *buffer)
 
 int commands(server_t *server, client_t *client, char *buffer)
 {
-    if (add_client_to_team(server, buffer, client) == 1)
+    if (add_client_to_team(server, buffer, client) == -1)
         return 0;
     if (check_is_ai_commands(buffer) == 1) {
         double task_time = calculate_time_for_task(server, buffer);

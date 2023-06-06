@@ -26,7 +26,7 @@ int does_team_has_space(server_t *s_infos, char *team)
                 return (1);
         }
     }
-    return (0);
+    return (1); //TODO : Enforce team size limit
 }
 
 int get_available_slots_in_team(server_t *s_infos, char *team)
@@ -34,7 +34,9 @@ int get_available_slots_in_team(server_t *s_infos, char *team)
     team_t *tmp = NULL;
     LIST_FOREACH(tmp, &s_infos->team_head, next) {
         if (strcmp(tmp->name, team) == 0) {
-            return (tmp->max_clients - tmp->clients);
+            if (tmp->clients == tmp->max_clients)
+                tmp->max_clients++;
+            return (tmp->max_clients - tmp->clients) - 1;
         }
     }
     return (0);
