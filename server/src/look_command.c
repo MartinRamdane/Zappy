@@ -64,34 +64,35 @@ int get_first_case_id_per_level(server_t *server, int tile, char dir, int level)
 char *get_all_tile_infos(tile *target)
 {
     char *buffer = malloc(sizeof(char) * MAX_BODY_LENGTH);
-    buffer = memset(buffer, '\0', MAX_BODY_LENGTH); int len = 0;
-    if (target->players) {
+    int len = 0;
+    player_queue *tmp = NULL;
+    LIST_FOREACH(tmp, &target->player_head, next) {
         strcat(buffer, " player"); len += 7;
     }
-    if (target->food > 0) {
+    for (int i = 0; i < target->food; i++) {
         strcat(buffer, " food"); len += 5;
     }
-    if (target->linemate > 0) {
+    for (int i = 0; i < target->linemate; i++) {
         strcat(buffer, " linemate"); len += 9;
     }
-    if (target->deraumere > 0) {
+    for (int i = 0; i < target->deraumere; i++) {
         strcat(buffer, " deraumere"); len += 11;
     }
-    if (target->sibur > 0) {
+    for (int i = 0; i < target->sibur; i++) {
         strcat(buffer, " sibur"); len += 6;
     }
-    if (target->mendiane > 0) {
+    for (int i = 0; i < target->mendiane; i++) {
         strcat(buffer, " mendiane"); len += 9;
     }
-    if (target->phiras > 0) {
+    for (int i = 0; i < target->phiras; i++) {
         strcat(buffer, " phiras"); len += 7;
     }
-    if (target->thystame > 0) {
+    for (int i = 0; i < target->thystame; i++) {
         strcat(buffer, " thystame"); len += 9;
     }
-    if (len > 0)
+    if (len > 0) {
         buffer[len] = ',';
-    else
+    } else
         buffer[0] = ',';
     return buffer;
 }

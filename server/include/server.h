@@ -209,6 +209,7 @@ void inventory_command(client_t *client);
 void look_command(server_t *server, client_t *client);
 void set_command(server_t *server, client_t *client, char *buffer);
 void take_command(server_t *server, client_t *client, char *buffer);
+void eject_command(server_t *server, client_t *client);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);

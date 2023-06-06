@@ -36,13 +36,16 @@ void generate_gui_player(client_t *cli, int socket)
 
 int check_if_solo_on_tile(server_t *server, client_t *cli)
 {
+    int _x = cli->player->x; int _y = cli->player->y;
+    tile *target = &server->game->map[_x][_y];
     int count = 0;
-    LIST_FOREACH(cli, &server->head, next) {
-        if (count > 1) {
-            return 1;
-        }
+    player_queue *tmp = NULL;
+    LIST_FOREACH(tmp, &target->player_head, next) {
         count++;
     }
+    if (count > 1)
+        return 1;
+    printf("solo\n");
     return 0;
 }
 

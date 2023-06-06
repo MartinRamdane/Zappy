@@ -30,6 +30,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strstr(cmd, "Take")) {
         take_command(server, task->client, cmd); return;
     }
+    if (strcmp(cmd, "Eject") == 0) {
+        eject_command(server, task->client); return;
+    }
 }
 
 void forward_command(server_t *server, client_t *client)
