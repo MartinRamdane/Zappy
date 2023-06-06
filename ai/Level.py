@@ -47,3 +47,12 @@ class Level():
             if self.getNbElemOnTile(tile, i) != nbElemForLevel:
                 return False
         return True
+
+    def getDictfromLevel(self, level):
+        tohave = {}
+        for i in self.getLevel[level]:
+            if i in tohave:
+                tohave[i] += 1
+            else:
+                tohave[i] = 1
+        return tohave
