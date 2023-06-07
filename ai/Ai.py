@@ -52,7 +52,7 @@ class Ai:
             if self.lookInventoryFood >= 8 and not self.prepareIncantation and not self.toJoin:
                 message = "Inventory\n"
                 self.lookInventoryFood = 0
-            elif self.seachFood:
+            elif self.seachFood and not self.path:
                 print("SEARCH FOOD", file = self.sourceFile)
                 message = "Look\n"
             elif self.path:
@@ -62,9 +62,15 @@ class Ai:
         receive = self.client.receive_message()
         print("Receive: ", receive, file = self.sourceFile)
         tmp = receive.split('\n')
+        i = 0
         for item in tmp:
             if item != "":
                 self.parseReponse(item)
+                i += 1
+        if i > 1:
+            print("Skip send Here", self.skipSend, file = self.sourceFile)
+            self.skipSend = False
+        print("Skip send la",self.skipSend, file = self.sourceFile)
         self.lookInventoryFood += 1
         if self.haveBroadcast:
             self.count += 1
@@ -121,6 +127,7 @@ class Ai:
             self.makeIncantation()()
 
     def elevation(self, receive):
+        print("ELEVATION", file = self.sourceFile)
         self.skipSend = True
 
     def levelUpdating(self, receive):
@@ -182,7 +189,6 @@ class Ai:
                 self.canIncantation = True
                 self.path = []
                 if not self.toJoin:
-                    self.skipSend = False
                     self.path.append("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
                 self.goToDir(int(self.direction))
                 self.path.append("Look\n")
@@ -197,6 +203,7 @@ class Ai:
                 self.prepareIncantation = True
                 self.waitingForReponse = False
                 self.canIncantation = True
+        print("SKip send: " + str(self.skipSend), file = self.sourceFile)
 
     def other(self, receive):
         if not self.path:
