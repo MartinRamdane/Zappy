@@ -240,7 +240,7 @@ int check_instant_commands(char *buffer, client_t *client, server_t *server);
 l_tile *get_all_listen_tiles_position(server_t *server, player *player);
 int *compare_diff(int **diff);
 int compare_listen_tiles(l_tile *listen_tiles, int x, int y);
-void send_broadcast(server_t *server, client_t *client, char *msg);
+void send_broadcast(server_t *server, client_t *sender, client_t *client, char *msg);
 
 // PLAYER
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name);

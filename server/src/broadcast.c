@@ -37,6 +37,7 @@ int *compare_diff(int **diff)
             if (diff[i][1] < res[1])
                 res[1] = diff[i][1];
         }
+        // printf("res x : %d res y: %d\n", res[0], res[1]);
     }
     return res;
 }
@@ -44,6 +45,9 @@ int *compare_diff(int **diff)
 int compare_listen_tiles(l_tile *listen_tiles, int x, int y)
 {
     int **diff = malloc(sizeof(int *) * 8);
+    for (int i = 0; i < 8; i++)
+        if (listen_tiles[i].x == x && listen_tiles[i].y == y)
+            return listen_tiles[i].id;
     for (int i = 0; i < 8; i++)
         diff[i] = malloc(sizeof(int) * 2);
     for (int i = 0; i < 8; i++) {
@@ -61,15 +65,13 @@ int compare_listen_tiles(l_tile *listen_tiles, int x, int y)
         if (listen_tiles[i].x == res[0] && listen_tiles[i].y == res[1])
             return listen_tiles[i].id;
     }
-    printf("res x : %d res y: %d\n", res[0], res[1]);
-    printf("don't find good id\n");
     return -1;
 }
 
-void send_broadcast(server_t *server, client_t *client, char *msg)
+void send_broadcast(server_t *server, client_t *sender, client_t *client, char *msg)
 {
     l_tile *listen_tiles = get_all_listen_tiles_position(server, client->player);
-    int id = compare_listen_tiles(listen_tiles, client->player->x, client->player->y);
+    int id = compare_listen_tiles(listen_tiles, sender->player->x, sender->player->y);
     char *to_send = malloc(sizeof(char) * MAX_BODY_LENGTH);
     sprintf(to_send, "message %d, %s\n", id, msg);
     send(client->socket, to_send, strlen(to_send), 0);
@@ -82,7 +84,7 @@ void broadcast_command(server_t *server, client_t *client, char *msg)
     send(client->socket, "ok\n", 3, 0);
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->player->state != INCANTATION && strcmp(tmp->player->uid, client->player->uid) != 0) {
-            send_broadcast(server, tmp, msg);
+            send_broadcast(server, client, tmp, msg);
         }
     }
 }
