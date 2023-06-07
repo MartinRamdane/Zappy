@@ -33,6 +33,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strcmp(cmd, "Eject") == 0) {
         eject_command(server, task->client); return;
     }
+    if (strstr(cmd, "Broadcast")) {
+        broadcast_command(server, task->client, cmd); return;
+    }
 }
 
 void forward_command(server_t *server, client_t *client)
