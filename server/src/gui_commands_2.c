@@ -35,6 +35,7 @@ void send_new_player_connected(server_t *server, client_t *player)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             send_playerdata_to_gui(tmp, player);
+            send_map_content(tmp, server);
         }
     }
 }
