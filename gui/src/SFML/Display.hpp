@@ -26,11 +26,12 @@ class Display {
         std::unique_ptr<sf::RenderWindow> &getWindow();
         void eventHandler(MapT cache);
         void createMap(int width, int height);
-        // void createTrantorians();
         void update(MapT cache);
-        void keyHandler();
+        void keyHandler(MapT cache);
         void clickHandler(MapT cache);
         void createViews(int map_width, int map_height);
+        std::string getMessage();
+        void resetMessage();
 
     protected:
     private:
@@ -49,4 +50,5 @@ class Display {
         bool _mapCreated = false;
         bool _ShowBottomMenu = false;
         sf::Vector2i _click_pos;
+        std::string _message;
 };

@@ -344,12 +344,14 @@ void Parsing::edi(std::string arg)
 
 void Parsing::sgt(std::string arg)
 {
-    std::cout << "pas compris" << std::endl;
+    std::cout << "frequency : " << arg << std::endl;
+    mapt.setFrequency(std::stod(arg));
 }
 
 void Parsing::sst(std::string arg)
 {
-    std::cout << "pas compris" << std::endl;
+    std::cout << "frequency : " << arg << std::endl;
+    mapt.setFrequency(std::stod(arg));
 }
 
 void Parsing::seg(std::string arg)

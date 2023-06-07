@@ -63,6 +63,7 @@ void STile::createSprite()
     this->_sprite.setTexture(this->_texture);
     this->_sprite.setPosition(sf::Vector2f(this->_x * 96, this->_y * 96));
     this->_sprite.setScale(sf::Vector2f(3, 3));
+    this->_sprite.setColor(sf::Color(255, 255, 255, 255));
 }
 
 void STile::setSpriteRect(sf::IntRect rect)
@@ -172,7 +173,6 @@ void STile::update(MapT cache)
     if (this->_type == 9) {
         int totalGems = cache.getTile(this->_x, this->_y).getNbrTotalGems();
         std::map<std::string, int> stocks = cache.getTile(this->_x, this->_y).getStocks();
-        std::cout << this->_x << " " << this->_y << std::endl;
         if (this->_gems.size() != totalGems) {
             this->_gems.clear();
             for (auto &gem : stocks) {

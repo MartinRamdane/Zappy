@@ -151,3 +151,13 @@ void MapT::removeTeam(std::string team)
         }
     }
 }
+
+void MapT::setFrequency(double frequency)
+{
+    this->frequency = frequency;
+}
+
+int MapT::getFrequency()
+{
+    return (this->frequency);
+}

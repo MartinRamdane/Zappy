@@ -85,7 +85,7 @@ void Display::render()
     this->_window->setView(this->_view);
 }
 
-void Display::keyHandler()
+void Display::keyHandler(MapT cache)
 {
     if (this->_event.type == sf::Event::KeyPressed) {
         if (this->_event.key.code == sf::Keyboard::Escape)
@@ -111,6 +111,10 @@ void Display::keyHandler()
             this->_view.setCenter(this->_mapCenter);
         } else if (this->_event.key.code == sf::Keyboard::B) {
             this->_ShowBottomMenu = !this->_ShowBottomMenu;
+        } else if (this->_event.key.code == sf::Keyboard::C) {
+            this->_message = "sst " + std::to_string(cache.getFrequency() - 10) + "\n";
+        } else if (this->_event.key.code == sf::Keyboard::V) {
+            this->_message = "sst " + std::to_string(cache.getFrequency() + 10) + "\n";
         }
     }
 }
@@ -137,7 +141,7 @@ void Display::eventHandler(MapT cache)
             this->_window->close();
         for (auto &sprite : this->_map)
             sprite->eventHandler(this->_event, *this->_window);
-        this->keyHandler();
+        this->keyHandler(cache);
         this->clickHandler(cache);
     }
 }
@@ -163,7 +167,6 @@ void Display::update(MapT cache)
         }
     }
     for (auto &trantor : cache.getTrantorians()) {
-        std::cout << "pls" << trantor.getOrientation() << std::endl;
         this->_trantorians[trantor.getId()]->update(cache);
     }
 
@@ -172,4 +175,16 @@ void Display::update(MapT cache)
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()
 {
     return this->_window;
+}
+
+void Display::resetMessage()
+{
+    this->_message.clear();
+}
+
+std::string Display::getMessage()
+{
+    if (this->_message == "")
+        return "";
+    return this->_message;
 }

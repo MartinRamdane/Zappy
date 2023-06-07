@@ -32,6 +32,11 @@ void Gui::socketThread()
                 this->_p.parse(msg);
             this->_socket.resetMessage();
         }
+        if (this->_display.getMessage() != "") {
+            std::cout << this->_display.getMessage() << std::endl;
+            this->_socket.sendToServer(this->_display.getMessage());
+            this->_display.resetMessage();
+        }
     }
 }
 
