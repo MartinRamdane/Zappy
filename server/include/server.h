@@ -149,6 +149,13 @@ typedef struct server_s {
     team_t *teams; // TODO: Implement teams when the server loads
 } server_t;
 
+typedef struct listen_tile {
+    int x;
+    int y;
+    int id;
+    player *player;
+} l_tile;
+
 
 // MISC
 void print_help(void);
@@ -163,6 +170,11 @@ int check_if_is_resources(char *cmd);
 char *generate_uuid(void);
 void remove_player_from_tile(client_t *cli, server_t *s_infos);
 void remove_client(int socket, server_t *s_infos);
+l_tile *get_north_case(server_t *server, l_tile *listen_tiles);
+l_tile *get_south_case(server_t *server, l_tile *listen_tiles);
+l_tile *get_east_case(server_t *server, l_tile *listen_tiles);
+l_tile *get_west_case(server_t *server, l_tile *listen_tiles);
+
 // SERVER
 server_t *create_server_struct(void);
 void init_server(server_t *s_infos);
@@ -211,6 +223,7 @@ void look_command(server_t *server, client_t *client);
 void set_command(server_t *server, client_t *client, char *buffer);
 void take_command(server_t *server, client_t *client, char *buffer);
 void eject_command(server_t *server, client_t *client);
+void broadcast_command(server_t *server, client_t *client, char *msg);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
@@ -224,6 +237,10 @@ int take_object(server_t *server, client_t *client, char *buffer);
 void eject_all_players(server_t *server, client_t *client, int x, int y);
 int eject_player(server_t *server, client_t *client);
 int check_instant_commands(char *buffer, client_t *client, server_t *server);
+l_tile *get_all_listen_tiles_position(server_t *server, player *player);
+int *compare_diff(int **diff);
+int compare_listen_tiles(l_tile *listen_tiles, int x, int y);
+void send_broadcast(server_t *server, client_t *client, char *msg);
 
 // PLAYER
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
