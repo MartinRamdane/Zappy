@@ -7,7 +7,7 @@
 
 #include "Trantorians.hpp"
 
-Trantorian::Trantorian(Stock stock, int id, char orientation, int lvl, bool canEvolve, int x, int y, std::string team)
+Trantorian::Trantorian(Stock stock, int id, int orientation, int lvl, bool canEvolve, int x, int y, std::string team)
 {
     this->x = x;
     this->y = y;
@@ -39,7 +39,7 @@ void Trantorian::setY(int y)
     this->y = y;
 }
 
-void Trantorian::setOrientation(char orientation)
+void Trantorian::setOrientation(int orientation)
 {
     this->orientation = orientation;
 }
@@ -64,7 +64,7 @@ int Trantorian::getY()
     return (this->y);
 }
 
-char Trantorian::getOrientation()
+int Trantorian::getOrientation()
 {
     return (this->orientation);
 }

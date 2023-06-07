@@ -110,9 +110,9 @@ void Parsing::pnw(std::string arg)
         parts.push_back(part);
     }
     Stock stock(0, 0, 0, 0, 0, 0, 0);
-    Trantorian trantorian(stock, std::stoi(parts[0]), parts[3][0], 1, false, std::stoi(parts[1]), std::stoi(parts[2]), parts[4]);
+    Trantorian trantorian(stock, std::stoi(parts[0]), std::stoi(parts[3]), 1, false, std::stoi(parts[1]), std::stoi(parts[2]), parts[4]);
     mapt.addTrantorian(trantorian);
-    std::cout << "Trantorian " << parts[0] << " is born" << std::endl;
+    std::cout << "Trantorian " << parts[0] << " is born with orientation" << parts[3][0] << std::endl;
 }
 
 void Parsing::ppo(std::string arg)
@@ -123,7 +123,7 @@ void Parsing::ppo(std::string arg)
     while (ss >> part) {
         parts.push_back(part);
     }
-    mapt.setTrantorianPos(std::stoi(parts[0]), std::stoi(parts[1]), std::stoi(parts[2]), parts[3][0]);
+    mapt.setTrantorianPos(std::stoi(parts[0]), std::stoi(parts[1]), std::stoi(parts[2]), std::stoi(parts[3]));
     std::cout << "Trantorian " << parts[0] << " is at " << parts[1] << " " << parts[2] << " " << parts[3] << std::endl;
 }
 

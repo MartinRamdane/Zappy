@@ -163,8 +163,10 @@ void Display::update(MapT cache)
         }
     }
     for (auto &trantor : cache.getTrantorians()) {
+        std::cout << "pls" << trantor.getOrientation() << std::endl;
         this->_trantorians[trantor.getId()]->update(cache);
     }
+
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()

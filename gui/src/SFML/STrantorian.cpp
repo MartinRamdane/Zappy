@@ -19,8 +19,8 @@ STrantorian::STrantorian(Trantorian trantorian)
 {
     this->createSprite();
     std::cout << "creer Tranto x: " << trantorian.getX() << " y: " << trantorian.getY() << std::endl;
-    this->setSpritePosition(sf::Vector2f(45 + (96 * (trantorian.getX())), 45 + (96 * (trantorian.getY()))));
-    this->setOrientation(trantorian.getOrientation() - 48);
+    this->setSpritePosition(sf::Vector2f((-45) + (96 * (trantorian.getX())), (-50) + ((96) * (trantorian.getY()))));
+    this->setOrientation(trantorian.getOrientation());
     this->setSpriteScale(sf::Vector2f(1.5, 1.5));
     id = trantorian.getId();
     //TODO: create sprite with trantorian infos
@@ -47,9 +47,10 @@ void STrantorian::createSprite()
 
 void STrantorian::update(MapT cache)
 {
+
     Trantorian t = cache.getTrantorian(id);
-    this->setSpritePosition(sf::Vector2f(45 + (96 * (t.getX())), 45 + (96 * (t.getY()))));
-    this->setOrientation(t.getOrientation() - 48);
+    this->setSpritePosition(sf::Vector2f((-45) + (96 * (t.getX())), (-50) + ((96) * (t.getY()))));
+    this->setOrientation(t.getOrientation());
 }
 
 void STrantorian::setSpriteRect(sf::IntRect rect)

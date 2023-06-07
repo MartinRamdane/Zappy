@@ -65,7 +65,7 @@ std::vector<Trantorian> MapT::getTrantorians()
     return (this->trantorians);
 }
 
-void MapT::setTrantorianPos(int id, int x, int y, char orientation)
+void MapT::setTrantorianPos(int id, int x, int y, int orientation)
 {
     for (int i = 0; i < this->trantorians.size(); i++) {
         if (this->trantorians[i].getId() == id) {
