@@ -147,7 +147,7 @@ void Parsing::pin(std::string arg)
     while (ss >> part) {
         parts.push_back(part);
     }
-    Stock stock(std::stoi(parts[3]), std::stoi(parts[4]), std::stoi(parts[5]), std::stoi(parts[6]), std::stoi(parts[7]), std::stoi(parts[8]), std::stoi(parts[10]));
+    Stock stock(std::stoi(parts[3]), std::stoi(parts[4]), std::stoi(parts[5]), std::stoi(parts[6]), std::stoi(parts[7]), std::stoi(parts[8]), std::stoi(parts[9]));
     mapt.setTrantorianStock(std::stoi(parts[0]), std::stoi(parts[1]), std::stoi(parts[2]), stock);
     std::cout << "inventory of" << parts[0] << std::endl;
 }
