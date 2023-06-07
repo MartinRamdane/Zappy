@@ -199,11 +199,13 @@ class Ai:
             print("CICIICIC", file = self.sourceFile)
             wantedLevel = int(tmp[8])
             if wantedLevel == self.level + 1:
-                print("LALALAL", file = self.sourceFile)
-                self.path = []
-                self.prepareIncantation = True
-                self.waitingForReponse = False
-                self.canIncantation = True
+                self.nbMatesAvailable += 1
+                if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
+                    print("LALALAL", file = self.sourceFile)
+                    self.path = []
+                    self.prepareIncantation = True
+                    self.waitingForReponse = False
+                    self.canIncantation = True
         print("SKip send: " + str(self.skipSend), file = self.sourceFile)
 
     def other(self, receive):
