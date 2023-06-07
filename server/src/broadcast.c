@@ -37,7 +37,6 @@ int *compare_diff(int **diff)
             if (diff[i][1] < res[1])
                 res[1] = diff[i][1];
         }
-        // printf("res x : %d res y: %d\n", res[0], res[1]);
     }
     return res;
 }

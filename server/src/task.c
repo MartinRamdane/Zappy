@@ -9,24 +9,25 @@
 
 void add_task(server_t *server, char *cmd, double time, client_t *cli)
 {
-    if (check_task_nb(server, cli) == false)
-        return;
+    if (check_task_nb(server, cli) == false) return;
+    if (strcmp(cmd, "Incantation") == 0) {
+        if (check_can_incantation(server, cli) == 0) {
+            send(cli->socket, "ko\n", 3, 0); cli->player->state = INCANTATION;
+            return;
+        }
+        send(cli->socket, "Elevation underway\n", 19, 0);
+    }
     task_t *new_task = malloc(sizeof(task_t));
-    new_task->cmd = strdup(cmd);
-    new_task->time = time;
-    new_task->client = cli;
-    new_task->id = server->task_id;
-    server->task_id++;
+    new_task->cmd = strdup(cmd); new_task->time = time; new_task->client = cli;
+    new_task->id = server->task_id; server->task_id++;
     new_task->next.le_next = NULL;
     if (LIST_EMPTY(&server->task_head)) {
-        LIST_INSERT_HEAD(&server->task_head, new_task, next);
-        return;
+        LIST_INSERT_HEAD(&server->task_head, new_task, next); return;
     }
     task_t *tmp;
     LIST_FOREACH(tmp, &server->task_head, next) {
         if (tmp->next.le_next == NULL) {
-            LIST_INSERT_AFTER(tmp, new_task, next);
-            break;
+            LIST_INSERT_AFTER(tmp, new_task, next); break;
         }
     }
 }
