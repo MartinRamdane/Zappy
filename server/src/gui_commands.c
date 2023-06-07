@@ -25,7 +25,10 @@ int check_gui_commands(char *buffer, client_t *client, server_t *server)
     if (strcmp(buffer, "mct") == 0) {
         send_map_content(client, server); return 1;
     }
-    return 0;
+    if (strstr(buffer, "ppo") != NULL) {
+        send_player_pos(client, server, buffer); return 1;
+    }
+    return check_others_gui_cmd(buffer, client, server);
 }
 
 void send_map_size(client_t *client, server_t *server)

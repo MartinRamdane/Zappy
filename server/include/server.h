@@ -273,3 +273,7 @@ void send_map_content(client_t *client, server_t *server);
 void send_tile_with_pos(client_t *client, server_t *server, int x, int y);
 void send_new_player_connected(server_t *server, client_t *player);
 void send_playerdata_to_gui(client_t *cli, client_t *pl);
+void send_player_pos(client_t *cli, server_t *server, char *buff);
+int check_others_gui_cmd(char *buffer, client_t *client, server_t *server);
+void send_player_level(client_t *cli, server_t *server, char *buff);
+void send_player_inventory(client_t *cli, server_t *server, char *buff);
