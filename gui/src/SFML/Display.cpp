@@ -56,7 +56,7 @@ void Display::createMap(int width, int height)
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++)
-            this->_map.push_back(std::make_unique<STile>(x, y, array[y][x] - '0'));
+            this->_map.push_back(std::make_unique<STile>(x - 1, y - 1, array[y][x] - '0'));
     }
 }
 

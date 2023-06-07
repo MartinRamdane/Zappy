@@ -172,6 +172,7 @@ void STile::update(MapT cache)
     if (this->_type == 9) {
         int totalGems = cache.getTile(this->_x, this->_y).getNbrTotalGems();
         std::map<std::string, int> stocks = cache.getTile(this->_x, this->_y).getStocks();
+        std::cout << this->_x << " " << this->_y << std::endl;
         if (this->_gems.size() != totalGems) {
             this->_gems.clear();
             for (auto &gem : stocks) {
@@ -179,9 +180,9 @@ void STile::update(MapT cache)
             }
         }
     }
-    if (this->_type == 10) {
+    if (this->_type != 9) {
         this->_rect.left += 32;
-        if (this->_rect.left >= 96)
+        if (this->_rect.left >= 64)
             this->_rect.left = 0;
         this->setSpriteRect(this->_rect);
     }

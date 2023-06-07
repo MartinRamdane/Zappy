@@ -19,7 +19,7 @@ STrantorian::STrantorian(Trantorian trantorian)
 {
     this->createSprite();
     std::cout << "creer Tranto x: " << trantorian.getX() << " y: " << trantorian.getY() << std::endl;
-    this->setSpritePosition(sf::Vector2f(45 + (96 * (trantorian.getX() - 1)), 45 + (96 * (trantorian.getY() - 1))));
+    this->setSpritePosition(sf::Vector2f(45 + (96 * (trantorian.getX())), 45 + (96 * (trantorian.getY()))));
     this->setOrientation(trantorian.getOrientation() - 48);
     this->setSpriteScale(sf::Vector2f(1.5, 1.5));
     id = trantorian.getId();
