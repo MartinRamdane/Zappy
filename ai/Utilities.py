@@ -98,3 +98,12 @@ def decrypt(message, key):
         else:
             decrypted_message += char
     return decrypted_message
+
+def listToDict(liste):
+    dico = {}
+    for item in liste:
+        if item in dico:
+            dico[item] += 1
+        else:
+            dico[item] = 1
+    return dico
