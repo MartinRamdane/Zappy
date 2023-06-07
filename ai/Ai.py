@@ -145,6 +145,7 @@ class Ai:
         self.direction = ""
         self.countLook = 0
         self.seachFood = True
+        self.nbMatesAvailable = 1
 
     def goToDir(self, tile):
         val = self.tiles[tile]
