@@ -32,6 +32,7 @@
 #define ARG_COND ; optind < ac \
 && av[optind][0] != '-'; optind++
 #define MAX_BODY_LENGTH 1024
+#define GUI_UNKNOWN_PARAM "sbp\n"
 enum state {
     DEAD,
     EGG,
@@ -74,6 +75,7 @@ typedef struct player {
     int socket;
     enum state state;
     char *uid;
+    int id;
 } player;
 
 typedef struct player_queue {
@@ -139,6 +141,7 @@ typedef struct server_s {
     int socket;
     int task_id;
     int task_stack;
+    int player_id;
     struct list_head head;
     struct team_listhead team_head;
     struct task_listhead task_head;
@@ -241,3 +244,15 @@ void debug_print_player_inventory(client_t *cli);
 
 //TIME
 double calculate_time_for_task(server_t *server, char *buffer);
+
+//GUI COMMANDS
+int check_gui_commands(char *buffer, client_t *client, server_t *server);
+void send_map_size(client_t *client, server_t *server);
+void send_time_unit(client_t *client, server_t *server);
+void send_teams(client_t *client, server_t *server);
+void send_tile_content(client_t *client, server_t *server, char *msg);
+void send_tile_with_pos(client_t *client, server_t *server, int x, int y);
+void send_map_content(client_t *client, server_t *server);
+void send_tile_with_pos(client_t *client, server_t *server, int x, int y);
+void send_new_player_connected(server_t *server, client_t *player);
+void send_playerdata_to_gui(client_t *cli, client_t *pl);

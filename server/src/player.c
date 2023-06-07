@@ -17,12 +17,12 @@ void generate_player(server_t *server, client_t *cli, int socket, char *team_nam
     cli->player->inv->deraumere = 0; cli->player->inv->sibur = 0;
     cli->player->inv->mendiane = 0; cli->player->inv->phiras = 0;
     cli->player->inv->thystame = 0; cli->player->is_dead = 0;
-    cli->player->orientation = 'N';
+    cli->player->orientation = 'N'; cli->player->id = server->player_id;
     cli->player->team_name = strdup(team_name); cli->player->socket = socket;
     cli->player->state = ALIVE; cli->player->uid = strdup(cli->uid);
     server->game->map[0][0].players = malloc(sizeof(player_queue));
     player_queue *p_queue = malloc(sizeof(player_queue));
-    p_queue->player = cli->player;
+    p_queue->player = cli->player; server->player_id++;
     LIST_INSERT_HEAD(&server->game->map[0][0].player_head, p_queue, next);
 }
 

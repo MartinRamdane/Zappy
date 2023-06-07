@@ -43,6 +43,8 @@ int commands(server_t *server, client_t *client, char *buffer)
         return 0;
     if (check_instant_commands(buffer, client, server) == 1)
         return 0;
+    if (check_gui_commands(buffer, client, server) == 1)
+        return 0;
     if (check_is_ai_commands(buffer) == 1) {
         double task_time = calculate_time_for_task(server, buffer);
         add_task(server, buffer, task_time, client);
