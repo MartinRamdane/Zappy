@@ -17,4 +17,5 @@ int orientation_to_number(char c)
         return 3;
     if (c == 'W')
         return 4;
+    return 0;
 }
