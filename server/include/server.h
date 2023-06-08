@@ -281,3 +281,4 @@ int check_others_gui_cmd(char *buffer, client_t *client, server_t *server);
 void send_player_level(client_t *cli, server_t *server, char *buff);
 void send_player_inventory(client_t *cli, server_t *server, char *buff);
 int orientation_to_number(char c);
+void send_new_player_pos(client_t *cli, server_t *server);

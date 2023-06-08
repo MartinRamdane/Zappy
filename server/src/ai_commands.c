@@ -10,28 +10,29 @@
 void send_task_response(server_t *server, task_t *task, char *cmd)
 {
     if (strcmp(cmd, "Forward") == 0) {
-        forward_command(server, task->client); return;
+        forward_command(server, task->client);
+        send_new_player_pos(task->client, server);
     }
     if (strcmp(cmd, "Right") == 0) {
-        right_command(task->client); return;
+        right_command(task->client); send_new_player_pos(task->client, server);
     }
     if (strcmp(cmd, "Left") == 0) {
-        left_command(task->client); return;
+        left_command(task->client); send_new_player_pos(task->client, server);
     }
     if (strcmp(cmd, "Inventory") == 0) {
-        inventory_command(task->client); return;
+        inventory_command(task->client);
     }
     if (strcmp(cmd, "Look") == 0) {
-        look_command(server, task->client); return;
+        look_command(server, task->client);
     }
     if (strstr(cmd, "Set")) {
-        set_command(server, task->client, cmd); return;
+        set_command(server, task->client, cmd);
     }
     if (strstr(cmd, "Take")) {
-        take_command(server, task->client, cmd); return;
+        take_command(server, task->client, cmd);
     }
     if (strcmp(cmd, "Eject") == 0) {
-        eject_command(server, task->client); return;
+        eject_command(server, task->client);
     }
     if (strstr(cmd, "Broadcast")) {
         broadcast_command(server, task->client, cmd); return;
@@ -69,6 +70,7 @@ void right_command(client_t *client)
     else if (client->player->orientation == 'W')
         client->player->orientation = 'N';
     send(client->socket, "ok\n", 3, 0);
+    
 }
 
 void left_command(client_t *client)
