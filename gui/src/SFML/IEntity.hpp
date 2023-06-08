@@ -42,5 +42,10 @@ class IEntity {
             PHIRAS,
             THYSTAME
         };
+
+        enum EggMode {
+            HATCHING,
+            HATCHED
+        };
     private:
 };

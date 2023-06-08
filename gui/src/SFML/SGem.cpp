@@ -16,7 +16,6 @@ SGem::~SGem()
 {
 }
 
-
 void SGem::createSprite()
 {
     switch (this->_type)

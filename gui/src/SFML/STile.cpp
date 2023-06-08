@@ -104,6 +104,11 @@ void STile::draw(sf::RenderWindow &window, sf::View &view)
             gem->draw(window, view);
         }
     }
+    if (this->_eggs.size() > 0) {
+        for (auto &egg : this->_eggs) {
+            egg->draw(window, view);
+        }
+    }
 }
 
 void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
@@ -158,6 +163,19 @@ void STile::createGem(std::string name, int quantity)
 
 }
 
+void STile::createEgg()
+{
+    std::unique_ptr<SEgg> egg;
+    sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 55), this->_sprite.getGlobalBounds().top + 10 + (rand() % 53));
+
+    egg = std::make_unique<SEgg>();
+
+    if (egg) {
+        egg->setSpritePosition(position);
+        this->_eggs.push_back(std::move(egg));
+    }
+}
+
 sf::Vector2i STile::getClicked()
 {
     if (this->_isClicked) {
@@ -179,6 +197,12 @@ void STile::update(MapT cache)
                 createGem(gem.first, gem.second);
             }
         }
+        if (this->_eggs.size() != cache.getEggsFromPos(this->_x, this->_y)) {
+            this->_eggs.clear();
+            for (int i = 0; i < cache.getEggsFromPos(this->_x, this->_y); i++) {
+                createEgg();
+            }
+        }
     }
     if (this->_type != 9) {
         this->_rect.left += 32;
@@ -191,4 +215,14 @@ void STile::update(MapT cache)
             gem->update(cache);
         }
     }
+    if (this->_eggs.size() > 0) {
+        for (auto &egg : this->_eggs) {
+            egg->update(cache);
+        }
+    }
+}
+
+void STile::removeEgg()
+{
+    this->_eggs.erase(this->_eggs.begin());
 }

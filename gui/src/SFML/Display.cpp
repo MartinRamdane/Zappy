@@ -153,7 +153,7 @@ void Display::update(MapT cache)
         this->createViews(cache.getX(), cache.getY());
         this->_mapCreated = true;
     }
-    if (this->_clock.getElapsedTime().asSeconds() > 0.15) {
+    if (this->_clock.getElapsedTime().asSeconds() > 0.11) {
         this->_clock.restart();
         for (auto &sprite : this->_map)
             sprite->update(cache);
@@ -169,7 +169,6 @@ void Display::update(MapT cache)
     for (auto &trantor : cache.getTrantorians()) {
         this->_trantorians[trantor.getId()]->update(cache);
     }
-
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()

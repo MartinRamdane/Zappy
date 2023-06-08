@@ -19,6 +19,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <SFML/Graphics.hpp>
 
 class MapT
 {
@@ -50,9 +51,11 @@ class MapT
         void setTrantorianStock(int id, int x, int y, Stock stock);
         void setTrantorianMessage(int id, std::string message);
         std::vector<Egg> getEggs();
+        int getEggsFromPos(int x, int y);
         std::vector<Teams> getTeams();
         std::vector<Trantorian> getTrantorians();
         Trantorian getTrantorian(int id);
         int getFrequency();
         void setFrequency(double frequency);
+        sf::Vector2i firstPlacedEgg();
 };

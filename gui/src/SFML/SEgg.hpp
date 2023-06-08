@@ -2,20 +2,17 @@
 ** EPITECH PROJECT, 2023
 ** B-YEP-400-MAR-4-1-zappy-martin.ramdane
 ** File description:
-** STile
+** SEgg
 */
 
 #pragma once
 
 #include "IEntity.hpp"
-#include "SGem.hpp"
-#include "SEgg.hpp"
 
-class STile : public IEntity {
-
+class SEgg : public IEntity {
     public:
-        STile(int x, int y, int type);
-        ~STile();
+        SEgg();
+        ~SEgg();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
         void setSpritePosition(sf::Vector2f pos);
@@ -26,22 +23,12 @@ class STile : public IEntity {
         void draw(sf::RenderWindow &window, sf::View &view);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         void update(MapT cache);
-        void createGem(std::string type, int quantity);
-        sf::Vector2i getClicked();
-        void createEgg();
-        void removeEgg();
+        sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
 
     protected:
     private:
         sf::Sprite _sprite;
         sf::Texture _texture;
         sf::IntRect _rect;
-        sf::Texture _oceanTexture;
-        sf::Sprite _oceanTile;
-        std::vector<std::unique_ptr<IEntity>> _gems;
-        std::vector<std::unique_ptr<IEntity>> _eggs;
-        int _x;
-        int _y;
-        int _type;
-        bool _isClicked = false;
+        enum EggMode _mode;
 };

@@ -26,7 +26,7 @@ class STrantorian : public IEntity {
         void eventHandler(sf::Event event, sf::RenderWindow &window){};
         void update(MapT cache);
         void update(MapT cache, int id);
-        sf::Vector2i getClicked(){};
+        sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
 
     protected:
     private:

@@ -161,3 +161,21 @@ int MapT::getFrequency()
 {
     return (this->frequency);
 }
+
+int MapT::getEggsFromPos(int x, int y)
+{
+    int num = 0;
+    for (int i = 0; i < this->eggs.size(); i++) {
+        if (this->eggs[i].getX() == x && this->eggs[i].getY() == y) {
+            num++;
+        }
+    }
+    return (num);
+}
+
+sf::Vector2i MapT::firstPlacedEgg()
+{
+    if (this->eggs.size() == 0)
+        return (sf::Vector2i(-1, -1));
+    return (sf::Vector2i(this->eggs[0].getX(), this->eggs[0].getY()));
+}
