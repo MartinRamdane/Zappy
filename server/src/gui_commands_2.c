@@ -44,8 +44,9 @@ void send_playerdata_to_gui(client_t *cli, client_t *pl)
 {
     char *buffer = malloc(sizeof(char) * 100);
     memset(buffer, 0, 100);
-    sprintf(buffer, "pnw %d %d %d %c %d %s\n", pl->player->id, pl->player->x,
-    pl->player->y, pl->player->orientation, pl->player->level, pl->team_name);
+    sprintf(buffer, "pnw %d %d %d %d %d %s\n", pl->player->id, pl->player->x,
+    pl->player->y, orientation_to_number(pl->player->orientation),
+    pl->player->level, pl->team_name);
     send(cli->socket, buffer, strlen(buffer), 0);
     free(buffer);
 }

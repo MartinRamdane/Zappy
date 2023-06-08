@@ -29,9 +29,9 @@ void send_player_pos(client_t *cli, server_t *server, char *buff)
     client_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->player && tmp->player->id == atoi(id)) {
-            sprintf(buffer, "ppo %d %d %d %c\n", tmp->player->id,
+            sprintf(buffer, "ppo %d %d %d %d\n", tmp->player->id,
             tmp->player->x, tmp->player->y,
-            tmp->player->orientation);
+            orientation_to_number(tmp->player->orientation));
             send(cli->socket, buffer, strlen(buffer), 0);
             free(buffer);
             return;
