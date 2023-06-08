@@ -5,7 +5,7 @@ class Level():
                     2: ["linemate"],
                     3: ["linemate", "deraumere", "sibur"],
                     4: ["linemate", "linemate", "phiras", "phiras", "sibur"],
-                    5: ["linemate", "deraumere", "sibur", "sibur", "sibur", "phiras"],
+                    5: ["linemate", "deraumere", "sibur", "sibur", "phiras"],
                     6: ["linemate", "deraumere", "deraumere", "sibur", "mendiane", "mendiane", "mendiane"],
                     7: ["linemate", "deraumere", "deraumere", "sibur", "sibur", "sibur", "phiras"],
                     8: ["linemate", "linemate", "deraumere", "deraumere", "sibur", "sibur", "mendiane", "mendiane",  "phiras",  "phiras", "thystame"]}
