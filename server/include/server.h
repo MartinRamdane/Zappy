@@ -177,6 +177,8 @@ l_tile *get_north_case(server_t *server, l_tile *listen_tiles);
 l_tile *get_south_case(server_t *server, l_tile *listen_tiles);
 l_tile *get_east_case(server_t *server, l_tile *listen_tiles);
 l_tile *get_west_case(server_t *server, l_tile *listen_tiles);
+int get_nb_players_on_tile(tile *tile);
+int check_can_incantation(server_t *server, client_t *client);
 
 // SERVER
 server_t *create_server_struct(void);
@@ -227,6 +229,7 @@ void set_command(server_t *server, client_t *client, char *buffer);
 void take_command(server_t *server, client_t *client, char *buffer);
 void eject_command(server_t *server, client_t *client);
 void broadcast_command(server_t *server, client_t *client, char *msg);
+void incantation_command(client_t *client);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);

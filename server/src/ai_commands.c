@@ -36,6 +36,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strstr(cmd, "Broadcast")) {
         broadcast_command(server, task->client, cmd); return;
     }
+    if (strcmp(cmd, "Incantation") == 0) {
+        incantation_command(task->client); return;
+    }
 }
 
 void forward_command(server_t *server, client_t *client)
@@ -80,4 +83,13 @@ void left_command(client_t *client)
     else if (client->player->orientation == 'W')
         client->player->orientation = 'S';
     send(client->socket, "ok\n", 3, 0);
+}
+
+void incantation_command(client_t *client)
+{
+    client->player->state = ALIVE;
+    client->player->level ++;
+    char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);
+    sprintf(buff, "Current level: %d\n", client->player->level);
+    send(client->socket, buff, strlen(buff), 0);
 }
