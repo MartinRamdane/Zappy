@@ -30,7 +30,7 @@ class MapT
         std::vector<Teams> teams;
         std::vector<Trantorian> trantorians;
         std::vector<Egg> eggs;
-        int frequency = 0.0;
+        double frequency = 0.0;
     public:
         MapT();
         ~MapT();
@@ -55,7 +55,7 @@ class MapT
         std::vector<Teams> getTeams();
         std::vector<Trantorian> getTrantorians();
         Trantorian getTrantorian(int id);
-        int getFrequency();
+        double getFrequency();
         void setFrequency(double frequency);
         sf::Vector2i firstPlacedEgg();
 };
