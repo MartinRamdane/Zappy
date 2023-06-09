@@ -229,7 +229,7 @@ void set_command(server_t *server, client_t *client, char *buffer);
 void take_command(server_t *server, client_t *client, char *buffer);
 void eject_command(server_t *server, client_t *client);
 void broadcast_command(server_t *server, client_t *client, char *msg);
-void incantation_command(client_t *client);
+void incantation_command(client_t *client, server_t *server);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
@@ -282,3 +282,7 @@ void send_player_level(client_t *cli, server_t *server, char *buff);
 void send_player_inventory(client_t *cli, server_t *server, char *buff);
 int orientation_to_number(char c);
 void send_new_player_pos(client_t *cli, server_t *server);
+void event_player_expulsion(client_t *cli, server_t *server);
+void event_player_broadcast(client_t *cli, server_t *server, char *msg);
+void event_player_incantation_start(client_t *cli, server_t *server);
+void event_player_incantation_end(client_t *cli, server_t *server, int res);

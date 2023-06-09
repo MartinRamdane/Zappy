@@ -86,4 +86,5 @@ void broadcast_command(server_t *server, client_t *client, char *msg)
             send_broadcast(server, client, tmp, msg);
         }
     }
+    event_player_broadcast(client, server, msg);
 }

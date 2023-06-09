@@ -55,6 +55,7 @@ void eject_command(server_t *server, client_t *client)
 {
     if (eject_player(server, client) == 1) {
         send(client->socket, "ok\n", 3, 0);
+        event_player_expulsion(client, server);
     } else {
         send(client->socket, "ko\n", 3, 0);
     }
