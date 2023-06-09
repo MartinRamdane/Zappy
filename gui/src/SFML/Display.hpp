@@ -42,7 +42,8 @@ class Display {
         std::unique_ptr<SBottom_menu> _bottomMenu;
         sf::View _view;
         sf::View _bottomMenuView;
-        sf::Clock _clock;
+        sf::Clock _clock_map;
+        sf::Clock _clock_trantorian;
         sf::Time _time;
         int _width;
         int _height;

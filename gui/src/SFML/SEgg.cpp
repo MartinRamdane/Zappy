@@ -57,7 +57,6 @@ void SEgg::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
 
 void SEgg::draw(sf::RenderWindow &window, sf::View &view)
 {
-    std::cout << "draw egg" << std::endl;
     window.draw(this->_sprite);
 }
 

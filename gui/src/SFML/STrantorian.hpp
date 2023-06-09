@@ -12,7 +12,6 @@
 class STrantorian : public IEntity {
     public:
         STrantorian(Trantorian trantorian);
-        STrantorian();
         ~STrantorian();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -25,12 +24,20 @@ class STrantorian : public IEntity {
         void setOrientation(int orientation);
         void eventHandler(sf::Event event, sf::RenderWindow &window){};
         void update(MapT cache);
-        void update(MapT cache, int id);
         sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
 
     protected:
     private:
+        enum Animation {
+            IDLE,
+            WALKING,
+            EXPULSION,
+            INCANTATION,
+            DEATH,
+        };
         int id;
         sf::Sprite _sprite;
         std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
+        sf::IntRect _rect;
+        Animation _animation = IDLE;
 };
