@@ -24,6 +24,7 @@ class SGem : public IEntity {
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         void update(MapT cache);
         sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
+        void moveSprite(MapT cache){};
 
     protected:
     private:

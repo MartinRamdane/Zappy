@@ -113,9 +113,9 @@ void Display::keyHandler(MapT cache)
         } else if (this->_event.key.code == sf::Keyboard::B) {
             this->_ShowBottomMenu = !this->_ShowBottomMenu;
         } else if (this->_event.key.code == sf::Keyboard::C) {
-            this->_message = "sst " + std::to_string(cache.getFrequency() - 10) + "\n";
+            this->_message = "sst " + std::to_string(cache.getFrequency() - 1) + "\n";
         } else if (this->_event.key.code == sf::Keyboard::V) {
-            this->_message = "sst " + std::to_string(cache.getFrequency() + 10) + "\n";
+            this->_message = "sst " + std::to_string(cache.getFrequency() + 1) + "\n";
         }
     }
 }
@@ -173,6 +173,8 @@ void Display::update(MapT cache)
             for (auto &sprite : this->_trantorians)
                 sprite.second->update(cache);
         }
+        for (auto &sprite : this->_trantorians)
+            sprite.second->moveSprite(cache);
     }
 }
 

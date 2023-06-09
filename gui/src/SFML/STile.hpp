@@ -30,6 +30,7 @@ class STile : public IEntity {
         sf::Vector2i getClicked();
         void createEgg();
         void removeEgg();
+        void moveSprite(MapT cache){};
 
     protected:
     private:

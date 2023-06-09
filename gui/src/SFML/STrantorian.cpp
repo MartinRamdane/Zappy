@@ -24,6 +24,7 @@ STrantorian::STrantorian(Trantorian trantorian)
     this->setSpriteScale(sf::Vector2f(3.5, 3.5));
     id = trantorian.getId();
     this->_rect = sf::IntRect(0, 0, 48, 48);
+    this->setSpriteRect(this->_rect);
 }
 
 STrantorian::~STrantorian()
@@ -51,27 +52,9 @@ void STrantorian::createSprite()
     _textures["Wright"]->loadFromFile("gui/assets/trantorian/TrantorianRightRun.png");
 }
 
-//! implement tp, if origentation is not the same of direction, TP
 
 void STrantorian::update(MapT cache)
 {
-    Trantorian t = cache.getTrantorian(id);
-    int freq = cache.getFrequency();
-
-    sf::Vector2f targetPosition = sf::Vector2f((-35) + (96 * (t.getX())), (-70) + ((96) * (t.getY())));
-    sf::Vector2f currentPosition = this->_sprite.getPosition();
-    float movementMultiplier = 8.0f;
-    sf::Vector2f movementPerFrame = (targetPosition - currentPosition) * (movementMultiplier / freq);
-
-    if (currentPosition != targetPosition) {
-        this->_animation = WALKING;
-        this->setSpritePosition(currentPosition + movementPerFrame);
-    } else {
-        this->_animation = IDLE;
-    }
-
-    this->setOrientation(t.getOrientation());
-
     if (this->_rect.left >= 204)
         this->_rect.left = 0;
     else
@@ -79,7 +62,46 @@ void STrantorian::update(MapT cache)
 
     this->setSpriteRect(this->_rect);
 }
+//! implement tp, if origentation is not the same of direction, TP
 
+void STrantorian::moveSprite(MapT cache)
+{
+    Trantorian t = cache.getTrantorian(id);
+    int freq = cache.getFrequency();
+
+    sf::Vector2f targetPosition = sf::Vector2f((-35) + (96 * (t.getX())), (-70) + ((96) * (t.getY())));
+    sf::Vector2f currentPosition = this->_sprite.getPosition();
+
+    float distanceThreshold = 1.0f;
+
+    if (t.getOrientation() == 1 && currentPosition.y > targetPosition.y) {
+        this->_sprite.setPosition(targetPosition);
+    } else if (t.getOrientation() == 2 && currentPosition.x > targetPosition.x) {
+        this->_sprite.setPosition(targetPosition);
+    } else if (t.getOrientation() == 3 && currentPosition.y < targetPosition.y) {
+        this->_sprite.setPosition(targetPosition);
+    } else if (t.getOrientation() == 4 && currentPosition.x < targetPosition.x) {
+        this->_sprite.setPosition(targetPosition);
+    } else {
+        sf::Vector2f distance = targetPosition - currentPosition;
+        float totalDistance = std::sqrt(distance.x * distance.x + distance.y * distance.y);
+
+        if (totalDistance > distanceThreshold) {
+            this->_animation = WALKING;
+
+            float movementSpeed = freq * 1.0f;
+            sf::Vector2f direction = movementSpeed / totalDistance * distance;
+            sf::Vector2f newPosition = currentPosition + direction;
+
+            this->setSpritePosition(newPosition);
+        } else {
+            this->_animation = IDLE;
+            this->setSpritePosition(targetPosition);
+        }
+    }
+
+    this->setOrientation(t.getOrientation());
+}
 
 void STrantorian::setSpriteRect(sf::IntRect rect)
 {
@@ -117,19 +139,15 @@ void STrantorian::setOrientation(int orientation)
         switch (orientation) {
             case 1:
                 this->setSpriteTexture(this->_textures["up"]);
-                this->setSpriteRect(sf::IntRect(0, 0, 48, 48));
                 break;
             case 2:
                 this->setSpriteTexture(this->_textures["right"]);
-                this->setSpriteRect(sf::IntRect(0, 0, 48, 48));
                 break;
             case 3:
                 this->setSpriteTexture(this->_textures["down"]);
-                this->setSpriteRect(sf::IntRect(0, 0, 48, 48));
                 break;
             case 4:
                 this->setSpriteTexture(this->_textures["left"]);
-                this->setSpriteRect(sf::IntRect(0, 0, 48, 48));
                 break;
         }
     } else if (this->_animation == WALKING) {
