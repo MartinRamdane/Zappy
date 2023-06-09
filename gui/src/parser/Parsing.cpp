@@ -180,7 +180,6 @@ void Parsing::pic(std::string arg)
         parts.push_back(part);
     }
     Tile tile = mapt.getTile(std::stoi(parts[0]), std::stoi(parts[1]));
-    tile.setLvlEvo(std::stoi(parts[2]));
     std::vector<int> trantorian;
     for (int i = 3; i < parts.size(); i++) {
         trantorian.push_back(std::stoi(parts[i]));
@@ -190,9 +189,10 @@ void Parsing::pic(std::string arg)
     mapt.setTile(tuple, tile);
     std::cout << "incantation from";
     for (int i = 3; i < parts.size(); i++) {
+        mapt.setTrantorianCanEvolve(std::stoi(parts[i]), true);
         std::cout << " " << parts[i];
     }
-    std::cout << "for lvl" << parts[2] << std::endl;
+    std::cout << " to lvl " << parts[2] << std::endl;
 }
 
 void Parsing::pie(std::string arg)
@@ -210,8 +210,6 @@ void Parsing::pie(std::string arg)
             mapt.setTrantorianLvl(tile.getPlayers()[i], tile.getLvlEvo());
         }
     }
-    tile.setLvlEvo(0);
-    tile.setPlayers({});
     std::cout << "fin incantation" << std::endl;
 }
 

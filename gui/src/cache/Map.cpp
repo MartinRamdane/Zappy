@@ -7,7 +7,7 @@
 
 #include "Map.hpp"
 
-MapT::MapT(/* args */)
+MapT::MapT()
 {
 }
 
@@ -81,6 +81,7 @@ void MapT::setTrantorianLvl(int id, int lvl)
     for (int i = 0; i < this->trantorians.size(); i++) {
         if (this->trantorians[i].getId() == id) {
             this->trantorians[i].setLvl(lvl);
+            this->trantorians[i].setCanEvolve(false);
         }
     }
 }
@@ -178,4 +179,13 @@ sf::Vector2i MapT::firstPlacedEgg()
     if (this->eggs.size() == 0)
         return (sf::Vector2i(-1, -1));
     return (sf::Vector2i(this->eggs[0].getX(), this->eggs[0].getY()));
+}
+
+void MapT::setTrantorianCanEvolve(int id, bool canEvolve)
+{
+    for (int i = 0; i < this->trantorians.size(); i++) {
+        if (this->trantorians[i].getId() == id) {
+            this->trantorians[i].setCanEvolve(canEvolve);
+        }
+    }
 }

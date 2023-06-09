@@ -42,4 +42,5 @@ class STrantorian : public IEntity {
         std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
         sf::IntRect _rect;
         Animation _animation = IDLE;
+        int _level = 1;
 };

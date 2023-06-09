@@ -50,6 +50,7 @@ class MapT
         void setTrantorianLvl(int id, int lvl);
         void setTrantorianStock(int id, int x, int y, Stock stock);
         void setTrantorianMessage(int id, std::string message);
+        void setTrantorianCanEvolve(int id, bool canEvolve);
         std::vector<Egg> getEggs();
         int getEggsFromPos(int x, int y);
         std::vector<Teams> getTeams();

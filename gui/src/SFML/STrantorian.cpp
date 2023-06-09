@@ -7,14 +7,6 @@
 
 #include "STrantorian.hpp"
 
-// STrantorian::STrantorian()
-// {
-//     this->createSprite();
-//     this->setSpritePosition(sf::Vector2f(0, 0));
-//     this->setOrientation(3);
-//     this->setSpriteScale(sf::Vector2f(1.5, 1.5));
-// }
-
 STrantorian::STrantorian(Trantorian trantorian)
 {
     this->createSprite();
@@ -33,36 +25,52 @@ STrantorian::~STrantorian()
 
 void STrantorian::createSprite()
 {
-    _textures["down"] = std::make_shared<sf::Texture>();
-    _textures["down"]->loadFromFile("gui/assets/trantorian/TrantorianUpIdle.png");
-    _textures["left"] = std::make_shared<sf::Texture>();
-    _textures["left"]->loadFromFile("gui/assets/trantorian/TrantorianLeftIdle.png");
-    _textures["up"] = std::make_shared<sf::Texture>();
-    _textures["up"]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle.png");
-    _textures["right"] = std::make_shared<sf::Texture>();
-    _textures["right"]->loadFromFile("gui/assets/trantorian/TrantorianRightIdle.png");
 
-    _textures["Wdown"] = std::make_shared<sf::Texture>();
-    _textures["Wdown"]->loadFromFile("gui/assets/trantorian/TrantorianUpRun.png");
-    _textures["Wleft"] = std::make_shared<sf::Texture>();
-    _textures["Wleft"]->loadFromFile("gui/assets/trantorian/TrantorianLeftRun.png");
-    _textures["Wup"] = std::make_shared<sf::Texture>();
-    _textures["Wup"]->loadFromFile("gui/assets/trantorian/TrantorianDownRun.png");
-    _textures["Wright"] = std::make_shared<sf::Texture>();
-    _textures["Wright"]->loadFromFile("gui/assets/trantorian/TrantorianRightRun.png");
+    for (int i = 1; i != 3; i++) {
+        _textures["down" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["down" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpIdle" + std::to_string(i) + ".png");
+        _textures["left" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["left" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftIdle" + std::to_string(i) + ".png");
+        _textures["up" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["up" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle" + std::to_string(i) + ".png");
+        _textures["right" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["right" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightIdle" + std::to_string(i) + ".png");
+
+        _textures["Wdown" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Wdown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpRun" + std::to_string(i) + ".png");
+        _textures["Wleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Wleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftRun" + std::to_string(i) + ".png");
+        _textures["Wup" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Wup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownRun" + std::to_string(i) + ".png");
+        _textures["Wright" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Wright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightRun" + std::to_string(i) + ".png");
+
+        _textures["Idown" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Idown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpIncantation" + std::to_string(i) + ".png");
+        _textures["Ileft" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Ileft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftIncantation" + std::to_string(i) + ".png");
+        _textures["Iup" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Iup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIncantation" + std::to_string(i) + ".png");
+        _textures["Iright" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Iright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightIncantation" + std::to_string(i) + ".png");
+    }
 }
-
 
 void STrantorian::update(MapT cache)
 {
-    if (this->_rect.left >= 204)
-        this->_rect.left = 0;
-    else
-        this->_rect.left += 48;
-
+    if (this->_animation == INCANTATION) {
+        if (this->_rect.left >= 480)
+            this->_rect.left = 48;
+        else
+            this->_rect.left += 48;
+    } else {
+        if (this->_rect.left >= 204)
+            this->_rect.left = 0;
+        else
+            this->_rect.left += 48;
+    }
     this->setSpriteRect(this->_rect);
 }
-//! implement tp, if origentation is not the same of direction, TP
 
 void STrantorian::moveSprite(MapT cache)
 {
@@ -95,11 +103,16 @@ void STrantorian::moveSprite(MapT cache)
 
             this->setSpritePosition(newPosition);
         } else {
-            this->_animation = IDLE;
+            std::cout << "canEvolve: " << t.getCanEvolve() << std::endl;
+            if (t.getCanEvolve() == true) {
+                    this->_animation = INCANTATION;
+            } else {
+                this->_animation = IDLE;
+            }
             this->setSpritePosition(targetPosition);
         }
     }
-
+    this->_level = t.getLevel();
     this->setOrientation(t.getOrientation());
 }
 
@@ -138,31 +151,46 @@ void STrantorian::setOrientation(int orientation)
     if (this->_animation == IDLE) {
         switch (orientation) {
             case 1:
-                this->setSpriteTexture(this->_textures["up"]);
+                this->setSpriteTexture(this->_textures["up" + std::to_string(this->_level)]);
                 break;
             case 2:
-                this->setSpriteTexture(this->_textures["right"]);
+                this->setSpriteTexture(this->_textures["right" + std::to_string(this->_level)]);
                 break;
             case 3:
-                this->setSpriteTexture(this->_textures["down"]);
+                this->setSpriteTexture(this->_textures["down" + std::to_string(this->_level)]);
                 break;
             case 4:
-                this->setSpriteTexture(this->_textures["left"]);
+                this->setSpriteTexture(this->_textures["left" + std::to_string(this->_level)]);
                 break;
         }
     } else if (this->_animation == WALKING) {
         switch (orientation) {
             case 1:
-                this->setSpriteTexture(this->_textures["Wup"]);
+                this->setSpriteTexture(this->_textures["Wup" + std::to_string(this->_level)]);
                 break;
             case 2:
-                this->setSpriteTexture(this->_textures["Wright"]);
+                this->setSpriteTexture(this->_textures["Wright" + std::to_string(this->_level)]);
                 break;
             case 3:
-                this->setSpriteTexture(this->_textures["Wdown"]);
+                this->setSpriteTexture(this->_textures["Wdown" + std::to_string(this->_level)]);
                 break;
             case 4:
-                this->setSpriteTexture(this->_textures["Wleft"]);
+                this->setSpriteTexture(this->_textures["Wleft" + std::to_string(this->_level)]);
+                break;
+        }
+    } else if (this->_animation == INCANTATION) {
+        switch (orientation) {
+            case 1:
+                this->setSpriteTexture(this->_textures["Iup" + std::to_string(this->_level)]);
+                break;
+            case 2:
+                this->setSpriteTexture(this->_textures["Iright" + std::to_string(this->_level)]);
+                break;
+            case 3:
+                this->setSpriteTexture(this->_textures["Idown" + std::to_string(this->_level)]);
+                break;
+            case 4:
+                this->setSpriteTexture(this->_textures["Ileft" + std::to_string(this->_level)]);
                 break;
         }
     }

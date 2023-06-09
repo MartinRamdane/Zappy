@@ -46,4 +46,5 @@ class Trantorian
         int getY();
         std::string getTeam();
         std::string getMessage();
+        int getLevel();
 };

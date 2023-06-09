@@ -98,7 +98,6 @@ int Trantorian::getId()
 {
     return (this->id);
 }
-
 void Trantorian::setCanEvolve(bool canEvolve)
 {
     this->canEvolve = canEvolve;
@@ -117,4 +116,9 @@ void Trantorian::setMessage(std::string message)
 std::string Trantorian::getMessage()
 {
     return (this->message);
+}
+
+int Trantorian::getLevel()
+{
+    return (this->lvl);
 }
