@@ -110,7 +110,7 @@ void Parsing::pnw(std::string arg)
         parts.push_back(part);
     }
     Stock stock(0, 0, 0, 0, 0, 0, 0);
-    Trantorian trantorian(stock, std::stoi(parts[0]), std::stoi(parts[3]), 1, false, std::stoi(parts[1]), std::stoi(parts[2]), parts[4]);
+    Trantorian trantorian(stock, std::stoi(parts[0]), std::stoi(parts[3]), std::stoi(parts[4]), false, std::stoi(parts[1]), std::stoi(parts[2]), parts[5]);
     mapt.addTrantorian(trantorian);
     std::cout << "Trantorian " << parts[0] << " is born with orientation" << parts[3][0] << std::endl;
 }

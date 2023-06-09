@@ -103,7 +103,6 @@ void STrantorian::moveSprite(MapT cache)
 
             this->setSpritePosition(newPosition);
         } else {
-            std::cout << "canEvolve: " << t.getCanEvolve() << std::endl;
             if (t.getCanEvolve() == true) {
                     this->_animation = INCANTATION;
             } else {
