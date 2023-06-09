@@ -250,7 +250,7 @@ void send_broadcast(server_t *server, client_t *sender, client_t *client, char *
 
 // PLAYER
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
-void generate_gui_player(client_t *cli, int socket);
+void generate_gui_player(client_t *cli, int socket, server_t *s_infos);
 int check_if_solo_on_tile(server_t *server, client_t *cli);
 void add_player_from_queue(tile *tile, player *player);
 void remove_player_from_queue(tile *tile, player *player);
@@ -286,3 +286,8 @@ void event_player_expulsion(client_t *cli, server_t *server);
 void event_player_broadcast(client_t *cli, server_t *server, char *msg);
 void event_player_incantation_start(client_t *cli, server_t *server);
 void event_player_incantation_end(client_t *cli, server_t *server, int res);
+void send_ressource_collect(client_t *cli, int ressource, server_t *server);
+void send_ressource_dropped(client_t *cli, int ressource, server_t *server);
+void send_map_content_to_all_gui(server_t *server);
+void event_end_of_game(server_t *server, team_t *winners);
+void send_all_player_pos(client_t *cli, server_t *server);

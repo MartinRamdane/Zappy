@@ -110,32 +110,38 @@ int set_object(server_t *server, client_t *client, char *buffer)
     if (check_if_player_has_item(client, buffer) == 0)
         return 0;
     if (strcmp(buffer, "food") == 0) {
-        client->player->inv->food--;
+        client->player->inv->food--; send_ressource_dropped(client, 0, server);
         server->game->map[client->player->x][client->player->y].food++;
     }
     if (strcmp(buffer, "linemate") == 0) {
         client->player->inv->linemate--;
         server->game->map[client->player->x][client->player->y].linemate++;
+        send_ressource_dropped(client, 1, server);
     }
     if (strcmp(buffer, "deraumere") == 0) {
         client->player->inv->deraumere--;
         server->game->map[client->player->x][client->player->y].deraumere++;
+        send_ressource_dropped(client, 2, server);
     }
     if (strcmp(buffer, "sibur") == 0) {
         client->player->inv->sibur--;
         server->game->map[client->player->x][client->player->y].sibur++;
+        send_ressource_dropped(client, 3, server);
     }
     if (strcmp(buffer, "mendiane") == 0) {
         client->player->inv->mendiane--;
         server->game->map[client->player->x][client->player->y].mendiane++;
+        send_ressource_dropped(client, 4, server);
     }
     if (strcmp(buffer, "phiras") == 0) {
         client->player->inv->phiras--;
         server->game->map[client->player->x][client->player->y].phiras++;
+        send_ressource_dropped(client, 5, server);
     }
     if (strcmp(buffer, "thystame") == 0) {
         client->player->inv->thystame--;
         server->game->map[client->player->x][client->player->y].thystame++;
+        send_ressource_dropped(client, 6, server);
     }
     return 1;
 }
@@ -150,31 +156,36 @@ int take_object(server_t *server, client_t *client, char *buffer)
         return 0;
     if (strcmp(buffer, "food") == 0) {
         server->game->map[client->player->x][client->player->y].food--;
-        client->player->inv->food++;
+        client->player->inv->food++; send_ressource_collect(client, 0, server);
     }
     if (strcmp(buffer, "linemate") == 0) {
         client->player->inv->linemate++;
         server->game->map[client->player->x][client->player->y].linemate--;
+        send_ressource_collect(client, 1, server);
     }
     if (strcmp(buffer, "deraumere") == 0) {
         client->player->inv->deraumere++;
         server->game->map[client->player->x][client->player->y].deraumere--;
+        send_ressource_collect(client, 2, server);
     }
     if (strcmp(buffer, "sibur") == 0) {
-        client->player->inv->sibur++;
+        client->player->inv->sibur++;send_ressource_collect(client, 3, server);
         server->game->map[client->player->x][client->player->y].sibur--;
     }
     if (strcmp(buffer, "mendiane") == 0) {
         client->player->inv->mendiane++;
         server->game->map[client->player->x][client->player->y].mendiane--;
+        send_ressource_collect(client, 4, server);
     }
     if (strcmp(buffer, "phiras") == 0) {
         client->player->inv->phiras++;
         server->game->map[client->player->x][client->player->y].phiras--;
+        send_ressource_collect(client, 5, server);
     }
     if (strcmp(buffer, "thystame") == 0) {
         client->player->inv->thystame++;
         server->game->map[client->player->x][client->player->y].thystame--;
+        send_ressource_collect(client, 6, server);
     }
     return 1;
 }

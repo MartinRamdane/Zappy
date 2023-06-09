@@ -26,12 +26,15 @@ void generate_player(server_t *server, client_t *cli, int socket, char *team_nam
     LIST_INSERT_HEAD(&server->game->map[0][0].player_head, p_queue, next);
 }
 
-void generate_gui_player(client_t *cli, int socket)
+void generate_gui_player(client_t *cli, int socket, server_t *s_infos)
 {
     cli->gui_player = malloc(sizeof(gui_player));
     cli->gui_player->x = 0;
     cli->gui_player->y = 0;
     cli->gui_player->socket = socket;
+    send_map_size(cli, s_infos); send_time_unit(cli, s_infos);
+    send_map_content(cli, s_infos); send_teams(cli, s_infos);
+    send_all_player_pos(cli, s_infos);
 }
 
 int check_if_solo_on_tile(server_t *server, client_t *cli)

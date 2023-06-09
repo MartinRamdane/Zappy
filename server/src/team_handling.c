@@ -45,9 +45,8 @@ int get_available_slots_in_team(server_t *s_infos, char *team)
 int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
 {
     if (strcmp(team, "GRAPHIC") == 0) {
-        cli->team_name = strdup(team); generate_gui_player(cli, cli->socket);
-        send_map_size(cli, s_infos); send_time_unit(cli, s_infos);
-        send_map_content(cli, s_infos); send_teams(cli, s_infos); return 1;
+        cli->team_name = strdup(team);
+        generate_gui_player(cli, cli->socket, s_infos); return 1;
     }
     if (cli->team_name != NULL) return 0;
     int available_slots = get_available_slots_in_team(s_infos, team) - 1;
