@@ -115,14 +115,14 @@ void STile::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
 void STile::draw(sf::RenderWindow &window, sf::View &view)
 {
     window.draw(this->_sprite);
-    if (this->_gems.size() > 0) {
-        for (auto &gem : this->_gems) {
-            gem->draw(window, view);
-        }
-    }
     if (this->_eggs.size() > 0) {
         for (auto &egg : this->_eggs) {
             egg->draw(window, view);
+        }
+    }
+    if (this->_gems.size() > 0) {
+        for (auto &gem : this->_gems) {
+            gem->draw(window, view);
         }
     }
 }

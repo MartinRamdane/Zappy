@@ -20,9 +20,10 @@ void SEgg::createSprite()
 {
     this->_texture.loadFromFile("gui/assets/trantorian/egg.png");
     this->_sprite.setTexture(this->_texture);
-    this->_sprite.setScale(sf::Vector2f(0.1, 0.1));
-    this->_rect = sf::IntRect(0, 0, 317, 306);
+    this->_sprite.setScale(sf::Vector2f(0.25, 0.25));
+    this->_rect = sf::IntRect(0, 0, 160, 160);
     this->setSpriteRect(this->_rect);
+    this->setSpriteRotation(-45);
 }
 
 void SEgg::setSpriteRect(sf::IntRect rect)
