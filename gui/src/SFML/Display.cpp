@@ -32,24 +32,41 @@ void Display::createMap(int width, int height)
     width += 2; height += 2;
     std::vector<std::string> array(height);
     for (int i = 0; i < height; i++) {
-        array[i] = std::string(width, '9');
+        array[i] = std::string(width, 'g');
         for (int j = 0; j < width; j++) {
+            if (i == 1 && j == 1) {
+                array[i][j] = 'h';
+            } else if (i == 1 && j == width - 2) {
+                array[i][j] = 'i';
+            } else if (i == height - 2 && j == 1) {
+                array[i][j] = 'j';
+            } else if (i == height - 2 && j == width - 2) {
+                array[i][j] = 'k';
+            } else if (i == 1) {
+                array[i][j] = 'l';
+            } else if (j == 1) {
+                array[i][j] = 'm';
+            } else if (j == width - 2) {
+                array[i][j] = 'n';
+            } else if (i == height - 2) {
+                array[i][j] = 'o';
+            }
             if (i == 0 && j == 0) {
-                array[i][j] = '1';
+                array[i][j] = 'w';
             } else if (i == 0 && j == width - 1) {
-                array[i][j] = '3';
+                array[i][j] = 'x';
             } else if (i == 0 && j != 0) {
-                array[i][j] = '2';
+                array[i][j] = 'q';
             } else if (i == height - 1 && j == 0) {
-                array[i][j] = '7';
+                array[i][j] = 's';
             } else if (i == height - 1 && j == width - 1) {
-                array[i][j] = '5';
+                array[i][j] = 'd';
             } else if (i == height - 1 && j != 0) {
-                array[i][j] = '6';
+                array[i][j] = 'a';
             } else if (i != 0 && j == 0) {
-                array[i][j] = '8';
+                array[i][j] = 'p';
             } else if (i != 0 && j == width - 1) {
-                array[i][j] = '4';
+                array[i][j] = 'z';
             }
         }
     }
@@ -57,7 +74,7 @@ void Display::createMap(int width, int height)
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++)
-            this->_map.push_back(std::make_unique<STile>(x - 1, y - 1, array[y][x] - '0'));
+            this->_map.push_back(std::make_unique<STile>(x - 1, y - 1, array[y][x]));
     }
 }
 

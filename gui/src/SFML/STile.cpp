@@ -19,43 +19,59 @@ STile::~STile()
 {
 }
 
-// void STile::createOcean()
-// {
-//     this->_oceanTexture.loadFromFile("gui/assets/map/ocean.png");
-//     this->_oceanTile.setTexture(this->_oceanTexture);
-//     this->_oceanTile.setScale(sf::Vector2f(3, 3));
-//     this->_oceanTile.setPosition(sf::Vector2f(-100, -100));
-// }
-
 void STile::createSprite()
 {
     switch(this->_type) {
-        case 1:
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_left.png");
+        case 'g':
+            this->_texture.loadFromFile("gui/assets/map/grass.png");
             break;
-        case 2:
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_middle.png");
+        case 'h':
+            this->_texture.loadFromFile("gui/assets/map/grass_left_top.png");
             break;
-        case 3:
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_right.png");
+        case 'i':
+            this->_texture.loadFromFile("gui/assets/map/grass_right_top.png");
             break;
-        case 4:
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_right_middle.png");
+        case 'j':
+            this->_texture.loadFromFile("gui/assets/map/grass_left_down.png");
             break;
-        case 5:
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_right.png");
+        case 'k':
+            this->_texture.loadFromFile("gui/assets/map/grass_right_down.png");
             break;
-        case 6:
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_middle.png");
+        case 'l':
+            this->_texture.loadFromFile("gui/assets/map/grass_middle_top.png");
             break;
-        case 7:
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_left.png");
+        case 'm':
+            this->_texture.loadFromFile("gui/assets/map/grass_middle_left.png");
             break;
-        case 8:
+        case 'n':
+            this->_texture.loadFromFile("gui/assets/map/grass_middle_right.png");
+            break;
+        case 'o':
+            this->_texture.loadFromFile("gui/assets/map/grass_middle_down.png");
+            break;
+        case 'p':
             this->_texture.loadFromFile("gui/assets/map/ocean_terrain_left_middle.png");
             break;
-        case 9:
-            this->_texture.loadFromFile("gui/assets/map/grass.png");
+        case 'q':
+            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_middle.png");
+            break;
+        case 'w':
+            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_left.png");
+            break;
+        case 'x':
+            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_right.png");
+            break;
+        case 'z':
+            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_right_middle.png");
+            break;
+        case 'a':
+            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_middle.png");
+            break;
+        case 's':
+            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_left.png");
+            break;
+        case 'd':
+            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_right.png");
             break;
         default:
             break;
@@ -114,7 +130,7 @@ void STile::draw(sf::RenderWindow &window, sf::View &view)
 void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
 {
     if (event.type == sf::Event::MouseMoved) {
-        if (this->_type == 9) {
+        if (this->_type == 'g' || this->_type == 'h' || this->_type == 'i' || this->_type == 'j' || this->_type == 'k' || this->_type == 'l' || this->_type == 'm' || this->_type == 'n' || this->_type == 'o') {
             sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
             sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
             if (this->_sprite.getGlobalBounds().contains(sf::Vector2f(worldPos.x, worldPos.y))) {
@@ -125,7 +141,7 @@ void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
         }
     }
     if (event.type == sf::Event::MouseButtonPressed) {
-        if (this->_type == 9) {
+        if (this->_type == 'g' || this->_type == 'h' || this->_type == 'i' || this->_type == 'j' || this->_type == 'k' || this->_type == 'l' || this->_type == 'm' || this->_type == 'n' || this->_type == 'o') {
             sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
             sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
             if (this->_sprite.getGlobalBounds().contains(sf::Vector2f(worldPos.x, worldPos.y))) {
@@ -188,7 +204,7 @@ sf::Vector2i STile::getClicked()
 
 void STile::update(MapT cache)
 {
-    if (this->_type == 9) {
+    if (this->_type == 'g' || this->_type == 'h' || this->_type == 'i' || this->_type == 'j' || this->_type == 'k' || this->_type == 'l' || this->_type == 'm' || this->_type == 'n' || this->_type == 'o') {
         int totalGems = cache.getTile(this->_x, this->_y).getNbrTotalGems();
         std::map<std::string, int> stocks = cache.getTile(this->_x, this->_y).getStocks();
         if (this->_gems.size() != totalGems) {
@@ -204,12 +220,12 @@ void STile::update(MapT cache)
             }
         }
     }
-    if (this->_type != 9) {
-        this->_rect.left += 32;
-        if (this->_rect.left >= 64)
-            this->_rect.left = 0;
-        this->setSpriteRect(this->_rect);
-    }
+    // if (this->_type != 9) {
+    //     this->_rect.left += 32;
+    //     if (this->_rect.left >= 64)
+    //         this->_rect.left = 0;
+    //     this->setSpriteRect(this->_rect);
+    // }
     if (this->_gems.size() > 0) {
         for (auto &gem : this->_gems) {
             gem->update(cache);

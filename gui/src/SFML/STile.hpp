@@ -43,6 +43,6 @@ class STile : public IEntity {
         std::vector<std::unique_ptr<IEntity>> _eggs;
         int _x;
         int _y;
-        int _type;
+        char _type;
         bool _isClicked = false;
 };
