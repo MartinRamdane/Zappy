@@ -42,8 +42,8 @@ void SGem::createSprite()
             break;
     }
     this->_sprite.setTexture(this->_texture);
-    this->_sprite.setScale(sf::Vector2f(0.1, 0.1));
-    this->_rect = sf::IntRect(0, 0, 317, 306);
+    this->_sprite.setScale(sf::Vector2f(2, 2));
+    this->_rect = sf::IntRect(0, 0, 16, 16);
     this->setSpriteRect(this->_rect);
 }
 
@@ -89,8 +89,8 @@ void SGem::eventHandler(sf::Event event, sf::RenderWindow &window)
 
 void SGem::update(MapT cache)
 {
-    this->_rect.left += 317;
-    if (this->_rect.left >= 317 * 6)
+    this->_rect.left += 16;
+    if (this->_rect.left >= 16 * 4)
         this->_rect.left = 0;
     this->setSpriteRect(this->_rect);
 }

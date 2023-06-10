@@ -39,42 +39,42 @@ void SBottom_menu::createSprite(int w_width, int w_height)
     this->_textures["linemate"]->loadFromFile("gui/assets/gems/linemate.png");
     this->_sprites["linemate"] = std::make_shared<sf::Sprite>();
     this->_sprites["linemate"]->setTexture(*this->_textures["linemate"]);
-    this->_sprites["linemate"]->setTextureRect(sf::IntRect(0, 0, 317, 306));
+    this->_sprites["linemate"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
     this->_sprites["linemate"]->setOrigin(sf::Vector2f(this->_sprites["linemate"]->getGlobalBounds().width / 2, this->_sprites["linemate"]->getGlobalBounds().height / 2));
 
     this->_textures["deraumere"] = std::make_shared<sf::Texture>();
     this->_textures["deraumere"]->loadFromFile("gui/assets/gems/deraumere.png");
     this->_sprites["deraumere"] = std::make_shared<sf::Sprite>();
     this->_sprites["deraumere"]->setTexture(*this->_textures["deraumere"]);
-    this->_sprites["deraumere"]->setTextureRect(sf::IntRect(0, 0, 317, 306));
+    this->_sprites["deraumere"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
     this->_sprites["deraumere"]->setOrigin(sf::Vector2f(this->_sprites["deraumere"]->getGlobalBounds().width / 2, this->_sprites["deraumere"]->getGlobalBounds().height / 2));
 
     this->_textures["sibur"] = std::make_shared<sf::Texture>();
     this->_textures["sibur"]->loadFromFile("gui/assets/gems/sibur.png");
     this->_sprites["sibur"] = std::make_shared<sf::Sprite>();
     this->_sprites["sibur"]->setTexture(*this->_textures["sibur"]);
-    this->_sprites["sibur"]->setTextureRect(sf::IntRect(0, 0, 317, 306));
+    this->_sprites["sibur"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
     this->_sprites["sibur"]->setOrigin(sf::Vector2f(this->_sprites["sibur"]->getGlobalBounds().width / 2, this->_sprites["sibur"]->getGlobalBounds().height / 2));
 
     this->_textures["mendiane"] = std::make_shared<sf::Texture>();
     this->_textures["mendiane"]->loadFromFile("gui/assets/gems/mendiane.png");
     this->_sprites["mendiane"] = std::make_shared<sf::Sprite>();
     this->_sprites["mendiane"]->setTexture(*this->_textures["mendiane"]);
-    this->_sprites["mendiane"]->setTextureRect(sf::IntRect(0, 0, 317, 306));
+    this->_sprites["mendiane"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
     this->_sprites["mendiane"]->setOrigin(sf::Vector2f(this->_sprites["mendiane"]->getGlobalBounds().width / 2, this->_sprites["mendiane"]->getGlobalBounds().height / 2));
 
     this->_textures["phiras"] = std::make_shared<sf::Texture>();
     this->_textures["phiras"]->loadFromFile("gui/assets/gems/phiras.png");
     this->_sprites["phiras"] = std::make_shared<sf::Sprite>();
     this->_sprites["phiras"]->setTexture(*this->_textures["phiras"]);
-    this->_sprites["phiras"]->setTextureRect(sf::IntRect(0, 0, 317, 306));
+    this->_sprites["phiras"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
     this->_sprites["phiras"]->setOrigin(sf::Vector2f(this->_sprites["phiras"]->getGlobalBounds().width / 2, this->_sprites["phiras"]->getGlobalBounds().height / 2));
 
     this->_textures["thystame"] = std::make_shared<sf::Texture>();
     this->_textures["thystame"]->loadFromFile("gui/assets/gems/thystame.png");
     this->_sprites["thystame"] = std::make_shared<sf::Sprite>();
     this->_sprites["thystame"]->setTexture(*this->_textures["thystame"]);
-    this->_sprites["thystame"]->setTextureRect(sf::IntRect(0, 0, 317, 306));
+    this->_sprites["thystame"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
     this->_sprites["thystame"]->setOrigin(sf::Vector2f(this->_sprites["thystame"]->getGlobalBounds().width / 2, this->_sprites["thystame"]->getGlobalBounds().height / 2));
 
     float distance = this->_sprites["bottom_menu"]->getGlobalBounds().width / this->_sprites.size();
@@ -86,27 +86,27 @@ void SBottom_menu::createSprite(int w_width, int w_height)
 
     this->_sprites["linemate"]->setPosition(sf::Vector2f(this->_sprites["bottom_menu"]->getPosition().x - this->_sprites["bottom_menu"]->getGlobalBounds().width / 2 + (distance * 2), this->_sprites["bottom_menu"]->getPosition().y - this->_sprites["bottom_menu"]->getGlobalBounds().height / 2 + this->_sprites["bottom_menu"]->getGlobalBounds().height / 2));
     scale = distance / this->_sprites["linemate"]->getGlobalBounds().width;
-    this->_sprites["linemate"]->setScale(sf::Vector2f(scale * 0.5, scale * 0.5));
+    this->_sprites["linemate"]->setScale(sf::Vector2f(scale * 0.4, scale * 0.4));
 
     this->_sprites["deraumere"]->setPosition(sf::Vector2f(this->_sprites["bottom_menu"]->getPosition().x - this->_sprites["bottom_menu"]->getGlobalBounds().width / 2 + (distance * 3), this->_sprites["bottom_menu"]->getPosition().y - this->_sprites["bottom_menu"]->getGlobalBounds().height / 2 + this->_sprites["bottom_menu"]->getGlobalBounds().height / 2));
     scale = distance / this->_sprites["deraumere"]->getGlobalBounds().width;
-    this->_sprites["deraumere"]->setScale(sf::Vector2f(scale * 0.5, scale * 0.5));
+    this->_sprites["deraumere"]->setScale(sf::Vector2f(scale * 0.4, scale * 0.4));
 
     this->_sprites["sibur"]->setPosition(sf::Vector2f(this->_sprites["bottom_menu"]->getPosition().x - this->_sprites["bottom_menu"]->getGlobalBounds().width / 2 + (distance * 4), this->_sprites["bottom_menu"]->getPosition().y - this->_sprites["bottom_menu"]->getGlobalBounds().height / 2 + this->_sprites["bottom_menu"]->getGlobalBounds().height / 2));
     scale = distance / this->_sprites["sibur"]->getGlobalBounds().width;
-    this->_sprites["sibur"]->setScale(sf::Vector2f(scale * 0.5, scale * 0.5));
+    this->_sprites["sibur"]->setScale(sf::Vector2f(scale * 0.4, scale * 0.4));
 
     this->_sprites["mendiane"]->setPosition(sf::Vector2f(this->_sprites["bottom_menu"]->getPosition().x - this->_sprites["bottom_menu"]->getGlobalBounds().width / 2 + (distance * 5), this->_sprites["bottom_menu"]->getPosition().y - this->_sprites["bottom_menu"]->getGlobalBounds().height / 2 + this->_sprites["bottom_menu"]->getGlobalBounds().height / 2));
     scale = distance / this->_sprites["mendiane"]->getGlobalBounds().width;
-    this->_sprites["mendiane"]->setScale(sf::Vector2f(scale * 0.5, scale * 0.5));
+    this->_sprites["mendiane"]->setScale(sf::Vector2f(scale * 0.4, scale * 0.4));
 
     this->_sprites["phiras"]->setPosition(sf::Vector2f(this->_sprites["bottom_menu"]->getPosition().x - this->_sprites["bottom_menu"]->getGlobalBounds().width / 2 + (distance * 6), this->_sprites["bottom_menu"]->getPosition().y - this->_sprites["bottom_menu"]->getGlobalBounds().height / 2 + this->_sprites["bottom_menu"]->getGlobalBounds().height / 2));
     scale = distance / this->_sprites["phiras"]->getGlobalBounds().width;
-    this->_sprites["phiras"]->setScale(sf::Vector2f(scale * 0.5, scale * 0.5));100,
+    this->_sprites["phiras"]->setScale(sf::Vector2f(scale * 0.4, scale * 0.4));100,
 
     this->_sprites["thystame"]->setPosition(sf::Vector2f(this->_sprites["bottom_menu"]->getPosition().x - this->_sprites["bottom_menu"]->getGlobalBounds().width / 2 + (distance * 7), this->_sprites["bottom_menu"]->getPosition().y - this->_sprites["bottom_menu"]->getGlobalBounds().height / 2 + this->_sprites["bottom_menu"]->getGlobalBounds().height / 2));
     scale = distance / this->_sprites["thystame"]->getGlobalBounds().width;
-    this->_sprites["thystame"]->setScale(sf::Vector2f(scale * 0.5, scale * 0.5));
+    this->_sprites["thystame"]->setScale(sf::Vector2f(scale * 0.4, scale * 0.4));
 }
 
 
@@ -200,59 +200,59 @@ void SBottom_menu::createTexts()
     float distance = this->_sprites["bottom_menu"]->getGlobalBounds().width / this->_texts.size();
     float scale;
 
-    this->_texts["food"]->setPosition(sf::Vector2f(this->_sprites["food"]->getPosition().x - 10, this->_sprites["food"]->getPosition().y + this->_sprites["food"]->getGlobalBounds().height / 2));
+    this->_texts["food"]->setPosition(sf::Vector2f(this->_sprites["food"]->getPosition().x - 10, this->_sprites["food"]->getPosition().y + this->_sprites["food"]->getGlobalBounds().height / 2 + 3));
     scale = distance / this->_sprites["food"]->getGlobalBounds().width * 0.4;
     this->_texts["food"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["linemate"]->setPosition(sf::Vector2f(this->_sprites["linemate"]->getPosition().x - 8, this->_sprites["linemate"]->getPosition().y + this->_sprites["linemate"]->getGlobalBounds().height / 2));
+    this->_texts["linemate"]->setPosition(sf::Vector2f(this->_sprites["linemate"]->getPosition().x - 8, this->_sprites["linemate"]->getPosition().y + this->_sprites["linemate"]->getGlobalBounds().height / 2 + 3));
     scale = distance / this->_sprites["linemate"]->getGlobalBounds().width * 0.4;
     this->_texts["linemate"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["deraumere"]->setPosition(sf::Vector2f(this->_sprites["deraumere"]->getPosition().x - 8, this->_sprites["deraumere"]->getPosition().y + this->_sprites["deraumere"]->getGlobalBounds().height / 2));
+    this->_texts["deraumere"]->setPosition(sf::Vector2f(this->_sprites["deraumere"]->getPosition().x - 8, this->_sprites["deraumere"]->getPosition().y + this->_sprites["deraumere"]->getGlobalBounds().height / 2 + 3));
     scale = distance / this->_sprites["deraumere"]->getGlobalBounds().width * 0.4;
     this->_texts["deraumere"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["sibur"]->setPosition(sf::Vector2f(this->_sprites["sibur"]->getPosition().x - 8, this->_sprites["sibur"]->getPosition().y + this->_sprites["sibur"]->getGlobalBounds().height / 2));
+    this->_texts["sibur"]->setPosition(sf::Vector2f(this->_sprites["sibur"]->getPosition().x - 8, this->_sprites["sibur"]->getPosition().y + this->_sprites["sibur"]->getGlobalBounds().height / 2 + 3));
     scale = distance / this->_sprites["sibur"]->getGlobalBounds().width * 0.4;
     this->_texts["sibur"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["mendiane"]->setPosition(sf::Vector2f(this->_sprites["mendiane"]->getPosition().x - 8, this->_sprites["mendiane"]->getPosition().y + this->_sprites["mendiane"]->getGlobalBounds().height / 2));
+    this->_texts["mendiane"]->setPosition(sf::Vector2f(this->_sprites["mendiane"]->getPosition().x - 8, this->_sprites["mendiane"]->getPosition().y + this->_sprites["mendiane"]->getGlobalBounds().height / 2 + 3));
     scale = distance / this->_sprites["mendiane"]->getGlobalBounds().width * 0.4;
     this->_texts["mendiane"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["phiras"]->setPosition(sf::Vector2f(this->_sprites["phiras"]->getPosition().x - 8, this->_sprites["phiras"]->getPosition().y + this->_sprites["phiras"]->getGlobalBounds().height / 2));
+    this->_texts["phiras"]->setPosition(sf::Vector2f(this->_sprites["phiras"]->getPosition().x - 8, this->_sprites["phiras"]->getPosition().y + this->_sprites["phiras"]->getGlobalBounds().height / 2 + 3));
     scale = distance / this->_sprites["phiras"]->getGlobalBounds().width * 0.4;
     this->_texts["phiras"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["thystame"]->setPosition(sf::Vector2f(this->_sprites["thystame"]->getPosition().x - 8, this->_sprites["thystame"]->getPosition().y + this->_sprites["thystame"]->getGlobalBounds().height / 2));
+    this->_texts["thystame"]->setPosition(sf::Vector2f(this->_sprites["thystame"]->getPosition().x - 8, this->_sprites["thystame"]->getPosition().y + this->_sprites["thystame"]->getGlobalBounds().height / 2 + 3));
     scale = distance / this->_sprites["thystame"]->getGlobalBounds().width * 0.4;
     this->_texts["thystame"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["foodName"]->setPosition(sf::Vector2f(this->_sprites["food"]->getPosition().x - 20, this->_sprites["food"]->getPosition().y - this->_sprites["food"]->getGlobalBounds().height / 2 - 13));
+    this->_texts["foodName"]->setPosition(sf::Vector2f(this->_sprites["food"]->getPosition().x - 20, this->_sprites["food"]->getPosition().y - this->_sprites["food"]->getGlobalBounds().height / 2 - 20));
     scale = distance / this->_sprites["food"]->getGlobalBounds().width * 0.4;
     this->_texts["foodName"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["linemateName"]->setPosition(sf::Vector2f(this->_sprites["linemate"]->getPosition().x - 50, this->_sprites["linemate"]->getPosition().y - this->_sprites["linemate"]->getGlobalBounds().height / 2 - 13));
+    this->_texts["linemateName"]->setPosition(sf::Vector2f(this->_sprites["linemate"]->getPosition().x - 50, this->_sprites["linemate"]->getPosition().y - this->_sprites["linemate"]->getGlobalBounds().height / 2 - 20));
     scale = distance / this->_sprites["linemate"]->getGlobalBounds().width * 0.4;
     this->_texts["linemateName"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["deraumereName"]->setPosition(sf::Vector2f(this->_sprites["deraumere"]->getPosition().x - 50, this->_sprites["deraumere"]->getPosition().y - this->_sprites["deraumere"]->getGlobalBounds().height / 2 - 13));
+    this->_texts["deraumereName"]->setPosition(sf::Vector2f(this->_sprites["deraumere"]->getPosition().x - 60, this->_sprites["deraumere"]->getPosition().y - this->_sprites["deraumere"]->getGlobalBounds().height / 2 - 20));
     scale = distance / this->_sprites["deraumere"]->getGlobalBounds().width * 0.4;
     this->_texts["deraumereName"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["siburName"]->setPosition(sf::Vector2f(this->_sprites["sibur"]->getPosition().x - 25, this->_sprites["sibur"]->getPosition().y - this->_sprites["sibur"]->getGlobalBounds().height / 2 - 13));
+    this->_texts["siburName"]->setPosition(sf::Vector2f(this->_sprites["sibur"]->getPosition().x - 26, this->_sprites["sibur"]->getPosition().y - this->_sprites["sibur"]->getGlobalBounds().height / 2 - 20));
     scale = distance / this->_sprites["sibur"]->getGlobalBounds().width * 0.4;
     this->_texts["siburName"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["mendianeName"]->setPosition(sf::Vector2f(this->_sprites["mendiane"]->getPosition().x - 45, this->_sprites["mendiane"]->getPosition().y - this->_sprites["mendiane"]->getGlobalBounds().height / 2 - 13));
+    this->_texts["mendianeName"]->setPosition(sf::Vector2f(this->_sprites["mendiane"]->getPosition().x - 50, this->_sprites["mendiane"]->getPosition().y - this->_sprites["mendiane"]->getGlobalBounds().height / 2 - 20));
     scale = distance / this->_sprites["mendiane"]->getGlobalBounds().width * 0.4;
     this->_texts["mendianeName"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["phirasName"]->setPosition(sf::Vector2f(this->_sprites["phiras"]->getPosition().x - 30, this->_sprites["phiras"]->getPosition().y - this->_sprites["phiras"]->getGlobalBounds().height / 2 - 13));
+    this->_texts["phirasName"]->setPosition(sf::Vector2f(this->_sprites["phiras"]->getPosition().x - 35, this->_sprites["phiras"]->getPosition().y - this->_sprites["phiras"]->getGlobalBounds().height / 2 - 20));
     scale = distance / this->_sprites["phiras"]->getGlobalBounds().width * 0.4;
     this->_texts["phirasName"]->setScale(sf::Vector2f(scale, scale));
 
-    this->_texts["thystameName"]->setPosition(sf::Vector2f(this->_sprites["thystame"]->getPosition().x - 50, this->_sprites["thystame"]->getPosition().y - this->_sprites["thystame"]->getGlobalBounds().height / 2 - 13));
+    this->_texts["thystameName"]->setPosition(sf::Vector2f(this->_sprites["thystame"]->getPosition().x - 55, this->_sprites["thystame"]->getPosition().y - this->_sprites["thystame"]->getGlobalBounds().height / 2 - 20));
     scale = distance / this->_sprites["thystame"]->getGlobalBounds().width * 0.4;
     this->_texts["thystameName"]->setScale(sf::Vector2f(scale, scale));
 }
