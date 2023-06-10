@@ -209,6 +209,10 @@ void Parsing::pie(std::string arg)
         for (int i = 0; i < tile.getPlayers().size(); i++) {
             mapt.setTrantorianLvl(tile.getPlayers()[i], tile.getLvlEvo());
         }
+    } else {
+        for (int i = 0; i < tile.getPlayers().size(); i++) {
+            mapt.setTrantorianCanEvolve(tile.getPlayers()[i], false);
+        }
     }
     std::cout << "fin incantation" << std::endl;
 }

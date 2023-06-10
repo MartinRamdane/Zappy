@@ -28,11 +28,11 @@ void STrantorian::createSprite()
 
     for (int i = 1; i != 3; i++) {
         _textures["down" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["down" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpIdle" + std::to_string(i) + ".png");
+        _textures["down" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle" + std::to_string(i) + ".png");
         _textures["left" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["left" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftIdle" + std::to_string(i) + ".png");
         _textures["up" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["up" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle" + std::to_string(i) + ".png");
+        _textures["up" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpIdle" + std::to_string(i) + ".png");
         _textures["right" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["right" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightIdle" + std::to_string(i) + ".png");
 
