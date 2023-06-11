@@ -127,6 +127,7 @@ typedef struct task {
     int id;
     double time;
     client_t *client;
+    double initial_time;
     LIST_ENTRY(task) next;
 } task_t;
 extern LIST_HEAD(task_listhead, task) task_head;
@@ -230,6 +231,8 @@ void take_command(server_t *server, client_t *client, char *buffer);
 void eject_command(server_t *server, client_t *client);
 void broadcast_command(server_t *server, client_t *client, char *msg);
 void incantation_command(client_t *client, server_t *server);
+void remove_task_of_player(client_t *cli, server_t *s_infos);
+void update_freq_for_tasks(server_t *server);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);
@@ -264,6 +267,7 @@ void debug_print_player_inventory(client_t *cli);
 
 //TIME
 double calculate_time_for_task(server_t *server, char *buffer);
+void change_time_unit(client_t *cli, server_t *server, char *buff);
 
 //GUI COMMANDS
 int check_gui_commands(char *buffer, client_t *client, server_t *server);
@@ -291,3 +295,5 @@ void send_ressource_dropped(client_t *cli, int ressource, server_t *server);
 void send_map_content_to_all_gui(server_t *server);
 void event_end_of_game(server_t *server, team_t *winners);
 void send_all_player_pos(client_t *cli, server_t *server);
+void send_time_unit_to_all_guis(server_t *server);
+void send_player_death(client_t *player, server_t *server);

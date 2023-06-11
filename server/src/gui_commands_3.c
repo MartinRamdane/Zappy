@@ -15,6 +15,9 @@ int check_others_gui_cmd(char *buffer, client_t *client, server_t *server)
     if (strstr(buffer, "pin") != NULL) {
         send_player_inventory(client, server, buffer); return 1;
     }
+    if (strstr(buffer, "sst") != NULL) {
+        change_time_unit(client, server, buffer); return 1;
+    }
     return 0;
 }
 

@@ -82,6 +82,9 @@ void broadcast_command(server_t *server, client_t *client, char *msg)
     client_t *tmp = NULL;
     send(client->socket, "ok\n", 3, 0);
     LIST_FOREACH(tmp, &server->head, next) {
+        if (tmp->player == NULL) {
+            continue;
+        }
         if (tmp->player->state != INCANTATION && strcmp(tmp->player->uid, client->player->uid) != 0) {
             send_broadcast(server, client, tmp, msg);
         }

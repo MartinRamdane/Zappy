@@ -12,8 +12,11 @@ void remove_client(int socket, server_t *s_infos)
     struct client *tmp;
     LIST_FOREACH(tmp, &s_infos->head, next) {
         if (tmp->socket == socket) {
-            if (tmp->player != NULL)
+            if (tmp->player != NULL) {
                 remove_player_from_tile(tmp, s_infos);
+                remove_task_of_player(tmp, s_infos);
+                send_player_death(tmp, s_infos);
+            }
             remove_client_from_team(tmp, s_infos);
             if (tmp->socket != -1)
                 close(tmp->socket);
@@ -40,6 +43,17 @@ void remove_player_from_tile(client_t *cli, server_t *s_infos)
         if (tmp->player->uid == cli->player->uid) {
             LIST_REMOVE(tmp, next);
             return;
+        }
+    }
+}
+
+void remove_task_of_player(client_t *cli, server_t *s_infos)
+{
+    task_t *tmp = NULL;
+    LIST_FOREACH(tmp, &s_infos->task_head, next) {
+        if (strcmp(tmp->client->uid, cli->player->uid) == 0) {
+            LIST_REMOVE(tmp, next);
+            continue;
         }
     }
 }
