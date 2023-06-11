@@ -35,6 +35,7 @@ class Ai:
         self.haveStones = False
         self.message = ""
         self.askForLevel = False
+        self.lastReceive = ""
 
     def joinGame(self):
         self.client = Client(self.machine, self.port)
@@ -47,13 +48,13 @@ class Ai:
 
     def communication(self):
         print("LEVEL: ", self.level, file = self.sourceFile)
-        self.message = "Take food\n"
         receive = ""
         print ("lookInventoryFood = ", self.lookInventoryFood, file = self.sourceFile)
         print ("searchFood = ", self.seachFood, file = self.sourceFile)
         print ("PATH before send: ", self.path, file = self.sourceFile)
         self.canFork = False
         if not self.skipSend:
+            self.message = "Take food\n"
             if self.lookInventoryFood >= 8 and not self.prepareIncantation and not self.toJoin:
                 self.message = "Inventory\n"
                 self.lookInventoryFood = 0
@@ -79,6 +80,7 @@ class Ai:
         for item in tmp:
             if item != "":
                 self.parseReponse(item)
+                self.lastReceive = item
                 i += 1
         if i > 1:
             print("Skip send Here", self.skipSend, file = self.sourceFile)
@@ -125,7 +127,7 @@ class Ai:
     def look(self, receive):
         print("PATH IN LOOK: ", self.path, file = self.sourceFile)
         self.getObjectsAround(receive)
-        if self.count >= 8:
+        if self.count >= 7:
             self.count = 0
             self.waitingForReponse = False
             if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
@@ -145,7 +147,8 @@ class Ai:
 
     def elevation(self, receive):
         print("ELEVATION", file = self.sourceFile)
-        self.skipSend = True
+        if self.lastReceive != "Elevation underway":
+            self.skipSend = True
 
     def levelUpdating(self, receive):
         print("LEVEL UPDATING to LEVEL " + str(self.level + 1))
@@ -167,6 +170,8 @@ class Ai:
         self.haveStones = False
         self.nbMatesAvailableForIncantation = 1
         self.askForLevel = False
+        if self.message != "Incantation\n":
+            self.skipSend = True
 
     def goToDir(self, tile):
         val = self.tiles[tile]
@@ -249,12 +254,14 @@ class Ai:
         print("SKip send: " + str(self.skipSend), file = self.sourceFile)
 
     def other(self, receive):
+        if self.message == "Fork\n" and receive == "ok":
+            self.canFork = True
         if not self.path:
             print("PATH IS EMPTY", file = self.sourceFile)
             self.path = ["Look\n"]
 
     def dead(self, receive):
-        print("Team " + self.teamName + " is dead")
+        print("Team " + self.teamName + " level " + str(self.level) + " is dead")
         sys.exit(0)
 
     def getCommand(self,case):
@@ -303,9 +310,8 @@ class Ai:
             print("LA 2",  file = self.sourceFile)
             if self.nbFork < 1 and self.nbMatesAvailable < self.levelManager.matesNeeded[self.level + 1]:
                 self.path.append("Fork\n")
-                print("FORK from " + self.teamName + ", I'm level " + str(self.level))
                 self.nbFork += 1
-                self.canFork = True
+                print("FORK from " + self.teamName + ", I'm level " + str(self.level))
             self.haveBroadcast = False
             self.waitingForReponse = False
         elif not self.waitingForReponse:
@@ -348,6 +354,8 @@ class Ai:
                     self.countLook += 1
                 return
             val = self.levelManager.checkIfCanLevelUp(self.inventory, self.level + 1)
+            if ("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n") in self.path:
+                return
             if val == True and not self.tosendJoin:
                 print("HE BROADCAST", file = self.sourceFile)
                 self.path = ["Look\n"]
