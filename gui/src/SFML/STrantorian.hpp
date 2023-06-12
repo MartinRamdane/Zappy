@@ -24,9 +24,9 @@ class STrantorian : public IEntity {
         void draw(sf::RenderWindow &window, sf::View &view);
         void setOrientation(int orientation);
         void eventHandler(sf::Event event, sf::RenderWindow &window){};
-        void update(MapT cache);
+        void update(MapT *cache);
         sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
-        void moveSprite(MapT cache);
+        void moveSprite(MapT *cache);
 
     protected:
     private:
@@ -37,10 +37,11 @@ class STrantorian : public IEntity {
             INCANTATION,
             DEATH,
         };
-        int id;
+        int _id;
         sf::Sprite _sprite;
         std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
         sf::IntRect _rect;
         Animation _animation = IDLE;
+        Animation _lastAnimation = IDLE;
         int _level = 1;
 };

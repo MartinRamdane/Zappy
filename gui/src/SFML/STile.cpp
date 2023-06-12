@@ -205,19 +205,19 @@ sf::Vector2i STile::getClicked()
     }
 }
 
-void STile::update(MapT cache)
+void STile::update(MapT *cache)
 {
     if (this->_type == 'g' || this->_type == 'h' || this->_type == 'i' || this->_type == 'j' || this->_type == 'k' || this->_type == 'l' || this->_type == 'm' || this->_type == 'n' || this->_type == 'o') {
-        int totalGems = cache.getTile(this->_x, this->_y).getNbrTotalGems();
-        std::map<std::string, int> stocks = cache.getTile(this->_x, this->_y).getStocks();
+        int totalGems = cache->getTile(this->_x, this->_y).getNbrTotalGems();
+        std::map<std::string, int> stocks = cache->getTile(this->_x, this->_y).getStocks();
         if (this->_gems.size() != totalGems) {
             this->_gems.clear();
             for (auto &gem : stocks) {
                 createGem(gem.first, gem.second);
             }
         }
-        std::vector<Egg> eggs = cache.getEggs();
-        if (this->_eggs.size() != cache.getEggsFromPos(this->_x, this->_y)) {
+        std::vector<Egg> eggs = cache->getEggs();
+        if (this->_eggs.size() != cache->getEggsFromPos(this->_x, this->_y)) {
             this->_eggs.clear();
             for (auto &egg : eggs) {
                 if (egg.getX() == this->_x && egg.getY() == this->_y) {

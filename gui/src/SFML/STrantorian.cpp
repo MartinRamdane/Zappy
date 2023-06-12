@@ -8,6 +8,7 @@
 #include "STrantorian.hpp"
 
 //! Fix animation when a player is ejected and loop eject animation
+//* Probably need to get a pointer to cache, instead of a copy so we can update the cache
 
 STrantorian::STrantorian(Trantorian trantorian)
 {
@@ -16,7 +17,7 @@ STrantorian::STrantorian(Trantorian trantorian)
     this->setSpritePosition(sf::Vector2f((-40) + (96 * (trantorian.getX())), (-90) + ((96) * (trantorian.getY()))));
     this->setOrientation(trantorian.getOrientation());
     this->setSpriteScale(sf::Vector2f(3.5, 3.5));
-    id = trantorian.getId();
+    this->_id = trantorian.getId();
     this->_rect = sf::IntRect(0, 0, 48, 48);
     this->setSpriteRect(this->_rect);
 }
@@ -67,7 +68,7 @@ void STrantorian::createSprite()
     }
 }
 
-void STrantorian::update(MapT cache)
+void STrantorian::update(MapT *cache)
 {
     if (this->_animation == INCANTATION) {
         if (this->_rect.left >= 480)
@@ -76,7 +77,7 @@ void STrantorian::update(MapT cache)
             this->_rect.left += 48;
     } else if (this->_animation == EJECTION) {
         if (this->_rect.left >= 6 * 48) {
-            std::cout << "Ejection finished" << std::endl;
+            cache->setTrantorianEjection(this->_id, false);
             this->_rect.left = 0;
         } else
             this->_rect.left += 48;
@@ -89,10 +90,10 @@ void STrantorian::update(MapT cache)
     this->setSpriteRect(this->_rect);
 }
 
-void STrantorian::moveSprite(MapT cache)
+void STrantorian::moveSprite(MapT *cache)
 {
-    Trantorian t = cache.getTrantorian(id);
-    int freq = cache.getFrequency();
+    Trantorian t = cache->getTrantorian(this->_id);
+    int freq = cache->getFrequency();
 
     sf::Vector2f targetPosition = sf::Vector2f((-35) + (96 * (t.getX())), (-70) + ((96) * (t.getY())));
     sf::Vector2f currentPosition = this->_sprite.getPosition();
@@ -120,6 +121,9 @@ void STrantorian::moveSprite(MapT cache)
 
             this->setSpritePosition(newPosition);
         } else {
+            this->_lastAnimation = this->_animation;
+            if (this->_lastAnimation != this->_animation)
+                this->_rect.left = 0;
             if (t.getCanEvolve() == true) {
                 this->_animation = INCANTATION;
             } else if (t.getEjection() == true) {

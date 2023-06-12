@@ -26,7 +26,7 @@ class Display {
         std::unique_ptr<sf::RenderWindow> &getWindow();
         void eventHandler(MapT cache);
         void createMap(int width, int height);
-        void update(MapT cache);
+        void update(MapT *cache);
         void keyHandler(MapT cache);
         void clickHandler(MapT cache);
         void createViews(int map_width, int map_height);

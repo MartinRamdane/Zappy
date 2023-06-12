@@ -50,5 +50,6 @@ class Parsing
         ~Parsing();
         void parse(std::string str);
         MapT getMap();
+        MapT *getMapPtr();
 };
 

@@ -25,12 +25,12 @@ class STile : public IEntity {
         void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
         void draw(sf::RenderWindow &window, sf::View &view);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
-        void update(MapT cache);
+        void update(MapT *cache);
         void createGem(std::string type, int quantity);
         sf::Vector2i getClicked();
         void createEgg(int id, bool isHatched);
         void removeEgg();
-        void moveSprite(MapT cache){};
+        void moveSprite(MapT *cache){};
 
     protected:
     private:

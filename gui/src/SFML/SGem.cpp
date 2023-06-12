@@ -87,7 +87,7 @@ void SGem::eventHandler(sf::Event event, sf::RenderWindow &window)
 
 }
 
-void SGem::update(MapT cache)
+void SGem::update(MapT *cache)
 {
     this->_rect.left += 16;
     if (this->_rect.left >= 16 * 4)

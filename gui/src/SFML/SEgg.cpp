@@ -66,7 +66,7 @@ void SEgg::eventHandler(sf::Event event, sf::RenderWindow &window)
 
 }
 
-void SEgg::update(MapT cache)
+void SEgg::update(MapT *cache)
 {
 }
 

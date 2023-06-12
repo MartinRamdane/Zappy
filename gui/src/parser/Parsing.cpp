@@ -387,3 +387,8 @@ MapT Parsing::getMap()
 {
     return mapt;
 }
+
+MapT *Parsing::getMapPtr()
+{
+    return &mapt;
+}

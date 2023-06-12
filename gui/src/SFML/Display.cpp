@@ -164,13 +164,12 @@ void Display::eventHandler(MapT cache)
     }
 }
 
-//TODO: use the time unit to determine the speed of the animation
-void Display::update(MapT cache)
+void Display::update(MapT *cache)
 {
-    const sf::Time targetFrameTime = sf::seconds(1.0f / cache.getFrequency());
-    if (this->_mapCreated == false && cache.getX() != 0 && cache.getY() != 0) {
-        this->createMap(cache.getX(), cache.getY());
-        this->createViews(cache.getX(), cache.getY());
+    const sf::Time targetFrameTime = sf::seconds(1.0f / cache->getFrequency());
+    if (this->_mapCreated == false && cache->getX() != 0 && cache->getY() != 0) {
+        this->createMap(cache->getX(), cache->getY());
+        this->createViews(cache->getX(), cache->getY());
         this->_mapCreated = true;
     }
     if (this->_clock_map.getElapsedTime() > targetFrameTime) {
@@ -178,9 +177,9 @@ void Display::update(MapT cache)
         for (auto &sprite : this->_map)
             sprite->update(cache);
     }
-    if (this->_trantorians.size() != cache.getTrantorians().size()) {
+    if (this->_trantorians.size() != cache->getTrantorians().size()) {
         this->_trantorians.clear();
-        for (auto &trantor : cache.getTrantorians()) {
+        for (auto &trantor : cache->getTrantorians()) {
             this->_trantorians[trantor.getId()] = std::make_unique<STrantorian>(trantor);
         }
     }
