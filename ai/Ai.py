@@ -36,6 +36,7 @@ class Ai:
         self.message = ""
         self.askForLevel = False
         self.lastReceive = ""
+        self.elevationInProgress = False
 
     def joinGame(self):
         self.client = Client(self.machine, self.port)
@@ -53,7 +54,8 @@ class Ai:
         print ("searchFood = ", self.seachFood, file = self.sourceFile)
         print ("PATH before send: ", self.path, file = self.sourceFile)
         self.canFork = False
-        if not self.skipSend:
+        if not self.skipSend and not self.elevationInProgress:
+            print("HERE", file = self.sourceFile)
             self.message = "Take food\n"
             if self.lookInventoryFood >= 8 and not self.prepareIncantation and not self.toJoin:
                 self.message = "Inventory\n"
@@ -127,7 +129,7 @@ class Ai:
     def look(self, receive):
         print("PATH IN LOOK: ", self.path, file = self.sourceFile)
         self.getObjectsAround(receive)
-        if self.count >= 7:
+        if self.count >= 8:
             self.count = 0
             self.waitingForReponse = False
             if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
@@ -146,6 +148,7 @@ class Ai:
             self.makeIncantation()()
 
     def elevation(self, receive):
+        self.elevationInProgress = True
         print("ELEVATION", file = self.sourceFile)
         if self.lastReceive != "Elevation underway":
             self.skipSend = True
@@ -170,8 +173,7 @@ class Ai:
         self.haveStones = False
         self.nbMatesAvailableForIncantation = 1
         self.askForLevel = False
-        if self.message != "Incantation\n":
-            self.skipSend = True
+        self.elevationInProgress = False
 
     def goToDir(self, tile):
         val = self.tiles[tile]
@@ -280,6 +282,8 @@ class Ai:
         self.skipSend = False
         print("Receive to " + self.teamName + ": " + receive, file = self.sourceFile)
         reponseType = getTypeOfReponse(receive)
+        if self.elevationInProgress and reponseType != Type.LEVELUPDATING and reponseType != Type.DEAD:
+            return
         self.getCommand(reponseType)(receive)
 
     def makeIncantationLevel2(self):
