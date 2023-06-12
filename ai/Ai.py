@@ -58,7 +58,7 @@ class Ai:
             if self.lookInventoryFood >= 8 and not self.prepareIncantation and not self.toJoin:
                 self.message = "Inventory\n"
                 self.lookInventoryFood = 0
-            elif self.seachFood and not self.path:
+            elif self.seachFood and not self.path and not self.prepareIncantation:
                 print("SEARCH FOOD", file = self.sourceFile)
                 self.message = "Look\n"
             elif self.path:
@@ -330,23 +330,16 @@ class Ai:
                     return
                 needed = self.levelManager.getDictfromLevel(self.level + 1)
                 items = listToDict(self.objectsAround[0])
-                for item in self.objectsAround[0]:
-                    if item == "player":
-                        continue
-                    if not item in needed:
-                        self.path.append("Take " + item + "\n")
+                for tmp in needed:
+                    if tmp in items:
+                        if items[tmp] < needed[tmp]:
+                            for i in range(needed[tmp] - items[tmp]):
+                                self.path.append("Set " + tmp + "\n")
                     else:
-                        if items[item] > needed[item]:
-                            for i in range(items[item] - needed[item]):
-                                self.path.append("Take " + item + "\n")
-                        elif items[item] < needed[item]:
-                            for i in range(needed[item] - items[item]):
-                                self.path.append("Set " + item + "\n")
-                for item in needed:
-                    if item not in items:
-                        for i in range(needed[item]):
-                            self.path.append("Set " + item + "\n")
+                        for i in range(needed[tmp]):
+                            self.path.append("Set " + tmp + "\n")
                 self.path.append("Look\n")
+                self.seachFood = False
                 if self.countLook >= 6:
                     self.path.insert(0, "Broadcast " + encrypt("Join me for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
                     self.countLook = 0
