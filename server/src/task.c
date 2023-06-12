@@ -79,8 +79,12 @@ void execute_tasks(server_t *server)
         double value = (double)((ts.tv_sec - server->server_time.tv_sec));
         if (value >= tmp->time) {
             printf("command when removing : %s\n", tmp->cmd);
-            send_task_response(server, tmp, tmp->cmd);
-            LIST_REMOVE(tmp, next);
+            if ((tmp->client->player != NULL &&
+            tmp->client->player->state == ALIVE) ||
+            strcmp(tmp->cmd, "Incantation") == 0) {
+                send_task_response(server, tmp, tmp->cmd);
+                LIST_REMOVE(tmp, next);
+            }
         }
     }
     return;
