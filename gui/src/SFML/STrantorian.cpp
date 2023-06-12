@@ -7,6 +7,8 @@
 
 #include "STrantorian.hpp"
 
+//! Fix animation when a player is ejected and loop eject animation
+
 STrantorian::STrantorian(Trantorian trantorian)
 {
     this->createSprite();
@@ -53,6 +55,15 @@ void STrantorian::createSprite()
         _textures["Iup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIncantation" + std::to_string(i) + ".png");
         _textures["Iright" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["Iright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightIncantation" + std::to_string(i) + ".png");
+
+        _textures["Edown" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Edown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpEjection" + std::to_string(i) + ".png");
+        _textures["Eleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Eleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftEjection" + std::to_string(i) + ".png");
+        _textures["Eup" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Eup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownEjection" + std::to_string(i) + ".png");
+        _textures["Eright" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Eright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightEjection" + std::to_string(i) + ".png");
     }
 }
 
@@ -62,6 +73,12 @@ void STrantorian::update(MapT cache)
         if (this->_rect.left >= 480)
             this->_rect.left = 48;
         else
+            this->_rect.left += 48;
+    } else if (this->_animation == EJECTION) {
+        if (this->_rect.left >= 6 * 48) {
+            std::cout << "Ejection finished" << std::endl;
+            this->_rect.left = 0;
+        } else
             this->_rect.left += 48;
     } else {
         if (this->_rect.left >= 204)
@@ -82,13 +99,13 @@ void STrantorian::moveSprite(MapT cache)
 
     float distanceThreshold = 1.0f;
 
-    if (t.getOrientation() == 1 && currentPosition.y > targetPosition.y) {
+    if (t.getOrientation() != 3 && currentPosition.y > targetPosition.y) {
         this->_sprite.setPosition(targetPosition);
-    } else if (t.getOrientation() == 2 && currentPosition.x > targetPosition.x) {
+    } else if (t.getOrientation() != 4 && currentPosition.x > targetPosition.x) {
         this->_sprite.setPosition(targetPosition);
-    } else if (t.getOrientation() == 3 && currentPosition.y < targetPosition.y) {
+    } else if (t.getOrientation() != 1 && currentPosition.y < targetPosition.y) {
         this->_sprite.setPosition(targetPosition);
-    } else if (t.getOrientation() == 4 && currentPosition.x < targetPosition.x) {
+    } else if (t.getOrientation() != 2 && currentPosition.x < targetPosition.x) {
         this->_sprite.setPosition(targetPosition);
     } else {
         sf::Vector2f distance = targetPosition - currentPosition;
@@ -104,7 +121,9 @@ void STrantorian::moveSprite(MapT cache)
             this->setSpritePosition(newPosition);
         } else {
             if (t.getCanEvolve() == true) {
-                    this->_animation = INCANTATION;
+                this->_animation = INCANTATION;
+            } else if (t.getEjection() == true) {
+                this->_animation = EJECTION;
             } else {
                 this->_animation = IDLE;
             }
@@ -190,6 +209,21 @@ void STrantorian::setOrientation(int orientation)
                 break;
             case 4:
                 this->setSpriteTexture(this->_textures["Ileft" + std::to_string(this->_level)]);
+                break;
+        }
+    } else if (this->_animation == EJECTION) {
+        switch (orientation) {
+            case 1:
+                this->setSpriteTexture(this->_textures["Eup" + std::to_string(this->_level)]);
+                break;
+            case 2:
+                this->setSpriteTexture(this->_textures["Eright" + std::to_string(this->_level)]);
+                break;
+            case 3:
+                this->setSpriteTexture(this->_textures["Edown" + std::to_string(this->_level)]);
+                break;
+            case 4:
+                this->setSpriteTexture(this->_textures["Eleft" + std::to_string(this->_level)]);
                 break;
         }
     }

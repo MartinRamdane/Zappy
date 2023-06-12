@@ -154,7 +154,7 @@ void Parsing::pin(std::string arg)
 
 void Parsing::pex(std::string arg)
 {
-    mapt.removeTrantorian(std::stoi(arg));
+    mapt.setTrantorianEjection(std::stoi(arg), true);
     std::cout << "Trantorian " << arg << " is explused" << std::endl;
 }
 

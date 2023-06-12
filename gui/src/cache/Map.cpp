@@ -193,3 +193,12 @@ void MapT::setTrantorianCanEvolve(int id, bool canEvolve)
         }
     }
 }
+
+void MapT::setTrantorianEjection(int id, bool ejecting)
+{
+    for (int i = 0; i < this->trantorians.size(); i++) {
+        if (this->trantorians[i].getId() == id) {
+            this->trantorians[i].setEjection(ejecting);
+        }
+    }
+}

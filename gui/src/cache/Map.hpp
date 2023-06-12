@@ -59,4 +59,5 @@ class MapT
         int getFrequency();
         void setFrequency(int frequency);
         void setHasHatched(int id);
+        void setTrantorianEjection(int id, bool ejecting);
 };

@@ -33,7 +33,7 @@ class STrantorian : public IEntity {
         enum Animation {
             IDLE,
             WALKING,
-            EXPULSION,
+            EJECTION,
             INCANTATION,
             DEATH,
         };

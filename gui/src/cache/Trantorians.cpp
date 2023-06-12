@@ -122,3 +122,13 @@ int Trantorian::getLevel()
 {
     return (this->lvl);
 }
+
+void Trantorian::setEjection(bool ejecting)
+{
+    this->ejecting = ejecting;
+}
+
+bool Trantorian::getEjection()
+{
+    return (this->ejecting);
+}

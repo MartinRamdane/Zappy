@@ -23,6 +23,7 @@ class Trantorian
         int y;
         std::string team;
         std::string message;
+        bool ejecting = false;
 
     public:
         Trantorian();
@@ -47,4 +48,6 @@ class Trantorian
         std::string getTeam();
         std::string getMessage();
         int getLevel();
+        void setEjection(bool ejecting);
+        bool getEjection();
 };
