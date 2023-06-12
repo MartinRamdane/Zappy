@@ -215,6 +215,7 @@ void put_sibur_resource(server_t infos, tile **map, int r);
 void put_mendiane_resource(server_t infos, tile **map, int r);
 void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
+void respawn_task(server_t *server);
 
 // TASK
 void add_task(server_t *server, char *cmd, double time, client_t *cli);
@@ -233,6 +234,7 @@ void broadcast_command(server_t *server, client_t *client, char *msg);
 void incantation_command(client_t *client, server_t *server);
 void remove_task_of_player(client_t *cli, server_t *s_infos);
 void update_freq_for_tasks(server_t *server);
+void add_server_task(server_t *server, char *cmd, double t_time);
 
 // CMD
 void move_player(player *p, tile **map, int *pos, server_t *s_infos);

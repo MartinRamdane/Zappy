@@ -67,6 +67,7 @@ int main(int ac, char **av)
     s_infos->game->map = generate_map(s_infos);
     fill_map(*s_infos, s_infos->game->map);
     debug_print_map(s_infos, s_infos->game->map);
+    respawn_task(s_infos);
     init_server(s_infos);
     loop_server(s_infos);
     return 0;

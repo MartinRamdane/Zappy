@@ -10,6 +10,7 @@
 void send_task_response(server_t *server, task_t *task, char *cmd)
 {
     if (strcmp(cmd, "Forward") == 0) {
+        printf("task time: %d\n", task->time);
         forward_command(server, task->client);
         send_new_player_pos(task->client, server);
     }
@@ -39,6 +40,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     }
     if (strcmp(cmd, "Incantation") == 0) {
         incantation_command(task->client, server); return;
+    }
+    if (strcmp(cmd, "Respawn") == 0) {
+        respawn_task(server); return;
     }
 }
 
