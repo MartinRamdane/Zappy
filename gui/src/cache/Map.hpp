@@ -58,5 +58,5 @@ class MapT
         Trantorian getTrantorian(int id);
         int getFrequency();
         void setFrequency(int frequency);
-        sf::Vector2i firstPlacedEgg();
+        void setHasHatched(int id);
 };

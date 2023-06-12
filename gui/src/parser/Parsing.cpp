@@ -338,6 +338,12 @@ void Parsing::ebo(std::string arg)
     std::cout << "egg born" << std::endl;
 }
 
+void Parsing::eht(std::string arg)
+{
+    mapt.setHasHatched(std::stoi(arg));
+    std::cout << "egg hatched" << std::endl;
+}
+
 void Parsing::edi(std::string arg)
 {
     mapt.removeEgg(std::stoi(arg));

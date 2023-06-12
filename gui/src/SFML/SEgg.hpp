@@ -25,6 +25,7 @@ class SEgg : public IEntity {
         void update(MapT cache);
         sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
         void moveSprite(MapT cache){};
+        void setId(int id);
 
     protected:
     private:
@@ -32,4 +33,5 @@ class SEgg : public IEntity {
         sf::Texture _texture;
         sf::IntRect _rect;
         enum EggMode _mode;
+        int _id;
 };

@@ -132,9 +132,20 @@ void MapT::addEgg(Egg egg)
 
 void MapT::removeEgg(int e)
 {
+    std::cout << "remove egg" << std::endl;
     for (int i = 0; i < this->eggs.size(); i++) {
         if (this->eggs[i].getId() == e) {
+            std::cout << "egg id: " << this->eggs[i].getId() << " removed" << std::endl;
             this->eggs.erase(this->eggs.begin() + i);
+        }
+    }
+}
+
+void MapT::setHasHatched(int id)
+{
+    for (int i = 0; i < this->eggs.size(); i++) {
+        if (this->eggs[i].getId() == id) {
+            this->eggs[i].setHatched();
         }
     }
 }
@@ -172,13 +183,6 @@ int MapT::getEggsFromPos(int x, int y)
         }
     }
     return (num);
-}
-
-sf::Vector2i MapT::firstPlacedEgg()
-{
-    if (this->eggs.size() == 0)
-        return (sf::Vector2i(-1, -1));
-    return (sf::Vector2i(this->eggs[0].getX(), this->eggs[0].getY()));
 }
 
 void MapT::setTrantorianCanEvolve(int id, bool canEvolve)

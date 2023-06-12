@@ -28,7 +28,7 @@ class STile : public IEntity {
         void update(MapT cache);
         void createGem(std::string type, int quantity);
         sf::Vector2i getClicked();
-        void createEgg();
+        void createEgg(int id, bool isHatched);
         void removeEgg();
         void moveSprite(MapT cache){};
 

@@ -45,6 +45,7 @@ class Parsing
         void smg(std::string arg);
         void suc(std::string arg);
         void sbp(std::string arg);
+        void eht(std::string arg);
         Parsing();
         ~Parsing();
         void parse(std::string str);

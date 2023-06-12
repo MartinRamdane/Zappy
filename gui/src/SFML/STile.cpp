@@ -179,7 +179,7 @@ void STile::createGem(std::string name, int quantity)
 
 }
 
-void STile::createEgg()
+void STile::createEgg(int id, bool isHatched)
 {
     std::unique_ptr<SEgg> egg;
     sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 55), this->_sprite.getGlobalBounds().top + 10 + (rand() % 53));
@@ -188,6 +188,9 @@ void STile::createEgg()
 
     if (egg) {
         egg->setSpritePosition(position);
+        egg->setId(id);
+        if (isHatched)
+            egg->setSpriteRect(sf::IntRect(160, 0, 160, 160));
         this->_eggs.push_back(std::move(egg));
     }
 }
@@ -213,19 +216,16 @@ void STile::update(MapT cache)
                 createGem(gem.first, gem.second);
             }
         }
+        std::vector<Egg> eggs = cache.getEggs();
         if (this->_eggs.size() != cache.getEggsFromPos(this->_x, this->_y)) {
             this->_eggs.clear();
-            for (int i = 0; i < cache.getEggsFromPos(this->_x, this->_y); i++) {
-                createEgg();
+            for (auto &egg : eggs) {
+                if (egg.getX() == this->_x && egg.getY() == this->_y) {
+                    createEgg(egg.getId(), egg.getHatched());
+                }
             }
         }
     }
-    // if (this->_type != 9) {
-    //     this->_rect.left += 32;
-    //     if (this->_rect.left >= 64)
-    //         this->_rect.left = 0;
-    //     this->setSpriteRect(this->_rect);
-    // }
     if (this->_gems.size() > 0) {
         for (auto &gem : this->_gems) {
             gem->update(cache);
