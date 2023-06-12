@@ -89,6 +89,9 @@ void left_command(client_t *client)
 void incantation_command(client_t *client, server_t *server)
 {
     client->player->state = ALIVE;
+    if (check_can_incantation(server, client) == 0) {
+        send(client->socket, "ko\n", 3, 0); return;
+    }
     client->player->level ++;
     char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);
     sprintf(buff, "Current level: %d\n", client->player->level);
