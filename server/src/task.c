@@ -57,7 +57,7 @@ bool check_task_nb(server_t *server, client_t *client)
     int counter = 0;
     task_t *tmp;
     LIST_FOREACH(tmp, &server->task_head, next) {
-        if (tmp->client->socket == client->socket) {
+        if (tmp->client != NULL && tmp->client->socket == client->socket) {
             counter++;
         }
     }
@@ -100,7 +100,7 @@ void execute_tasks(server_t *server)
         double value = (double)((ts.tv_sec - server->server_time.tv_sec));
         if (value >= tmp->time) {
             printf("command when removing : %s\n", tmp->cmd);
-            if ((tmp->client->player != NULL &&
+            if (tmp->client == NULL || (tmp->client->player != NULL &&
             tmp->client->player->state == ALIVE) ||
             strcmp(tmp->cmd, "Incantation") == 0) {
                 send_task_response(server, tmp, tmp->cmd);
