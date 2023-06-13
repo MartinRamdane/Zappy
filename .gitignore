@@ -5,5 +5,4 @@ zappy_ai
 zappy_gui
 zappy_server_example
 ai/__pycache__
-test.log
-toto.log
+*.log

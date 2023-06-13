@@ -216,12 +216,12 @@ class Ai:
                 self.canIncantation = True
                 self.nbMatesAvailable = 1
                 self.waitingForReponse = False
-        if "I have all stones for level" in decrypted:
+        if "I have all stones for level" in decrypted and not self.haveStones:
             tmp = decrypted.split(" ")
             wantedLevel = int(tmp[7])
             if wantedLevel == self.level + 1 and not self.prepareIncantation:
-                if self.message == ("I have all stones for level " + str(self.level + 1) + "\n"):
-                    self.haveStones = False
+                # if self.message == ("I have all stones for level " + str(self.level + 1) + "\n"):
+                #     self.haveStones = False
                 self.path = []
                 if (not self.toJoin or ("I'm coming to join you for level " + str(self.level + 1) + "\n") in self.path) and not self.tosendJoin and not self.haveStones:
                     self.path.append("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
