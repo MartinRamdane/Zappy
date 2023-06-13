@@ -21,10 +21,6 @@ void Gui::socketThread()
     while (this->_display.getWindow()->isOpen()) {
         this->_socket.socketSelect();
         std::string msg = this->_socket.getMessage();
-        // for (int i = 0; _p.getMap().getTrantorians().size() != i; i++) {
-        //     std::string send = "ppo " + std::to_string(_p.getMap().getTrantorians()[i].getId()) + "\n";
-        //     this->_socket.sendToServer(send.c_str());
-        // }
         if (msg != "") {
             if (msg == "WELCOME\n")
                 this->_socket.sendToServer("GRAPHIC\n");

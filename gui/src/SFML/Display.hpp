@@ -16,7 +16,7 @@
 #include "STrantorian.hpp"
 #include "STile.hpp"
 #include "../cache/Map.hpp"
-#include "SBottom_menu.hpp"
+#include "SSide_menu.hpp"
 
 class Display {
     public:
@@ -39,7 +39,7 @@ class Display {
         sf::Event _event;
         std::map<int, std::unique_ptr<IEntity>> _trantorians;
         std::vector<std::unique_ptr<IEntity>> _map;
-        std::unique_ptr<SBottom_menu> _bottomMenu;
+        std::unique_ptr<SSide_menu> _bottomMenu;
         sf::View _view;
         sf::View _bottomMenuView;
         sf::Clock _clock_map;

@@ -13,7 +13,7 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_window->setFramerateLimit(60);
     this->_window->setActive(false);
     this->_view.setSize(sf::Vector2f(w_width, w_height));
-    this->_bottomMenu = std::make_unique<SBottom_menu>(w_width, w_height);
+    this->_bottomMenu = std::make_unique<SSide_menu>(w_width, w_height);
     this->_clock_map.restart();
     this->_clock_trantorian.restart();
 }
@@ -21,11 +21,6 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
 Display::~Display()
 {
 }
-
-// void Display::createTrantorians()
-// {
-//     this->_trantorians.insert(std::make_pair("trantorian1", std::make_unique<STrantorian>()));
-// }
 
 void Display::createMap(int width, int height)
 {
@@ -96,9 +91,7 @@ void Display::render()
     for (auto &sprite : this->_trantorians)
         sprite.second->draw(*this->_window, this->_view);
     this->_window->setView(this->_bottomMenuView);
-    if (this->_ShowBottomMenu == true) {
-        this->_bottomMenu->draw(*this->_window);
-    }
+    this->_bottomMenu->draw(*this->_window);
     this->_window->display();
     this->_window->setView(this->_view);
 }
@@ -128,7 +121,8 @@ void Display::keyHandler(MapT cache)
             this->_view.reset(sf::FloatRect(0, 0, this->_width, this->_height));
             this->_view.setCenter(this->_mapCenter);
         } else if (this->_event.key.code == sf::Keyboard::B) {
-            this->_ShowBottomMenu = !this->_ShowBottomMenu;
+            this->_bottomMenu->fadeIn(false);
+            this->_bottomMenu->fadeOut(true);
         } else if (this->_event.key.code == sf::Keyboard::C) {
             this->_message = "sst " + std::to_string(cache.getFrequency() - 1) + "\n";
         } else if (this->_event.key.code == sf::Keyboard::V) {
@@ -142,10 +136,11 @@ void Display::clickHandler(MapT cache)
     if (this->_event.type == sf::Event::MouseButtonPressed) {
         if (this->_event.mouseButton.button == sf::Mouse::Left) {
             for (auto &sprite : this->_map) {
-                this->_click_pos = sprite->getClicked();
-                if (this->_click_pos.x != -1 && this->_click_pos.y != -1) {
-                    this->_ShowBottomMenu = true;
-                    this->_bottomMenu->update(cache.getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
+                sf::Vector2i click = sprite->getClicked();
+                if (click.x != -1 && click.y != -1) {
+                    this->_click_pos = click;
+                    this->_bottomMenu->fadeOut(false);
+                    this->_bottomMenu->fadeIn(true);
                 }
             }
         }
@@ -192,6 +187,7 @@ void Display::update(MapT *cache)
         for (auto &sprite : this->_trantorians)
             sprite.second->moveSprite(cache);
     }
+    this->_bottomMenu->update(cache->getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()
