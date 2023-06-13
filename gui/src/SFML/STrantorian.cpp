@@ -100,11 +100,11 @@ void STrantorian::moveSprite(MapT *cache)
 
     float distanceThreshold = 1.0f;
 
-    if (t.getOrientation() != 3 && currentPosition.y > targetPosition.y) {
+    if (t.getOrientation() != 1 && currentPosition.y > targetPosition.y) {
         this->_sprite.setPosition(targetPosition);
     } else if (t.getOrientation() != 4 && currentPosition.x > targetPosition.x) {
         this->_sprite.setPosition(targetPosition);
-    } else if (t.getOrientation() != 1 && currentPosition.y < targetPosition.y) {
+    } else if (t.getOrientation() != 3 && currentPosition.y < targetPosition.y) {
         this->_sprite.setPosition(targetPosition);
     } else if (t.getOrientation() != 2 && currentPosition.x < targetPosition.x) {
         this->_sprite.setPosition(targetPosition);
@@ -238,4 +238,7 @@ void STrantorian::draw(sf::RenderWindow &window, sf::View &view)
     window.draw(this->_sprite);
 }
 
-
+sf::Vector2f STrantorian::getSpritePosition()
+{
+    return this->_sprite.getPosition();
+}

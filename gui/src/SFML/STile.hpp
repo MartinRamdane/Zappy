@@ -31,6 +31,7 @@ class STile : public IEntity {
         void createEgg(int id, bool isHatched);
         void removeEgg();
         void moveSprite(MapT *cache){};
+        sf::Vector2f getSpritePosition(){return sf::Vector2f(0, 0);};
 
     protected:
     private:

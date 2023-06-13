@@ -85,10 +85,16 @@ void Display::createViews(int map_width, int map_height)
 
 void Display::render()
 {
+    std::vector<std::pair<int, IEntity *>> sortedTrantorians;
+    for (auto &sprite : this->_trantorians)
+        sortedTrantorians.push_back(std::make_pair(sprite.second->getSpritePosition().y, sprite.second.get()));
+    std::sort(sortedTrantorians.begin(), sortedTrantorians.end(), [](const auto& a, const auto& b) {
+        return a.first < b.first;
+    });
     this->_window->clear(sf::Color::Black);
     for (auto &sprite : this->_map)
        sprite->draw(*this->_window, this->_view);
-    for (auto &sprite : this->_trantorians)
+    for (auto &sprite : sortedTrantorians)
         sprite.second->draw(*this->_window, this->_view);
     this->_window->setView(this->_bottomMenuView);
     this->_bottomMenu->draw(*this->_window);

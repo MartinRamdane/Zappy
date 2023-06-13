@@ -25,6 +25,7 @@ class SGem : public IEntity {
         void update(MapT *cache);
         sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
         void moveSprite(MapT *cache){};
+        sf::Vector2f getSpritePosition(){return sf::Vector2f(0, 0);};
 
     protected:
     private:

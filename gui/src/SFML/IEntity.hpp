@@ -33,6 +33,7 @@ class IEntity {
         virtual void update(MapT *cache) = 0;
         virtual sf::Vector2i getClicked() = 0;
         virtual void moveSprite(MapT *cache) = 0;
+        virtual sf::Vector2f getSpritePosition() = 0;
 
     protected:
         enum GemType {
