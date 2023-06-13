@@ -14,6 +14,7 @@ class Ai:
         self.client = None
         self.tiles = {0: ["Look\n"], 1: ["Forward\n"], 2: ["Forward\n", "Left\n", "Forward\n"], 3: ["Left\n", "Forward\n"], 4: ["Left\n", "Forward\n", "Left\n", "Forward\n"], 5: ["Left\n", "Left\n", "Forward\n"], 6: ["Left\n", "Left\n", "Forward\n", "Left\n", "Forward\n"], 7: ["Right\n", "Forward\n"], 8: ["Forward\n", "Right\n", "Forward\n"]}
         self.sourceFile = open(filename + '.log', 'w')
+        self.debug = filename
         self.inventory = {}
         self.canFork = False
         self.objectsAround = []
@@ -129,7 +130,7 @@ class Ai:
     def look(self, receive):
         print("PATH IN LOOK: ", self.path, file = self.sourceFile)
         self.getObjectsAround(receive)
-        if self.count >= 8:
+        if self.count >= 10:
             self.count = 0
             self.waitingForReponse = False
             if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
@@ -154,7 +155,7 @@ class Ai:
             self.skipSend = True
 
     def levelUpdating(self, receive):
-        print("LEVEL UPDATING to LEVEL " + str(self.level + 1))
+        print("LEVEL UPDATING from " + self.debug + " to LEVEL " + str(self.level + 1))
         self.level = int(receive[15])
         print("Level: " + str(self.level), file = self.sourceFile)
         self.nbFork = 0
@@ -196,7 +197,7 @@ class Ai:
             wantedLevel = int(code[5])
             if self.level == wantedLevel:
                 self.count = 0
-                if not self.askForLevel:
+                if not self.askForLevel and not ("Broadcast " + encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0])) + "\n") in self.path:
                     encode = encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0]))
                     self.path.insert(0, "Broadcast " + encode + "\n")
                 self.nbMatesAvailable += 1
@@ -237,6 +238,7 @@ class Ai:
                 self.goToDir(int(self.direction))
                 self.path.append("Look\n")
                 self.toJoin = True
+                self.haveBroadcast = True
         if "I'm coming to join you for level" in decrypted:
             tmp = decrypted.split(" ")
             print("CICIICIC", file = self.sourceFile)
@@ -263,7 +265,7 @@ class Ai:
             self.path = ["Look\n"]
 
     def dead(self, receive):
-        print("Team " + self.teamName + " level " + str(self.level) + " is dead")
+        print("Team " + self.debug + " level " + str(self.level) + " is dead")
         sys.exit(0)
 
     def getCommand(self,case):
@@ -307,7 +309,7 @@ class Ai:
             if self.nbFork < 1 and self.nbMatesAvailable < self.levelManager.matesNeeded[self.level + 1]:
                 self.path.append("Fork\n")
                 self.nbFork += 1
-                print("FORK from " + self.teamName + ", I'm level " + str(self.level))
+                print("FORK from " + self.debug + ", I'm level " + str(self.level))
             self.haveBroadcast = False
             self.waitingForReponse = False
         elif not self.waitingForReponse:

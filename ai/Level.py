@@ -44,7 +44,7 @@ class Level():
             return False
         for i in self.getLevel[level]:
             nbElemForLevel = self.getNbElemForLevel(level, i)
-            if self.getNbElemOnTile(tile, i) != nbElemForLevel:
+            if self.getNbElemOnTile(tile, i) < nbElemForLevel:
                 return False
         return True
 
