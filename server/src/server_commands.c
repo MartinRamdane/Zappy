@@ -10,6 +10,7 @@
 void respawn_task(server_t *server)
 {
     fill_map(*server, server->game->map);
+    send_map_content_to_all_gui(server);
     char *buffer_respawn = strdup("Respawn");
     double task_time = calculate_time_for_task(server, buffer_respawn);
     add_server_task(server, buffer_respawn, task_time);
