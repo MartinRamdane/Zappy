@@ -43,6 +43,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strcmp(cmd, "Respawn") == 0) {
         respawn_task(server); return;
     }
+    if (strcmp(cmd, "Fork") == 0) {
+        fork_command(task->client, server); return;
+    }
 }
 
 void forward_command(server_t *server, client_t *client)
@@ -93,7 +96,9 @@ void incantation_command(client_t *client, server_t *server)
 {
     client->player->state = ALIVE;
     if (check_can_incantation(server, client) == 0) {
-        send(client->socket, "ko\n", 3, 0); return;
+        send(client->socket, "ko\n", 3, 0);
+        event_player_incantation_end(client, server, 0);
+        return;
     }
     client->player->level ++;
     char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);

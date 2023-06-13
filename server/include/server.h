@@ -59,10 +59,11 @@ typedef struct gui_player {
 typedef struct egg {
     int x;
     int y;
-    int time;
-    int level;
-    int max_level;
-} egg;
+    int id;
+    int parent_id;
+    char *team_name;
+    LIST_ENTRY(egg) next;
+} t_egg;
 
 typedef struct player {
     int x;
@@ -84,6 +85,7 @@ typedef struct player_queue {
 } player_queue;
 
 extern LIST_HEAD(player_listhead, player_queue) player_head;
+extern LIST_HEAD(eggs_list, egg) eggs_head;
 
 typedef struct tile {
     int x;
@@ -96,6 +98,7 @@ typedef struct tile {
     int phiras;
     int thystame;
     struct player_listhead player_head;
+    struct eggs_list eggs_head;
     player_queue *players;
 } tile;
 
@@ -143,6 +146,7 @@ typedef struct server_s {
     int task_id;
     int task_stack;
     int player_id;
+    int egg_id;
     struct list_head head;
     struct team_listhead team_head;
     struct task_listhead task_head;
@@ -299,3 +303,9 @@ void event_end_of_game(server_t *server, team_t *winners);
 void send_all_player_pos(client_t *cli, server_t *server);
 void send_time_unit_to_all_guis(server_t *server);
 void send_player_death(client_t *player, server_t *server);
+void send_new_egg_to_guis(server_t *server, t_egg *egg);
+void send_egg_death_to_guis(server_t *server, t_egg *egg);
+
+//FORK
+void fork_command(client_t *client, server_t *server);
+void remove_eggs_on_tile(server_t *server, int x, int y);
