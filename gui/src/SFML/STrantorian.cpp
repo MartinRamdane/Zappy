@@ -29,7 +29,7 @@ STrantorian::~STrantorian()
 void STrantorian::createSprite()
 {
 
-    for (int i = 1; i != 7; i++) {
+    for (int i = 1; i != 8; i++) {
         _textures["down" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["down" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle" + std::to_string(i) + ".png");
         _textures["left" + std::to_string(i)] = std::make_shared<sf::Texture>();
@@ -147,8 +147,6 @@ void STrantorian::moveSprite(MapT *cache)
             this->setSpritePosition(newPosition);
         } else {
             this->_lastAnimation = this->_animation;
-            if (this->_lastAnimation != this->_animation)
-                this->_rect.left = 0;
             if (t.getDeath() == true) {
                 std::cout << "death" << std::endl;
                 this->_animation = DEATH;
@@ -159,6 +157,8 @@ void STrantorian::moveSprite(MapT *cache)
             } else {
                 this->_animation = IDLE;
             }
+            if (this->_lastAnimation != this->_animation)
+                this->_rect.left = 0;
             this->setSpritePosition(targetPosition);
         }
     }

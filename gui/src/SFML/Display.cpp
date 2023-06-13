@@ -185,13 +185,13 @@ void Display::update(MapT *cache)
         }
     }
     if (this->_trantorians.size() > 0) {
+        for (auto &sprite : this->_trantorians)
+            sprite.second->moveSprite(cache);
         if (this->_clock_trantorian.getElapsedTime() > targetFrameTime) {
             this->_clock_trantorian.restart();
             for (auto &sprite : this->_trantorians)
                 sprite.second->update(cache);
         }
-        for (auto &sprite : this->_trantorians)
-            sprite.second->moveSprite(cache);
     }
     this->_bottomMenu->update(cache->getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
 }
