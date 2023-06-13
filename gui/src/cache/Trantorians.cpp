@@ -132,3 +132,13 @@ bool Trantorian::getEjection()
 {
     return (this->ejecting);
 }
+
+void Trantorian::setDeath()
+{
+    this->death = true;
+}
+
+bool Trantorian::getDeath()
+{
+    return (this->death);
+}

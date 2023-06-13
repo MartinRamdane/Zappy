@@ -36,6 +36,7 @@ class STrantorian : public IEntity {
             WALKING,
             EJECTION,
             INCANTATION,
+            HURT,
             DEATH,
         };
         int _id;

@@ -314,7 +314,7 @@ void Parsing::pgt(std::string arg)
 
 void Parsing::pdi(std::string arg)
 {
-    mapt.removeTrantorian(std::stoi(arg));
+    mapt.setTrantorianDeath(std::stoi(arg));
     std::cout << "mort" << std::endl;
 }
 

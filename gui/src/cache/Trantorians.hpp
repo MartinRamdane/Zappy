@@ -24,6 +24,7 @@ class Trantorian
         std::string team;
         std::string message;
         bool ejecting = false;
+        bool death = false;
 
     public:
         Trantorian();
@@ -50,4 +51,6 @@ class Trantorian
         int getLevel();
         void setEjection(bool ejecting);
         bool getEjection();
+        void setDeath();
+        bool getDeath();
 };

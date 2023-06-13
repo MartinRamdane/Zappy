@@ -29,7 +29,7 @@ STrantorian::~STrantorian()
 void STrantorian::createSprite()
 {
 
-    for (int i = 1; i != 3; i++) {
+    for (int i = 1; i != 7; i++) {
         _textures["down" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["down" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle" + std::to_string(i) + ".png");
         _textures["left" + std::to_string(i)] = std::make_shared<sf::Texture>();
@@ -40,37 +40,62 @@ void STrantorian::createSprite()
         _textures["right" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightIdle" + std::to_string(i) + ".png");
 
         _textures["Wdown" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Wdown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpRun" + std::to_string(i) + ".png");
+        _textures["Wdown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownRun" + std::to_string(i) + ".png");
         _textures["Wleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["Wleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftRun" + std::to_string(i) + ".png");
         _textures["Wup" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Wup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownRun" + std::to_string(i) + ".png");
+        _textures["Wup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpRun" + std::to_string(i) + ".png");
         _textures["Wright" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["Wright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightRun" + std::to_string(i) + ".png");
 
         _textures["Idown" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Idown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpIncantation" + std::to_string(i) + ".png");
+        _textures["Idown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIncantation" + std::to_string(i) + ".png");
         _textures["Ileft" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["Ileft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftIncantation" + std::to_string(i) + ".png");
         _textures["Iup" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Iup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIncantation" + std::to_string(i) + ".png");
+        _textures["Iup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpIncantation" + std::to_string(i) + ".png");
         _textures["Iright" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["Iright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightIncantation" + std::to_string(i) + ".png");
 
         _textures["Edown" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Edown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpEjection" + std::to_string(i) + ".png");
+        _textures["Edown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownEjection" + std::to_string(i) + ".png");
         _textures["Eleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["Eleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftEjection" + std::to_string(i) + ".png");
         _textures["Eup" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Eup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownEjection" + std::to_string(i) + ".png");
+        _textures["Eup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpEjection" + std::to_string(i) + ".png");
         _textures["Eright" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["Eright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightEjection" + std::to_string(i) + ".png");
+
+        _textures["Ddown" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Ddown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownDeath" + std::to_string(i) + ".png");
+        _textures["Dleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Dleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftDeath" + std::to_string(i) + ".png");
+        _textures["Dup" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Dup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpDeath" + std::to_string(i) + ".png");
+        _textures["Dright" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Dright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightDeath" + std::to_string(i) + ".png");
+
+        _textures["Hdown" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Hdown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownHurt" + std::to_string(i) + ".png");
+        _textures["Hleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Hleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftHurt" + std::to_string(i) + ".png");
+        _textures["Hup" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Hup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpHurt" + std::to_string(i) + ".png");
+        _textures["Hright" + std::to_string(i)] = std::make_shared<sf::Texture>();
+        _textures["Hright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightHurt" + std::to_string(i) + ".png");
     }
 }
 
 void STrantorian::update(MapT *cache)
 {
-    if (this->_animation == INCANTATION) {
+    if (this->_animation == DEATH) {
+        if (this->_rect.left >= 10 * 48) {
+            std:: cout << "remove trantorian" << std::endl;
+            cache->removeTrantorian(this->_id);
+        }
+        else
+            this->_rect.left += 48;
+    } else if (this->_animation == INCANTATION) {
         if (this->_rect.left >= 480)
             this->_rect.left = 48;
         else
@@ -124,7 +149,10 @@ void STrantorian::moveSprite(MapT *cache)
             this->_lastAnimation = this->_animation;
             if (this->_lastAnimation != this->_animation)
                 this->_rect.left = 0;
-            if (t.getCanEvolve() == true) {
+            if (t.getDeath() == true) {
+                std::cout << "death" << std::endl;
+                this->_animation = DEATH;
+            } else if (t.getCanEvolve() == true) {
                 this->_animation = INCANTATION;
             } else if (t.getEjection() == true) {
                 this->_animation = EJECTION;
@@ -228,6 +256,36 @@ void STrantorian::setOrientation(int orientation)
                 break;
             case 4:
                 this->setSpriteTexture(this->_textures["Eleft" + std::to_string(this->_level)]);
+                break;
+        }
+    } else if (this->_animation == DEATH) {
+        switch (orientation) {
+            case 1:
+                this->setSpriteTexture(this->_textures["Dup" + std::to_string(this->_level)]);
+                break;
+            case 2:
+                this->setSpriteTexture(this->_textures["Dright" + std::to_string(this->_level)]);
+                break;
+            case 3:
+                this->setSpriteTexture(this->_textures["Ddown" + std::to_string(this->_level)]);
+                break;
+            case 4:
+                this->setSpriteTexture(this->_textures["Dleft" + std::to_string(this->_level)]);
+                break;
+        }
+    } else if (this->_animation == HURT) {
+        switch (orientation) {
+            case 1:
+                this->setSpriteTexture(this->_textures["Hup" + std::to_string(this->_level)]);
+                break;
+            case 2:
+                this->setSpriteTexture(this->_textures["Hright" + std::to_string(this->_level)]);
+                break;
+            case 3:
+                this->setSpriteTexture(this->_textures["Hdown" + std::to_string(this->_level)]);
+                break;
+            case 4:
+                this->setSpriteTexture(this->_textures["Hleft" + std::to_string(this->_level)]);
                 break;
         }
     }

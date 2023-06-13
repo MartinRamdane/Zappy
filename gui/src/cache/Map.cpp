@@ -202,3 +202,12 @@ void MapT::setTrantorianEjection(int id, bool ejecting)
         }
     }
 }
+
+void MapT::setTrantorianDeath(int id)
+{
+    for (int i = 0; i < this->trantorians.size(); i++) {
+        if (this->trantorians[i].getId() == id) {
+            this->trantorians[i].setDeath();
+        }
+    }
+}
