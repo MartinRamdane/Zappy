@@ -11,6 +11,7 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
 {
     if (strcmp(cmd, "Forward") == 0) {
         forward_command(server, task->client);
+        printf("[DEBUG]: id: %d x: %d y: %d\n", task->client->socket, task->client->player->x, task->client->player->y);
         send_new_player_pos(task->client, server);
     }
     if (strcmp(cmd, "Right") == 0) {
@@ -40,9 +41,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strcmp(cmd, "Incantation") == 0) {
         incantation_command(task->client, server); return;
     }
-    if (strcmp(cmd, "Respawn") == 0) {
-        respawn_task(server); return;
-    }
+    // if (strcmp(cmd, "Respawn") == 0) {
+    //     respawn_task(server); return;
+    // }
     if (strcmp(cmd, "Fork") == 0) {
         fork_command(task->client, server); return;
     }

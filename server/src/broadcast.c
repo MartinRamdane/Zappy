@@ -28,14 +28,18 @@ l_tile *get_all_listen_tiles_position(server_t *server, player *player)
 
 int *compare_diff(int **diff)
 {
-    int *res = malloc(sizeof(int) * 2);
+    int *res = malloc(sizeof(int) * 4);
     res[0] = 1000; res[1] = 1000;
     for (int i = 0; i < 8; i++) {
-        if (diff[i][0] < res[0])
-            res[0] = diff[i][0];
-        if (diff[i][0] == res[0]) {
-            if (diff[i][1] < res[1])
+        printf("diff[%d][0] = %d diff[%d][1] = %d\n", i, diff[i][0], i, diff[i][1]);
+        if (diff[i][0] < res[0]) {
+            res[0] = diff[i][0]; res[2] = diff[i][2];
+        } if (diff[i][0] == res[0]) {
+            printf("same y: %d\n", diff[i][0]);
+            if (diff[i][1] < res[1]) {
                 res[1] = diff[i][1];
+                res[3] = diff[i][3];
+            }
         }
     }
     return res;
@@ -44,24 +48,33 @@ int *compare_diff(int **diff)
 int compare_listen_tiles(l_tile *listen_tiles, int x, int y)
 {
     int **diff = malloc(sizeof(int *) * 8);
+    int **target_tiles = malloc(sizeof(int *) * 8);
     for (int i = 0; i < 8; i++)
         if (listen_tiles[i].x == x && listen_tiles[i].y == y)
             return listen_tiles[i].id;
-    for (int i = 0; i < 8; i++)
-        diff[i] = malloc(sizeof(int) * 2);
     for (int i = 0; i < 8; i++) {
-        if (listen_tiles[i].x > x)
-            diff[i][0] = listen_tiles[i].x - x;
-        else
-            diff[i][0] = x - listen_tiles[i].x;
-        if (listen_tiles[i].y > y)
-            diff[i][1] = listen_tiles[i].y - y;
-        else
-            diff[i][1] = y - listen_tiles[i].y;
+        diff[i] = malloc(sizeof(int) * 2);
+        target_tiles[i] = malloc(sizeof(int) * 4);
+    }
+    for (int i = 0; i < 8; i++) {
+        if (listen_tiles[i].x > x) {
+            diff[i][0] = listen_tiles[i].x - x; diff[i][2] = 0;
+        } else {
+            diff[i][0] = x - listen_tiles[i].x; diff[i][2] = 1;
+        } if (listen_tiles[i].y > y) {
+            diff[i][1] = listen_tiles[i].y - y; diff[i][3] = 0;
+        } else {
+            diff[i][1] = y - listen_tiles[i].y; diff[i][3] = 1;
+        }
     }
     int *res = compare_diff(diff);
+    int new_x = 0, new_y = 0;
+    if (res[2] == 1) new_x = x - res[0];
+    else new_x = x + res[0];
+    if (res[3] == 1) new_y = y - res[1];
+    else new_y = y + res[1];
     for (int i = 0; i < 8; i++) {
-        if (listen_tiles[i].x == res[0] && listen_tiles[i].y == res[1])
+        if (listen_tiles[i].x == new_x && listen_tiles[i].y == new_y)
             return listen_tiles[i].id;
     }
     return -1;
@@ -70,7 +83,11 @@ int compare_listen_tiles(l_tile *listen_tiles, int x, int y)
 void send_broadcast(server_t *server, client_t *sender, client_t *client, char *msg)
 {
     l_tile *listen_tiles = get_all_listen_tiles_position(server, client->player);
-    int id = compare_listen_tiles(listen_tiles, sender->player->x, sender->player->y);
+    int id = 0;
+    if (client->player->x != sender->player->x ||
+            client->player->y != sender->player->y) {
+        id = compare_listen_tiles(listen_tiles, sender->player->x, sender->player->y);
+    }
     char *to_send = malloc(sizeof(char) * MAX_BODY_LENGTH);
     sprintf(to_send, "message %d, %s\n", id, msg);
     send(client->socket, to_send, strlen(to_send), 0);
