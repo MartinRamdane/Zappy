@@ -292,14 +292,6 @@ class Ai:
             self.path.append("Forward\n")
             return
         self.path += getPathtoObject(nearestIncantation)
-        nbLinemate = 0
-        for item in self.objectsAround[nearestIncantation]:
-            if item == "linemate":
-                if nbLinemate >= 1:
-                    self.path.append("Take " + item + "\n")
-                nbLinemate += 1
-            elif item != "player" and item != "linemate":
-                self.path.append("Take " + item + "\n")
         self.path.append("Look\n")
         self.path.append("Incantation\n")
 
