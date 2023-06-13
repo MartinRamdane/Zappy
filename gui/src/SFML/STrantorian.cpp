@@ -29,7 +29,7 @@ STrantorian::~STrantorian()
 void STrantorian::createSprite()
 {
 
-    for (int i = 1; i != 8; i++) {
+    for (int i = 1; i != 9; i++) {
         _textures["down" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["down" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle" + std::to_string(i) + ".png");
         _textures["left" + std::to_string(i)] = std::make_shared<sf::Texture>();
