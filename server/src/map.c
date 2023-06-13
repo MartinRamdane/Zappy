@@ -57,10 +57,10 @@ void fill_map(server_t infos, tile **map)
     int *r = get_remaining_resources(ratio, infos);
     for (int i = 0; i < infos.width; i++) {
         for (int j = 0; j < infos.height; j++) {
-            map[i][j].food = q[0]; map[i][j].linemate = q[1];
-            map[i][j].deraumere = q[2]; map[i][j].sibur = q[3];
-            map[i][j].mendiane = q[4]; map[i][j].phiras = q[5];
-            map[i][j].thystame = q[6];
+            map[i][j].food += q[0]; map[i][j].linemate += q[1];
+            map[i][j].deraumere += q[2]; map[i][j].sibur += q[3];
+            map[i][j].mendiane += q[4]; map[i][j].phiras += q[5];
+            map[i][j].thystame += q[6];
         }
     }
     srand(time(0));

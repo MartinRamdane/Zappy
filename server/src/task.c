@@ -86,8 +86,7 @@ double calculate_time_for_task(server_t *server, char *buffer)
     else if (strcmp(buffer, "Incantation") == 0)
         return diff + (300.0 / server->freq);
     else if (strcmp(buffer, "Respawn") == 0) {
-        printf("respawn task\n");
-        return diff + (4.0 / server->freq);
+        return diff + (20.0 / server->freq);
     }
     else return 0.0;
 }
