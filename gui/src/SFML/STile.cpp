@@ -114,15 +114,42 @@ void STile::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
 
 void STile::draw(sf::RenderWindow &window, sf::View &view)
 {
-    window.draw(this->_sprite);
-    if (this->_eggs.size() > 0) {
-        for (auto &egg : this->_eggs) {
-            egg->draw(window, view);
-        }
+    std::vector<std::pair<int, IEntity*>> sortedGems;
+    std::vector<std::pair<int, IEntity*>> sortedEggs;
+
+    for (auto &gem : this->_gems) {
+        SGem tmp = dynamic_cast<SGem&>(*gem);
+        if (tmp.getType() != FOOD)
+            sortedGems.push_back(std::make_pair(gem->getSpritePosition().y, gem.get()));
     }
+
+    for (auto &egg : this->_eggs) {
+        sortedEggs.push_back(std::make_pair(egg->getSpritePosition().y, egg.get()));
+    }
+
+    std::sort(sortedGems.begin(), sortedGems.end(), [](const auto& a, const auto& b) {
+        return a.first < b.first;
+    });
+
+    std::sort(sortedEggs.begin(), sortedEggs.end(), [](const auto& a, const auto& b) {
+        return a.first < b.first;
+    });
+
+    window.draw(this->_sprite);
     if (this->_gems.size() > 0) {
         for (auto &gem : this->_gems) {
-            gem->draw(window, view);
+            SGem tmp = dynamic_cast<SGem&>(*gem);
+            if (tmp.getType() == FOOD)
+                gem->draw(window, view);
+        }
+
+        for (auto &gem : sortedGems) {
+            gem.second->draw(window, view);
+        }
+    }
+    if (this->_eggs.size() > 0) {
+        for (auto &egg : sortedEggs) {
+            egg.second->draw(window, view);
         }
     }
 }

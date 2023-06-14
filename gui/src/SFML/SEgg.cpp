@@ -20,10 +20,9 @@ void SEgg::createSprite()
 {
     this->_texture.loadFromFile("gui/assets/trantorian/egg.png");
     this->_sprite.setTexture(this->_texture);
-    this->_sprite.setScale(sf::Vector2f(0.25, 0.25));
-    this->_rect = sf::IntRect(0, 0, 160, 160);
+    this->_sprite.setScale(sf::Vector2f(1.3, 1.3));
+    this->_rect = sf::IntRect(0, 0, 40, 39);
     this->setSpriteRect(this->_rect);
-    this->setSpriteRotation(-45);
 }
 
 void SEgg::setSpriteRect(sf::IntRect rect)
@@ -63,11 +62,28 @@ void SEgg::draw(sf::RenderWindow &window, sf::View &view)
 
 void SEgg::eventHandler(sf::Event event, sf::RenderWindow &window)
 {
-
 }
 
 void SEgg::update(MapT *cache)
 {
+    std::vector<Egg> eggs = cache->getEggs();
+    for (auto &egg : eggs) {
+        if (egg.getId() == this->_id) {
+            if (egg.getHatched() == true && this->_mode == EggMode::HATCHING) {
+                if (this->_rect.left < 120) {
+                    this->_rect.left += 40;
+                } else if (this->_rect.left == 120 && this->_rect.top < 39 * 3) {
+                    this->_rect.left = 0;
+                    this->_rect.top += 39;
+                } else if (this->_rect.left == 120 && this->_rect.top == 39 * 3) {
+                    this->_rect.left = 120;
+                    this->_rect.top = 39 * 3;
+                    this->_mode = EggMode::HATCHED;
+                }
+            }
+        }
+    }
+    this->setSpriteRect(this->_rect);
 }
 
 void SEgg::setId(int id)

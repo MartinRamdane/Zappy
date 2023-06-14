@@ -8,6 +8,7 @@
 #pragma once
 
 #include "IEntity.hpp"
+#include "../cache/Egg.hpp"
 
 class SEgg : public IEntity {
     public:
@@ -26,7 +27,7 @@ class SEgg : public IEntity {
         sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
         void moveSprite(MapT *cache){};
         void setId(int id);
-        sf::Vector2f getSpritePosition(){return sf::Vector2f(0, 0);};
+        sf::Vector2f getSpritePosition(){return this->_sprite.getPosition();};
 
 
     protected:
