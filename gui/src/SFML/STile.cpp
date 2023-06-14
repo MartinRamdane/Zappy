@@ -134,13 +134,17 @@ void STile::draw(sf::RenderWindow &window, sf::View &view)
     std::sort(sortedEggs.begin(), sortedEggs.end(), [](const auto& a, const auto& b) {
         return a.first < b.first;
     });
-
+    int drawed_food = 0;
     window.draw(this->_sprite);
     if (this->_gems.size() > 0) {
         for (auto &gem : this->_gems) {
             SGem tmp = dynamic_cast<SGem&>(*gem);
-            if (tmp.getType() == FOOD)
-                gem->draw(window, view);
+            if (tmp.getType() == FOOD) {
+                if (drawed_food < 2) {
+                    gem->draw(window, view);
+                    drawed_food++;
+                }
+            }
         }
 
         for (auto &gem : sortedGems) {
