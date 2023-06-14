@@ -10,8 +10,7 @@
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name)
 {
     cli->player = malloc(sizeof(player));
-    cli->player->x = 0; // TODO: Check if the start position is random or not
-    cli->player->y = 0; cli->player->level = 1;
+    cli->player->level = 1;
     cli->player->inv = malloc(sizeof(inventory));
     cli->player->inv->food = 10; cli->player->inv->linemate = 0;
     cli->player->inv->deraumere = 0; cli->player->inv->sibur = 0;
@@ -20,6 +19,7 @@ void generate_player(server_t *server, client_t *cli, int socket, char *team_nam
     cli->player->orientation = 'N'; cli->player->id = server->player_id;
     cli->player->team_name = strdup(team_name); cli->player->socket = socket;
     cli->player->state = ALIVE; cli->player->uid = strdup(cli->uid);
+    spawn_player_on_egg(cli, server);
     server->game->map[0][0].players = malloc(sizeof(player_queue));
     player_queue *p_queue = malloc(sizeof(player_queue));
     p_queue->player = cli->player; server->player_id++;

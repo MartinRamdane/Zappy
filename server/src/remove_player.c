@@ -16,6 +16,7 @@ void remove_client(int socket, server_t *s_infos)
                 remove_player_from_tile(tmp, s_infos);
                 remove_task_of_player(tmp, s_infos);
                 send_player_death(tmp, s_infos);
+                regenerate_eggs(s_infos);
             }
             remove_client_from_team(tmp, s_infos);
             if (tmp->socket != -1)

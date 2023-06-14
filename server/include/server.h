@@ -62,6 +62,7 @@ typedef struct egg {
     int id;
     int parent_id;
     char *team_name;
+    bool is_default;
     LIST_ENTRY(egg) next;
 } t_egg;
 
@@ -98,7 +99,6 @@ typedef struct tile {
     int phiras;
     int thystame;
     struct player_listhead player_head;
-    struct eggs_list eggs_head;
     player_queue *players;
 } tile;
 
@@ -151,6 +151,7 @@ typedef struct server_s {
     struct team_listhead team_head;
     struct task_listhead task_head;
     struct timespec server_time;
+    struct eggs_list eggs_head;
     client_t *clients;
     game_t *game;
     task_t *tasks;
@@ -309,3 +310,10 @@ void send_egg_death_to_guis(server_t *server, t_egg *egg);
 //FORK
 void fork_command(client_t *client, server_t *server);
 void remove_eggs_on_tile(server_t *server, int x, int y);
+
+//EGGS
+void generate_eggs(server_t *s_infos);
+void spawn_player_on_egg(client_t *cli, server_t *server);
+void send_egg_connection_to_guis(server_t *server, t_egg *egg);
+int count_default_eggs(server_t *s_infos, char *team);
+void regenerate_eggs(server_t *s_infos);
