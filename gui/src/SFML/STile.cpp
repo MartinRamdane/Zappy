@@ -169,6 +169,8 @@ void STile::createGem(std::string name, int quantity)
             gem = std::make_unique<SGem>(PHIRAS);
         } else if (name == "thystame") {
             gem = std::make_unique<SGem>(THYSTAME);
+        } else if (name == "food") {
+            gem = std::make_unique<SGem>(FOOD);
         }
 
         if (gem) {

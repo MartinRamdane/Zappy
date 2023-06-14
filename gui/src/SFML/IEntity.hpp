@@ -42,7 +42,8 @@ class IEntity {
             SIBUR,
             MENDIANE,
             PHIRAS,
-            THYSTAME
+            THYSTAME,
+            FOOD
         };
 
         enum EggMode {

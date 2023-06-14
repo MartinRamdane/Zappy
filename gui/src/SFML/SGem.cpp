@@ -38,6 +38,9 @@ void SGem::createSprite()
         case THYSTAME:
             this->_texture.loadFromFile("gui/assets/gems/thystame.png");
             break;
+        case FOOD:
+            this->_texture.loadFromFile("gui/assets/gems/food.png");
+            break;
         default:
             break;
     }
@@ -89,6 +92,8 @@ void SGem::eventHandler(sf::Event event, sf::RenderWindow &window)
 
 void SGem::update(MapT *cache)
 {
+    if (this->_type == FOOD)
+        return;
     this->_rect.left += 16;
     if (this->_rect.left >= 16 * 4)
         this->_rect.left = 0;

@@ -60,6 +60,7 @@ int Tile::getNbrTotalGems()
     nbr += stock.mendiane;
     nbr += stock.phiras;
     nbr += stock.thystame;
+    nbr += stock.food;
     return (nbr);
 }
 
