@@ -40,7 +40,7 @@ class Level():
 
     def checkTileForIncanation(self, tile, level):
         nbPlayersOnTile = self.getNbElemOnTile(tile, "player")
-        if nbPlayersOnTile != self.matesNeeded[level]:
+        if nbPlayersOnTile < self.matesNeeded[level]:
             return False
         for i in self.getLevel[level]:
             nbElemForLevel = self.getNbElemForLevel(level, i)

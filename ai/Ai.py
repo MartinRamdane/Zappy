@@ -257,7 +257,7 @@ class Ai:
                 self.nbMatesAvailableForIncantation += 1
                 print("NB MATES: " + str(self.nbMatesAvailableForIncantation), file = self.sourceFile)
                 print("NB MATES NEEDED: " + str(self.levelManager.matesNeeded[self.level + 1]), file = self.sourceFile)
-                if self.nbMatesAvailableForIncantation >= self.levelManager.matesNeeded[self.level + 1]:
+                if self.nbMatesAvailableForIncantation >= self.levelManager.matesNeeded[self.level + 1] and self.haveStones and not self.tosendJoin:
                     print("LALALAL", file = self.sourceFile)
                     self.path = ["Broadcast " + encrypt("Join me for level " + str(self.level + 1), ord(self.teamName[0])) + "\n"]
                     self.prepareIncantation = True
@@ -267,7 +267,8 @@ class Ai:
         print("SKip send: " + str(self.skipSend), file = self.sourceFile)
 
     def other(self, receive):
-        if self.message == "Incanation\n" and "ko" in receive:
+        if self.elevationInProgress and "ko" in receive:
+            print("INCANTATION FAILED", file = self.sourceFile)
             self.path = []
             self.path.append("Look\n")
             self.elevationInProgress = False
@@ -313,7 +314,7 @@ class Ai:
         self.skipSend = False
         print("Receive to " + self.teamName + ": " + receive, file = self.sourceFile)
         reponseType = getTypeOfReponse(receive)
-        if self.elevationInProgress and reponseType != Type.LEVELUPDATING and reponseType != Type.DEAD:
+        if (self.elevationInProgress and reponseType != Type.LEVELUPDATING and reponseType != Type.DEAD and reponseType != Type.ELEVATION and reponseType != Type.OTHER):
             return
         self.getCommand(reponseType)(receive)
 
@@ -336,6 +337,7 @@ class Ai:
         elif not self.canIncantation and not self.waitingForReponse:
             print("LA 2",  file = self.sourceFile)
             if self.nbFork < 1 and self.nbMatesAvailable < self.levelManager.matesNeeded[self.level + 1]:
+                print("CONNNECT NBR", file = self.sourceFile)
                 self.path.append("Connect_nbr\n")
             self.haveBroadcast = False
             self.waitingForReponse = False
@@ -382,7 +384,10 @@ class Ai:
             stonesNeeded = self.levelManager.getLevel[self.level + 1]
             take = False
             print("PATH la: ", self.path, file = self.sourceFile)
-            self.path = []
+            if ("Broadcast " + encrypt(("Yes I'm level " + str(self.level) + "\n"), ord(self.teamName[0]))) in self.path:
+                self.path = [encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0])) + "\n"]
+            else:
+                self.path = []
             for stone in stonesNeeded:
                 if stone in self.inventory and self.inventory[stone] >= checkNbElemInList(stonesNeeded, stone):
                     continue
