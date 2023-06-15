@@ -8,6 +8,8 @@ class Type(Enum):
     MESSAGE = 5
     OTHER = 6
     DEAD = 7
+    CONNECTED = 8
+    EJECT = 9
 
 def getTypeOfReponse(receive) -> Type:
     if receive == "dead":
@@ -23,6 +25,10 @@ def getTypeOfReponse(receive) -> Type:
             return Type.INVENTORY
         else:
             return Type.LOOK
+    if receive.isdigit() and len(receive) == 1:
+        return Type.CONNECTED
+    if "eject" in receive:
+        return Type.EJECT
     return Type.OTHER
 
 def getNearestObject(name, objects):

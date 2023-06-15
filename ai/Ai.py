@@ -200,6 +200,9 @@ class Ai:
                 if not self.askForLevel and not ("Broadcast " + encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0])) + "\n") in self.path:
                     encode = encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0]))
                     self.path.insert(0, "Broadcast " + encode + "\n")
+                    self.askForLevel = True
+                    self.haveBroadcast = True
+                    self.waitingForReponse = True
                 self.nbMatesAvailable += 1
                 if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
                     self.canIncantation = True
@@ -216,14 +219,22 @@ class Ai:
                 self.canIncantation = True
                 self.nbMatesAvailable = 1
                 self.waitingForReponse = False
-        if "I have all stones for level" in decrypted and not self.haveStones:
+        if "I have all stones for level" in decrypted:
             tmp = decrypted.split(" ")
             wantedLevel = int(tmp[7])
             if wantedLevel == self.level + 1 and not self.prepareIncantation:
                 self.path = []
-                if (not self.toJoin or ("I'm coming to join you for level " + str(self.level + 1) + "\n") in self.path) and not self.tosendJoin and not self.haveStones:
-                    self.path.append("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
-                    self.path.append("Inventory\n")
+                food = int(tmp[9])
+                if (not self.toJoin or ("I'm coming to join you for level " + str(self.level + 1) + "\n") in self.path) and not self.tosendJoin:
+                    tmp = False
+                    if self.haveStones:
+                        if food > self.inventory["food"]:
+                            tmp = True
+                    else:
+                        tmp = True
+                    if tmp:
+                        self.path.append("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
+                        self.path.append("Inventory\n")
         if "Join me for level" in decrypted:
             tmp = decrypted.split(" ")
             wantedLevel = int(tmp[5])
@@ -256,6 +267,11 @@ class Ai:
         print("SKip send: " + str(self.skipSend), file = self.sourceFile)
 
     def other(self, receive):
+        if self.message == "Incanation\n" and "ko" in receive:
+            self.path = []
+            self.path.append("Look\n")
+            self.elevationInProgress = False
+            self.skipSend = False
         if self.message == "Fork\n" and receive == "ok":
             self.canFork = True
         if not self.path:
@@ -266,6 +282,19 @@ class Ai:
         print("Team " + self.debug + " level " + str(self.level) + " is dead")
         sys.exit(0)
 
+    def connected(self, receive):
+        if int(receive) > 0:
+            self.canFork = True
+        elif self.nbFork < 1:
+            self.path.append("Fork\n")
+            print("FORK from " + self.debug + ", I'm level " + str(self.level))
+        self.nbFork += 1
+
+    def eject(self, receive):
+        self.path = []
+        self.elevationInProgress = False
+        self.skipSend = False
+
     def getCommand(self,case):
         switch = {
             Type.INVENTORY: self.getInventory,
@@ -274,7 +303,9 @@ class Ai:
             Type.LEVELUPDATING: self.levelUpdating,
             Type.MESSAGE: self.ReceiveMessage,
             Type.OTHER: self.other,
-            Type.DEAD: self.dead
+            Type.DEAD: self.dead,
+            Type.CONNECTED: self.connected,
+            Type.EJECT: self.eject
         }
         return switch.get(case, lambda: "Invalid type")
 
@@ -305,9 +336,7 @@ class Ai:
         elif not self.canIncantation and not self.waitingForReponse:
             print("LA 2",  file = self.sourceFile)
             if self.nbFork < 1 and self.nbMatesAvailable < self.levelManager.matesNeeded[self.level + 1]:
-                self.path.append("Fork\n")
-                self.nbFork += 1
-                print("FORK from " + self.debug + ", I'm level " + str(self.level))
+                self.path.append("Connect_nbr\n")
             self.haveBroadcast = False
             self.waitingForReponse = False
         elif not self.waitingForReponse:
@@ -348,7 +377,7 @@ class Ai:
             if val == True and not self.tosendJoin:
                 print("HE BROADCAST", file = self.sourceFile)
                 self.path = ["Look\n"]
-                self.path.insert(0, "Broadcast " + encrypt("I have all stones for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
+                self.path.insert(0, "Broadcast " + encrypt("I have all stones for level " + str(self.level + 1) + " food " + str(self.inventory["food"]), ord(self.teamName[0])) + "\n")
                 return
             stonesNeeded = self.levelManager.getLevel[self.level + 1]
             take = False
