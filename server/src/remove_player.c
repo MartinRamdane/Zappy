@@ -52,7 +52,7 @@ void remove_task_of_player(client_t *cli, server_t *s_infos)
 {
     task_t *tmp = NULL;
     LIST_FOREACH(tmp, &s_infos->task_head, next) {
-        if (strcmp(tmp->client->uid, cli->player->uid) == 0) {
+        if (tmp->client && strcmp(tmp->client->uid, cli->player->uid) == 0) {
             LIST_REMOVE(tmp, next);
             continue;
         }
