@@ -62,6 +62,9 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
             tmp->clients++; cli->team_name = strdup(team);
             send(cli->socket, buff, strlen(buff), 0);
             generate_player(s_infos, cli, cli->socket, team);
+            char *buffer_life = strdup("LifeCycle");
+            double task_food_time = calculate_time_for_task(s_infos, buffer_life);
+            add_task(s_infos, buffer_life, task_food_time, cli);
             sprintf(buff, "%d %d\n", s_infos->width, s_infos->height);
             send(cli->socket, buff, strlen(buff), 0);
             send_new_player_connected(s_infos, cli); return 1;

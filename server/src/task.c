@@ -85,9 +85,10 @@ double calculate_time_for_task(server_t *server, char *buffer)
     else if (strstr(buffer, "Set")) return diff + (7.0 / server->freq);
     else if (strcmp(buffer, "Incantation") == 0)
         return diff + (300.0 / server->freq);
-    else if (strcmp(buffer, "Respawn") == 0) {
+    else if (strcmp(buffer, "Respawn") == 0)
         return diff + (20.0 / server->freq);
-    }
+    else if (strcmp(buffer, "LifeCycle") == 0)
+        return diff + (126.0 / server->freq);
     else return 0.0;
 }
 

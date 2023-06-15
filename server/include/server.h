@@ -205,6 +205,7 @@ int get_available_slots_in_team(server_t *s_infos, char *team);
 int does_team_has_space(server_t *s_infos, char *team);
 int does_team_exists(server_t *s_infos, char *team);
 void remove_client_from_team(client_t *cli, server_t *s_infos);
+void life_cycle_command(server_t *server, client_t *client);
 
 // MAP
 tile **generate_map(server_t *infos);
