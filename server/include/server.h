@@ -317,3 +317,4 @@ void spawn_player_on_egg(client_t *cli, server_t *server);
 void send_egg_connection_to_guis(server_t *server, t_egg *egg);
 int count_default_eggs(server_t *s_infos, char *team);
 void regenerate_eggs(server_t *s_infos);
+int count_all_eggs(server_t *s_infos, char *team);

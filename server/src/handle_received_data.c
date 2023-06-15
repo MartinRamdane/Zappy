@@ -26,7 +26,7 @@ int check_is_ai_commands(char *buffer)
 int check_instant_commands(char *buffer, client_t *client, server_t *server)
 {
     if (strcmp(buffer, "Connect_nbr") == 0) {
-        int nb = get_available_slots_in_team(server, client->team_name);
+        int nb = count_all_eggs(server, client->team_name);
         char *buff = malloc(sizeof(char) * 100);
         memset(buff, 0, 100);
         sprintf(buff, "%d\n", nb);

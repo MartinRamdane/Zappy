@@ -57,3 +57,15 @@ int count_default_eggs(server_t *s_infos, char *team)
     }
     return count;
 }
+
+int count_all_eggs(server_t *s_infos, char *team)
+{
+    t_egg *egg = NULL;
+    int count = 0;
+    LIST_FOREACH(egg, &s_infos->eggs_head, next) {
+        if (strcmp(egg->team_name, team) == 0) {
+            count++;
+        }
+    }
+    return count;
+}
