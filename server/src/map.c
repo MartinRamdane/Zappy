@@ -73,5 +73,3 @@ void fill_map(server_t infos, tile **map)
     put_thystame_resource(infos, map, r[6]);
     free(ratio);
 }
-
-
