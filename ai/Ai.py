@@ -327,7 +327,7 @@ class Ai:
         self.path.append("Look\n")
         self.path.append("Incantation\n")
 
-    def makeIncantationLevel3(self):
+    def makeIncantationOtherLevels(self):
         print("INCANTE 3", file = self.sourceFile)
         if not self.haveBroadcast and not self.waitingForReponse:
             print("LA 1", file = self.sourceFile)
@@ -407,29 +407,9 @@ class Ai:
                 self.path.append("Inventory\n")
             print("PATH la: ", self.path, file = self.sourceFile)
 
-    def makeIncantationLevel4(self):
-        pass
-
-    def makeIncantationLevel5(self):
-        pass
-
-    def makeIncantationLevel6(self):
-        pass
-
-    def makeIncantationLevel7(self):
-        pass
-
-    def makeIncantationLevel8(self):
-        pass
-
     def makeIncantation(self):
-        switch = {
-            2: self.makeIncantationLevel2,
-            3: self.makeIncantationLevel3,
-            4: self.makeIncantationLevel3,
-            5: self.makeIncantationLevel3,
-            6: self.makeIncantationLevel3,
-            7: self.makeIncantationLevel3,
-            8: self.makeIncantationLevel3
-        }
-        return switch.get(self.level + 1, lambda: "Invalid level")
+        if self.level + 1 == 2:
+            return self.makeIncantationLevel2
+        else:
+            return self.makeIncantationOtherLevels
+
