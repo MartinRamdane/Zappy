@@ -23,7 +23,21 @@ void send_egg_death_to_guis(server_t *server, t_egg *egg)
 {
     client_t *tmp = NULL;
     char *buff = malloc(sizeof(char) * 100);
+    memset(buff, 0, 100);
     sprintf(buff, "edi %d\n", egg->id);
+    LIST_FOREACH(tmp, &server->head, next) {
+        if (tmp->gui_player != NULL)
+            send(tmp->socket, buff, strlen(buff), 0);
+    }
+    free(buff);
+}
+
+void send_egg_connection_to_guis(server_t *server, t_egg *egg)
+{
+    client_t *tmp = NULL;
+    char *buff = malloc(sizeof(char) * 100);
+    memset(buff, 0, 100);
+    sprintf(buff, "ebo %d\n", egg->id);
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL)
             send(tmp->socket, buff, strlen(buff), 0);

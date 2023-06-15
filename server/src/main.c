@@ -70,6 +70,7 @@ int main(int ac, char **av)
     char *buffer_respawn = strdup("Respawn");
     double task_time = calculate_time_for_task(s_infos, buffer_respawn);
     add_server_task(s_infos, buffer_respawn, task_time);
+    generate_eggs(s_infos);
     loop_server(s_infos);
     return 0;
 }
