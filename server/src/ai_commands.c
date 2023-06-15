@@ -41,9 +41,9 @@ void send_task_response(server_t *server, task_t *task, char *cmd)
     if (strcmp(cmd, "Incantation") == 0) {
         incantation_command(task->client, server); return;
     }
-    // if (strcmp(cmd, "Respawn") == 0) {
-    //     respawn_task(server); return;
-    // }
+    if (strcmp(cmd, "Respawn") == 0) {
+        respawn_task(server); return;
+    }
     if (strcmp(cmd, "Fork") == 0) {
         fork_command(task->client, server); return;
     }

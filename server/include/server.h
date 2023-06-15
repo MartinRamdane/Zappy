@@ -208,6 +208,8 @@ void remove_client_from_team(client_t *cli, server_t *s_infos);
 // MAP
 tile **generate_map(server_t *infos);
 void fill_map(server_t infos, tile **map);
+void respawn_map(server_t infos, tile **map);
+void respawn_map_2(server_t infos, tile **map, int *resources);
 
 // MAP RESOURCES
 int *get_resources_quantities(int *ratio, server_t infos);
@@ -220,6 +222,7 @@ void put_mendiane_resource(server_t infos, tile **map, int r);
 void put_phiras_resource(server_t infos, tile **map, int r);
 void put_thystame_resource(server_t infos, tile **map, int r);
 void respawn_task(server_t *server);
+int *take_all_resources_from_map(server_t infos);
 
 // TASK
 void add_task(server_t *server, char *cmd, double time, client_t *cli);
