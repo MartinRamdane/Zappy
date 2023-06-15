@@ -49,7 +49,7 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
         generate_gui_player(cli, cli->socket, s_infos); return 1;
     }
     if (cli->team_name != NULL) return 0;
-    int available_slots = get_available_slots_in_team(s_infos, team) - 1;
+    int available_slots = count_all_eggs(s_infos, team);
     char *buff = malloc(sizeof(char) * 100);
     sprintf(buff, "%d\n", available_slots);
     if (does_team_exists(s_infos, team) == 0) return -1;
