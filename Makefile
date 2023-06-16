@@ -18,6 +18,12 @@ COLOUR_RED=\033[0;31m
 COLOUR_BLUE=\033[0;34m
 END_COLOR=\033[0m
 
+compile_gui = cd gui && make
+
+ifeq ($(shell uname -s),Darwin)
+	compile_gui = $(shell cd gui && mkdir build && cd build && cmake .. && cmake --build .)
+endif
+
 all: compile
 
 # Build target
@@ -29,9 +35,9 @@ z_server:
 	@echo "$(COLOUR_GREEN)Server build$(END_COLOR)"
 
 z_gui:
-	cd gui && make
+	$(compile_gui)
 	mv gui/$(CLIENT_NAME) .
-	@echo "$(COLOUR_RED)gui: Add make command in main makefile$(END_COLOR)"
+	@echo "$(COLOUR_GREEN)Gui build$(COLOUR_GREEN)"
 
 z_ai:
 	cp ai/main.py ./
@@ -42,6 +48,7 @@ z_ai:
 # Clean target
 clean:
 	@rm -f *~ | rm -f *.o
+	@rm -rf gui/build
 	@echo "$(COLOUR_GREEN)Clean done.$(END_COLOR)"
 
 fclean: clean
