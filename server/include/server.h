@@ -150,7 +150,8 @@ typedef struct server_s {
     struct list_head head;
     struct team_listhead team_head;
     struct task_listhead task_head;
-    struct timespec server_time;
+    struct timeval *tv;
+    double old_timeout;
     struct eggs_list eggs_head;
     client_t *clients;
     game_t *game;
@@ -279,6 +280,10 @@ void debug_print_player_inventory(client_t *cli);
 //TIME
 double calculate_time_for_task(server_t *server, char *buffer);
 void change_time_unit(client_t *cli, server_t *server, char *buff);
+task_t *find_task_with_lowest_time(server_t *server);
+void calculate_timeout_val(server_t *server);
+void recalculate_task_time(server_t *server);
+void recalculate_task_time_after_timeout(server_t *server);
 
 //GUI COMMANDS
 int check_gui_commands(char *buffer, client_t *client, server_t *server);

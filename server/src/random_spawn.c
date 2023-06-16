@@ -22,6 +22,7 @@ void spawn_player_on_egg(client_t *cli, server_t *server)
                 send_egg_connection_to_guis(server, egg);
             }
             LIST_REMOVE(egg, next);
+            free(egg);
             return;
         }
     }

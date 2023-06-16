@@ -59,8 +59,10 @@ void remove_player_from_queue(tile *tile, player *player)
 {
     player_queue *tmp = NULL;
     LIST_FOREACH(tmp, &tile->player_head, next) {
-        if (strcmp(tmp->player->uid, player->uid) == 0) {
+        if (tmp->player->uid != NULL && strcmp(tmp->player->uid, player->uid) == 0) {
             LIST_REMOVE(tmp, next);
+            free(tmp);
+            break;
         }
     }
 }

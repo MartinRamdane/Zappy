@@ -69,43 +69,39 @@ bool check_task_nb(server_t *server, client_t *client)
 
 double calculate_time_for_task(server_t *server, char *buffer)
 {
-    struct timespec ts;
-    clock_gettime(0, &ts);
-    time_t diff = ts.tv_sec - server->server_time.tv_sec;
-    if (strcmp(buffer, "Forward") == 0) return diff + (7.0 / server->freq);
-    else if (strcmp(buffer, "Right") == 0) return diff + (7.0 / server->freq);
-    else if (strcmp(buffer, "Left") == 0) return diff + (7.0 / server->freq);
-    else if (strcmp(buffer, "Look") == 0) return diff + (7.0 / server->freq);
+    if (strcmp(buffer, "Forward") == 0) return (7.0 / server->freq);
+    else if (strcmp(buffer, "Right") == 0) return (7.0 / server->freq);
+    else if (strcmp(buffer, "Left") == 0) return (7.0 / server->freq);
+    else if (strcmp(buffer, "Look") == 0) return (7.0 / server->freq);
     else if (strcmp(buffer, "Inventory") == 0)
-        return diff + (1.0 / server->freq);
-    else if (strstr(buffer, "Broadcast")) return diff + (7.0 / server->freq);
-    else if (strcmp(buffer, "Fork") == 0) return diff + (42.0 / server->freq);
-    else if (strcmp(buffer, "Eject") == 0) return diff + (7.0 / server->freq);
-    else if (strstr(buffer, "Take")) return diff + (7.0 / server->freq);
-    else if (strstr(buffer, "Set")) return diff + (7.0 / server->freq);
+        return (1.0 / server->freq);
+    else if (strstr(buffer, "Broadcast")) return (7.0 / server->freq);
+    else if (strcmp(buffer, "Fork") == 0) return (42.0 / server->freq);
+    else if (strcmp(buffer, "Eject") == 0) return (7.0 / server->freq);
+    else if (strstr(buffer, "Take")) return (7.0 / server->freq);
+    else if (strstr(buffer, "Set")) return (7.0 / server->freq);
     else if (strcmp(buffer, "Incantation") == 0)
-        return diff + (300.0 / server->freq);
+        return (300.0 / server->freq);
     else if (strcmp(buffer, "Respawn") == 0)
-        return diff + (20.0 / server->freq);
+        return (20.0 / server->freq);
     else if (strcmp(buffer, "LifeCycle") == 0)
-        return diff + (126.0 / server->freq);
+        return (126.0 / server->freq);
     else return 0.0;
 }
 
 void execute_tasks(server_t *server)
 {
-    struct timespec ts;
-    task_t *tmp;
-    clock_gettime(0, &ts);
+    task_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->task_head, next) {
-        double value = (double)((ts.tv_sec - server->server_time.tv_sec));
-        if (value >= tmp->time) {
-            printf("command when removing : %s\n", tmp->cmd);
+        if (tmp->time <= 0) {
             if (tmp->client == NULL || (tmp->client->player != NULL &&
             tmp->client->player->state == ALIVE) ||
             strcmp(tmp->cmd, "Incantation") == 0) {
                 send_task_response(server, tmp, tmp->cmd);
                 LIST_REMOVE(tmp, next);
+                free(tmp->cmd);
+                free(tmp);
+                break;
             }
         }
     }

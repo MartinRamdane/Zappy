@@ -11,6 +11,7 @@ void remove_client(int socket, server_t *s_infos)
 {
     struct client *tmp;
     LIST_FOREACH(tmp, &s_infos->head, next) {
+        printf("REMOVE CLIENT !");
         if (tmp->socket == socket) {
             if (tmp->player != NULL) {
                 remove_player_from_tile(tmp, s_infos);
@@ -32,6 +33,7 @@ void remove_client(int socket, server_t *s_infos)
             if (tmp->gui_player)
                 free(tmp->gui_player);
             LIST_REMOVE(tmp, next);
+            free(tmp);
             return;
         }
     }
@@ -43,6 +45,7 @@ void remove_player_from_tile(client_t *cli, server_t *s_infos)
     LIST_FOREACH(tmp, &s_infos->game->map[cli->player->x][cli->player->y].player_head, next) {
         if (tmp->player->uid == cli->player->uid) {
             LIST_REMOVE(tmp, next);
+            free(tmp);
             return;
         }
     }
@@ -54,6 +57,7 @@ void remove_task_of_player(client_t *cli, server_t *s_infos)
     LIST_FOREACH(tmp, &s_infos->task_head, next) {
         if (tmp->client && strcmp(tmp->client->uid, cli->player->uid) == 0) {
             LIST_REMOVE(tmp, next);
+            free(tmp);
             continue;
         }
     }
