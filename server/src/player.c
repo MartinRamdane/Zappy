@@ -20,10 +20,6 @@ void generate_player(server_t *server, client_t *cli, int socket, char *team_nam
     cli->player->team_name = strdup(team_name); cli->player->socket = socket;
     cli->player->state = ALIVE; cli->player->uid = strdup(cli->uid);
     spawn_player_on_egg(cli, server);
-    server->game->map[0][0].players = malloc(sizeof(player_queue));
-    player_queue *p_queue = malloc(sizeof(player_queue));
-    p_queue->player = cli->player; server->player_id++;
-    LIST_INSERT_HEAD(&server->game->map[0][0].player_head, p_queue, next);
 }
 
 void generate_gui_player(client_t *cli, int socket, server_t *s_infos)
