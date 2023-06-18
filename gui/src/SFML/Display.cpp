@@ -15,6 +15,7 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_view.setSize(sf::Vector2f(w_width, w_height));
     this->_bottomMenu = std::make_unique<SSide_menu>(w_width, w_height);
     this->_inventory = std::make_unique<SInventory>(w_width, w_height);
+    this->_slider = std::make_unique<SSlider>(w_width, w_height);
     this->_clock_map.restart();
     this->_clock_trantorian.restart();
 }
@@ -100,6 +101,7 @@ void Display::render()
     this->_window->setView(this->_bottomMenuView);
     this->_bottomMenu->draw(*this->_window);
     this->_inventory->draw(*this->_window);
+    this->_slider->draw(*this->_window);
     this->_window->display();
     this->_window->setView(this->_view);
 }
@@ -135,6 +137,12 @@ void Display::keyHandler(MapT cache)
             this->_message = "sst " + std::to_string(cache.getFrequency() - 1) + "\n";
         } else if (this->_event.key.code == sf::Keyboard::V) {
             this->_message = "sst " + std::to_string(cache.getFrequency() + 1) + "\n";
+        } else if (this->_event.key.code == sf::Keyboard::M) {
+            this->_slider->fadeIn(false);
+            this->_slider->fadeOut(true);
+        } else if (this->_event.key.code == sf::Keyboard::P) {
+            this->_slider->fadeOut(false);
+            this->_slider->fadeIn(true);
         }
     }
 }
@@ -160,8 +168,30 @@ void Display::clickHandler(MapT cache)
                     this->_bottomMenu->fadeIn(true);
                 }
             }
+
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(*this->_window);
+            if (this->_slider->getRect()["zslider_bar1"]->getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+                this->_slider->setIsDragging1(true);
+            // if (this->_slider->getRect()["zslider_bar2"]->getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+            //     this->_slider->setIsDragging2(true);
         }
     }
+    if (this->_event.type == sf::Event::MouseButtonReleased)
+    {
+        if (this->_event.mouseButton.button == sf::Mouse::Left) {
+            int freq = (this->_slider->getRect()["zslider_bar1"]->getPosition().x - 1550) * 5;
+            this->_message = "sst " + std::to_string(freq) + "\n";
+            this->_slider->setIsDragging1(false);
+        }
+        // if (this->_event.mouseButton.button == sf::Mouse::Left) {
+        //     int zoom = (this->_slider->getRect()["zslider_bar2"]->getPosition().x - 1550) / 50;
+        //     // int zoomx = _width / this->_view.getSize().x;
+        //     // int zoomy = _height / this->_view.getSize().y;
+            
+        //     this->_slider->setIsDragging2(false);
+        // }
+    }
+    // cache.setFrequency(1550 - this->_slider->getRect()["zslider_bar1"]->getPosition().x * 5);
 }
 
 void Display::eventHandler(MapT cache)
@@ -219,6 +249,7 @@ void Display::update(MapT *cache)
             this->_trantorian_clicked = sf::Vector2i(-1, -1);
         }
     }
+    this->_slider->update(cache);
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()

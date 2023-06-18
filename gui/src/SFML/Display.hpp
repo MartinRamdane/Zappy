@@ -18,6 +18,7 @@
 #include "../cache/Map.hpp"
 #include "SSide_menu.hpp"
 #include "SInventory.hpp"
+#include "SSlider.hpp"
 
 class Display {
     public:
@@ -42,6 +43,7 @@ class Display {
         std::vector<std::unique_ptr<IEntity>> _map;
         std::unique_ptr<SSide_menu> _bottomMenu;
         std::unique_ptr<SInventory> _inventory;
+        std::unique_ptr<SSlider> _slider;
         sf::View _view;
         sf::View _bottomMenuView;
         sf::Clock _clock_map;
