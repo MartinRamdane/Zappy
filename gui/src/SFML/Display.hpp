@@ -17,6 +17,7 @@
 #include "STile.hpp"
 #include "../cache/Map.hpp"
 #include "SSide_menu.hpp"
+#include "SInventory.hpp"
 
 class Display {
     public:
@@ -40,6 +41,7 @@ class Display {
         std::map<int, std::unique_ptr<IEntity>> _trantorians;
         std::vector<std::unique_ptr<IEntity>> _map;
         std::unique_ptr<SSide_menu> _bottomMenu;
+        std::unique_ptr<SInventory> _inventory;
         sf::View _view;
         sf::View _bottomMenuView;
         sf::Clock _clock_map;
@@ -50,6 +52,7 @@ class Display {
         sf::Vector2f _mapCenter;
         bool _mapCreated = false;
         bool _ShowBottomMenu = false;
-        sf::Vector2i _click_pos;
+        sf::Vector2i _click_pos = sf::Vector2i(-1, -1);
         std::string _message;
+        sf::Vector2i _trantorian_clicked = sf::Vector2i(-1, -1);
 };

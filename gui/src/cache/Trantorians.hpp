@@ -9,6 +9,7 @@
 
 #include "Stock.hpp"
 #include "Teams.hpp"
+#include <map>
 #include <string>
 
 class Trantorian
@@ -53,4 +54,5 @@ class Trantorian
         bool getEjection();
         void setDeath();
         bool getDeath();
+        std::map<std::string, int> getStocks();
 };

@@ -61,4 +61,5 @@ class MapT
         void setHasHatched(int id);
         void setTrantorianEjection(int id, bool ejecting);
         void setTrantorianDeath(int id);
+        Stock getInventory(int id);
 };

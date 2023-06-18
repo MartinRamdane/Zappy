@@ -14,6 +14,7 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_window->setActive(false);
     this->_view.setSize(sf::Vector2f(w_width, w_height));
     this->_bottomMenu = std::make_unique<SSide_menu>(w_width, w_height);
+    this->_inventory = std::make_unique<SInventory>(w_width, w_height);
     this->_clock_map.restart();
     this->_clock_trantorian.restart();
 }
@@ -98,6 +99,7 @@ void Display::render()
         sprite.second->draw(*this->_window, this->_view);
     this->_window->setView(this->_bottomMenuView);
     this->_bottomMenu->draw(*this->_window);
+    this->_inventory->draw(*this->_window);
     this->_window->display();
     this->_window->setView(this->_view);
 }
@@ -141,6 +143,15 @@ void Display::clickHandler(MapT cache)
 {
     if (this->_event.type == sf::Event::MouseButtonPressed) {
         if (this->_event.mouseButton.button == sf::Mouse::Left) {
+            for (auto &sprite : this->_trantorians) {
+                sf::Vector2i click = sprite.second->getClicked();
+                if (click.x  != -1 && click.y != -1) {
+                    this->_trantorian_clicked = click;
+                    this->_inventory->fadeOut(false);
+                    this->_inventory->fadeIn(true);
+                    this->_message = "pin " + std::to_string(click.x) + "\n";
+                }
+            }
             for (auto &sprite : this->_map) {
                 sf::Vector2i click = sprite->getClicked();
                 if (click.x != -1 && click.y != -1) {
@@ -160,6 +171,8 @@ void Display::eventHandler(MapT cache)
             this->_window->close();
         for (auto &sprite : this->_map)
             sprite->eventHandler(this->_event, *this->_window);
+        for (auto &sprite : this->_trantorians)
+            sprite.second->eventHandler(this->_event, *this->_window);
         this->keyHandler(cache);
         this->clickHandler(cache);
     }
@@ -193,7 +206,19 @@ void Display::update(MapT *cache)
                 sprite.second->update(cache);
         }
     }
-    this->_bottomMenu->update(cache->getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
+    if (this->_click_pos.x != -1 && this->_click_pos.y != -1)
+        this->_bottomMenu->update(cache->getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
+    for (auto &sprite : this->_trantorians) {
+        if (sprite.first == this->_trantorian_clicked.x) {
+            if (this->_trantorian_clicked.x != -1 && this->_trantorian_clicked.y != -1) {
+                STrantorian *trantorian = dynamic_cast<STrantorian *>(this->_trantorians[this->_trantorian_clicked.x].get());
+                this->_inventory->setTrantorianTexture(trantorian->getTexture());
+                this->_inventory->update(cache->getTrantorian(this->_trantorian_clicked.x).getStocks(), cache->getTrantorian(this->_trantorian_clicked.x).getTeam(), cache->getTrantorian(this->_trantorian_clicked.x).getLvl());
+            }
+        } else {
+            this->_trantorian_clicked = sf::Vector2i(-1, -1);
+        }
+    }
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()

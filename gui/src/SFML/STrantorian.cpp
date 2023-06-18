@@ -7,9 +7,6 @@
 
 #include "STrantorian.hpp"
 
-//! Fix animation when a player is ejected and loop eject animation
-//* Probably need to get a pointer to cache, instead of a copy so we can update the cache
-
 STrantorian::STrantorian(Trantorian trantorian)
 {
     this->createSprite();
@@ -28,7 +25,6 @@ STrantorian::~STrantorian()
 
 void STrantorian::createSprite()
 {
-
     for (int i = 1; i != 9; i++) {
         _textures["down" + std::to_string(i)] = std::make_shared<sf::Texture>();
         _textures["down" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle" + std::to_string(i) + ".png");
@@ -291,6 +287,20 @@ void STrantorian::setOrientation(int orientation)
     }
 }
 
+void STrantorian::eventHandler(sf::Event event, sf::RenderWindow &window)
+{
+    if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.mouseButton.button == sf::Mouse::Left) {
+            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+            sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+            if (this->_sprite.getGlobalBounds().contains(sf::Vector2f(worldPos.x - 60, worldPos.y - 60))) {
+                std::cout << "event trantorian" << std::endl;
+                this->_isClicked = true;
+            }
+        }
+    }
+}
+
 void STrantorian::draw(sf::RenderWindow &window, sf::View &view)
 {
     window.draw(this->_sprite);
@@ -299,4 +309,19 @@ void STrantorian::draw(sf::RenderWindow &window, sf::View &view)
 sf::Vector2f STrantorian::getSpritePosition()
 {
     return this->_sprite.getPosition();
+}
+
+std::shared_ptr<sf::Texture> STrantorian::getTexture()
+{
+    return this->_textures["down" + std::to_string(this->_level)];
+}
+
+sf::Vector2i STrantorian::getClicked()
+{
+    if (this->_isClicked == true) {
+        this->_isClicked = false;
+        return sf::Vector2i(this->_id, 1);
+    } else {
+        return sf::Vector2i(-1, -1);
+    }
 }
