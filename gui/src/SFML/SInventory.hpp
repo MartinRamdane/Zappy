@@ -24,6 +24,10 @@ class SInventory {
         void fadeIn(bool isFading);
         void fadeOut(bool isFading);
         void setTrantorianTexture(std::shared_ptr<sf::Texture> texture);
+        void eventHandler(sf::Event event, sf::RenderWindow &window);
+        bool isFading(){return _isFading;};
+        bool isFadingOut(){return _isFadingOut;};
+        int getOpacity(){return _opacity;};
 
     protected:
     private:
@@ -31,9 +35,10 @@ class SInventory {
         std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
         std::map<std::string, std::shared_ptr<sf::Sprite>> _sprites;
         std::map<std::string, std::shared_ptr<sf::Text>> _texts;
+        sf::RectangleShape _background;
         sf::Clock _clock;
         sf::IntRect _rect;
-        int _opacity = 255;
+        int _opacity = 0;
         bool _isFading = false;
         bool _isFadingOut = false;
 };

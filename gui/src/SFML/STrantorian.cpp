@@ -86,7 +86,6 @@ void STrantorian::update(MapT *cache)
 {
     if (this->_animation == DEATH) {
         if (this->_rect.left >= 10 * 48) {
-            std:: cout << "remove trantorian" << std::endl;
             cache->removeTrantorian(this->_id);
         }
         else
@@ -144,7 +143,6 @@ void STrantorian::moveSprite(MapT *cache)
         } else {
             this->_lastAnimation = this->_animation;
             if (t.getDeath() == true) {
-                std::cout << "death" << std::endl;
                 this->_animation = DEATH;
             } else if (t.getCanEvolve() == true) {
                 this->_animation = INCANTATION;
@@ -293,8 +291,12 @@ void STrantorian::eventHandler(sf::Event event, sf::RenderWindow &window)
         if (event.mouseButton.button == sf::Mouse::Left) {
             sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
             sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
-            if (this->_sprite.getGlobalBounds().contains(sf::Vector2f(worldPos.x - 60, worldPos.y - 60))) {
-                std::cout << "event trantorian" << std::endl;
+            sf::FloatRect bounds = this->_sprite.getGlobalBounds();
+            bounds.left += 10;
+            bounds.top += 10;
+            bounds.width -= 60;
+            bounds.height -= 60;
+            if (bounds.contains(worldPos)) {
                 this->_isClicked = true;
             }
         }

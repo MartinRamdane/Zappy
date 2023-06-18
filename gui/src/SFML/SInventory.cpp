@@ -97,6 +97,21 @@ void SInventory::createSprite(int w_width, int w_height)
     this->_sprites["thystame"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
     this->_sprites["thystame"]->setPosition(this->_sprites["inventory"]->getPosition().x + 35, this->_sprites["inventory"]->getPosition().y + 135);
     this->_sprites["thystame"]->setScale(3.5, 3.5);
+
+    this->_textures["close"] = std::make_shared<sf::Texture>();
+    this->_textures["close"]->loadFromFile("gui/assets/close.png");
+    this->_sprites["close"] = std::make_shared<sf::Sprite>();
+    this->_sprites["close"]->setTexture(*this->_textures["close"]);
+    this->_sprites["close"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
+    this->_sprites["close"]->setPosition(this->_sprites["display"]->getPosition().x, this->_sprites["display"]->getPosition().y);
+    this->_sprites["close"]->setScale(3.5, 3.5);
+
+    this->_background.setSize(sf::Vector2f(180, 50));
+    this->_background.setFillColor(sf::Color(0, 0, 0, 0));
+    this->_background.setPosition(this->_sprites["close"]->getPosition().x + 10, this->_sprites["close"]->getPosition().y + 10);
+
+    for (auto &sprite : this->_sprites)
+        sprite.second->setColor(sf::Color(255, 255, 255, this->_opacity));
 }
 
 
@@ -106,93 +121,100 @@ void SInventory::createTexts()
     this->_texts["food"] = std::make_shared<sf::Text>();
     this->_texts["food"]->setFont(this->_font);
     this->_texts["food"]->setString("0x");
-    this->_texts["food"]->setCharacterSize(40);
+    this->_texts["food"]->setCharacterSize(30);
     this->_texts["food"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    this->_texts["food"]->setPosition(this->_sprites["food"]->getPosition().x + 35, this->_sprites["food"]->getPosition().y + 15);
+    this->_texts["food"]->setPosition(this->_sprites["food"]->getPosition().x + 33, this->_sprites["food"]->getPosition().y + 25);
 
     this->_texts["foodName"] = std::make_shared<sf::Text>();
     this->_texts["foodName"]->setFont(this->_font);
     this->_texts["foodName"]->setString("Food");
-    this->_texts["foodName"]->setCharacterSize(40);
-    this->_texts["foodName"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+    this->_texts["foodName"]->setCharacterSize(35);
+    this->_texts["foodName"]->setFillColor(sf::Color(255, 255, 255, 0));
+    this->_texts["foodName"]->setPosition(this->_sprites["food"]->getPosition().x + 35, this->_sprites["food"]->getPosition().y + 55);
 
     this->_texts["linemate"] = std::make_shared<sf::Text>();
     this->_texts["linemate"]->setFont(this->_font);
     this->_texts["linemate"]->setString("0x");
-    this->_texts["linemate"]->setCharacterSize(40);
+    this->_texts["linemate"]->setCharacterSize(30);
     this->_texts["linemate"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    this->_texts["linemate"]->setPosition(this->_sprites["linemate"]->getPosition().x + 35, this->_sprites["linemate"]->getPosition().y + 15);
+    this->_texts["linemate"]->setPosition(this->_sprites["linemate"]->getPosition().x + 33, this->_sprites["linemate"]->getPosition().y + 25);
 
     this->_texts["linemateName"] = std::make_shared<sf::Text>();
     this->_texts["linemateName"]->setFont(this->_font);
     this->_texts["linemateName"]->setString("Linemate");
     this->_texts["linemateName"]->setCharacterSize(35);
-    this->_texts["linemateName"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+    this->_texts["linemateName"]->setFillColor(sf::Color(255, 255, 255, 0));
+    this->_texts["linemateName"]->setPosition(this->_sprites["linemate"]->getPosition().x + 35, this->_sprites["linemate"]->getPosition().y + 55);
 
     this->_texts["deraumere"] = std::make_shared<sf::Text>();
     this->_texts["deraumere"]->setFont(this->_font);
     this->_texts["deraumere"]->setString("0x");
-    this->_texts["deraumere"]->setCharacterSize(40);
+    this->_texts["deraumere"]->setCharacterSize(30);
     this->_texts["deraumere"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    this->_texts["deraumere"]->setPosition(this->_sprites["deraumere"]->getPosition().x + 35, this->_sprites["deraumere"]->getPosition().y + 15);
+    this->_texts["deraumere"]->setPosition(this->_sprites["deraumere"]->getPosition().x + 33, this->_sprites["deraumere"]->getPosition().y + 25);
 
     this->_texts["deraumereName"] = std::make_shared<sf::Text>();
     this->_texts["deraumereName"]->setFont(this->_font);
     this->_texts["deraumereName"]->setString("Deraumere");
     this->_texts["deraumereName"]->setCharacterSize(35);
-    this->_texts["deraumereName"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+    this->_texts["deraumereName"]->setFillColor(sf::Color(255, 255, 255, 0));
+    this->_texts["deraumereName"]->setPosition(this->_sprites["deraumere"]->getPosition().x + 35, this->_sprites["deraumere"]->getPosition().y + 55);
 
     this->_texts["sibur"] = std::make_shared<sf::Text>();
     this->_texts["sibur"]->setFont(this->_font);
     this->_texts["sibur"]->setString("0x");
-    this->_texts["sibur"]->setCharacterSize(40);
+    this->_texts["sibur"]->setCharacterSize(30);
     this->_texts["sibur"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    this->_texts["sibur"]->setPosition(this->_sprites["sibur"]->getPosition().x + 35, this->_sprites["sibur"]->getPosition().y + 15);
+    this->_texts["sibur"]->setPosition(this->_sprites["sibur"]->getPosition().x + 33, this->_sprites["sibur"]->getPosition().y + 25);
 
     this->_texts["siburName"] = std::make_shared<sf::Text>();
     this->_texts["siburName"]->setFont(this->_font);
     this->_texts["siburName"]->setString("Sibur");
     this->_texts["siburName"]->setCharacterSize(35);
-    this->_texts["siburName"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+    this->_texts["siburName"]->setFillColor(sf::Color(255, 255, 255, 0));
+    this->_texts["siburName"]->setPosition(this->_sprites["sibur"]->getPosition().x + 35, this->_sprites["sibur"]->getPosition().y + 55);
 
     this->_texts["mendiane"] = std::make_shared<sf::Text>();
     this->_texts["mendiane"]->setFont(this->_font);
     this->_texts["mendiane"]->setString("0x");
-    this->_texts["mendiane"]->setCharacterSize(40);
+    this->_texts["mendiane"]->setCharacterSize(30);
     this->_texts["mendiane"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    this->_texts["mendiane"]->setPosition(this->_sprites["mendiane"]->getPosition().x + 35, this->_sprites["mendiane"]->getPosition().y + 15);
+    this->_texts["mendiane"]->setPosition(this->_sprites["mendiane"]->getPosition().x + 33, this->_sprites["mendiane"]->getPosition().y + 25);
 
     this->_texts["mendianeName"] = std::make_shared<sf::Text>();
     this->_texts["mendianeName"]->setFont(this->_font);
     this->_texts["mendianeName"]->setString("Mendiane");
     this->_texts["mendianeName"]->setCharacterSize(35);
-    this->_texts["mendianeName"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+    this->_texts["mendianeName"]->setFillColor(sf::Color(255, 255, 255, 0));
+    this->_texts["mendianeName"]->setPosition(this->_sprites["mendiane"]->getPosition().x + 35, this->_sprites["mendiane"]->getPosition().y + 55);
 
     this->_texts["phiras"] = std::make_shared<sf::Text>();
     this->_texts["phiras"]->setFont(this->_font);
     this->_texts["phiras"]->setString("0x");
-    this->_texts["phiras"]->setCharacterSize(40);
+    this->_texts["phiras"]->setCharacterSize(30);
     this->_texts["phiras"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    this->_texts["phiras"]->setPosition(this->_sprites["phiras"]->getPosition().x + 35, this->_sprites["phiras"]->getPosition().y + 15);
+    this->_texts["phiras"]->setPosition(this->_sprites["phiras"]->getPosition().x + 33, this->_sprites["phiras"]->getPosition().y + 25);
 
     this->_texts["phirasName"] = std::make_shared<sf::Text>();
     this->_texts["phirasName"]->setFont(this->_font);
     this->_texts["phirasName"]->setString("Phiras");
     this->_texts["phirasName"]->setCharacterSize(35);
-    this->_texts["phirasName"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+    this->_texts["phirasName"]->setFillColor(sf::Color(255, 255, 255, 0));
+    this->_texts["phirasName"]->setPosition(this->_sprites["phiras"]->getPosition().x + 35, this->_sprites["phiras"]->getPosition().y + 55);
 
     this->_texts["thystame"] = std::make_shared<sf::Text>();
     this->_texts["thystame"]->setFont(this->_font);
     this->_texts["thystame"]->setString("0x");
-    this->_texts["thystame"]->setCharacterSize(40);
+    this->_texts["thystame"]->setCharacterSize(30);
     this->_texts["thystame"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    this->_texts["thystame"]->setPosition(this->_sprites["thystame"]->getPosition().x + 35, this->_sprites["thystame"]->getPosition().y + 15);
+    this->_texts["thystame"]->setPosition(this->_sprites["thystame"]->getPosition().x + 33, this->_sprites["thystame"]->getPosition().y + 25);
 
     this->_texts["thystameName"] = std::make_shared<sf::Text>();
     this->_texts["thystameName"]->setFont(this->_font);
     this->_texts["thystameName"]->setString("Thystame");
-    this->_texts["thystameName"]->setCharacterSize(70);
-    this->_texts["thystameName"]->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+    this->_texts["thystameName"]->setCharacterSize(35);
+    this->_texts["thystameName"]->setFillColor(sf::Color(255, 255, 255, 0));
+    this->_texts["thystameName"]->setPosition(this->_sprites["thystame"]->getPosition().x + 35, this->_sprites["thystame"]->getPosition().y + 55);
 
     this->_texts["team"] = std::make_shared<sf::Text>();
     this->_texts["team"]->setFont(this->_font);
@@ -212,16 +234,19 @@ void SInventory::createTexts()
 void SInventory::draw(sf::RenderWindow &window)
 {
     for (auto &sprite : this->_sprites) {
-        if (sprite.first == "food" || sprite.first == "deraumere")
+        if (sprite.first == "food" || sprite.first == "deraumere" || sprite.first == "close")
             continue;
         window.draw(*sprite.second);
     }
 
     window.draw(*this->_sprites["food"]);
     window.draw(*this->_sprites["deraumere"]);
+    window.draw(*this->_sprites["close"]);
 
-    for (auto &text : this->_texts)
+    window.draw(this->_background);
+    for (auto &text : this->_texts) {
         window.draw(*text.second);
+    }
 }
 
 void SInventory::update(std::map<std::string, int> stock, std::string team, int lvl)
@@ -237,19 +262,35 @@ void SInventory::update(std::map<std::string, int> stock, std::string team, int 
     this->_texts["lvl"]->setString(std::string("Lvl: ") + std::to_string(lvl));
 
 
-    // if (this->_isFading) {
-    //     if (this->_opacity < 255)
-    //         this->_opacity += 5;
-    //     this->_sprites["trantorian"]->setColor(sf::Color(255, 255, 255, this->_opacity));
-    //     for (auto &text : this->_texts)
-    //         text.second->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    // } else if (this->_isFadingOut) {
-    //     if (this->_opacity > 0)
-    //         this->_opacity -= 5;
-    //     this->_sprites["trantorian"]->setColor(sf::Color(255, 255, 255, this->_opacity));
-    //     for (auto &text : this->_texts)
-    //         text.second->setFillColor(sf::Color(255, 255, 255, this->_opacity));
-    // }
+    if (this->_isFading) {
+        if (this->_opacity < 255)
+            this->_opacity += 15;
+        else {
+            this->_isFading = false;
+            this->_isFadingOut = false;
+        }
+        for (auto &text : this->_texts) {
+            if (text.first.find("Name") != std::string::npos)
+                continue;
+            text.second->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+        }
+        for (auto &sprite : this->_sprites)
+            sprite.second->setColor(sf::Color(255, 255, 255, this->_opacity));
+    } else if (this->_isFadingOut) {
+        if (this->_opacity > 0)
+            this->_opacity -= 15;
+        else {
+            this->_isFadingOut = false;
+            this->_isFading = false;
+        }
+        for (auto &text : this->_texts) {
+            if (text.first.find("Name") != std::string::npos)
+                continue;
+            text.second->setFillColor(sf::Color(255, 255, 255, this->_opacity));
+        }
+        for (auto &sprite : this->_sprites)
+            sprite.second->setColor(sf::Color(255, 255, 255, this->_opacity));
+    }
 
     if (this->_clock.getElapsedTime().asSeconds() > 0.1) {
         if (this->_rect.left >= 204)
@@ -258,6 +299,39 @@ void SInventory::update(std::map<std::string, int> stock, std::string team, int 
             this->_rect.left += 48;
         this->_sprites["trantorian"]->setTextureRect(this->_rect);
         this->_clock.restart();
+    }
+}
+
+void SInventory::eventHandler(sf::Event event, sf::RenderWindow &window)
+{
+    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+    sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+    for (auto &sprite : this->_sprites) {
+        if (event.type == sf::Event::MouseButtonPressed) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                if (sprite.second->getGlobalBounds().contains(mousePosF)) {
+                    if (sprite.first == "close") {
+                        this->_isFadingOut = true;
+                    }
+                }
+            }
+        }
+        if (sprite.second->getGlobalBounds().contains(mousePosF)) {
+            if(sprite.first == "inventory" || sprite.first == "display" || sprite.first == "trantorian" || sprite.first == "close") {
+                continue;
+            } else {
+                this->_texts[sprite.first + "Name"]->setFillColor(sf::Color(255, 255, 255, 255));
+                this->_background.setFillColor(sf::Color(0, 0, 0, 190));
+                this->_background.setPosition(this->_texts[sprite.first + "Name"]->getPosition().x - 5, this->_texts[sprite.first + "Name"]->getPosition().y);
+            }
+        } else {
+            if(sprite.first == "inventory" || sprite.first == "display" || sprite.first == "trantorian" || sprite.first == "close") {
+                continue;
+            } else {
+                this->_texts[sprite.first + "Name"]->setFillColor(sf::Color(255, 255, 255, 0));
+                this->_background.setFillColor(sf::Color(0, 0, 0, 0));
+            }
+        }
     }
 }
 

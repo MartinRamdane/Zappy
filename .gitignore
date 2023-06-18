@@ -7,3 +7,4 @@ vg*
 .vscode
 zappy_server_example
 build
+output.txt

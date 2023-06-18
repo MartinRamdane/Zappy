@@ -275,26 +275,14 @@ void SSide_menu::draw(sf::RenderWindow &window)
 void SSide_menu::update(std::map<std::string, int> stock)
 {
     if (this->_clock.getElapsedTime().asSeconds() >= 0.01) {
-        if (this->_opacity < 255 && this->_isFading) {
-            for (auto &sprite : this->_sprites)
-                sprite.second->setColor(sf::Color(255, 255, 255, this->_opacity));
-            for (auto &text : this->_texts)
-                text.second->setFillColor(sf::Color(13, 144, 104, this->_opacity));
+        if (this->_opacity < 255 && this->_isFading)
             this->_opacity += 15;
-        }
-        if (this->_opacity > 0 && this->_isFadingOut) {
-            for (auto &sprite : this->_sprites)
-                sprite.second->setColor(sf::Color(255, 255, 255, this->_opacity));
-            for (auto &text : this->_texts)
-                text.second->setFillColor(sf::Color(13, 144, 104, this->_opacity));
+        if (this->_opacity > 0 && this->_isFadingOut)
             this->_opacity -= 15;
-            if (this->_opacity == 0) {
-                for (auto &sprite : this->_sprites)
-                    sprite.second->setColor(sf::Color(255, 255, 255, 0));
-                for (auto &text : this->_texts)
-                    text.second->setFillColor(sf::Color(13, 144, 104, 0));
-            }
-        }
+        for (auto &sprite : this->_sprites)
+            sprite.second->setColor(sf::Color(255, 255, 255, this->_opacity));
+        for (auto &text : this->_texts)
+            text.second->setFillColor(sf::Color(13, 144, 104, this->_opacity));
         this->_clock.restart();
     }
 

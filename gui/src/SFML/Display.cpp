@@ -99,8 +99,10 @@ void Display::render()
     for (auto &sprite : sortedTrantorians)
         sprite.second->draw(*this->_window, this->_view);
     this->_window->setView(this->_bottomMenuView);
-    this->_bottomMenu->draw(*this->_window);
-    this->_inventory->draw(*this->_window);
+    if (this->_click_pos.x != -1 && this->_click_pos.y != -1)
+        this->_bottomMenu->draw(*this->_window);
+    if (this->_trantorian_clicked.x != -1 && this->_trantorian_clicked.y != -1)
+        this->_inventory->draw(*this->_window);
     this->_slider->draw(*this->_window);
     this->_window->display();
     this->_window->setView(this->_view);
@@ -143,53 +145,47 @@ void Display::keyHandler(MapT cache)
         } else if (this->_event.key.code == sf::Keyboard::P) {
             this->_slider->fadeOut(false);
             this->_slider->fadeIn(true);
+        } else if (this->_event.key.code == sf::Keyboard::I) {
+            this->_inventory->fadeIn(false);
+            this->_inventory->fadeOut(true);
         }
     }
 }
 
 void Display::clickHandler(MapT cache)
 {
-    if (this->_event.type == sf::Event::MouseButtonPressed) {
-        if (this->_event.mouseButton.button == sf::Mouse::Left) {
-            for (auto &sprite : this->_trantorians) {
-                sf::Vector2i click = sprite.second->getClicked();
-                if (click.x  != -1 && click.y != -1) {
-                    this->_trantorian_clicked = click;
-                    this->_inventory->fadeOut(false);
-                    this->_inventory->fadeIn(true);
-                    this->_message = "pin " + std::to_string(click.x) + "\n";
-                }
-            }
-            for (auto &sprite : this->_map) {
-                sf::Vector2i click = sprite->getClicked();
-                if (click.x != -1 && click.y != -1) {
-                    this->_click_pos = click;
-                    this->_bottomMenu->fadeOut(false);
-                    this->_bottomMenu->fadeIn(true);
-                }
-            }
-
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(*this->_window);
-            if (this->_slider->getRect()["zslider_bar1"]->getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-                this->_slider->setIsDragging1(true);
-            // if (this->_slider->getRect()["zslider_bar2"]->getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            //     this->_slider->setIsDragging2(true);
+    bool clicked = false;
+    for (auto &sprite : this->_trantorians) {
+        sf::Vector2i click = sprite.second->getClicked();
+        if (click.x  != -1 && click.y != -1) {
+            clicked = true;
+            this->_trantorian_clicked = click;
+            this->_inventory->fadeOut(false);
+            this->_inventory->fadeIn(true);
+            this->_message = "pin " + std::to_string(click.x) + "\n";
         }
     }
-    if (this->_event.type == sf::Event::MouseButtonReleased)
-    {
+    int opacity = this->_inventory->getOpacity();
+    this->_inventory->eventHandler(this->_event, *this->_window);
+    std::cout << opacity << " " << this->_inventory->isFadingOut() << std::endl;
+    for (auto &sprite : this->_map) {
+        sf::Vector2i click = sprite->getClicked();
+        if (click.x != -1 && click.y != -1 && clicked == false && (opacity == 0 || this->_inventory->isFadingOut() == false)) {
+            this->_click_pos = click;
+            this->_bottomMenu->fadeOut(false);
+            this->_bottomMenu->fadeIn(true);
+        }
+    }
+    // this->_bottomMenu->eventHandler(this->_event, *this->_window);
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*this->_window);
+    if (this->_slider->getRect()["zslider_bar1"]->getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+        this->_slider->setIsDragging1(true);
+    if (this->_event.type == sf::Event::MouseButtonReleased) {
         if (this->_event.mouseButton.button == sf::Mouse::Left) {
             int freq = (this->_slider->getRect()["zslider_bar1"]->getPosition().x - 1550) * 5;
             this->_message = "sst " + std::to_string(freq) + "\n";
             this->_slider->setIsDragging1(false);
         }
-        // if (this->_event.mouseButton.button == sf::Mouse::Left) {
-        //     int zoom = (this->_slider->getRect()["zslider_bar2"]->getPosition().x - 1550) / 50;
-        //     // int zoomx = _width / this->_view.getSize().x;
-        //     // int zoomy = _height / this->_view.getSize().y;
-            
-        //     this->_slider->setIsDragging2(false);
-        // }
     }
     // cache.setFrequency(1550 - this->_slider->getRect()["zslider_bar1"]->getPosition().x * 5);
 }
@@ -199,10 +195,10 @@ void Display::eventHandler(MapT cache)
     while (this->_window->pollEvent(this->_event)) {
         if (this->_event.type == sf::Event::Closed)
             this->_window->close();
-        for (auto &sprite : this->_map)
-            sprite->eventHandler(this->_event, *this->_window);
         for (auto &sprite : this->_trantorians)
             sprite.second->eventHandler(this->_event, *this->_window);
+        for (auto &sprite : this->_map)
+            sprite->eventHandler(this->_event, *this->_window);
         this->keyHandler(cache);
         this->clickHandler(cache);
     }
@@ -216,6 +212,15 @@ void Display::update(MapT *cache)
         this->createViews(cache->getX(), cache->getY());
         this->_mapCreated = true;
     }
+    if (this->_trantorians.size() > 0) {
+        for (auto &sprite : this->_trantorians)
+            sprite.second->moveSprite(cache);
+        if (this->_clock_trantorian.getElapsedTime() > targetFrameTime) {
+            this->_clock_trantorian.restart();
+            for (auto &sprite : this->_trantorians)
+                sprite.second->update(cache);
+        }
+    }
     if (this->_clock_map.getElapsedTime() > targetFrameTime) {
         this->_clock_map.restart();
         for (auto &sprite : this->_map)
@@ -225,15 +230,6 @@ void Display::update(MapT *cache)
         this->_trantorians.clear();
         for (auto &trantor : cache->getTrantorians()) {
             this->_trantorians[trantor.getId()] = std::make_unique<STrantorian>(trantor);
-        }
-    }
-    if (this->_trantorians.size() > 0) {
-        for (auto &sprite : this->_trantorians)
-            sprite.second->moveSprite(cache);
-        if (this->_clock_trantorian.getElapsedTime() > targetFrameTime) {
-            this->_clock_trantorian.restart();
-            for (auto &sprite : this->_trantorians)
-                sprite.second->update(cache);
         }
     }
     if (this->_click_pos.x != -1 && this->_click_pos.y != -1)
@@ -250,6 +246,9 @@ void Display::update(MapT *cache)
         }
     }
     this->_slider->update(cache);
+    if (this->_inventory->getOpacity() == 0) {
+        this->_trantorian_clicked = sf::Vector2i(-1, -1);
+    }
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()
