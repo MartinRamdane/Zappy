@@ -176,9 +176,17 @@ void Display::clickHandler(MapT cache)
         }
     }
     // this->_bottomMenu->eventHandler(this->_event, *this->_window);
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(*this->_window);
-    if (this->_slider->getRect()["zslider_bar1"]->getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-        this->_slider->setIsDragging1(true);
+    // sf::Vector2i mousePosition = sf::Mouse::getPosition(*this->_window);
+    sf::Vector2i pixelPos = sf::Mouse::getPosition();
+    // sf::Vector2f worldPos = this->_windowmapPixelToCoords(pixelPos);
+    if (this->_event.type == sf::Event::MouseButtonPressed) {
+        if (this->_event.mouseButton.button == sf::Mouse::Left) {
+                std::cout << "lll x: " << this->_slider->getRect()["zslider_bar1"]->getPosition().x << " " << pixelPos.x << " y: " << this->_slider->getRect()["zslider_bar1"]->getPosition().y << " " << pixelPos.y << std::endl;
+            if (this->_slider->getRect()["zslider_bar1"]->getGlobalBounds().contains(pixelPos.x, pixelPos.y)) {
+                this->_slider->setIsDragging1(true);
+            }
+        }
+    }
     if (this->_event.type == sf::Event::MouseButtonReleased) {
         if (this->_event.mouseButton.button == sf::Mouse::Left) {
             int freq = (this->_slider->getRect()["zslider_bar1"]->getPosition().x - 1550) * 5;
