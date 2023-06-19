@@ -12,8 +12,13 @@ int get_case(server_t *server, char dir, int tile, int diff)
     if (diff == 0) return (tile);
     if (dir == 'N') {
         if (tile - diff < 0) {
+            printf("diff : %d tile: %d\n", diff, tile);
             diff = diff - tile; int new_tile = server->height - diff;
-            printf("paris diff: %d\n", diff);
+            if (new_tile < 0) {
+                new_tile = get_case(server, dir, tile, (new_tile * -1));
+            }
+            printf("paris new diff: %d\n", diff);
+            printf("new tile : %d\n", new_tile);
             return (new_tile);
         } else {
             printf("paris tile - diff: %d\n", tile - diff);
@@ -23,6 +28,7 @@ int get_case(server_t *server, char dir, int tile, int diff)
     if (dir == 'S') {
         diff = diff % server->height;
         if (tile + diff >= server->height) {
+            printf("diff : %d tile: %d\n", diff, tile);
             diff = diff - (server->height - tile);
             printf("marseille diff: %d\n", diff);
             return diff;
@@ -32,6 +38,7 @@ int get_case(server_t *server, char dir, int tile, int diff)
     if (dir == 'E') {
         diff = diff % server->width;
         if (tile + diff >= server->width) {
+            printf("diff : %d tile: %d\n", diff, tile);
             diff = diff - (server->width - tile);
             printf("wisembach diff: %d\n", diff);
             return diff;
@@ -42,8 +49,13 @@ int get_case(server_t *server, char dir, int tile, int diff)
     }
     if (dir == 'W') {
         if (tile - diff < 0) {
+            printf("diff : %d tile: %d\n", diff, tile);
             diff = diff - tile; int new_tile = server->width - diff;
+            if (new_tile < 0) {
+                new_tile = get_case(server, dir, tile, (new_tile * -1));
+            }
             printf("angers diff: %d\n", diff);
+            printf("new tile : %d\n", new_tile);
             return (new_tile);
         } else {
             printf("return angers tile - diff: %d\n", tile - diff);
