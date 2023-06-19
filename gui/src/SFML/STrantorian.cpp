@@ -17,6 +17,8 @@ STrantorian::STrantorian(Trantorian trantorian)
     this->_id = trantorian.getId();
     this->_rect = sf::IntRect(0, 0, 48, 48);
     this->setSpriteRect(this->_rect);
+    if (!_incantation.openFromFile("gui/assets/sounds/cast.ogg"))
+        exit(84);
 }
 
 STrantorian::~STrantorian()
@@ -91,6 +93,10 @@ void STrantorian::update(MapT *cache)
         else
             this->_rect.left += 48;
     } else if (this->_animation == INCANTATION) {
+        if (_incantation.getStatus() != sf::Music::Playing) {
+            _incantation.setLoop(true);
+            _incantation.play();
+        }
         if (this->_rect.left >= 480)
             this->_rect.left = 48;
         else
@@ -102,6 +108,7 @@ void STrantorian::update(MapT *cache)
         } else
             this->_rect.left += 48;
     } else {
+        _incantation.stop();
         if (this->_rect.left >= 204)
             this->_rect.left = 0;
         else
