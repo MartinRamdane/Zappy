@@ -67,9 +67,10 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
             add_task(s_infos, buffer_life, task_food_time, cli);
             sprintf(buff, "%d\n%d %d\n", available_slots, s_infos->width, s_infos->height);
             send(cli->socket, buff, strlen(buff), 0);
-            send_new_player_connected(s_infos, cli); return 1;
+            send_new_player_connected(s_infos, cli); free(buffer_life);
+            free(buff); return 1;
         }
-    } return 0;
+    } free(buff); return 0;
 }
 
 void remove_client_from_team(client_t *cli, server_t *s_infos)

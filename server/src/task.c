@@ -101,7 +101,7 @@ void execute_tasks(server_t *server)
                 LIST_REMOVE(tmp, next);
                 free(tmp->cmd);
                 free(tmp);
-                break;
+                return execute_tasks(server);
             }
         }
     }

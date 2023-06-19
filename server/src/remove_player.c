@@ -33,7 +33,6 @@ void remove_client(int socket, server_t *s_infos)
             if (tmp->gui_player)
                 free(tmp->gui_player);
             LIST_REMOVE(tmp, next);
-            free(tmp);
             return;
         }
     }
@@ -43,7 +42,7 @@ void remove_player_from_tile(client_t *cli, server_t *s_infos)
 {
     player_queue *tmp = NULL;
     LIST_FOREACH(tmp, &s_infos->game->map[cli->player->x][cli->player->y].player_head, next) {
-        if (tmp->player->uid == cli->player->uid) {
+        if (strcmp(tmp->player->uid, cli->player->uid) == 0) {
             LIST_REMOVE(tmp, next);
             free(tmp);
             return;
@@ -58,7 +57,7 @@ void remove_task_of_player(client_t *cli, server_t *s_infos)
         if (tmp->client && strcmp(tmp->client->uid, cli->player->uid) == 0) {
             LIST_REMOVE(tmp, next);
             free(tmp);
-            continue;
+            return remove_task_of_player(cli, s_infos);
         }
     }
 }

@@ -23,15 +23,9 @@ void calculate_timeout_val(server_t *server)
     task_t *tmp = find_task_with_lowest_time(server);
     if (tmp == NULL)
         return;
-    if (strcmp(tmp->cmd, "LifeCycle") == 0) {
-        printf("time : %f\n", tmp->time);
-    }
     server->tv->tv_sec = tmp->time;
     server->tv->tv_usec = (suseconds_t)((tmp->time - (time_t)tmp->time) * 1000000);  // Set the microseconds part
-        server->old_timeout = tmp->time;
-    if (strcmp(tmp->cmd, "LifeCycle") == 0) {
-        printf("time : %f\n", tmp->time);
-    }
+    server->old_timeout = tmp->time;
 }
 
 void recalculate_task_time(server_t *server)
