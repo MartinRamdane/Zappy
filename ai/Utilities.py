@@ -25,7 +25,7 @@ def getTypeOfReponse(receive) -> Type:
             return Type.INVENTORY
         else:
             return Type.LOOK
-    if receive.isdigit() and len(receive) == 1:
+    if receive.isdigit():
         return Type.CONNECTED
     if "eject" in receive:
         return Type.EJECT
