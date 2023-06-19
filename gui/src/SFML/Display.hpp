@@ -38,6 +38,7 @@ class Display {
 
     protected:
     private:
+        sf::Music music;
         std::unique_ptr<sf::RenderWindow> _window;
         sf::Event _event;
         std::map<int, std::unique_ptr<IEntity>> _trantorians;

@@ -18,6 +18,12 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_slider = std::make_unique<SSlider>(w_width, w_height);
     this->_clock_map.restart();
     this->_clock_trantorian.restart();
+    if (!music.openFromFile("gui/assets/sounds/main_theme.ogg"))
+        exit(84);
+    // music.openFromFile("gui/assets/sounds/main_theme.ogg");
+    music.setVolume(50);
+    music.setLoop(true);
+    music.play();
 }
 
 Display::~Display()

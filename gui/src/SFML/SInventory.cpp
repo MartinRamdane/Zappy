@@ -102,9 +102,9 @@ void SInventory::createSprite(int w_width, int w_height)
     this->_textures["close"]->loadFromFile("gui/assets/close.png");
     this->_sprites["close"] = std::make_shared<sf::Sprite>();
     this->_sprites["close"]->setTexture(*this->_textures["close"]);
-    this->_sprites["close"]->setTextureRect(sf::IntRect(0, 0, 16, 16));
+    this->_sprites["close"]->setTextureRect(sf::IntRect(0, 0, 200, 200));
     this->_sprites["close"]->setPosition(this->_sprites["display"]->getPosition().x, this->_sprites["display"]->getPosition().y);
-    this->_sprites["close"]->setScale(3.5, 3.5);
+    this->_sprites["close"]->setScale(0.25, 0.25);
 
     this->_background.setSize(sf::Vector2f(180, 50));
     this->_background.setFillColor(sf::Color(0, 0, 0, 0));

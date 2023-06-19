@@ -41,6 +41,7 @@ class STrantorian : public IEntity {
             DEATH,
         };
         int _id;
+        sf::Music _incantation;
         sf::Sprite _sprite;
         std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
         sf::IntRect _rect;
