@@ -258,10 +258,11 @@ void Display::update(MapT *cache)
             sprite->update(cache);
     }
     if (this->_trantorians.size() != cache->getTrantorians().size()) {
+        for (auto &sprite : this->_trantorians)
+            delete sprite.second.get();
         this->_trantorians.clear();
-        for (auto &trantor : cache->getTrantorians()) {
+        for (auto &trantor : cache->getTrantorians())
             this->_trantorians[trantor.getId()] = std::make_unique<STrantorian>(trantor);
-        }
     }
     if (this->_click_pos.x != -1 && this->_click_pos.y != -1)
         this->_bottomMenu->update(cache->getTile(this->_click_pos.x, this->_click_pos.y).getStocks());

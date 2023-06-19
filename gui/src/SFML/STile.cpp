@@ -247,6 +247,8 @@ void STile::update(MapT *cache)
         int totalGems = cache->getTile(this->_x, this->_y).getNbrTotalGems();
         std::map<std::string, int> stocks = cache->getTile(this->_x, this->_y).getStocks();
         if (this->_gems.size() != totalGems) {
+            for (auto &sprite : this->_gems)
+                delete sprite.get();
             this->_gems.clear();
             for (auto &gem : stocks) {
                 createGem(gem.first, gem.second);
@@ -254,6 +256,8 @@ void STile::update(MapT *cache)
         }
         std::vector<Egg> eggs = cache->getEggs();
         if (this->_eggs.size() != cache->getEggsFromPos(this->_x, this->_y)) {
+            for (auto &sprite : this->_eggs)
+                delete sprite.get();
             this->_eggs.clear();
             for (auto &egg : eggs) {
                 if (egg.getX() == this->_x && egg.getY() == this->_y) {
