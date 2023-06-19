@@ -23,7 +23,6 @@ void fork_command(client_t *client, server_t *server)
 
 void life_cycle_command(server_t *server, client_t *client)
 {
-    printf("life cycle task executed\n");
     if (client->player->inv->food > 0) {
         client->player->inv->food--;
     } else {

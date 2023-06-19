@@ -24,7 +24,6 @@ tile **generate_map(server_t *infos)
             map[x][y].phiras = 0;
             map[x][y].thystame = 0;
             LIST_INIT(&map[x][y].player_head);
-            printf("DATA IN TARGET x %d y %d food %d : linemate %d: \n", map[x][y].x, map[x][y].y, map[x][y].food, map[x][y].linemate);
         }
     }
     return map;

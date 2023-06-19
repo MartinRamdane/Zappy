@@ -250,7 +250,7 @@ void move_player(player *p, tile **map, int *pos, server_t *s_infos);
 int get_case(server_t *server, char dir, int tile, int diff);
 int get_nb_tiles_per_level(int level);
 int get_first_case_id_per_level(server_t *server, int tile, char dir, int level);
-char *get_all_tile_infos(tile *target, int x, int y);
+char *get_all_tile_infos(tile *target);
 char *get_all_tiles_per_level(server_t *server, client_t *client, int level);
 int set_object(server_t *server, client_t *client, char *buffer);
 int take_object(server_t *server, client_t *client, char *buffer);

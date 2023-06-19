@@ -11,7 +11,6 @@ void remove_client(int socket, server_t *s_infos)
 {
     struct client *tmp;
     LIST_FOREACH(tmp, &s_infos->head, next) {
-        printf("REMOVE CLIENT !");
         if (tmp->socket == socket) {
             if (tmp->player != NULL) {
                 remove_player_from_tile(tmp, s_infos);
