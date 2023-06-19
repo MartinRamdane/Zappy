@@ -53,7 +53,7 @@ void put_thystame_resource(server_t infos, tile **map, int r)
 
 int get_nb_players_on_tile(tile *tile)
 {
-    player_queue *tmp = NULL;
+    t_player_queue *tmp = NULL;
     int i = 0;
     LIST_FOREACH(tmp, &tile->player_head, next) {
         i++;

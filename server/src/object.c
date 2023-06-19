@@ -149,7 +149,6 @@ int set_object(server_t *server, client_t *client, char *buffer)
 int take_object(server_t *server, client_t *client, char *buffer)
 {
     buffer += 5;
-    printf("buffer : %s\n", buffer);
     if (check_if_is_resources(buffer) == 0)
         return 0;
     if (check_if_tile_has_item(server, client, buffer) == 0)

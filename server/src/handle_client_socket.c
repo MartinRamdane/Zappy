@@ -30,7 +30,6 @@ void check_command(client_t *cli, server_t *s_infos)
     }
     if (cli->buffer[strlen(cli->buffer) - 1] == '\n') {
         cli->buffer[strlen((cli->buffer)) - 1] = '\0';
-        printf("Client %d sent: %s\n", cli->socket, cli->buffer);
         if (commands(s_infos, cli, cli->buffer) == 1)
             return;
         memset(cli->buffer, 0, MAX_BODY_LENGTH);

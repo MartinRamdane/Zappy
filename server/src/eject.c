@@ -10,7 +10,7 @@
 void eject_all_players(server_t *server, client_t *client, int x, int y)
 {
     int _x = client->player->x; int _y = client->player->y;
-    player_queue *tmp = NULL;
+    t_player_queue *tmp = NULL;
     LIST_FOREACH(tmp, &server->game->map[_x][_y].player_head, next) {
         if (strcmp(tmp->player->uid, client->uid) != 0) {
             tmp->player->x = x; tmp->player->y = y;

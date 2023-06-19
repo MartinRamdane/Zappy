@@ -49,6 +49,7 @@ void respawn_map_2(server_t infos, tile **map, int *resources)
         printf("[DEBUG]: Respawn thystame %d\n", to_add);
         put_thystame_resource(infos, map, to_add);
     }
+    free(resources);
 }
 
 void respawn_map(server_t infos, tile **map)

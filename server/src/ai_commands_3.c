@@ -23,7 +23,6 @@ void fork_command(client_t *client, server_t *server)
 
 void life_cycle_command(server_t *server, client_t *client)
 {
-    printf("life cycle task executed\n");
     if (client->player->inv->food > 0) {
         client->player->inv->food--;
     } else {
@@ -37,4 +36,5 @@ void life_cycle_command(server_t *server, client_t *client)
     char *buffer_life = strdup("LifeCycle");
     double task_food_time = calculate_time_for_task(server, buffer_life);
     add_task(server, buffer_life, task_food_time, client);
+    free(buffer_life);
 }

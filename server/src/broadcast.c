@@ -31,11 +31,11 @@ int *compare_diff(int **diff)
     int *res = malloc(sizeof(int) * 4);
     res[0] = 1000; res[1] = 1000;
     for (int i = 0; i < 8; i++) {
-        printf("diff[%d][0] = %d diff[%d][1] = %d\n", i, diff[i][0], i, diff[i][1]);
+        //printf("diff[%d][0] = %d diff[%d][1] = %d\n", i, diff[i][0], i, diff[i][1]);
         if (diff[i][0] < res[0]) {
             res[0] = diff[i][0]; res[2] = diff[i][2];
         } if (diff[i][0] == res[0]) {
-            printf("same y: %d\n", diff[i][0]);
+          //  printf("same y: %d\n", diff[i][0]);
             if (diff[i][1] < res[1]) {
                 res[1] = diff[i][1];
                 res[3] = diff[i][3];
@@ -48,12 +48,14 @@ int *compare_diff(int **diff)
 int compare_listen_tiles(l_tile *listen_tiles, int x, int y)
 {
     int **diff = malloc(sizeof(int *) * 8);
+    memset(diff, 0, sizeof(int *) * 8);
     int **target_tiles = malloc(sizeof(int *) * 8);
+    memset(target_tiles, 0, sizeof(int *) * 8);
     for (int i = 0; i < 8; i++)
         if (listen_tiles[i].x == x && listen_tiles[i].y == y)
             return listen_tiles[i].id;
     for (int i = 0; i < 8; i++) {
-        diff[i] = malloc(sizeof(int) * 2);
+        diff[i] = malloc(sizeof(int) * 4);
         target_tiles[i] = malloc(sizeof(int) * 4);
     }
     for (int i = 0; i < 8; i++) {
@@ -77,6 +79,9 @@ int compare_listen_tiles(l_tile *listen_tiles, int x, int y)
         if (listen_tiles[i].x == new_x && listen_tiles[i].y == new_y)
             return listen_tiles[i].id;
     }
+    free(res);
+    free(diff);
+    free(target_tiles);
     return -1;
 }
 
@@ -91,6 +96,8 @@ void send_broadcast(server_t *server, client_t *sender, client_t *client, char *
     char *to_send = malloc(sizeof(char) * MAX_BODY_LENGTH);
     sprintf(to_send, "message %d, %s\n", id, msg);
     send(client->socket, to_send, strlen(to_send), 0);
+    free(to_send);
+    free(listen_tiles);
 }
 
 void broadcast_command(server_t *server, client_t *client, char *msg)

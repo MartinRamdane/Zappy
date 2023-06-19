@@ -83,7 +83,7 @@ typedef struct player {
 typedef struct player_queue {
     player *player;
     LIST_ENTRY(player_queue) next;
-} player_queue;
+} t_player_queue;
 
 extern LIST_HEAD(player_listhead, player_queue) player_head;
 extern LIST_HEAD(eggs_list, egg) eggs_head;
@@ -99,7 +99,6 @@ typedef struct tile {
     int phiras;
     int thystame;
     struct player_listhead player_head;
-    player_queue *players;
 } tile;
 
 typedef struct client {
@@ -150,7 +149,8 @@ typedef struct server_s {
     struct list_head head;
     struct team_listhead team_head;
     struct task_listhead task_head;
-    struct timespec server_time;
+    struct timeval *tv;
+    double old_timeout;
     struct eggs_list eggs_head;
     client_t *clients;
     game_t *game;
@@ -279,6 +279,10 @@ void debug_print_player_inventory(client_t *cli);
 //TIME
 double calculate_time_for_task(server_t *server, char *buffer);
 void change_time_unit(client_t *cli, server_t *server, char *buff);
+task_t *find_task_with_lowest_time(server_t *server);
+void calculate_timeout_val(server_t *server);
+void recalculate_task_time(server_t *server);
+void recalculate_task_time_after_timeout(server_t *server);
 
 //GUI COMMANDS
 int check_gui_commands(char *buffer, client_t *client, server_t *server);

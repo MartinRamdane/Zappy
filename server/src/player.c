@@ -38,7 +38,7 @@ int check_if_solo_on_tile(server_t *server, client_t *cli)
     int _x = cli->player->x; int _y = cli->player->y;
     tile *target = &server->game->map[_x][_y];
     int count = 0;
-    player_queue *tmp = NULL;
+    t_player_queue *tmp = NULL;
     LIST_FOREACH(tmp, &target->player_head, next) {
         count++;
     }
@@ -50,24 +50,26 @@ int check_if_solo_on_tile(server_t *server, client_t *cli)
 
 void add_player_from_queue(tile *tile, player *player)
 {
-    player_queue *p_queue = malloc(sizeof(player_queue));
+    t_player_queue *p_queue = malloc(sizeof(t_player_queue));
     p_queue->player = player;
     LIST_INSERT_HEAD(&tile->player_head, p_queue, next);
 }
 
 void remove_player_from_queue(tile *tile, player *player)
 {
-    player_queue *tmp = NULL;
+    t_player_queue *tmp = NULL;
     LIST_FOREACH(tmp, &tile->player_head, next) {
-        if (strcmp(tmp->player->uid, player->uid) == 0) {
+        if (tmp->player->uid != NULL && strcmp(tmp->player->uid, player->uid) == 0) {
             LIST_REMOVE(tmp, next);
+            free(tmp);
+            return;
         }
     }
 }
 
 player *get_player_from_queue(tile *target, player *player)
 {
-    player_queue *tmp = NULL;
+    t_player_queue *tmp = NULL;
     LIST_FOREACH(tmp, &target->player_head, next) {
         if (strcmp(tmp->player->uid, player->uid) == 0)
             return tmp->player;

@@ -14,14 +14,13 @@ void spawn_player_on_egg(client_t *cli, server_t *server)
         if (strcmp(egg->team_name, cli->player->team_name) == 0) {
             cli->player->x = egg->x;
             cli->player->y = egg->y;
-            server->game->map[egg->x][egg->y].players = malloc(sizeof(player_queue));
-            player_queue *p_queue = malloc(sizeof(player_queue));
-            p_queue->player = cli->player; server->player_id++;
-            LIST_INSERT_HEAD(&server->game->map[egg->x][egg->y].player_head, p_queue, next);
+            add_player_from_queue(&server->game->map[egg->x][egg->y], cli->player);
+            server->player_id++;
             if (egg->is_default == false) {
                 send_egg_connection_to_guis(server, egg);
             }
             LIST_REMOVE(egg, next);
+            free(egg);
             return;
         }
     }
