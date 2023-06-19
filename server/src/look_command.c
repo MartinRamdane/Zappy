@@ -144,7 +144,7 @@ char *get_all_tiles_per_level(server_t *server, client_t *client, int level)
             }
         }
         if (client->player->orientation == 'W') {
-            int diff_x = get_case(server, 'W', client->player->y, (-1 * get_diff_x_per_level(i, client->player->orientation)));
+            int diff_x = get_case(server, 'W', client->player->x, (-1 * get_diff_x_per_level(i, client->player->orientation)));
             int diff_y = client->player->y;
             int first_case = get_first_case_id_per_level(server, diff_y, client->player->orientation, i);
             int nb_tiles_to_print = get_nb_tiles_per_level(i);
@@ -157,7 +157,7 @@ char *get_all_tiles_per_level(server_t *server, client_t *client, int level)
             }
         }
         if (client->player->orientation == 'E') {
-            int diff_x = get_case(server, 'E', client->player->y, (get_diff_x_per_level(i, client->player->orientation)));
+            int diff_x = get_case(server, 'E', client->player->x, (get_diff_x_per_level(i, client->player->orientation)));
             int diff_y = client->player->y;
             int first_case = get_first_case_id_per_level(server, diff_y, client->player->orientation, i);
             int nb_tiles_to_print = get_nb_tiles_per_level(i);
