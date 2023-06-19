@@ -140,7 +140,7 @@ typedef struct server_s {
     int height;
     char **sname;
     int clientsNb;
-    int freq;
+    double freq;
     int socket;
     int task_id;
     int task_stack;

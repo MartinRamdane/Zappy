@@ -45,7 +45,7 @@ void send_time_unit(client_t *client, server_t *server)
 {
     char *buffer = malloc(sizeof(char) * 100);
     memset(buffer, 0, 100);
-    sprintf(buffer, "sgt %d\n", server->freq);
+    sprintf(buffer, "sgt %f\n", server->freq);
     send(client->socket, buffer, strlen(buffer), 0);
     free(buffer);
     return;

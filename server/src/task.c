@@ -85,7 +85,7 @@ double calculate_time_for_task(server_t *server, char *buffer)
     else if (strcmp(buffer, "Respawn") == 0)
         return (20.0 / server->freq);
     else if (strcmp(buffer, "LifeCycle") == 0)
-        return (200.0 / server->freq);
+        return (126.0 / server->freq);
     else return 0.0;
 }
 
@@ -96,7 +96,6 @@ void execute_tasks(server_t *server)
         if (tmp->time <= 0) {
                 send_task_response(server, tmp, tmp->cmd);
                 LIST_REMOVE(tmp, next);
-                return execute_tasks(server);
         }
     }
     return;

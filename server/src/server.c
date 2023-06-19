@@ -53,10 +53,10 @@ void add_clients_to_set(fd_set *set, server_t *s_infos)
 void loop_server(server_t *s_infos)
 {
     while (1) {
+        calculate_timeout_val(s_infos);
         fd_set readfds; FD_ZERO(&readfds);
         FD_SET(s_infos->socket, &readfds);
         add_clients_to_set(&readfds, s_infos);
-        calculate_timeout_val(s_infos);
         int select_val = select(1000, &readfds, NULL, NULL, s_infos->tv);
         if (select_val <= 0) {
             execute_tasks(s_infos);

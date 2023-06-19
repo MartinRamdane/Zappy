@@ -38,7 +38,7 @@ void recalculate_task_time(server_t *server)
             elapsed_time.tv_usec = 0;
             tmp->time -= elapsed_time.tv_sec + (double)elapsed_time.tv_usec / 1000000.0;
 
-            if (tmp->time < 0) {
+            if (tmp->time <= 0) {
                 tmp->time = 0;
             }
         }
