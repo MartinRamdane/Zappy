@@ -167,7 +167,6 @@ void Display::clickHandler(MapT cache)
     }
     int opacity = this->_inventory->getOpacity();
     this->_inventory->eventHandler(this->_event, *this->_window);
-    std::cout << opacity << " " << this->_inventory->isFadingOut() << std::endl;
     for (auto &sprite : this->_map) {
         sf::Vector2i click = sprite->getClicked();
         if (click.x != -1 && click.y != -1 && clicked == false && (opacity == 0 || this->_inventory->isFadingOut() == false)) {

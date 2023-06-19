@@ -321,11 +321,13 @@ void SInventory::eventHandler(sf::Event event, sf::RenderWindow &window)
                 continue;
             } else {
                 this->_texts[sprite.first + "Name"]->setFillColor(sf::Color(255, 255, 255, 255));
+                this->_background.setSize(sf::Vector2f(this->_texts[sprite.first + "Name"]->getGlobalBounds().width + 10, 35));
                 this->_background.setFillColor(sf::Color(0, 0, 0, 190));
-                this->_background.setPosition(this->_texts[sprite.first + "Name"]->getPosition().x - 5, this->_texts[sprite.first + "Name"]->getPosition().y);
+                this->_background.setPosition(this->_texts[sprite.first + "Name"]->getPosition().x - 5, this->_texts[sprite.first + "Name"]->getPosition().y + 10);
+                break;
             }
         } else {
-            if(sprite.first == "inventory" || sprite.first == "display" || sprite.first == "trantorian" || sprite.first == "close") {
+            if (sprite.first == "inventory" || sprite.first == "display" || sprite.first == "trantorian" || sprite.first == "close") {
                 continue;
             } else {
                 this->_texts[sprite.first + "Name"]->setFillColor(sf::Color(255, 255, 255, 0));

@@ -24,11 +24,10 @@ s
 sg
 sgt
 sgt 
-sgt 1
-sgt 10
-sgt 10
+sgt 5
+sgt 5
 
-frequency : 10
+frequency : 5
 
 b
 bc
@@ -38,22 +37,22 @@ bct 0
 bct 0 
 bct 0 0
 bct 0 0 
-bct 0 0 1
-bct 0 0 1 
-bct 0 0 1 0
-bct 0 0 1 0 
-bct 0 0 1 0 1
-bct 0 0 1 0 1 
-bct 0 0 1 0 1 0
-bct 0 0 1 0 1 0 
-bct 0 0 1 0 1 0 0
-bct 0 0 1 0 1 0 0 
-bct 0 0 1 0 1 0 0 1
-bct 0 0 1 0 1 0 0 1 
-bct 0 0 1 0 1 0 0 1 0
-bct 0 0 1 0 1 0 0 1 0
+bct 0 0 5
+bct 0 0 5 
+bct 0 0 5 1
+bct 0 0 5 1 
+bct 0 0 5 1 0
+bct 0 0 5 1 0 
+bct 0 0 5 1 0 0
+bct 0 0 5 1 0 0 
+bct 0 0 5 1 0 0 1
+bct 0 0 5 1 0 0 1 
+bct 0 0 5 1 0 0 1 0
+bct 0 0 5 1 0 0 1 0 
+bct 0 0 5 1 0 0 1 0 0
+bct 0 0 5 1 0 0 1 0 0
 
-Tile 0 0 has 1 0 1 0 0 1 0
+Tile 0 0 has 5 1 0 0 1 0 0
 b
 bc
 bct
@@ -62,22 +61,22 @@ bct 1
 bct 1 
 bct 1 0
 bct 1 0 
-bct 1 0 0
-bct 1 0 0 
-bct 1 0 0 0
-bct 1 0 0 0 
-bct 1 0 0 0 0
-bct 1 0 0 0 0 
-bct 1 0 0 0 0 1
-bct 1 0 0 0 0 1 
-bct 1 0 0 0 0 1 0
-bct 1 0 0 0 0 1 0 
-bct 1 0 0 0 0 1 0 0
-bct 1 0 0 0 0 1 0 0 
-bct 1 0 0 0 0 1 0 0 0
-bct 1 0 0 0 0 1 0 0 0
+bct 1 0 7
+bct 1 0 7 
+bct 1 0 7 0
+bct 1 0 7 0 
+bct 1 0 7 0 0
+bct 1 0 7 0 0 
+bct 1 0 7 0 0 2
+bct 1 0 7 0 0 2 
+bct 1 0 7 0 0 2 0
+bct 1 0 7 0 0 2 0 
+bct 1 0 7 0 0 2 0 0
+bct 1 0 7 0 0 2 0 0 
+bct 1 0 7 0 0 2 0 0 0
+bct 1 0 7 0 0 2 0 0 0
 
-Tile 1 0 has 0 0 0 1 0 0 0
+Tile 1 0 has 7 0 0 2 0 0 0
 b
 bc
 bct
@@ -86,22 +85,22 @@ bct 2
 bct 2 
 bct 2 0
 bct 2 0 
-bct 2 0 0
-bct 2 0 0 
-bct 2 0 0 0
-bct 2 0 0 0 
-bct 2 0 0 0 0
-bct 2 0 0 0 0 
-bct 2 0 0 0 0 0
-bct 2 0 0 0 0 0 
-bct 2 0 0 0 0 0 0
-bct 2 0 0 0 0 0 0 
-bct 2 0 0 0 0 0 0 0
-bct 2 0 0 0 0 0 0 0 
-bct 2 0 0 0 0 0 0 0 0
-bct 2 0 0 0 0 0 0 0 0
+bct 2 0 1
+bct 2 0 1 
+bct 2 0 1 0
+bct 2 0 1 0 
+bct 2 0 1 0 0
+bct 2 0 1 0 0 
+bct 2 0 1 0 0 0
+bct 2 0 1 0 0 0 
+bct 2 0 1 0 0 0 1
+bct 2 0 1 0 0 0 1 
+bct 2 0 1 0 0 0 1 0
+bct 2 0 1 0 0 0 1 0 
+bct 2 0 1 0 0 0 1 0 0
+bct 2 0 1 0 0 0 1 0 0
 
-Tile 2 0 has 0 0 0 0 0 0 0
+Tile 2 0 has 1 0 0 0 1 0 0
 b
 bc
 bct
@@ -110,22 +109,22 @@ bct 3
 bct 3 
 bct 3 0
 bct 3 0 
-bct 3 0 2
-bct 3 0 2 
-bct 3 0 2 0
-bct 3 0 2 0 
-bct 3 0 2 0 1
-bct 3 0 2 0 1 
-bct 3 0 2 0 1 0
-bct 3 0 2 0 1 0 
-bct 3 0 2 0 1 0 0
-bct 3 0 2 0 1 0 0 
-bct 3 0 2 0 1 0 0 0
-bct 3 0 2 0 1 0 0 0 
-bct 3 0 2 0 1 0 0 0 0
-bct 3 0 2 0 1 0 0 0 0
+bct 3 0 3
+bct 3 0 3 
+bct 3 0 3 1
+bct 3 0 3 1 
+bct 3 0 3 1 0
+bct 3 0 3 1 0 
+bct 3 0 3 1 0 0
+bct 3 0 3 1 0 0 
+bct 3 0 3 1 0 0 0
+bct 3 0 3 1 0 0 0 
+bct 3 0 3 1 0 0 0 1
+bct 3 0 3 1 0 0 0 1 
+bct 3 0 3 1 0 0 0 1 0
+bct 3 0 3 1 0 0 0 1 0
 
-Tile 3 0 has 2 0 1 0 0 0 0
+Tile 3 0 has 3 1 0 0 0 1 0
 b
 bc
 bct
@@ -134,22 +133,22 @@ bct 4
 bct 4 
 bct 4 0
 bct 4 0 
-bct 4 0 2
-bct 4 0 2 
-bct 4 0 2 0
-bct 4 0 2 0 
-bct 4 0 2 0 1
-bct 4 0 2 0 1 
-bct 4 0 2 0 1 0
-bct 4 0 2 0 1 0 
-bct 4 0 2 0 1 0 0
-bct 4 0 2 0 1 0 0 
-bct 4 0 2 0 1 0 0 0
-bct 4 0 2 0 1 0 0 0 
-bct 4 0 2 0 1 0 0 0 0
-bct 4 0 2 0 1 0 0 0 0
+bct 4 0 1
+bct 4 0 1 
+bct 4 0 1 0
+bct 4 0 1 0 
+bct 4 0 1 0 1
+bct 4 0 1 0 1 
+bct 4 0 1 0 1 0
+bct 4 0 1 0 1 0 
+bct 4 0 1 0 1 0 0
+bct 4 0 1 0 1 0 0 
+bct 4 0 1 0 1 0 0 0
+bct 4 0 1 0 1 0 0 0 
+bct 4 0 1 0 1 0 0 0 0
+bct 4 0 1 0 1 0 0 0 0
 
-Tile 4 0 has 2 0 1 0 0 0 0
+Tile 4 0 has 1 0 1 0 0 0 0
 b
 bc
 bct
@@ -158,22 +157,22 @@ bct 5
 bct 5 
 bct 5 0
 bct 5 0 
-bct 5 0 3
-bct 5 0 3 
-bct 5 0 3 0
-bct 5 0 3 0 
-bct 5 0 3 0 0
-bct 5 0 3 0 0 
-bct 5 0 3 0 0 0
-bct 5 0 3 0 0 0 
-bct 5 0 3 0 0 0 0
-bct 5 0 3 0 0 0 0 
-bct 5 0 3 0 0 0 0 0
-bct 5 0 3 0 0 0 0 0 
-bct 5 0 3 0 0 0 0 0 0
-bct 5 0 3 0 0 0 0 0 0
+bct 5 0 4
+bct 5 0 4 
+bct 5 0 4 0
+bct 5 0 4 0 
+bct 5 0 4 0 0
+bct 5 0 4 0 0 
+bct 5 0 4 0 0 0
+bct 5 0 4 0 0 0 
+bct 5 0 4 0 0 0 0
+bct 5 0 4 0 0 0 0 
+bct 5 0 4 0 0 0 0 0
+bct 5 0 4 0 0 0 0 0 
+bct 5 0 4 0 0 0 0 0 0
+bct 5 0 4 0 0 0 0 0 0
 
-Tile 5 0 has 3 0 0 0 0 0 0
+Tile 5 0 has 4 0 0 0 0 0 0
 b
 bc
 bct
@@ -182,22 +181,22 @@ bct 6
 bct 6 
 bct 6 0
 bct 6 0 
-bct 6 0 2
-bct 6 0 2 
-bct 6 0 2 1
-bct 6 0 2 1 
-bct 6 0 2 1 0
-bct 6 0 2 1 0 
-bct 6 0 2 1 0 1
-bct 6 0 2 1 0 1 
-bct 6 0 2 1 0 1 1
-bct 6 0 2 1 0 1 1 
-bct 6 0 2 1 0 1 1 0
-bct 6 0 2 1 0 1 1 0 
-bct 6 0 2 1 0 1 1 0 0
-bct 6 0 2 1 0 1 1 0 0
+bct 6 0 4
+bct 6 0 4 
+bct 6 0 4 0
+bct 6 0 4 0 
+bct 6 0 4 0 0
+bct 6 0 4 0 0 
+bct 6 0 4 0 0 0
+bct 6 0 4 0 0 0 
+bct 6 0 4 0 0 0 0
+bct 6 0 4 0 0 0 0 
+bct 6 0 4 0 0 0 0 0
+bct 6 0 4 0 0 0 0 0 
+bct 6 0 4 0 0 0 0 0 0
+bct 6 0 4 0 0 0 0 0 0
 
-Tile 6 0 has 2 1 0 1 1 0 0
+Tile 6 0 has 4 0 0 0 0 0 0
 b
 bc
 bct
@@ -206,22 +205,22 @@ bct 7
 bct 7 
 bct 7 0
 bct 7 0 
-bct 7 0 1
-bct 7 0 1 
-bct 7 0 1 1
-bct 7 0 1 1 
-bct 7 0 1 1 0
-bct 7 0 1 1 0 
-bct 7 0 1 1 0 1
-bct 7 0 1 1 0 1 
-bct 7 0 1 1 0 1 0
-bct 7 0 1 1 0 1 0 
-bct 7 0 1 1 0 1 0 0
-bct 7 0 1 1 0 1 0 0 
-bct 7 0 1 1 0 1 0 0 0
-bct 7 0 1 1 0 1 0 0 0
+bct 7 0 3
+bct 7 0 3 
+bct 7 0 3 2
+bct 7 0 3 2 
+bct 7 0 3 2 0
+bct 7 0 3 2 0 
+bct 7 0 3 2 0 0
+bct 7 0 3 2 0 0 
+bct 7 0 3 2 0 0 2
+bct 7 0 3 2 0 0 2 
+bct 7 0 3 2 0 0 2 0
+bct 7 0 3 2 0 0 2 0 
+bct 7 0 3 2 0 0 2 0 0
+bct 7 0 3 2 0 0 2 0 0
 
-Tile 7 0 has 1 1 0 1 0 0 0
+Tile 7 0 has 3 2 0 0 2 0 0
 b
 bc
 bct
@@ -230,22 +229,22 @@ bct 8
 bct 8 
 bct 8 0
 bct 8 0 
-bct 8 0 1
-bct 8 0 1 
-bct 8 0 1 0
-bct 8 0 1 0 
-bct 8 0 1 0 0
-bct 8 0 1 0 0 
-bct 8 0 1 0 0 1
-bct 8 0 1 0 0 1 
-bct 8 0 1 0 0 1 1
-bct 8 0 1 0 0 1 1 
-bct 8 0 1 0 0 1 1 0
-bct 8 0 1 0 0 1 1 0 
-bct 8 0 1 0 0 1 1 0 0
-bct 8 0 1 0 0 1 1 0 0
+bct 8 0 3
+bct 8 0 3 
+bct 8 0 3 0
+bct 8 0 3 0 
+bct 8 0 3 0 0
+bct 8 0 3 0 0 
+bct 8 0 3 0 0 0
+bct 8 0 3 0 0 0 
+bct 8 0 3 0 0 0 0
+bct 8 0 3 0 0 0 0 
+bct 8 0 3 0 0 0 0 0
+bct 8 0 3 0 0 0 0 0 
+bct 8 0 3 0 0 0 0 0 0
+bct 8 0 3 0 0 0 0 0 0
 
-Tile 8 0 has 1 0 0 1 1 0 0
+Tile 8 0 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -254,22 +253,22 @@ bct 9
 bct 9 
 bct 9 0
 bct 9 0 
-bct 9 0 0
-bct 9 0 0 
-bct 9 0 0 0
-bct 9 0 0 0 
-bct 9 0 0 0 0
-bct 9 0 0 0 0 
-bct 9 0 0 0 0 0
-bct 9 0 0 0 0 0 
-bct 9 0 0 0 0 0 0
-bct 9 0 0 0 0 0 0 
-bct 9 0 0 0 0 0 0 0
-bct 9 0 0 0 0 0 0 0 
-bct 9 0 0 0 0 0 0 0 0
-bct 9 0 0 0 0 0 0 0 0
+bct 9 0 2
+bct 9 0 2 
+bct 9 0 2 0
+bct 9 0 2 0 
+bct 9 0 2 0 0
+bct 9 0 2 0 0 
+bct 9 0 2 0 0 0
+bct 9 0 2 0 0 0 
+bct 9 0 2 0 0 0 0
+bct 9 0 2 0 0 0 0 
+bct 9 0 2 0 0 0 0 0
+bct 9 0 2 0 0 0 0 0 
+bct 9 0 2 0 0 0 0 0 0
+bct 9 0 2 0 0 0 0 0 0
 
-Tile 9 0 has 0 0 0 0 0 0 0
+Tile 9 0 has 2 0 0 0 0 0 0
 b
 bc
 bct
@@ -278,22 +277,22 @@ bct 0
 bct 0 
 bct 0 1
 bct 0 1 
-bct 0 1 1
-bct 0 1 1 
-bct 0 1 1 0
-bct 0 1 1 0 
-bct 0 1 1 0 1
-bct 0 1 1 0 1 
-bct 0 1 1 0 1 0
-bct 0 1 1 0 1 0 
-bct 0 1 1 0 1 0 0
-bct 0 1 1 0 1 0 0 
-bct 0 1 1 0 1 0 0 0
-bct 0 1 1 0 1 0 0 0 
-bct 0 1 1 0 1 0 0 0 0
-bct 0 1 1 0 1 0 0 0 0
+bct 0 1 3
+bct 0 1 3 
+bct 0 1 3 1
+bct 0 1 3 1 
+bct 0 1 3 1 1
+bct 0 1 3 1 1 
+bct 0 1 3 1 1 0
+bct 0 1 3 1 1 0 
+bct 0 1 3 1 1 0 1
+bct 0 1 3 1 1 0 1 
+bct 0 1 3 1 1 0 1 0
+bct 0 1 3 1 1 0 1 0 
+bct 0 1 3 1 1 0 1 0 1
+bct 0 1 3 1 1 0 1 0 1
 
-Tile 0 1 has 1 0 1 0 0 0 0
+Tile 0 1 has 3 1 1 0 1 0 1
 b
 bc
 bct
@@ -302,22 +301,22 @@ bct 1
 bct 1 
 bct 1 1
 bct 1 1 
-bct 1 1 0
-bct 1 1 0 
-bct 1 1 0 0
-bct 1 1 0 0 
-bct 1 1 0 0 0
-bct 1 1 0 0 0 
-bct 1 1 0 0 0 0
-bct 1 1 0 0 0 0 
-bct 1 1 0 0 0 0 0
-bct 1 1 0 0 0 0 0 
-bct 1 1 0 0 0 0 0 0
-bct 1 1 0 0 0 0 0 0 
-bct 1 1 0 0 0 0 0 0 0
-bct 1 1 0 0 0 0 0 0 0
+bct 1 1 3
+bct 1 1 3 
+bct 1 1 3 0
+bct 1 1 3 0 
+bct 1 1 3 0 0
+bct 1 1 3 0 0 
+bct 1 1 3 0 0 0
+bct 1 1 3 0 0 0 
+bct 1 1 3 0 0 0 1
+bct 1 1 3 0 0 0 1 
+bct 1 1 3 0 0 0 1 0
+bct 1 1 3 0 0 0 1 0 
+bct 1 1 3 0 0 0 1 0 0
+bct 1 1 3 0 0 0 1 0 0
 
-Tile 1 1 has 0 0 0 0 0 0 0
+Tile 1 1 has 3 0 0 0 1 0 0
 b
 bc
 bct
@@ -326,22 +325,22 @@ bct 2
 bct 2 
 bct 2 1
 bct 2 1 
-bct 2 1 0
-bct 2 1 0 
-bct 2 1 0 0
-bct 2 1 0 0 
-bct 2 1 0 0 1
-bct 2 1 0 0 1 
-bct 2 1 0 0 1 1
-bct 2 1 0 0 1 1 
-bct 2 1 0 0 1 1 0
-bct 2 1 0 0 1 1 0 
-bct 2 1 0 0 1 1 0 2
-bct 2 1 0 0 1 1 0 2 
-bct 2 1 0 0 1 1 0 2 0
-bct 2 1 0 0 1 1 0 2 0
+bct 2 1 2
+bct 2 1 2 
+bct 2 1 2 1
+bct 2 1 2 1 
+bct 2 1 2 1 0
+bct 2 1 2 1 0 
+bct 2 1 2 1 0 1
+bct 2 1 2 1 0 1 
+bct 2 1 2 1 0 1 1
+bct 2 1 2 1 0 1 1 
+bct 2 1 2 1 0 1 1 0
+bct 2 1 2 1 0 1 1 0 
+bct 2 1 2 1 0 1 1 0 0
+bct 2 1 2 1 0 1 1 0 0
 
-Tile 2 1 has 0 0 1 1 0 2 0
+Tile 2 1 has 2 1 0 1 1 0 0
 b
 bc
 bct
@@ -350,22 +349,22 @@ bct 3
 bct 3 
 bct 3 1
 bct 3 1 
-bct 3 1 3
-bct 3 1 3 
-bct 3 1 3 1
-bct 3 1 3 1 
-bct 3 1 3 1 0
-bct 3 1 3 1 0 
-bct 3 1 3 1 0 0
-bct 3 1 3 1 0 0 
-bct 3 1 3 1 0 0 0
-bct 3 1 3 1 0 0 0 
-bct 3 1 3 1 0 0 0 0
-bct 3 1 3 1 0 0 0 0 
-bct 3 1 3 1 0 0 0 0 0
-bct 3 1 3 1 0 0 0 0 0
+bct 3 1 4
+bct 3 1 4 
+bct 3 1 4 1
+bct 3 1 4 1 
+bct 3 1 4 1 0
+bct 3 1 4 1 0 
+bct 3 1 4 1 0 0
+bct 3 1 4 1 0 0 
+bct 3 1 4 1 0 0 1
+bct 3 1 4 1 0 0 1 
+bct 3 1 4 1 0 0 1 0
+bct 3 1 4 1 0 0 1 0 
+bct 3 1 4 1 0 0 1 0 0
+bct 3 1 4 1 0 0 1 0 0
 
-Tile 3 1 has 3 1 0 0 0 0 0
+Tile 3 1 has 4 1 0 0 1 0 0
 b
 bc
 bct
@@ -374,22 +373,22 @@ bct 4
 bct 4 
 bct 4 1
 bct 4 1 
-bct 4 1 0
-bct 4 1 0 
-bct 4 1 0 0
-bct 4 1 0 0 
-bct 4 1 0 0 0
-bct 4 1 0 0 0 
-bct 4 1 0 0 0 2
-bct 4 1 0 0 0 2 
-bct 4 1 0 0 0 2 0
-bct 4 1 0 0 0 2 0 
-bct 4 1 0 0 0 2 0 0
-bct 4 1 0 0 0 2 0 0 
-bct 4 1 0 0 0 2 0 0 0
-bct 4 1 0 0 0 2 0 0 0
+bct 4 1 4
+bct 4 1 4 
+bct 4 1 4 0
+bct 4 1 4 0 
+bct 4 1 4 0 0
+bct 4 1 4 0 0 
+bct 4 1 4 0 0 0
+bct 4 1 4 0 0 0 
+bct 4 1 4 0 0 0 0
+bct 4 1 4 0 0 0 0 
+bct 4 1 4 0 0 0 0 1
+bct 4 1 4 0 0 0 0 1 
+bct 4 1 4 0 0 0 0 1 0
+bct 4 1 4 0 0 0 0 1 0
 
-Tile 4 1 has 0 0 0 2 0 0 0
+Tile 4 1 has 4 0 0 0 0 1 0
 b
 bc
 bct
@@ -398,22 +397,22 @@ bct 5
 bct 5 
 bct 5 1
 bct 5 1 
-bct 5 1 1
-bct 5 1 1 
-bct 5 1 1 0
-bct 5 1 1 0 
-bct 5 1 1 0 0
-bct 5 1 1 0 0 
-bct 5 1 1 0 0 0
-bct 5 1 1 0 0 0 
-bct 5 1 1 0 0 0 0
-bct 5 1 1 0 0 0 0 
-bct 5 1 1 0 0 0 0 1
-bct 5 1 1 0 0 0 0 1 
-bct 5 1 1 0 0 0 0 1 0
-bct 5 1 1 0 0 0 0 1 0
+bct 5 1 2
+bct 5 1 2 
+bct 5 1 2 0
+bct 5 1 2 0 
+bct 5 1 2 0 0
+bct 5 1 2 0 0 
+bct 5 1 2 0 0 0
+bct 5 1 2 0 0 0 
+bct 5 1 2 0 0 0 0
+bct 5 1 2 0 0 0 0 
+bct 5 1 2 0 0 0 0 0
+bct 5 1 2 0 0 0 0 0 
+bct 5 1 2 0 0 0 0 0 0
+bct 5 1 2 0 0 0 0 0 0
 
-Tile 5 1 has 1 0 0 0 0 1 0
+Tile 5 1 has 2 0 0 0 0 0 0
 b
 bc
 bct
@@ -422,22 +421,22 @@ bct 6
 bct 6 
 bct 6 1
 bct 6 1 
-bct 6 1 0
-bct 6 1 0 
-bct 6 1 0 0
-bct 6 1 0 0 
-bct 6 1 0 0 0
-bct 6 1 0 0 0 
-bct 6 1 0 0 0 0
-bct 6 1 0 0 0 0 
-bct 6 1 0 0 0 0 1
-bct 6 1 0 0 0 0 1 
-bct 6 1 0 0 0 0 1 0
-bct 6 1 0 0 0 0 1 0 
-bct 6 1 0 0 0 0 1 0 0
-bct 6 1 0 0 0 0 1 0 0
+bct 6 1 3
+bct 6 1 3 
+bct 6 1 3 0
+bct 6 1 3 0 
+bct 6 1 3 0 0
+bct 6 1 3 0 0 
+bct 6 1 3 0 0 0
+bct 6 1 3 0 0 0 
+bct 6 1 3 0 0 0 0
+bct 6 1 3 0 0 0 0 
+bct 6 1 3 0 0 0 0 2
+bct 6 1 3 0 0 0 0 2 
+bct 6 1 3 0 0 0 0 2 0
+bct 6 1 3 0 0 0 0 2 0
 
-Tile 6 1 has 0 0 0 0 1 0 0
+Tile 6 1 has 3 0 0 0 0 2 0
 b
 bc
 bct
@@ -446,22 +445,22 @@ bct 7
 bct 7 
 bct 7 1
 bct 7 1 
-bct 7 1 1
-bct 7 1 1 
-bct 7 1 1 0
-bct 7 1 1 0 
-bct 7 1 1 0 1
-bct 7 1 1 0 1 
-bct 7 1 1 0 1 0
-bct 7 1 1 0 1 0 
-bct 7 1 1 0 1 0 0
-bct 7 1 1 0 1 0 0 
-bct 7 1 1 0 1 0 0 0
-bct 7 1 1 0 1 0 0 0 
-bct 7 1 1 0 1 0 0 0 0
-bct 7 1 1 0 1 0 0 0 0
+bct 7 1 0
+bct 7 1 0 
+bct 7 1 0 0
+bct 7 1 0 0 
+bct 7 1 0 0 1
+bct 7 1 0 0 1 
+bct 7 1 0 0 1 0
+bct 7 1 0 0 1 0 
+bct 7 1 0 0 1 0 0
+bct 7 1 0 0 1 0 0 
+bct 7 1 0 0 1 0 0 0
+bct 7 1 0 0 1 0 0 0 
+bct 7 1 0 0 1 0 0 0 0
+bct 7 1 0 0 1 0 0 0 0
 
-Tile 7 1 has 1 0 1 0 0 0 0
+Tile 7 1 has 0 0 1 0 0 0 0
 b
 bc
 bct
@@ -494,22 +493,22 @@ bct 9
 bct 9 
 bct 9 1
 bct 9 1 
-bct 9 1 2
-bct 9 1 2 
-bct 9 1 2 0
-bct 9 1 2 0 
-bct 9 1 2 0 0
-bct 9 1 2 0 0 
-bct 9 1 2 0 0 0
-bct 9 1 2 0 0 0 
-bct 9 1 2 0 0 0 0
-bct 9 1 2 0 0 0 0 
-bct 9 1 2 0 0 0 0 0
-bct 9 1 2 0 0 0 0 0 
-bct 9 1 2 0 0 0 0 0 0
-bct 9 1 2 0 0 0 0 0 0
+bct 9 1 3
+bct 9 1 3 
+bct 9 1 3 0
+bct 9 1 3 0 
+bct 9 1 3 0 0
+bct 9 1 3 0 0 
+bct 9 1 3 0 0 0
+bct 9 1 3 0 0 0 
+bct 9 1 3 0 0 0 0
+bct 9 1 3 0 0 0 0 
+bct 9 1 3 0 0 0 0 0
+bct 9 1 3 0 0 0 0 0 
+bct 9 1 3 0 0 0 0 0 0
+bct 9 1 3 0 0 0 0 0 0
 
-Tile 9 1 has 2 0 0 0 0 0 0
+Tile 9 1 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -520,20 +519,20 @@ bct 0 2
 bct 0 2 
 bct 0 2 2
 bct 0 2 2 
-bct 0 2 2 1
-bct 0 2 2 1 
-bct 0 2 2 1 0
-bct 0 2 2 1 0 
-bct 0 2 2 1 0 0
-bct 0 2 2 1 0 0 
-bct 0 2 2 1 0 0 0
-bct 0 2 2 1 0 0 0 
-bct 0 2 2 1 0 0 0 0
-bct 0 2 2 1 0 0 0 0 
-bct 0 2 2 1 0 0 0 0 0
-bct 0 2 2 1 0 0 0 0 0
+bct 0 2 2 0
+bct 0 2 2 0 
+bct 0 2 2 0 1
+bct 0 2 2 0 1 
+bct 0 2 2 0 1 1
+bct 0 2 2 0 1 1 
+bct 0 2 2 0 1 1 0
+bct 0 2 2 0 1 1 0 
+bct 0 2 2 0 1 1 0 0
+bct 0 2 2 0 1 1 0 0 
+bct 0 2 2 0 1 1 0 0 0
+bct 0 2 2 0 1 1 0 0 0
 
-Tile 0 2 has 2 1 0 0 0 0 0
+Tile 0 2 has 2 0 1 1 0 0 0
 b
 bc
 bct
@@ -542,22 +541,22 @@ bct 1
 bct 1 
 bct 1 2
 bct 1 2 
-bct 1 2 2
-bct 1 2 2 
-bct 1 2 2 0
-bct 1 2 2 0 
-bct 1 2 2 0 0
-bct 1 2 2 0 0 
-bct 1 2 2 0 0 0
-bct 1 2 2 0 0 0 
-bct 1 2 2 0 0 0 0
-bct 1 2 2 0 0 0 0 
-bct 1 2 2 0 0 0 0 0
-bct 1 2 2 0 0 0 0 0 
-bct 1 2 2 0 0 0 0 0 0
-bct 1 2 2 0 0 0 0 0 0
+bct 1 2 1
+bct 1 2 1 
+bct 1 2 1 0
+bct 1 2 1 0 
+bct 1 2 1 0 0
+bct 1 2 1 0 0 
+bct 1 2 1 0 0 0
+bct 1 2 1 0 0 0 
+bct 1 2 1 0 0 0 0
+bct 1 2 1 0 0 0 0 
+bct 1 2 1 0 0 0 0 0
+bct 1 2 1 0 0 0 0 0 
+bct 1 2 1 0 0 0 0 0 0
+bct 1 2 1 0 0 0 0 0 0
 
-Tile 1 2 has 2 0 0 0 0 0 0
+Tile 1 2 has 1 0 0 0 0 0 0
 b
 bc
 bct
@@ -570,18 +569,18 @@ bct 2 2 1
 bct 2 2 1 
 bct 2 2 1 0
 bct 2 2 1 0 
-bct 2 2 1 0 0
-bct 2 2 1 0 0 
-bct 2 2 1 0 0 1
-bct 2 2 1 0 0 1 
-bct 2 2 1 0 0 1 0
-bct 2 2 1 0 0 1 0 
-bct 2 2 1 0 0 1 0 0
-bct 2 2 1 0 0 1 0 0 
-bct 2 2 1 0 0 1 0 0 0
-bct 2 2 1 0 0 1 0 0 0
+bct 2 2 1 0 1
+bct 2 2 1 0 1 
+bct 2 2 1 0 1 0
+bct 2 2 1 0 1 0 
+bct 2 2 1 0 1 0 0
+bct 2 2 1 0 1 0 0 
+bct 2 2 1 0 1 0 0 0
+bct 2 2 1 0 1 0 0 0 
+bct 2 2 1 0 1 0 0 0 1
+bct 2 2 1 0 1 0 0 0 1
 
-Tile 2 2 has 1 0 0 1 0 0 0
+Tile 2 2 has 1 0 1 0 0 0 1
 b
 bc
 bct
@@ -594,18 +593,18 @@ bct 3 2 0
 bct 3 2 0 
 bct 3 2 0 1
 bct 3 2 0 1 
-bct 3 2 0 1 1
-bct 3 2 0 1 1 
-bct 3 2 0 1 1 0
-bct 3 2 0 1 1 0 
-bct 3 2 0 1 1 0 2
-bct 3 2 0 1 1 0 2 
-bct 3 2 0 1 1 0 2 0
-bct 3 2 0 1 1 0 2 0 
-bct 3 2 0 1 1 0 2 0 0
-bct 3 2 0 1 1 0 2 0 0
+bct 3 2 0 1 0
+bct 3 2 0 1 0 
+bct 3 2 0 1 0 0
+bct 3 2 0 1 0 0 
+bct 3 2 0 1 0 0 0
+bct 3 2 0 1 0 0 0 
+bct 3 2 0 1 0 0 0 0
+bct 3 2 0 1 0 0 0 0 
+bct 3 2 0 1 0 0 0 0 0
+bct 3 2 0 1 0 0 0 0 0
 
-Tile 3 2 has 0 1 1 0 2 0 0
+Tile 3 2 has 0 1 0 0 0 0 0
 b
 bc
 bct
@@ -614,22 +613,22 @@ bct 4
 bct 4 
 bct 4 2
 bct 4 2 
-bct 4 2 2
-bct 4 2 2 
-bct 4 2 2 2
-bct 4 2 2 2 
-bct 4 2 2 2 0
-bct 4 2 2 2 0 
-bct 4 2 2 2 0 0
-bct 4 2 2 2 0 0 
-bct 4 2 2 2 0 0 0
-bct 4 2 2 2 0 0 0 
-bct 4 2 2 2 0 0 0 0
-bct 4 2 2 2 0 0 0 0 
-bct 4 2 2 2 0 0 0 0 0
-bct 4 2 2 2 0 0 0 0 0
+bct 4 2 3
+bct 4 2 3 
+bct 4 2 3 0
+bct 4 2 3 0 
+bct 4 2 3 0 1
+bct 4 2 3 0 1 
+bct 4 2 3 0 1 0
+bct 4 2 3 0 1 0 
+bct 4 2 3 0 1 0 0
+bct 4 2 3 0 1 0 0 
+bct 4 2 3 0 1 0 0 0
+bct 4 2 3 0 1 0 0 0 
+bct 4 2 3 0 1 0 0 0 0
+bct 4 2 3 0 1 0 0 0 0
 
-Tile 4 2 has 2 2 0 0 0 0 0
+Tile 4 2 has 3 0 1 0 0 0 0
 b
 bc
 bct
@@ -638,22 +637,22 @@ bct 5
 bct 5 
 bct 5 2
 bct 5 2 
-bct 5 2 3
-bct 5 2 3 
-bct 5 2 3 0
-bct 5 2 3 0 
-bct 5 2 3 0 0
-bct 5 2 3 0 0 
-bct 5 2 3 0 0 0
-bct 5 2 3 0 0 0 
-bct 5 2 3 0 0 0 0
-bct 5 2 3 0 0 0 0 
-bct 5 2 3 0 0 0 0 0
-bct 5 2 3 0 0 0 0 0 
-bct 5 2 3 0 0 0 0 0 1
-bct 5 2 3 0 0 0 0 0 1
+bct 5 2 2
+bct 5 2 2 
+bct 5 2 2 0
+bct 5 2 2 0 
+bct 5 2 2 0 0
+bct 5 2 2 0 0 
+bct 5 2 2 0 0 0
+bct 5 2 2 0 0 0 
+bct 5 2 2 0 0 0 0
+bct 5 2 2 0 0 0 0 
+bct 5 2 2 0 0 0 0 0
+bct 5 2 2 0 0 0 0 0 
+bct 5 2 2 0 0 0 0 0 0
+bct 5 2 2 0 0 0 0 0 0
 
-Tile 5 2 has 3 0 0 0 0 0 1
+Tile 5 2 has 2 0 0 0 0 0 0
 b
 bc
 bct
@@ -672,12 +671,12 @@ bct 6 2 1 0 0 0
 bct 6 2 1 0 0 0 
 bct 6 2 1 0 0 0 0
 bct 6 2 1 0 0 0 0 
-bct 6 2 1 0 0 0 0 0
-bct 6 2 1 0 0 0 0 0 
-bct 6 2 1 0 0 0 0 0 0
-bct 6 2 1 0 0 0 0 0 0
+bct 6 2 1 0 0 0 0 2
+bct 6 2 1 0 0 0 0 2 
+bct 6 2 1 0 0 0 0 2 0
+bct 6 2 1 0 0 0 0 2 0
 
-Tile 6 2 has 1 0 0 0 0 0 0
+Tile 6 2 has 1 0 0 0 0 2 0
 b
 bc
 bct
@@ -686,22 +685,22 @@ bct 7
 bct 7 
 bct 7 2
 bct 7 2 
-bct 7 2 0
-bct 7 2 0 
-bct 7 2 0 0
-bct 7 2 0 0 
-bct 7 2 0 0 1
-bct 7 2 0 0 1 
-bct 7 2 0 0 1 0
-bct 7 2 0 0 1 0 
-bct 7 2 0 0 1 0 0
-bct 7 2 0 0 1 0 0 
-bct 7 2 0 0 1 0 0 1
-bct 7 2 0 0 1 0 0 1 
-bct 7 2 0 0 1 0 0 1 0
-bct 7 2 0 0 1 0 0 1 0
+bct 7 2 3
+bct 7 2 3 
+bct 7 2 3 0
+bct 7 2 3 0 
+bct 7 2 3 0 0
+bct 7 2 3 0 0 
+bct 7 2 3 0 0 0
+bct 7 2 3 0 0 0 
+bct 7 2 3 0 0 0 0
+bct 7 2 3 0 0 0 0 
+bct 7 2 3 0 0 0 0 0
+bct 7 2 3 0 0 0 0 0 
+bct 7 2 3 0 0 0 0 0 0
+bct 7 2 3 0 0 0 0 0 0
 
-Tile 7 2 has 0 0 1 0 0 1 0
+Tile 7 2 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -718,14 +717,14 @@ bct 8 2 2 0 0
 bct 8 2 2 0 0 
 bct 8 2 2 0 0 0
 bct 8 2 2 0 0 0 
-bct 8 2 2 0 0 0 0
-bct 8 2 2 0 0 0 0 
-bct 8 2 2 0 0 0 0 0
-bct 8 2 2 0 0 0 0 0 
-bct 8 2 2 0 0 0 0 0 0
-bct 8 2 2 0 0 0 0 0 0
+bct 8 2 2 0 0 0 1
+bct 8 2 2 0 0 0 1 
+bct 8 2 2 0 0 0 1 0
+bct 8 2 2 0 0 0 1 0 
+bct 8 2 2 0 0 0 1 0 0
+bct 8 2 2 0 0 0 1 0 0
 
-Tile 8 2 has 2 0 0 0 0 0 0
+Tile 8 2 has 2 0 0 0 1 0 0
 b
 bc
 bct
@@ -734,22 +733,22 @@ bct 9
 bct 9 
 bct 9 2
 bct 9 2 
-bct 9 2 2
-bct 9 2 2 
-bct 9 2 2 0
-bct 9 2 2 0 
-bct 9 2 2 0 0
-bct 9 2 2 0 0 
-bct 9 2 2 0 0 0
-bct 9 2 2 0 0 0 
-bct 9 2 2 0 0 0 0
-bct 9 2 2 0 0 0 0 
-bct 9 2 2 0 0 0 0 0
-bct 9 2 2 0 0 0 0 0 
-bct 9 2 2 0 0 0 0 0 0
-bct 9 2 2 0 0 0 0 0 0
+bct 9 2 1
+bct 9 2 1 
+bct 9 2 1 0
+bct 9 2 1 0 
+bct 9 2 1 0 0
+bct 9 2 1 0 0 
+bct 9 2 1 0 0 0
+bct 9 2 1 0 0 0 
+bct 9 2 1 0 0 0 1
+bct 9 2 1 0 0 0 1 
+bct 9 2 1 0 0 0 1 0
+bct 9 2 1 0 0 0 1 0 
+bct 9 2 1 0 0 0 1 0 0
+bct 9 2 1 0 0 0 1 0 0
 
-Tile 9 2 has 2 0 0 0 0 0 0
+Tile 9 2 has 1 0 0 0 1 0 0
 b
 bc
 bct
@@ -762,18 +761,18 @@ bct 0 3 3
 bct 0 3 3 
 bct 0 3 3 0
 bct 0 3 3 0 
-bct 0 3 3 0 1
-bct 0 3 3 0 1 
-bct 0 3 3 0 1 0
-bct 0 3 3 0 1 0 
-bct 0 3 3 0 1 0 0
-bct 0 3 3 0 1 0 0 
-bct 0 3 3 0 1 0 0 0
-bct 0 3 3 0 1 0 0 0 
-bct 0 3 3 0 1 0 0 0 0
-bct 0 3 3 0 1 0 0 0 0
+bct 0 3 3 0 0
+bct 0 3 3 0 0 
+bct 0 3 3 0 0 0
+bct 0 3 3 0 0 0 
+bct 0 3 3 0 0 0 1
+bct 0 3 3 0 0 0 1 
+bct 0 3 3 0 0 0 1 0
+bct 0 3 3 0 0 0 1 0 
+bct 0 3 3 0 0 0 1 0 0
+bct 0 3 3 0 0 0 1 0 0
 
-Tile 0 3 has 3 0 1 0 0 0 0
+Tile 0 3 has 3 0 0 0 1 0 0
 b
 bc
 bct
@@ -782,22 +781,22 @@ bct 1
 bct 1 
 bct 1 3
 bct 1 3 
-bct 1 3 1
-bct 1 3 1 
-bct 1 3 1 0
-bct 1 3 1 0 
-bct 1 3 1 0 0
-bct 1 3 1 0 0 
-bct 1 3 1 0 0 1
-bct 1 3 1 0 0 1 
-bct 1 3 1 0 0 1 0
-bct 1 3 1 0 0 1 0 
-bct 1 3 1 0 0 1 0 0
-bct 1 3 1 0 0 1 0 0 
-bct 1 3 1 0 0 1 0 0 0
-bct 1 3 1 0 0 1 0 0 0
+bct 1 3 4
+bct 1 3 4 
+bct 1 3 4 0
+bct 1 3 4 0 
+bct 1 3 4 0 0
+bct 1 3 4 0 0 
+bct 1 3 4 0 0 0
+bct 1 3 4 0 0 0 
+bct 1 3 4 0 0 0 0
+bct 1 3 4 0 0 0 0 
+bct 1 3 4 0 0 0 0 2
+bct 1 3 4 0 0 0 0 2 
+bct 1 3 4 0 0 0 0 2 0
+bct 1 3 4 0 0 0 0 2 0
 
-Tile 1 3 has 1 0 0 1 0 0 0
+Tile 1 3 has 4 0 0 0 0 2 0
 b
 bc
 bct
@@ -806,22 +805,22 @@ bct 2
 bct 2 
 bct 2 3
 bct 2 3 
-bct 2 3 1
-bct 2 3 1 
-bct 2 3 1 1
-bct 2 3 1 1 
-bct 2 3 1 1 1
-bct 2 3 1 1 1 
-bct 2 3 1 1 1 0
-bct 2 3 1 1 1 0 
-bct 2 3 1 1 1 0 0
-bct 2 3 1 1 1 0 0 
-bct 2 3 1 1 1 0 0 1
-bct 2 3 1 1 1 0 0 1 
-bct 2 3 1 1 1 0 0 1 0
-bct 2 3 1 1 1 0 0 1 0
+bct 2 3 3
+bct 2 3 3 
+bct 2 3 3 0
+bct 2 3 3 0 
+bct 2 3 3 0 0
+bct 2 3 3 0 0 
+bct 2 3 3 0 0 0
+bct 2 3 3 0 0 0 
+bct 2 3 3 0 0 0 0
+bct 2 3 3 0 0 0 0 
+bct 2 3 3 0 0 0 0 0
+bct 2 3 3 0 0 0 0 0 
+bct 2 3 3 0 0 0 0 0 0
+bct 2 3 3 0 0 0 0 0 0
 
-Tile 2 3 has 1 1 1 0 0 1 0
+Tile 2 3 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -830,22 +829,22 @@ bct 3
 bct 3 
 bct 3 3
 bct 3 3 
-bct 3 3 1
-bct 3 3 1 
-bct 3 3 1 0
-bct 3 3 1 0 
-bct 3 3 1 0 0
-bct 3 3 1 0 0 
-bct 3 3 1 0 0 1
-bct 3 3 1 0 0 1 
-bct 3 3 1 0 0 1 2
-bct 3 3 1 0 0 1 2 
-bct 3 3 1 0 0 1 2 0
-bct 3 3 1 0 0 1 2 0 
-bct 3 3 1 0 0 1 2 0 0
-bct 3 3 1 0 0 1 2 0 0
+bct 3 3 0
+bct 3 3 0 
+bct 3 3 0 1
+bct 3 3 0 1 
+bct 3 3 0 1 1
+bct 3 3 0 1 1 
+bct 3 3 0 1 1 0
+bct 3 3 0 1 1 0 
+bct 3 3 0 1 1 0 0
+bct 3 3 0 1 1 0 0 
+bct 3 3 0 1 1 0 0 0
+bct 3 3 0 1 1 0 0 0 
+bct 3 3 0 1 1 0 0 0 0
+bct 3 3 0 1 1 0 0 0 0
 
-Tile 3 3 has 1 0 0 1 2 0 0
+Tile 3 3 has 0 1 1 0 0 0 0
 b
 bc
 bct
@@ -854,22 +853,22 @@ bct 4
 bct 4 
 bct 4 3
 bct 4 3 
-bct 4 3 4
-bct 4 3 4 
-bct 4 3 4 1
-bct 4 3 4 1 
-bct 4 3 4 1 1
-bct 4 3 4 1 1 
-bct 4 3 4 1 1 0
-bct 4 3 4 1 1 0 
-bct 4 3 4 1 1 0 0
-bct 4 3 4 1 1 0 0 
-bct 4 3 4 1 1 0 0 0
-bct 4 3 4 1 1 0 0 0 
-bct 4 3 4 1 1 0 0 0 0
-bct 4 3 4 1 1 0 0 0 0
+bct 4 3 1
+bct 4 3 1 
+bct 4 3 1 0
+bct 4 3 1 0 
+bct 4 3 1 0 0
+bct 4 3 1 0 0 
+bct 4 3 1 0 0 1
+bct 4 3 1 0 0 1 
+bct 4 3 1 0 0 1 1
+bct 4 3 1 0 0 1 1 
+bct 4 3 1 0 0 1 1 0
+bct 4 3 1 0 0 1 1 0 
+bct 4 3 1 0 0 1 1 0 0
+bct 4 3 1 0 0 1 1 0 0
 
-Tile 4 3 has 4 1 1 0 0 0 0
+Tile 4 3 has 1 0 0 1 1 0 0
 b
 bc
 bct
@@ -886,14 +885,14 @@ bct 5 3 2 0 0
 bct 5 3 2 0 0 
 bct 5 3 2 0 0 0
 bct 5 3 2 0 0 0 
-bct 5 3 2 0 0 0 0
-bct 5 3 2 0 0 0 0 
-bct 5 3 2 0 0 0 0 1
-bct 5 3 2 0 0 0 0 1 
-bct 5 3 2 0 0 0 0 1 0
-bct 5 3 2 0 0 0 0 1 0
+bct 5 3 2 0 0 0 1
+bct 5 3 2 0 0 0 1 
+bct 5 3 2 0 0 0 1 0
+bct 5 3 2 0 0 0 1 0 
+bct 5 3 2 0 0 0 1 0 0
+bct 5 3 2 0 0 0 1 0 0
 
-Tile 5 3 has 2 0 0 0 0 1 0
+Tile 5 3 has 2 0 0 0 1 0 0
 b
 bc
 bct
@@ -902,22 +901,22 @@ bct 6
 bct 6 
 bct 6 3
 bct 6 3 
-bct 6 3 2
-bct 6 3 2 
-bct 6 3 2 0
-bct 6 3 2 0 
-bct 6 3 2 0 0
-bct 6 3 2 0 0 
-bct 6 3 2 0 0 0
-bct 6 3 2 0 0 0 
-bct 6 3 2 0 0 0 0
-bct 6 3 2 0 0 0 0 
-bct 6 3 2 0 0 0 0 0
-bct 6 3 2 0 0 0 0 0 
-bct 6 3 2 0 0 0 0 0 0
-bct 6 3 2 0 0 0 0 0 0
+bct 6 3 1
+bct 6 3 1 
+bct 6 3 1 0
+bct 6 3 1 0 
+bct 6 3 1 0 0
+bct 6 3 1 0 0 
+bct 6 3 1 0 0 0
+bct 6 3 1 0 0 0 
+bct 6 3 1 0 0 0 0
+bct 6 3 1 0 0 0 0 
+bct 6 3 1 0 0 0 0 0
+bct 6 3 1 0 0 0 0 0 
+bct 6 3 1 0 0 0 0 0 0
+bct 6 3 1 0 0 0 0 0 0
 
-Tile 6 3 has 2 0 0 0 0 0 0
+Tile 6 3 has 1 0 0 0 0 0 0
 b
 bc
 bct
@@ -926,22 +925,22 @@ bct 7
 bct 7 
 bct 7 3
 bct 7 3 
-bct 7 3 0
-bct 7 3 0 
-bct 7 3 0 0
-bct 7 3 0 0 
-bct 7 3 0 0 0
-bct 7 3 0 0 0 
-bct 7 3 0 0 0 0
-bct 7 3 0 0 0 0 
-bct 7 3 0 0 0 0 1
-bct 7 3 0 0 0 0 1 
-bct 7 3 0 0 0 0 1 0
-bct 7 3 0 0 0 0 1 0 
-bct 7 3 0 0 0 0 1 0 0
-bct 7 3 0 0 0 0 1 0 0
+bct 7 3 1
+bct 7 3 1 
+bct 7 3 1 0
+bct 7 3 1 0 
+bct 7 3 1 0 0
+bct 7 3 1 0 0 
+bct 7 3 1 0 0 1
+bct 7 3 1 0 0 1 
+bct 7 3 1 0 0 1 0
+bct 7 3 1 0 0 1 0 
+bct 7 3 1 0 0 1 0 0
+bct 7 3 1 0 0 1 0 0 
+bct 7 3 1 0 0 1 0 0 0
+bct 7 3 1 0 0 1 0 0 0
 
-Tile 7 3 has 0 0 0 0 1 0 0
+Tile 7 3 has 1 0 0 1 0 0 0
 b
 bc
 bct
@@ -976,20 +975,20 @@ bct 9 3
 bct 9 3 
 bct 9 3 3
 bct 9 3 3 
-bct 9 3 3 1
-bct 9 3 3 1 
-bct 9 3 3 1 0
-bct 9 3 3 1 0 
-bct 9 3 3 1 0 1
-bct 9 3 3 1 0 1 
-bct 9 3 3 1 0 1 1
-bct 9 3 3 1 0 1 1 
-bct 9 3 3 1 0 1 1 1
-bct 9 3 3 1 0 1 1 1 
-bct 9 3 3 1 0 1 1 1 0
-bct 9 3 3 1 0 1 1 1 0
+bct 9 3 3 0
+bct 9 3 3 0 
+bct 9 3 3 0 1
+bct 9 3 3 0 1 
+bct 9 3 3 0 1 1
+bct 9 3 3 0 1 1 
+bct 9 3 3 0 1 1 0
+bct 9 3 3 0 1 1 0 
+bct 9 3 3 0 1 1 0 0
+bct 9 3 3 0 1 1 0 0 
+bct 9 3 3 0 1 1 0 0 0
+bct 9 3 3 0 1 1 0 0 0
 
-Tile 9 3 has 3 1 0 1 1 1 0
+Tile 9 3 has 3 0 1 1 0 0 0
 b
 bc
 bct
@@ -998,22 +997,22 @@ bct 0
 bct 0 
 bct 0 4
 bct 0 4 
-bct 0 4 0
-bct 0 4 0 
-bct 0 4 0 0
-bct 0 4 0 0 
-bct 0 4 0 0 0
-bct 0 4 0 0 0 
-bct 0 4 0 0 0 1
-bct 0 4 0 0 0 1 
-bct 0 4 0 0 0 1 0
-bct 0 4 0 0 0 1 0 
-bct 0 4 0 0 0 1 0 0
-bct 0 4 0 0 0 1 0 0 
-bct 0 4 0 0 0 1 0 0 0
-bct 0 4 0 0 0 1 0 0 0
+bct 0 4 1
+bct 0 4 1 
+bct 0 4 1 0
+bct 0 4 1 0 
+bct 0 4 1 0 0
+bct 0 4 1 0 0 
+bct 0 4 1 0 0 0
+bct 0 4 1 0 0 0 
+bct 0 4 1 0 0 0 0
+bct 0 4 1 0 0 0 0 
+bct 0 4 1 0 0 0 0 0
+bct 0 4 1 0 0 0 0 0 
+bct 0 4 1 0 0 0 0 0 0
+bct 0 4 1 0 0 0 0 0 0
 
-Tile 0 4 has 0 0 0 1 0 0 0
+Tile 0 4 has 1 0 0 0 0 0 0
 b
 bc
 bct
@@ -1022,22 +1021,22 @@ bct 1
 bct 1 
 bct 1 4
 bct 1 4 
-bct 1 4 1
-bct 1 4 1 
-bct 1 4 1 0
-bct 1 4 1 0 
-bct 1 4 1 0 0
-bct 1 4 1 0 0 
-bct 1 4 1 0 0 0
-bct 1 4 1 0 0 0 
-bct 1 4 1 0 0 0 0
-bct 1 4 1 0 0 0 0 
-bct 1 4 1 0 0 0 0 1
-bct 1 4 1 0 0 0 0 1 
-bct 1 4 1 0 0 0 0 1 0
-bct 1 4 1 0 0 0 0 1 0
+bct 1 4 4
+bct 1 4 4 
+bct 1 4 4 0
+bct 1 4 4 0 
+bct 1 4 4 0 0
+bct 1 4 4 0 0 
+bct 1 4 4 0 0 0
+bct 1 4 4 0 0 0 
+bct 1 4 4 0 0 0 0
+bct 1 4 4 0 0 0 0 
+bct 1 4 4 0 0 0 0 0
+bct 1 4 4 0 0 0 0 0 
+bct 1 4 4 0 0 0 0 0 0
+bct 1 4 4 0 0 0 0 0 0
 
-Tile 1 4 has 1 0 0 0 0 1 0
+Tile 1 4 has 4 0 0 0 0 0 0
 b
 bc
 bct
@@ -1046,22 +1045,22 @@ bct 2
 bct 2 
 bct 2 4
 bct 2 4 
-bct 2 4 2
-bct 2 4 2 
-bct 2 4 2 0
-bct 2 4 2 0 
-bct 2 4 2 0 0
-bct 2 4 2 0 0 
-bct 2 4 2 0 0 0
-bct 2 4 2 0 0 0 
-bct 2 4 2 0 0 0 0
-bct 2 4 2 0 0 0 0 
-bct 2 4 2 0 0 0 0 0
-bct 2 4 2 0 0 0 0 0 
-bct 2 4 2 0 0 0 0 0 0
-bct 2 4 2 0 0 0 0 0 0
+bct 2 4 5
+bct 2 4 5 
+bct 2 4 5 0
+bct 2 4 5 0 
+bct 2 4 5 0 0
+bct 2 4 5 0 0 
+bct 2 4 5 0 0 0
+bct 2 4 5 0 0 0 
+bct 2 4 5 0 0 0 0
+bct 2 4 5 0 0 0 0 
+bct 2 4 5 0 0 0 0 0
+bct 2 4 5 0 0 0 0 0 
+bct 2 4 5 0 0 0 0 0 0
+bct 2 4 5 0 0 0 0 0 0
 
-Tile 2 4 has 2 0 0 0 0 0 0
+Tile 2 4 has 5 0 0 0 0 0 0
 b
 bc
 bct
@@ -1070,22 +1069,22 @@ bct 3
 bct 3 
 bct 3 4
 bct 3 4 
-bct 3 4 1
-bct 3 4 1 
-bct 3 4 1 1
-bct 3 4 1 1 
-bct 3 4 1 1 1
-bct 3 4 1 1 1 
-bct 3 4 1 1 1 0
-bct 3 4 1 1 1 0 
-bct 3 4 1 1 1 0 0
-bct 3 4 1 1 1 0 0 
-bct 3 4 1 1 1 0 0 1
-bct 3 4 1 1 1 0 0 1 
-bct 3 4 1 1 1 0 0 1 1
-bct 3 4 1 1 1 0 0 1 1
+bct 3 4 5
+bct 3 4 5 
+bct 3 4 5 1
+bct 3 4 5 1 
+bct 3 4 5 1 0
+bct 3 4 5 1 0 
+bct 3 4 5 1 0 0
+bct 3 4 5 1 0 0 
+bct 3 4 5 1 0 0 0
+bct 3 4 5 1 0 0 0 
+bct 3 4 5 1 0 0 0 0
+bct 3 4 5 1 0 0 0 0 
+bct 3 4 5 1 0 0 0 0 0
+bct 3 4 5 1 0 0 0 0 0
 
-Tile 3 4 has 1 1 1 0 0 1 1
+Tile 3 4 has 5 1 0 0 0 0 0
 b
 bc
 bct
@@ -1094,22 +1093,22 @@ bct 4
 bct 4 
 bct 4 4
 bct 4 4 
-bct 4 4 0
-bct 4 4 0 
-bct 4 4 0 0
-bct 4 4 0 0 
-bct 4 4 0 0 0
-bct 4 4 0 0 0 
-bct 4 4 0 0 0 0
-bct 4 4 0 0 0 0 
-bct 4 4 0 0 0 0 0
-bct 4 4 0 0 0 0 0 
-bct 4 4 0 0 0 0 0 0
-bct 4 4 0 0 0 0 0 0 
-bct 4 4 0 0 0 0 0 0 0
-bct 4 4 0 0 0 0 0 0 0
+bct 4 4 3
+bct 4 4 3 
+bct 4 4 3 0
+bct 4 4 3 0 
+bct 4 4 3 0 1
+bct 4 4 3 0 1 
+bct 4 4 3 0 1 0
+bct 4 4 3 0 1 0 
+bct 4 4 3 0 1 0 0
+bct 4 4 3 0 1 0 0 
+bct 4 4 3 0 1 0 0 0
+bct 4 4 3 0 1 0 0 0 
+bct 4 4 3 0 1 0 0 0 0
+bct 4 4 3 0 1 0 0 0 0
 
-Tile 4 4 has 0 0 0 0 0 0 0
+Tile 4 4 has 3 0 1 0 0 0 0
 b
 bc
 bct
@@ -1122,18 +1121,18 @@ bct 5 4 0
 bct 5 4 0 
 bct 5 4 0 0
 bct 5 4 0 0 
-bct 5 4 0 0 1
-bct 5 4 0 0 1 
-bct 5 4 0 0 1 0
-bct 5 4 0 0 1 0 
-bct 5 4 0 0 1 0 0
-bct 5 4 0 0 1 0 0 
-bct 5 4 0 0 1 0 0 0
-bct 5 4 0 0 1 0 0 0 
-bct 5 4 0 0 1 0 0 0 0
-bct 5 4 0 0 1 0 0 0 0
+bct 5 4 0 0 0
+bct 5 4 0 0 0 
+bct 5 4 0 0 0 0
+bct 5 4 0 0 0 0 
+bct 5 4 0 0 0 0 0
+bct 5 4 0 0 0 0 0 
+bct 5 4 0 0 0 0 0 0
+bct 5 4 0 0 0 0 0 0 
+bct 5 4 0 0 0 0 0 0 0
+bct 5 4 0 0 0 0 0 0 0
 
-Tile 5 4 has 0 0 1 0 0 0 0
+Tile 5 4 has 0 0 0 0 0 0 0
 b
 bc
 bct
@@ -1142,22 +1141,22 @@ bct 6
 bct 6 
 bct 6 4
 bct 6 4 
-bct 6 4 2
-bct 6 4 2 
-bct 6 4 2 0
-bct 6 4 2 0 
-bct 6 4 2 0 0
-bct 6 4 2 0 0 
-bct 6 4 2 0 0 1
-bct 6 4 2 0 0 1 
-bct 6 4 2 0 0 1 0
-bct 6 4 2 0 0 1 0 
-bct 6 4 2 0 0 1 0 0
-bct 6 4 2 0 0 1 0 0 
-bct 6 4 2 0 0 1 0 0 0
-bct 6 4 2 0 0 1 0 0 0
+bct 6 4 4
+bct 6 4 4 
+bct 6 4 4 2
+bct 6 4 4 2 
+bct 6 4 4 2 0
+bct 6 4 4 2 0 
+bct 6 4 4 2 0 0
+bct 6 4 4 2 0 0 
+bct 6 4 4 2 0 0 0
+bct 6 4 4 2 0 0 0 
+bct 6 4 4 2 0 0 0 0
+bct 6 4 4 2 0 0 0 0 
+bct 6 4 4 2 0 0 0 0 0
+bct 6 4 4 2 0 0 0 0 0
 
-Tile 6 4 has 2 0 0 1 0 0 0
+Tile 6 4 has 4 2 0 0 0 0 0
 b
 bc
 bct
@@ -1166,22 +1165,22 @@ bct 7
 bct 7 
 bct 7 4
 bct 7 4 
-bct 7 4 1
-bct 7 4 1 
-bct 7 4 1 0
-bct 7 4 1 0 
-bct 7 4 1 0 0
-bct 7 4 1 0 0 
-bct 7 4 1 0 0 0
-bct 7 4 1 0 0 0 
-bct 7 4 1 0 0 0 0
-bct 7 4 1 0 0 0 0 
-bct 7 4 1 0 0 0 0 0
-bct 7 4 1 0 0 0 0 0 
-bct 7 4 1 0 0 0 0 0 0
-bct 7 4 1 0 0 0 0 0 0
+bct 7 4 3
+bct 7 4 3 
+bct 7 4 3 0
+bct 7 4 3 0 
+bct 7 4 3 0 0
+bct 7 4 3 0 0 
+bct 7 4 3 0 0 0
+bct 7 4 3 0 0 0 
+bct 7 4 3 0 0 0 0
+bct 7 4 3 0 0 0 0 
+bct 7 4 3 0 0 0 0 0
+bct 7 4 3 0 0 0 0 0 
+bct 7 4 3 0 0 0 0 0 0
+bct 7 4 3 0 0 0 0 0 0
 
-Tile 7 4 has 1 0 0 0 0 0 0
+Tile 7 4 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -1190,22 +1189,22 @@ bct 8
 bct 8 
 bct 8 4
 bct 8 4 
-bct 8 4 0
-bct 8 4 0 
-bct 8 4 0 2
-bct 8 4 0 2 
-bct 8 4 0 2 0
-bct 8 4 0 2 0 
-bct 8 4 0 2 0 0
-bct 8 4 0 2 0 0 
-bct 8 4 0 2 0 0 0
-bct 8 4 0 2 0 0 0 
-bct 8 4 0 2 0 0 0 0
-bct 8 4 0 2 0 0 0 0 
-bct 8 4 0 2 0 0 0 0 0
-bct 8 4 0 2 0 0 0 0 0
+bct 8 4 3
+bct 8 4 3 
+bct 8 4 3 0
+bct 8 4 3 0 
+bct 8 4 3 0 0
+bct 8 4 3 0 0 
+bct 8 4 3 0 0 0
+bct 8 4 3 0 0 0 
+bct 8 4 3 0 0 0 0
+bct 8 4 3 0 0 0 0 
+bct 8 4 3 0 0 0 0 0
+bct 8 4 3 0 0 0 0 0 
+bct 8 4 3 0 0 0 0 0 1
+bct 8 4 3 0 0 0 0 0 1
 
-Tile 8 4 has 0 2 0 0 0 0 0
+Tile 8 4 has 3 0 0 0 0 0 1
 b
 bc
 bct
@@ -1214,22 +1213,22 @@ bct 9
 bct 9 
 bct 9 4
 bct 9 4 
-bct 9 4 0
-bct 9 4 0 
-bct 9 4 0 0
-bct 9 4 0 0 
-bct 9 4 0 0 0
-bct 9 4 0 0 0 
-bct 9 4 0 0 0 0
-bct 9 4 0 0 0 0 
-bct 9 4 0 0 0 0 1
-bct 9 4 0 0 0 0 1 
-bct 9 4 0 0 0 0 1 0
-bct 9 4 0 0 0 0 1 0 
-bct 9 4 0 0 0 0 1 0 0
-bct 9 4 0 0 0 0 1 0 0
+bct 9 4 2
+bct 9 4 2 
+bct 9 4 2 1
+bct 9 4 2 1 
+bct 9 4 2 1 0
+bct 9 4 2 1 0 
+bct 9 4 2 1 0 0
+bct 9 4 2 1 0 0 
+bct 9 4 2 1 0 0 0
+bct 9 4 2 1 0 0 0 
+bct 9 4 2 1 0 0 0 0
+bct 9 4 2 1 0 0 0 0 
+bct 9 4 2 1 0 0 0 0 0
+bct 9 4 2 1 0 0 0 0 0
 
-Tile 9 4 has 0 0 0 0 1 0 0
+Tile 9 4 has 2 1 0 0 0 0 0
 b
 bc
 bct
@@ -1244,16 +1243,16 @@ bct 0 5 4 0
 bct 0 5 4 0 
 bct 0 5 4 0 0
 bct 0 5 4 0 0 
-bct 0 5 4 0 0 0
-bct 0 5 4 0 0 0 
-bct 0 5 4 0 0 0 1
-bct 0 5 4 0 0 0 1 
-bct 0 5 4 0 0 0 1 1
-bct 0 5 4 0 0 0 1 1 
-bct 0 5 4 0 0 0 1 1 0
-bct 0 5 4 0 0 0 1 1 0
+bct 0 5 4 0 0 1
+bct 0 5 4 0 0 1 
+bct 0 5 4 0 0 1 0
+bct 0 5 4 0 0 1 0 
+bct 0 5 4 0 0 1 0 1
+bct 0 5 4 0 0 1 0 1 
+bct 0 5 4 0 0 1 0 1 0
+bct 0 5 4 0 0 1 0 1 0
 
-Tile 0 5 has 4 0 0 0 1 1 0
+Tile 0 5 has 4 0 0 1 0 1 0
 b
 bc
 bct
@@ -1262,22 +1261,22 @@ bct 1
 bct 1 
 bct 1 5
 bct 1 5 
-bct 1 5 1
-bct 1 5 1 
-bct 1 5 1 0
-bct 1 5 1 0 
-bct 1 5 1 0 0
-bct 1 5 1 0 0 
-bct 1 5 1 0 0 0
-bct 1 5 1 0 0 0 
-bct 1 5 1 0 0 0 0
-bct 1 5 1 0 0 0 0 
-bct 1 5 1 0 0 0 0 0
-bct 1 5 1 0 0 0 0 0 
-bct 1 5 1 0 0 0 0 0 0
-bct 1 5 1 0 0 0 0 0 0
+bct 1 5 2
+bct 1 5 2 
+bct 1 5 2 1
+bct 1 5 2 1 
+bct 1 5 2 1 0
+bct 1 5 2 1 0 
+bct 1 5 2 1 0 0
+bct 1 5 2 1 0 0 
+bct 1 5 2 1 0 0 0
+bct 1 5 2 1 0 0 0 
+bct 1 5 2 1 0 0 0 0
+bct 1 5 2 1 0 0 0 0 
+bct 1 5 2 1 0 0 0 0 0
+bct 1 5 2 1 0 0 0 0 0
 
-Tile 1 5 has 1 0 0 0 0 0 0
+Tile 1 5 has 2 1 0 0 0 0 0
 b
 bc
 bct
@@ -1286,22 +1285,22 @@ bct 2
 bct 2 
 bct 2 5
 bct 2 5 
-bct 2 5 1
-bct 2 5 1 
-bct 2 5 1 0
-bct 2 5 1 0 
-bct 2 5 1 0 0
-bct 2 5 1 0 0 
-bct 2 5 1 0 0 0
-bct 2 5 1 0 0 0 
-bct 2 5 1 0 0 0 0
-bct 2 5 1 0 0 0 0 
-bct 2 5 1 0 0 0 0 2
-bct 2 5 1 0 0 0 0 2 
-bct 2 5 1 0 0 0 0 2 0
-bct 2 5 1 0 0 0 0 2 0
+bct 2 5 4
+bct 2 5 4 
+bct 2 5 4 0
+bct 2 5 4 0 
+bct 2 5 4 0 0
+bct 2 5 4 0 0 
+bct 2 5 4 0 0 0
+bct 2 5 4 0 0 0 
+bct 2 5 4 0 0 0 0
+bct 2 5 4 0 0 0 0 
+bct 2 5 4 0 0 0 0 1
+bct 2 5 4 0 0 0 0 1 
+bct 2 5 4 0 0 0 0 1 0
+bct 2 5 4 0 0 0 0 1 0
 
-Tile 2 5 has 1 0 0 0 0 2 0
+Tile 2 5 has 4 0 0 0 0 1 0
 b
 bc
 bct
@@ -1314,18 +1313,18 @@ bct 3 5 3
 bct 3 5 3 
 bct 3 5 3 0
 bct 3 5 3 0 
-bct 3 5 3 0 0
-bct 3 5 3 0 0 
-bct 3 5 3 0 0 0
-bct 3 5 3 0 0 0 
-bct 3 5 3 0 0 0 0
-bct 3 5 3 0 0 0 0 
-bct 3 5 3 0 0 0 0 0
-bct 3 5 3 0 0 0 0 0 
-bct 3 5 3 0 0 0 0 0 0
-bct 3 5 3 0 0 0 0 0 0
+bct 3 5 3 0 1
+bct 3 5 3 0 1 
+bct 3 5 3 0 1 0
+bct 3 5 3 0 1 0 
+bct 3 5 3 0 1 0 0
+bct 3 5 3 0 1 0 0 
+bct 3 5 3 0 1 0 0 0
+bct 3 5 3 0 1 0 0 0 
+bct 3 5 3 0 1 0 0 0 0
+bct 3 5 3 0 1 0 0 0 0
 
-Tile 3 5 has 3 0 0 0 0 0 0
+Tile 3 5 has 3 0 1 0 0 0 0
 b
 bc
 bct
@@ -1334,22 +1333,22 @@ bct 4
 bct 4 
 bct 4 5
 bct 4 5 
-bct 4 5 0
-bct 4 5 0 
-bct 4 5 0 0
-bct 4 5 0 0 
-bct 4 5 0 0 0
-bct 4 5 0 0 0 
-bct 4 5 0 0 0 1
-bct 4 5 0 0 0 1 
-bct 4 5 0 0 0 1 0
-bct 4 5 0 0 0 1 0 
-bct 4 5 0 0 0 1 0 0
-bct 4 5 0 0 0 1 0 0 
-bct 4 5 0 0 0 1 0 0 0
-bct 4 5 0 0 0 1 0 0 0
+bct 4 5 5
+bct 4 5 5 
+bct 4 5 5 0
+bct 4 5 5 0 
+bct 4 5 5 0 1
+bct 4 5 5 0 1 
+bct 4 5 5 0 1 0
+bct 4 5 5 0 1 0 
+bct 4 5 5 0 1 0 0
+bct 4 5 5 0 1 0 0 
+bct 4 5 5 0 1 0 0 0
+bct 4 5 5 0 1 0 0 0 
+bct 4 5 5 0 1 0 0 0 0
+bct 4 5 5 0 1 0 0 0 0
 
-Tile 4 5 has 0 0 0 1 0 0 0
+Tile 4 5 has 5 0 1 0 0 0 0
 b
 bc
 bct
@@ -1382,22 +1381,22 @@ bct 6
 bct 6 
 bct 6 5
 bct 6 5 
-bct 6 5 0
-bct 6 5 0 
-bct 6 5 0 0
-bct 6 5 0 0 
-bct 6 5 0 0 0
-bct 6 5 0 0 0 
-bct 6 5 0 0 0 0
-bct 6 5 0 0 0 0 
-bct 6 5 0 0 0 0 0
-bct 6 5 0 0 0 0 0 
-bct 6 5 0 0 0 0 0 0
-bct 6 5 0 0 0 0 0 0 
-bct 6 5 0 0 0 0 0 0 0
-bct 6 5 0 0 0 0 0 0 0
+bct 6 5 2
+bct 6 5 2 
+bct 6 5 2 0
+bct 6 5 2 0 
+bct 6 5 2 0 0
+bct 6 5 2 0 0 
+bct 6 5 2 0 0 0
+bct 6 5 2 0 0 0 
+bct 6 5 2 0 0 0 0
+bct 6 5 2 0 0 0 0 
+bct 6 5 2 0 0 0 0 1
+bct 6 5 2 0 0 0 0 1 
+bct 6 5 2 0 0 0 0 1 0
+bct 6 5 2 0 0 0 0 1 0
 
-Tile 6 5 has 0 0 0 0 0 0 0
+Tile 6 5 has 2 0 0 0 0 1 0
 b
 bc
 bct
@@ -1410,18 +1409,18 @@ bct 7 5 2
 bct 7 5 2 
 bct 7 5 2 0
 bct 7 5 2 0 
-bct 7 5 2 0 0
-bct 7 5 2 0 0 
-bct 7 5 2 0 0 0
-bct 7 5 2 0 0 0 
-bct 7 5 2 0 0 0 0
-bct 7 5 2 0 0 0 0 
-bct 7 5 2 0 0 0 0 0
-bct 7 5 2 0 0 0 0 0 
-bct 7 5 2 0 0 0 0 0 0
-bct 7 5 2 0 0 0 0 0 0
+bct 7 5 2 0 1
+bct 7 5 2 0 1 
+bct 7 5 2 0 1 0
+bct 7 5 2 0 1 0 
+bct 7 5 2 0 1 0 1
+bct 7 5 2 0 1 0 1 
+bct 7 5 2 0 1 0 1 0
+bct 7 5 2 0 1 0 1 0 
+bct 7 5 2 0 1 0 1 0 0
+bct 7 5 2 0 1 0 1 0 0
 
-Tile 7 5 has 2 0 0 0 0 0 0
+Tile 7 5 has 2 0 1 0 1 0 0
 b
 bc
 bct
@@ -1430,22 +1429,22 @@ bct 8
 bct 8 
 bct 8 5
 bct 8 5 
-bct 8 5 2
-bct 8 5 2 
-bct 8 5 2 0
-bct 8 5 2 0 
-bct 8 5 2 0 1
-bct 8 5 2 0 1 
-bct 8 5 2 0 1 0
-bct 8 5 2 0 1 0 
-bct 8 5 2 0 1 0 0
-bct 8 5 2 0 1 0 0 
-bct 8 5 2 0 1 0 0 0
-bct 8 5 2 0 1 0 0 0 
-bct 8 5 2 0 1 0 0 0 0
-bct 8 5 2 0 1 0 0 0 0
+bct 8 5 0
+bct 8 5 0 
+bct 8 5 0 1
+bct 8 5 0 1 
+bct 8 5 0 1 0
+bct 8 5 0 1 0 
+bct 8 5 0 1 0 0
+bct 8 5 0 1 0 0 
+bct 8 5 0 1 0 0 1
+bct 8 5 0 1 0 0 1 
+bct 8 5 0 1 0 0 1 1
+bct 8 5 0 1 0 0 1 1 
+bct 8 5 0 1 0 0 1 1 0
+bct 8 5 0 1 0 0 1 1 0
 
-Tile 8 5 has 2 0 1 0 0 0 0
+Tile 8 5 has 0 1 0 0 1 1 0
 b
 bc
 bct
@@ -1454,22 +1453,22 @@ bct 9
 bct 9 
 bct 9 5
 bct 9 5 
-bct 9 5 0
-bct 9 5 0 
-bct 9 5 0 0
-bct 9 5 0 0 
-bct 9 5 0 0 0
-bct 9 5 0 0 0 
-bct 9 5 0 0 0 0
-bct 9 5 0 0 0 0 
-bct 9 5 0 0 0 0 0
-bct 9 5 0 0 0 0 0 
-bct 9 5 0 0 0 0 0 0
-bct 9 5 0 0 0 0 0 0 
-bct 9 5 0 0 0 0 0 0 0
-bct 9 5 0 0 0 0 0 0 0
+bct 9 5 1
+bct 9 5 1 
+bct 9 5 1 0
+bct 9 5 1 0 
+bct 9 5 1 0 1
+bct 9 5 1 0 1 
+bct 9 5 1 0 1 1
+bct 9 5 1 0 1 1 
+bct 9 5 1 0 1 1 0
+bct 9 5 1 0 1 1 0 
+bct 9 5 1 0 1 1 0 0
+bct 9 5 1 0 1 1 0 0 
+bct 9 5 1 0 1 1 0 0 0
+bct 9 5 1 0 1 1 0 0 0
 
-Tile 9 5 has 0 0 0 0 0 0 0
+Tile 9 5 has 1 0 1 1 0 0 0
 b
 bc
 bct
@@ -1502,22 +1501,22 @@ bct 1
 bct 1 
 bct 1 6
 bct 1 6 
-bct 1 6 4
-bct 1 6 4 
-bct 1 6 4 0
-bct 1 6 4 0 
-bct 1 6 4 0 0
-bct 1 6 4 0 0 
-bct 1 6 4 0 0 0
-bct 1 6 4 0 0 0 
-bct 1 6 4 0 0 0 0
-bct 1 6 4 0 0 0 0 
-bct 1 6 4 0 0 0 0 0
-bct 1 6 4 0 0 0 0 0 
-bct 1 6 4 0 0 0 0 0 0
-bct 1 6 4 0 0 0 0 0 0
+bct 1 6 6
+bct 1 6 6 
+bct 1 6 6 0
+bct 1 6 6 0 
+bct 1 6 6 0 0
+bct 1 6 6 0 0 
+bct 1 6 6 0 0 0
+bct 1 6 6 0 0 0 
+bct 1 6 6 0 0 0 0
+bct 1 6 6 0 0 0 0 
+bct 1 6 6 0 0 0 0 0
+bct 1 6 6 0 0 0 0 0 
+bct 1 6 6 0 0 0 0 0 0
+bct 1 6 6 0 0 0 0 0 0
 
-Tile 1 6 has 4 0 0 0 0 0 0
+Tile 1 6 has 6 0 0 0 0 0 0
 b
 bc
 bct
@@ -1526,22 +1525,22 @@ bct 2
 bct 2 
 bct 2 6
 bct 2 6 
-bct 2 6 1
-bct 2 6 1 
-bct 2 6 1 0
-bct 2 6 1 0 
-bct 2 6 1 0 0
-bct 2 6 1 0 0 
-bct 2 6 1 0 0 1
-bct 2 6 1 0 0 1 
-bct 2 6 1 0 0 1 1
-bct 2 6 1 0 0 1 1 
-bct 2 6 1 0 0 1 1 1
-bct 2 6 1 0 0 1 1 1 
-bct 2 6 1 0 0 1 1 1 0
-bct 2 6 1 0 0 1 1 1 0
+bct 2 6 2
+bct 2 6 2 
+bct 2 6 2 0
+bct 2 6 2 0 
+bct 2 6 2 0 0
+bct 2 6 2 0 0 
+bct 2 6 2 0 0 2
+bct 2 6 2 0 0 2 
+bct 2 6 2 0 0 2 0
+bct 2 6 2 0 0 2 0 
+bct 2 6 2 0 0 2 0 0
+bct 2 6 2 0 0 2 0 0 
+bct 2 6 2 0 0 2 0 0 0
+bct 2 6 2 0 0 2 0 0 0
 
-Tile 2 6 has 1 0 0 1 1 1 0
+Tile 2 6 has 2 0 0 2 0 0 0
 b
 bc
 bct
@@ -1558,14 +1557,14 @@ bct 3 6 1 0 0
 bct 3 6 1 0 0 
 bct 3 6 1 0 0 0
 bct 3 6 1 0 0 0 
-bct 3 6 1 0 0 0 1
-bct 3 6 1 0 0 0 1 
-bct 3 6 1 0 0 0 1 1
-bct 3 6 1 0 0 0 1 1 
-bct 3 6 1 0 0 0 1 1 0
-bct 3 6 1 0 0 0 1 1 0
+bct 3 6 1 0 0 0 0
+bct 3 6 1 0 0 0 0 
+bct 3 6 1 0 0 0 0 1
+bct 3 6 1 0 0 0 0 1 
+bct 3 6 1 0 0 0 0 1 0
+bct 3 6 1 0 0 0 0 1 0
 
-Tile 3 6 has 1 0 0 0 1 1 0
+Tile 3 6 has 1 0 0 0 0 1 0
 b
 bc
 bct
@@ -1574,22 +1573,22 @@ bct 4
 bct 4 
 bct 4 6
 bct 4 6 
-bct 4 6 1
-bct 4 6 1 
-bct 4 6 1 0
-bct 4 6 1 0 
-bct 4 6 1 0 0
-bct 4 6 1 0 0 
-bct 4 6 1 0 0 2
-bct 4 6 1 0 0 2 
-bct 4 6 1 0 0 2 0
-bct 4 6 1 0 0 2 0 
-bct 4 6 1 0 0 2 0 0
-bct 4 6 1 0 0 2 0 0 
-bct 4 6 1 0 0 2 0 0 0
-bct 4 6 1 0 0 2 0 0 0
+bct 4 6 3
+bct 4 6 3 
+bct 4 6 3 1
+bct 4 6 3 1 
+bct 4 6 3 1 0
+bct 4 6 3 1 0 
+bct 4 6 3 1 0 0
+bct 4 6 3 1 0 0 
+bct 4 6 3 1 0 0 0
+bct 4 6 3 1 0 0 0 
+bct 4 6 3 1 0 0 0 0
+bct 4 6 3 1 0 0 0 0 
+bct 4 6 3 1 0 0 0 0 0
+bct 4 6 3 1 0 0 0 0 0
 
-Tile 4 6 has 1 0 0 2 0 0 0
+Tile 4 6 has 3 1 0 0 0 0 0
 b
 bc
 bct
@@ -1598,22 +1597,22 @@ bct 5
 bct 5 
 bct 5 6
 bct 5 6 
-bct 5 6 3
-bct 5 6 3 
-bct 5 6 3 0
-bct 5 6 3 0 
-bct 5 6 3 0 1
-bct 5 6 3 0 1 
-bct 5 6 3 0 1 0
-bct 5 6 3 0 1 0 
-bct 5 6 3 0 1 0 0
-bct 5 6 3 0 1 0 0 
-bct 5 6 3 0 1 0 0 0
-bct 5 6 3 0 1 0 0 0 
-bct 5 6 3 0 1 0 0 0 0
-bct 5 6 3 0 1 0 0 0 0
+bct 5 6 5
+bct 5 6 5 
+bct 5 6 5 1
+bct 5 6 5 1 
+bct 5 6 5 1 0
+bct 5 6 5 1 0 
+bct 5 6 5 1 0 0
+bct 5 6 5 1 0 0 
+bct 5 6 5 1 0 0 0
+bct 5 6 5 1 0 0 0 
+bct 5 6 5 1 0 0 0 0
+bct 5 6 5 1 0 0 0 0 
+bct 5 6 5 1 0 0 0 0 0
+bct 5 6 5 1 0 0 0 0 0
 
-Tile 5 6 has 3 0 1 0 0 0 0
+Tile 5 6 has 5 1 0 0 0 0 0
 b
 bc
 bct
@@ -1622,22 +1621,22 @@ bct 6
 bct 6 
 bct 6 6
 bct 6 6 
-bct 6 6 2
-bct 6 6 2 
-bct 6 6 2 1
-bct 6 6 2 1 
-bct 6 6 2 1 0
-bct 6 6 2 1 0 
-bct 6 6 2 1 0 0
-bct 6 6 2 1 0 0 
-bct 6 6 2 1 0 0 0
-bct 6 6 2 1 0 0 0 
-bct 6 6 2 1 0 0 0 0
-bct 6 6 2 1 0 0 0 0 
-bct 6 6 2 1 0 0 0 0 0
-bct 6 6 2 1 0 0 0 0 0
+bct 6 6 4
+bct 6 6 4 
+bct 6 6 4 1
+bct 6 6 4 1 
+bct 6 6 4 1 0
+bct 6 6 4 1 0 
+bct 6 6 4 1 0 0
+bct 6 6 4 1 0 0 
+bct 6 6 4 1 0 0 0
+bct 6 6 4 1 0 0 0 
+bct 6 6 4 1 0 0 0 0
+bct 6 6 4 1 0 0 0 0 
+bct 6 6 4 1 0 0 0 0 0
+bct 6 6 4 1 0 0 0 0 0
 
-Tile 6 6 has 2 1 0 0 0 0 0
+Tile 6 6 has 4 1 0 0 0 0 0
 b
 bc
 bct
@@ -1646,22 +1645,22 @@ bct 7
 bct 7 
 bct 7 6
 bct 7 6 
-bct 7 6 3
-bct 7 6 3 
-bct 7 6 3 1
-bct 7 6 3 1 
-bct 7 6 3 1 0
-bct 7 6 3 1 0 
-bct 7 6 3 1 0 0
-bct 7 6 3 1 0 0 
-bct 7 6 3 1 0 0 0
-bct 7 6 3 1 0 0 0 
-bct 7 6 3 1 0 0 0 0
-bct 7 6 3 1 0 0 0 0 
-bct 7 6 3 1 0 0 0 0 0
-bct 7 6 3 1 0 0 0 0 0
+bct 7 6 2
+bct 7 6 2 
+bct 7 6 2 0
+bct 7 6 2 0 
+bct 7 6 2 0 0
+bct 7 6 2 0 0 
+bct 7 6 2 0 0 0
+bct 7 6 2 0 0 0 
+bct 7 6 2 0 0 0 0
+bct 7 6 2 0 0 0 0 
+bct 7 6 2 0 0 0 0 0
+bct 7 6 2 0 0 0 0 0 
+bct 7 6 2 0 0 0 0 0 0
+bct 7 6 2 0 0 0 0 0 0
 
-Tile 7 6 has 3 1 0 0 0 0 0
+Tile 7 6 has 2 0 0 0 0 0 0
 b
 bc
 bct
@@ -1670,22 +1669,22 @@ bct 8
 bct 8 
 bct 8 6
 bct 8 6 
-bct 8 6 3
-bct 8 6 3 
-bct 8 6 3 0
-bct 8 6 3 0 
-bct 8 6 3 0 0
-bct 8 6 3 0 0 
-bct 8 6 3 0 0 0
-bct 8 6 3 0 0 0 
-bct 8 6 3 0 0 0 0
-bct 8 6 3 0 0 0 0 
-bct 8 6 3 0 0 0 0 0
-bct 8 6 3 0 0 0 0 0 
-bct 8 6 3 0 0 0 0 0 0
-bct 8 6 3 0 0 0 0 0 0
+bct 8 6 2
+bct 8 6 2 
+bct 8 6 2 0
+bct 8 6 2 0 
+bct 8 6 2 0 0
+bct 8 6 2 0 0 
+bct 8 6 2 0 0 0
+bct 8 6 2 0 0 0 
+bct 8 6 2 0 0 0 0
+bct 8 6 2 0 0 0 0 
+bct 8 6 2 0 0 0 0 0
+bct 8 6 2 0 0 0 0 0 
+bct 8 6 2 0 0 0 0 0 0
+bct 8 6 2 0 0 0 0 0 0
 
-Tile 8 6 has 3 0 0 0 0 0 0
+Tile 8 6 has 2 0 0 0 0 0 0
 b
 bc
 bct
@@ -1694,22 +1693,22 @@ bct 9
 bct 9 
 bct 9 6
 bct 9 6 
-bct 9 6 1
-bct 9 6 1 
-bct 9 6 1 0
-bct 9 6 1 0 
-bct 9 6 1 0 1
-bct 9 6 1 0 1 
-bct 9 6 1 0 1 0
-bct 9 6 1 0 1 0 
-bct 9 6 1 0 1 0 0
-bct 9 6 1 0 1 0 0 
-bct 9 6 1 0 1 0 0 0
-bct 9 6 1 0 1 0 0 0 
-bct 9 6 1 0 1 0 0 0 0
-bct 9 6 1 0 1 0 0 0 0
+bct 9 6 3
+bct 9 6 3 
+bct 9 6 3 0
+bct 9 6 3 0 
+bct 9 6 3 0 0
+bct 9 6 3 0 0 
+bct 9 6 3 0 0 0
+bct 9 6 3 0 0 0 
+bct 9 6 3 0 0 0 0
+bct 9 6 3 0 0 0 0 
+bct 9 6 3 0 0 0 0 0
+bct 9 6 3 0 0 0 0 0 
+bct 9 6 3 0 0 0 0 0 0
+bct 9 6 3 0 0 0 0 0 0
 
-Tile 9 6 has 1 0 1 0 0 0 0
+Tile 9 6 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -1718,22 +1717,22 @@ bct 0
 bct 0 
 bct 0 7
 bct 0 7 
-bct 0 7 3
-bct 0 7 3 
-bct 0 7 3 0
-bct 0 7 3 0 
-bct 0 7 3 0 0
-bct 0 7 3 0 0 
-bct 0 7 3 0 0 0
-bct 0 7 3 0 0 0 
-bct 0 7 3 0 0 0 1
-bct 0 7 3 0 0 0 1 
-bct 0 7 3 0 0 0 1 0
-bct 0 7 3 0 0 0 1 0 
-bct 0 7 3 0 0 0 1 0 0
-bct 0 7 3 0 0 0 1 0 0
+bct 0 7 1
+bct 0 7 1 
+bct 0 7 1 0
+bct 0 7 1 0 
+bct 0 7 1 0 0
+bct 0 7 1 0 0 
+bct 0 7 1 0 0 1
+bct 0 7 1 0 0 1 
+bct 0 7 1 0 0 1 0
+bct 0 7 1 0 0 1 0 
+bct 0 7 1 0 0 1 0 0
+bct 0 7 1 0 0 1 0 0 
+bct 0 7 1 0 0 1 0 0 0
+bct 0 7 1 0 0 1 0 0 0
 
-Tile 0 7 has 3 0 0 0 1 0 0
+Tile 0 7 has 1 0 0 1 0 0 0
 b
 bc
 bct
@@ -1742,22 +1741,22 @@ bct 1
 bct 1 
 bct 1 7
 bct 1 7 
-bct 1 7 3
-bct 1 7 3 
-bct 1 7 3 0
-bct 1 7 3 0 
-bct 1 7 3 0 0
-bct 1 7 3 0 0 
-bct 1 7 3 0 0 0
-bct 1 7 3 0 0 0 
-bct 1 7 3 0 0 0 1
-bct 1 7 3 0 0 0 1 
-bct 1 7 3 0 0 0 1 0
-bct 1 7 3 0 0 0 1 0 
-bct 1 7 3 0 0 0 1 0 0
-bct 1 7 3 0 0 0 1 0 0
+bct 1 7 2
+bct 1 7 2 
+bct 1 7 2 1
+bct 1 7 2 1 
+bct 1 7 2 1 1
+bct 1 7 2 1 1 
+bct 1 7 2 1 1 0
+bct 1 7 2 1 1 0 
+bct 1 7 2 1 1 0 0
+bct 1 7 2 1 1 0 0 
+bct 1 7 2 1 1 0 0 0
+bct 1 7 2 1 1 0 0 0 
+bct 1 7 2 1 1 0 0 0 0
+bct 1 7 2 1 1 0 0 0 0
 
-Tile 1 7 has 3 0 0 0 1 0 0
+Tile 1 7 has 2 1 1 0 0 0 0
 b
 bc
 bct
@@ -1766,22 +1765,22 @@ bct 2
 bct 2 
 bct 2 7
 bct 2 7 
-bct 2 7 2
-bct 2 7 2 
-bct 2 7 2 0
-bct 2 7 2 0 
-bct 2 7 2 0 0
-bct 2 7 2 0 0 
-bct 2 7 2 0 0 0
-bct 2 7 2 0 0 0 
-bct 2 7 2 0 0 0 0
-bct 2 7 2 0 0 0 0 
-bct 2 7 2 0 0 0 0 1
-bct 2 7 2 0 0 0 0 1 
-bct 2 7 2 0 0 0 0 1 0
-bct 2 7 2 0 0 0 0 1 0
+bct 2 7 4
+bct 2 7 4 
+bct 2 7 4 0
+bct 2 7 4 0 
+bct 2 7 4 0 0
+bct 2 7 4 0 0 
+bct 2 7 4 0 0 0
+bct 2 7 4 0 0 0 
+bct 2 7 4 0 0 0 0
+bct 2 7 4 0 0 0 0 
+bct 2 7 4 0 0 0 0 0
+bct 2 7 4 0 0 0 0 0 
+bct 2 7 4 0 0 0 0 0 0
+bct 2 7 4 0 0 0 0 0 0
 
-Tile 2 7 has 2 0 0 0 0 1 0
+Tile 2 7 has 4 0 0 0 0 0 0
 b
 bc
 bct
@@ -1790,22 +1789,22 @@ bct 3
 bct 3 
 bct 3 7
 bct 3 7 
-bct 3 7 2
-bct 3 7 2 
-bct 3 7 2 0
-bct 3 7 2 0 
-bct 3 7 2 0 0
-bct 3 7 2 0 0 
-bct 3 7 2 0 0 0
-bct 3 7 2 0 0 0 
-bct 3 7 2 0 0 0 0
-bct 3 7 2 0 0 0 0 
-bct 3 7 2 0 0 0 0 0
-bct 3 7 2 0 0 0 0 0 
-bct 3 7 2 0 0 0 0 0 0
-bct 3 7 2 0 0 0 0 0 0
+bct 3 7 0
+bct 3 7 0 
+bct 3 7 0 0
+bct 3 7 0 0 
+bct 3 7 0 0 2
+bct 3 7 0 0 2 
+bct 3 7 0 0 2 0
+bct 3 7 0 0 2 0 
+bct 3 7 0 0 2 0 1
+bct 3 7 0 0 2 0 1 
+bct 3 7 0 0 2 0 1 0
+bct 3 7 0 0 2 0 1 0 
+bct 3 7 0 0 2 0 1 0 0
+bct 3 7 0 0 2 0 1 0 0
 
-Tile 3 7 has 2 0 0 0 0 0 0
+Tile 3 7 has 0 0 2 0 1 0 0
 b
 bc
 bct
@@ -1814,22 +1813,22 @@ bct 4
 bct 4 
 bct 4 7
 bct 4 7 
-bct 4 7 2
-bct 4 7 2 
-bct 4 7 2 0
-bct 4 7 2 0 
-bct 4 7 2 0 0
-bct 4 7 2 0 0 
-bct 4 7 2 0 0 0
-bct 4 7 2 0 0 0 
-bct 4 7 2 0 0 0 0
-bct 4 7 2 0 0 0 0 
-bct 4 7 2 0 0 0 0 1
-bct 4 7 2 0 0 0 0 1 
-bct 4 7 2 0 0 0 0 1 0
-bct 4 7 2 0 0 0 0 1 0
+bct 4 7 3
+bct 4 7 3 
+bct 4 7 3 0
+bct 4 7 3 0 
+bct 4 7 3 0 1
+bct 4 7 3 0 1 
+bct 4 7 3 0 1 1
+bct 4 7 3 0 1 1 
+bct 4 7 3 0 1 1 0
+bct 4 7 3 0 1 1 0 
+bct 4 7 3 0 1 1 0 0
+bct 4 7 3 0 1 1 0 0 
+bct 4 7 3 0 1 1 0 0 0
+bct 4 7 3 0 1 1 0 0 0
 
-Tile 4 7 has 2 0 0 0 0 1 0
+Tile 4 7 has 3 0 1 1 0 0 0
 b
 bc
 bct
@@ -1838,22 +1837,22 @@ bct 5
 bct 5 
 bct 5 7
 bct 5 7 
-bct 5 7 1
-bct 5 7 1 
-bct 5 7 1 0
-bct 5 7 1 0 
-bct 5 7 1 0 0
-bct 5 7 1 0 0 
-bct 5 7 1 0 0 0
-bct 5 7 1 0 0 0 
-bct 5 7 1 0 0 0 0
-bct 5 7 1 0 0 0 0 
-bct 5 7 1 0 0 0 0 0
-bct 5 7 1 0 0 0 0 0 
-bct 5 7 1 0 0 0 0 0 0
-bct 5 7 1 0 0 0 0 0 0
+bct 5 7 4
+bct 5 7 4 
+bct 5 7 4 0
+bct 5 7 4 0 
+bct 5 7 4 0 0
+bct 5 7 4 0 0 
+bct 5 7 4 0 0 0
+bct 5 7 4 0 0 0 
+bct 5 7 4 0 0 0 0
+bct 5 7 4 0 0 0 0 
+bct 5 7 4 0 0 0 0 1
+bct 5 7 4 0 0 0 0 1 
+bct 5 7 4 0 0 0 0 1 0
+bct 5 7 4 0 0 0 0 1 0
 
-Tile 5 7 has 1 0 0 0 0 0 0
+Tile 5 7 has 4 0 0 0 0 1 0
 b
 bc
 bct
@@ -1862,22 +1861,22 @@ bct 6
 bct 6 
 bct 6 7
 bct 6 7 
-bct 6 7 4
-bct 6 7 4 
-bct 6 7 4 1
-bct 6 7 4 1 
-bct 6 7 4 1 0
-bct 6 7 4 1 0 
-bct 6 7 4 1 0 1
-bct 6 7 4 1 0 1 
-bct 6 7 4 1 0 1 0
-bct 6 7 4 1 0 1 0 
-bct 6 7 4 1 0 1 0 1
-bct 6 7 4 1 0 1 0 1 
-bct 6 7 4 1 0 1 0 1 0
-bct 6 7 4 1 0 1 0 1 0
+bct 6 7 1
+bct 6 7 1 
+bct 6 7 1 0
+bct 6 7 1 0 
+bct 6 7 1 0 1
+bct 6 7 1 0 1 
+bct 6 7 1 0 1 1
+bct 6 7 1 0 1 1 
+bct 6 7 1 0 1 1 0
+bct 6 7 1 0 1 1 0 
+bct 6 7 1 0 1 1 0 0
+bct 6 7 1 0 1 1 0 0 
+bct 6 7 1 0 1 1 0 0 0
+bct 6 7 1 0 1 1 0 0 0
 
-Tile 6 7 has 4 1 0 1 0 1 0
+Tile 6 7 has 1 0 1 1 0 0 0
 b
 bc
 bct
@@ -1894,14 +1893,14 @@ bct 7 7 1 0 0
 bct 7 7 1 0 0 
 bct 7 7 1 0 0 0
 bct 7 7 1 0 0 0 
-bct 7 7 1 0 0 0 1
-bct 7 7 1 0 0 0 1 
-bct 7 7 1 0 0 0 1 0
-bct 7 7 1 0 0 0 1 0 
-bct 7 7 1 0 0 0 1 0 0
-bct 7 7 1 0 0 0 1 0 0
+bct 7 7 1 0 0 0 0
+bct 7 7 1 0 0 0 0 
+bct 7 7 1 0 0 0 0 1
+bct 7 7 1 0 0 0 0 1 
+bct 7 7 1 0 0 0 0 1 0
+bct 7 7 1 0 0 0 0 1 0
 
-Tile 7 7 has 1 0 0 0 1 0 0
+Tile 7 7 has 1 0 0 0 0 1 0
 b
 bc
 bct
@@ -1910,22 +1909,22 @@ bct 8
 bct 8 
 bct 8 7
 bct 8 7 
-bct 8 7 1
-bct 8 7 1 
-bct 8 7 1 0
-bct 8 7 1 0 
-bct 8 7 1 0 1
-bct 8 7 1 0 1 
-bct 8 7 1 0 1 0
-bct 8 7 1 0 1 0 
-bct 8 7 1 0 1 0 0
-bct 8 7 1 0 1 0 0 
-bct 8 7 1 0 1 0 0 0
-bct 8 7 1 0 1 0 0 0 
-bct 8 7 1 0 1 0 0 0 0
-bct 8 7 1 0 1 0 0 0 0
+bct 8 7 5
+bct 8 7 5 
+bct 8 7 5 0
+bct 8 7 5 0 
+bct 8 7 5 0 0
+bct 8 7 5 0 0 
+bct 8 7 5 0 0 0
+bct 8 7 5 0 0 0 
+bct 8 7 5 0 0 0 0
+bct 8 7 5 0 0 0 0 
+bct 8 7 5 0 0 0 0 0
+bct 8 7 5 0 0 0 0 0 
+bct 8 7 5 0 0 0 0 0 0
+bct 8 7 5 0 0 0 0 0 0
 
-Tile 8 7 has 1 0 1 0 0 0 0
+Tile 8 7 has 5 0 0 0 0 0 0
 b
 bc
 bct
@@ -1934,22 +1933,22 @@ bct 9
 bct 9 
 bct 9 7
 bct 9 7 
-bct 9 7 2
-bct 9 7 2 
-bct 9 7 2 0
-bct 9 7 2 0 
-bct 9 7 2 0 0
-bct 9 7 2 0 0 
-bct 9 7 2 0 0 0
-bct 9 7 2 0 0 0 
-bct 9 7 2 0 0 0 0
-bct 9 7 2 0 0 0 0 
-bct 9 7 2 0 0 0 0 0
-bct 9 7 2 0 0 0 0 0 
-bct 9 7 2 0 0 0 0 0 1
-bct 9 7 2 0 0 0 0 0 1
+bct 9 7 3
+bct 9 7 3 
+bct 9 7 3 0
+bct 9 7 3 0 
+bct 9 7 3 0 0
+bct 9 7 3 0 0 
+bct 9 7 3 0 0 0
+bct 9 7 3 0 0 0 
+bct 9 7 3 0 0 0 1
+bct 9 7 3 0 0 0 1 
+bct 9 7 3 0 0 0 1 1
+bct 9 7 3 0 0 0 1 1 
+bct 9 7 3 0 0 0 1 1 0
+bct 9 7 3 0 0 0 1 1 0
 
-Tile 9 7 has 2 0 0 0 0 0 1
+Tile 9 7 has 3 0 0 0 1 1 0
 b
 bc
 bct
@@ -1958,22 +1957,22 @@ bct 0
 bct 0 
 bct 0 8
 bct 0 8 
-bct 0 8 1
-bct 0 8 1 
-bct 0 8 1 2
-bct 0 8 1 2 
-bct 0 8 1 2 0
-bct 0 8 1 2 0 
-bct 0 8 1 2 0 0
-bct 0 8 1 2 0 0 
-bct 0 8 1 2 0 0 0
-bct 0 8 1 2 0 0 0 
-bct 0 8 1 2 0 0 0 0
-bct 0 8 1 2 0 0 0 0 
-bct 0 8 1 2 0 0 0 0 0
-bct 0 8 1 2 0 0 0 0 0
+bct 0 8 0
+bct 0 8 0 
+bct 0 8 0 0
+bct 0 8 0 0 
+bct 0 8 0 0 0
+bct 0 8 0 0 0 
+bct 0 8 0 0 0 1
+bct 0 8 0 0 0 1 
+bct 0 8 0 0 0 1 1
+bct 0 8 0 0 0 1 1 
+bct 0 8 0 0 0 1 1 1
+bct 0 8 0 0 0 1 1 1 
+bct 0 8 0 0 0 1 1 1 0
+bct 0 8 0 0 0 1 1 1 0
 
-Tile 0 8 has 1 2 0 0 0 0 0
+Tile 0 8 has 0 0 0 1 1 1 0
 b
 bc
 bct
@@ -1982,22 +1981,22 @@ bct 1
 bct 1 
 bct 1 8
 bct 1 8 
-bct 1 8 0
-bct 1 8 0 
-bct 1 8 0 0
-bct 1 8 0 0 
-bct 1 8 0 0 0
-bct 1 8 0 0 0 
-bct 1 8 0 0 0 0
-bct 1 8 0 0 0 0 
-bct 1 8 0 0 0 0 0
-bct 1 8 0 0 0 0 0 
-bct 1 8 0 0 0 0 0 0
-bct 1 8 0 0 0 0 0 0 
-bct 1 8 0 0 0 0 0 0 0
-bct 1 8 0 0 0 0 0 0 0
+bct 1 8 1
+bct 1 8 1 
+bct 1 8 1 0
+bct 1 8 1 0 
+bct 1 8 1 0 1
+bct 1 8 1 0 1 
+bct 1 8 1 0 1 1
+bct 1 8 1 0 1 1 
+bct 1 8 1 0 1 1 0
+bct 1 8 1 0 1 1 0 
+bct 1 8 1 0 1 1 0 0
+bct 1 8 1 0 1 1 0 0 
+bct 1 8 1 0 1 1 0 0 0
+bct 1 8 1 0 1 1 0 0 0
 
-Tile 1 8 has 0 0 0 0 0 0 0
+Tile 1 8 has 1 0 1 1 0 0 0
 b
 bc
 bct
@@ -2006,22 +2005,22 @@ bct 2
 bct 2 
 bct 2 8
 bct 2 8 
-bct 2 8 3
-bct 2 8 3 
-bct 2 8 3 0
-bct 2 8 3 0 
-bct 2 8 3 0 0
-bct 2 8 3 0 0 
-bct 2 8 3 0 0 0
-bct 2 8 3 0 0 0 
-bct 2 8 3 0 0 0 1
-bct 2 8 3 0 0 0 1 
-bct 2 8 3 0 0 0 1 1
-bct 2 8 3 0 0 0 1 1 
-bct 2 8 3 0 0 0 1 1 0
-bct 2 8 3 0 0 0 1 1 0
+bct 2 8 4
+bct 2 8 4 
+bct 2 8 4 0
+bct 2 8 4 0 
+bct 2 8 4 0 0
+bct 2 8 4 0 0 
+bct 2 8 4 0 0 0
+bct 2 8 4 0 0 0 
+bct 2 8 4 0 0 0 0
+bct 2 8 4 0 0 0 0 
+bct 2 8 4 0 0 0 0 0
+bct 2 8 4 0 0 0 0 0 
+bct 2 8 4 0 0 0 0 0 0
+bct 2 8 4 0 0 0 0 0 0
 
-Tile 2 8 has 3 0 0 0 1 1 0
+Tile 2 8 has 4 0 0 0 0 0 0
 b
 bc
 bct
@@ -2030,22 +2029,22 @@ bct 3
 bct 3 
 bct 3 8
 bct 3 8 
-bct 3 8 2
-bct 3 8 2 
-bct 3 8 2 0
-bct 3 8 2 0 
-bct 3 8 2 0 0
-bct 3 8 2 0 0 
-bct 3 8 2 0 0 0
-bct 3 8 2 0 0 0 
-bct 3 8 2 0 0 0 0
-bct 3 8 2 0 0 0 0 
-bct 3 8 2 0 0 0 0 0
-bct 3 8 2 0 0 0 0 0 
-bct 3 8 2 0 0 0 0 0 0
-bct 3 8 2 0 0 0 0 0 0
+bct 3 8 4
+bct 3 8 4 
+bct 3 8 4 1
+bct 3 8 4 1 
+bct 3 8 4 1 0
+bct 3 8 4 1 0 
+bct 3 8 4 1 0 0
+bct 3 8 4 1 0 0 
+bct 3 8 4 1 0 0 0
+bct 3 8 4 1 0 0 0 
+bct 3 8 4 1 0 0 0 0
+bct 3 8 4 1 0 0 0 0 
+bct 3 8 4 1 0 0 0 0 0
+bct 3 8 4 1 0 0 0 0 0
 
-Tile 3 8 has 2 0 0 0 0 0 0
+Tile 3 8 has 4 1 0 0 0 0 0
 b
 bc
 bct
@@ -2054,22 +2053,22 @@ bct 4
 bct 4 
 bct 4 8
 bct 4 8 
-bct 4 8 1
-bct 4 8 1 
-bct 4 8 1 0
-bct 4 8 1 0 
-bct 4 8 1 0 1
-bct 4 8 1 0 1 
-bct 4 8 1 0 1 0
-bct 4 8 1 0 1 0 
-bct 4 8 1 0 1 0 0
-bct 4 8 1 0 1 0 0 
-bct 4 8 1 0 1 0 0 0
-bct 4 8 1 0 1 0 0 0 
-bct 4 8 1 0 1 0 0 0 0
-bct 4 8 1 0 1 0 0 0 0
+bct 4 8 0
+bct 4 8 0 
+bct 4 8 0 0
+bct 4 8 0 0 
+bct 4 8 0 0 0
+bct 4 8 0 0 0 
+bct 4 8 0 0 0 0
+bct 4 8 0 0 0 0 
+bct 4 8 0 0 0 0 0
+bct 4 8 0 0 0 0 0 
+bct 4 8 0 0 0 0 0 0
+bct 4 8 0 0 0 0 0 0 
+bct 4 8 0 0 0 0 0 0 0
+bct 4 8 0 0 0 0 0 0 0
 
-Tile 4 8 has 1 0 1 0 0 0 0
+Tile 4 8 has 0 0 0 0 0 0 0
 b
 bc
 bct
@@ -2078,22 +2077,22 @@ bct 5
 bct 5 
 bct 5 8
 bct 5 8 
-bct 5 8 3
-bct 5 8 3 
-bct 5 8 3 0
-bct 5 8 3 0 
-bct 5 8 3 0 0
-bct 5 8 3 0 0 
-bct 5 8 3 0 0 0
-bct 5 8 3 0 0 0 
-bct 5 8 3 0 0 0 0
-bct 5 8 3 0 0 0 0 
-bct 5 8 3 0 0 0 0 1
-bct 5 8 3 0 0 0 0 1 
-bct 5 8 3 0 0 0 0 1 0
-bct 5 8 3 0 0 0 0 1 0
+bct 5 8 1
+bct 5 8 1 
+bct 5 8 1 0
+bct 5 8 1 0 
+bct 5 8 1 0 0
+bct 5 8 1 0 0 
+bct 5 8 1 0 0 0
+bct 5 8 1 0 0 0 
+bct 5 8 1 0 0 0 0
+bct 5 8 1 0 0 0 0 
+bct 5 8 1 0 0 0 0 0
+bct 5 8 1 0 0 0 0 0 
+bct 5 8 1 0 0 0 0 0 0
+bct 5 8 1 0 0 0 0 0 0
 
-Tile 5 8 has 3 0 0 0 0 1 0
+Tile 5 8 has 1 0 0 0 0 0 0
 b
 bc
 bct
@@ -2102,22 +2101,22 @@ bct 6
 bct 6 
 bct 6 8
 bct 6 8 
-bct 6 8 3
-bct 6 8 3 
-bct 6 8 3 0
-bct 6 8 3 0 
-bct 6 8 3 0 1
-bct 6 8 3 0 1 
-bct 6 8 3 0 1 0
-bct 6 8 3 0 1 0 
-bct 6 8 3 0 1 0 0
-bct 6 8 3 0 1 0 0 
-bct 6 8 3 0 1 0 0 0
-bct 6 8 3 0 1 0 0 0 
-bct 6 8 3 0 1 0 0 0 0
-bct 6 8 3 0 1 0 0 0 0
+bct 6 8 1
+bct 6 8 1 
+bct 6 8 1 0
+bct 6 8 1 0 
+bct 6 8 1 0 0
+bct 6 8 1 0 0 
+bct 6 8 1 0 0 0
+bct 6 8 1 0 0 0 
+bct 6 8 1 0 0 0 0
+bct 6 8 1 0 0 0 0 
+bct 6 8 1 0 0 0 0 0
+bct 6 8 1 0 0 0 0 0 
+bct 6 8 1 0 0 0 0 0 0
+bct 6 8 1 0 0 0 0 0 0
 
-Tile 6 8 has 3 0 1 0 0 0 0
+Tile 6 8 has 1 0 0 0 0 0 0
 b
 bc
 bct
@@ -2126,22 +2125,22 @@ bct 7
 bct 7 
 bct 7 8
 bct 7 8 
-bct 7 8 1
-bct 7 8 1 
-bct 7 8 1 0
-bct 7 8 1 0 
-bct 7 8 1 0 0
-bct 7 8 1 0 0 
-bct 7 8 1 0 0 0
-bct 7 8 1 0 0 0 
-bct 7 8 1 0 0 0 1
-bct 7 8 1 0 0 0 1 
-bct 7 8 1 0 0 0 1 0
-bct 7 8 1 0 0 0 1 0 
-bct 7 8 1 0 0 0 1 0 0
-bct 7 8 1 0 0 0 1 0 0
+bct 7 8 4
+bct 7 8 4 
+bct 7 8 4 0
+bct 7 8 4 0 
+bct 7 8 4 0 0
+bct 7 8 4 0 0 
+bct 7 8 4 0 0 0
+bct 7 8 4 0 0 0 
+bct 7 8 4 0 0 0 0
+bct 7 8 4 0 0 0 0 
+bct 7 8 4 0 0 0 0 0
+bct 7 8 4 0 0 0 0 0 
+bct 7 8 4 0 0 0 0 0 0
+bct 7 8 4 0 0 0 0 0 0
 
-Tile 7 8 has 1 0 0 0 1 0 0
+Tile 7 8 has 4 0 0 0 0 0 0
 b
 bc
 bct
@@ -2150,22 +2149,22 @@ bct 8
 bct 8 
 bct 8 8
 bct 8 8 
-bct 8 8 1
-bct 8 8 1 
-bct 8 8 1 1
-bct 8 8 1 1 
-bct 8 8 1 1 0
-bct 8 8 1 1 0 
-bct 8 8 1 1 0 0
-bct 8 8 1 1 0 0 
-bct 8 8 1 1 0 0 1
-bct 8 8 1 1 0 0 1 
-bct 8 8 1 1 0 0 1 0
-bct 8 8 1 1 0 0 1 0 
-bct 8 8 1 1 0 0 1 0 0
-bct 8 8 1 1 0 0 1 0 0
+bct 8 8 4
+bct 8 8 4 
+bct 8 8 4 0
+bct 8 8 4 0 
+bct 8 8 4 0 0
+bct 8 8 4 0 0 
+bct 8 8 4 0 0 0
+bct 8 8 4 0 0 0 
+bct 8 8 4 0 0 0 1
+bct 8 8 4 0 0 0 1 
+bct 8 8 4 0 0 0 1 0
+bct 8 8 4 0 0 0 1 0 
+bct 8 8 4 0 0 0 1 0 0
+bct 8 8 4 0 0 0 1 0 0
 
-Tile 8 8 has 1 1 0 0 1 0 0
+Tile 8 8 has 4 0 0 0 1 0 0
 b
 bc
 bct
@@ -2174,22 +2173,22 @@ bct 9
 bct 9 
 bct 9 8
 bct 9 8 
-bct 9 8 1
-bct 9 8 1 
-bct 9 8 1 1
-bct 9 8 1 1 
-bct 9 8 1 1 0
-bct 9 8 1 1 0 
-bct 9 8 1 1 0 1
-bct 9 8 1 1 0 1 
-bct 9 8 1 1 0 1 0
-bct 9 8 1 1 0 1 0 
-bct 9 8 1 1 0 1 0 0
-bct 9 8 1 1 0 1 0 0 
-bct 9 8 1 1 0 1 0 0 0
-bct 9 8 1 1 0 1 0 0 0
+bct 9 8 2
+bct 9 8 2 
+bct 9 8 2 0
+bct 9 8 2 0 
+bct 9 8 2 0 1
+bct 9 8 2 0 1 
+bct 9 8 2 0 1 1
+bct 9 8 2 0 1 1 
+bct 9 8 2 0 1 1 0
+bct 9 8 2 0 1 1 0 
+bct 9 8 2 0 1 1 0 0
+bct 9 8 2 0 1 1 0 0 
+bct 9 8 2 0 1 1 0 0 0
+bct 9 8 2 0 1 1 0 0 0
 
-Tile 9 8 has 1 1 0 1 0 0 0
+Tile 9 8 has 2 0 1 1 0 0 0
 b
 bc
 bct
@@ -2198,22 +2197,22 @@ bct 0
 bct 0 
 bct 0 9
 bct 0 9 
-bct 0 9 1
-bct 0 9 1 
-bct 0 9 1 0
-bct 0 9 1 0 
-bct 0 9 1 0 0
-bct 0 9 1 0 0 
-bct 0 9 1 0 0 0
-bct 0 9 1 0 0 0 
-bct 0 9 1 0 0 0 0
-bct 0 9 1 0 0 0 0 
-bct 0 9 1 0 0 0 0 0
-bct 0 9 1 0 0 0 0 0 
-bct 0 9 1 0 0 0 0 0 0
-bct 0 9 1 0 0 0 0 0 0
+bct 0 9 3
+bct 0 9 3 
+bct 0 9 3 0
+bct 0 9 3 0 
+bct 0 9 3 0 0
+bct 0 9 3 0 0 
+bct 0 9 3 0 0 1
+bct 0 9 3 0 0 1 
+bct 0 9 3 0 0 1 0
+bct 0 9 3 0 0 1 0 
+bct 0 9 3 0 0 1 0 1
+bct 0 9 3 0 0 1 0 1 
+bct 0 9 3 0 0 1 0 1 0
+bct 0 9 3 0 0 1 0 1 0
 
-Tile 0 9 has 1 0 0 0 0 0 0
+Tile 0 9 has 3 0 0 1 0 1 0
 b
 bc
 bct
@@ -2222,22 +2221,22 @@ bct 1
 bct 1 
 bct 1 9
 bct 1 9 
-bct 1 9 1
-bct 1 9 1 
-bct 1 9 1 0
-bct 1 9 1 0 
-bct 1 9 1 0 0
-bct 1 9 1 0 0 
-bct 1 9 1 0 0 0
-bct 1 9 1 0 0 0 
-bct 1 9 1 0 0 0 0
-bct 1 9 1 0 0 0 0 
-bct 1 9 1 0 0 0 0 0
-bct 1 9 1 0 0 0 0 0 
-bct 1 9 1 0 0 0 0 0 0
-bct 1 9 1 0 0 0 0 0 0
+bct 1 9 2
+bct 1 9 2 
+bct 1 9 2 0
+bct 1 9 2 0 
+bct 1 9 2 0 0
+bct 1 9 2 0 0 
+bct 1 9 2 0 0 0
+bct 1 9 2 0 0 0 
+bct 1 9 2 0 0 0 0
+bct 1 9 2 0 0 0 0 
+bct 1 9 2 0 0 0 0 0
+bct 1 9 2 0 0 0 0 0 
+bct 1 9 2 0 0 0 0 0 0
+bct 1 9 2 0 0 0 0 0 0
 
-Tile 1 9 has 1 0 0 0 0 0 0
+Tile 1 9 has 2 0 0 0 0 0 0
 b
 bc
 bct
@@ -2246,22 +2245,22 @@ bct 2
 bct 2 
 bct 2 9
 bct 2 9 
-bct 2 9 3
-bct 2 9 3 
-bct 2 9 3 0
-bct 2 9 3 0 
-bct 2 9 3 0 0
-bct 2 9 3 0 0 
-bct 2 9 3 0 0 0
-bct 2 9 3 0 0 0 
-bct 2 9 3 0 0 0 0
-bct 2 9 3 0 0 0 0 
-bct 2 9 3 0 0 0 0 0
-bct 2 9 3 0 0 0 0 0 
-bct 2 9 3 0 0 0 0 0 0
-bct 2 9 3 0 0 0 0 0 0
+bct 2 9 1
+bct 2 9 1 
+bct 2 9 1 0
+bct 2 9 1 0 
+bct 2 9 1 0 0
+bct 2 9 1 0 0 
+bct 2 9 1 0 0 0
+bct 2 9 1 0 0 0 
+bct 2 9 1 0 0 0 0
+bct 2 9 1 0 0 0 0 
+bct 2 9 1 0 0 0 0 0
+bct 2 9 1 0 0 0 0 0 
+bct 2 9 1 0 0 0 0 0 0
+bct 2 9 1 0 0 0 0 0 0
 
-Tile 2 9 has 3 0 0 0 0 0 0
+Tile 2 9 has 1 0 0 0 0 0 0
 b
 bc
 bct
@@ -2270,22 +2269,22 @@ bct 3
 bct 3 
 bct 3 9
 bct 3 9 
-bct 3 9 1
-bct 3 9 1 
-bct 3 9 1 0
-bct 3 9 1 0 
-bct 3 9 1 0 1
-bct 3 9 1 0 1 
-bct 3 9 1 0 1 0
-bct 3 9 1 0 1 0 
-bct 3 9 1 0 1 0 0
-bct 3 9 1 0 1 0 0 
-bct 3 9 1 0 1 0 0 0
-bct 3 9 1 0 1 0 0 0 
-bct 3 9 1 0 1 0 0 0 0
-bct 3 9 1 0 1 0 0 0 0
+bct 3 9 2
+bct 3 9 2 
+bct 3 9 2 0
+bct 3 9 2 0 
+bct 3 9 2 0 0
+bct 3 9 2 0 0 
+bct 3 9 2 0 0 0
+bct 3 9 2 0 0 0 
+bct 3 9 2 0 0 0 1
+bct 3 9 2 0 0 0 1 
+bct 3 9 2 0 0 0 1 1
+bct 3 9 2 0 0 0 1 1 
+bct 3 9 2 0 0 0 1 1 0
+bct 3 9 2 0 0 0 1 1 0
 
-Tile 3 9 has 1 0 1 0 0 0 0
+Tile 3 9 has 2 0 0 0 1 1 0
 b
 bc
 bct
@@ -2294,22 +2293,22 @@ bct 4
 bct 4 
 bct 4 9
 bct 4 9 
-bct 4 9 1
-bct 4 9 1 
-bct 4 9 1 0
-bct 4 9 1 0 
-bct 4 9 1 0 0
-bct 4 9 1 0 0 
-bct 4 9 1 0 0 0
-bct 4 9 1 0 0 0 
-bct 4 9 1 0 0 0 0
-bct 4 9 1 0 0 0 0 
-bct 4 9 1 0 0 0 0 0
-bct 4 9 1 0 0 0 0 0 
-bct 4 9 1 0 0 0 0 0 0
-bct 4 9 1 0 0 0 0 0 0
+bct 4 9 3
+bct 4 9 3 
+bct 4 9 3 0
+bct 4 9 3 0 
+bct 4 9 3 0 0
+bct 4 9 3 0 0 
+bct 4 9 3 0 0 0
+bct 4 9 3 0 0 0 
+bct 4 9 3 0 0 0 0
+bct 4 9 3 0 0 0 0 
+bct 4 9 3 0 0 0 0 0
+bct 4 9 3 0 0 0 0 0 
+bct 4 9 3 0 0 0 0 0 0
+bct 4 9 3 0 0 0 0 0 0
 
-Tile 4 9 has 1 0 0 0 0 0 0
+Tile 4 9 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -2318,22 +2317,22 @@ bct 5
 bct 5 
 bct 5 9
 bct 5 9 
-bct 5 9 3
-bct 5 9 3 
-bct 5 9 3 0
-bct 5 9 3 0 
-bct 5 9 3 0 0
-bct 5 9 3 0 0 
-bct 5 9 3 0 0 0
-bct 5 9 3 0 0 0 
-bct 5 9 3 0 0 0 0
-bct 5 9 3 0 0 0 0 
-bct 5 9 3 0 0 0 0 0
-bct 5 9 3 0 0 0 0 0 
-bct 5 9 3 0 0 0 0 0 0
-bct 5 9 3 0 0 0 0 0 0
+bct 5 9 2
+bct 5 9 2 
+bct 5 9 2 0
+bct 5 9 2 0 
+bct 5 9 2 0 0
+bct 5 9 2 0 0 
+bct 5 9 2 0 0 1
+bct 5 9 2 0 0 1 
+bct 5 9 2 0 0 1 0
+bct 5 9 2 0 0 1 0 
+bct 5 9 2 0 0 1 0 0
+bct 5 9 2 0 0 1 0 0 
+bct 5 9 2 0 0 1 0 0 0
+bct 5 9 2 0 0 1 0 0 0
 
-Tile 5 9 has 3 0 0 0 0 0 0
+Tile 5 9 has 2 0 0 1 0 0 0
 b
 bc
 bct
@@ -2342,22 +2341,22 @@ bct 6
 bct 6 
 bct 6 9
 bct 6 9 
-bct 6 9 2
-bct 6 9 2 
-bct 6 9 2 0
-bct 6 9 2 0 
-bct 6 9 2 0 0
-bct 6 9 2 0 0 
-bct 6 9 2 0 0 0
-bct 6 9 2 0 0 0 
-bct 6 9 2 0 0 0 0
-bct 6 9 2 0 0 0 0 
-bct 6 9 2 0 0 0 0 0
-bct 6 9 2 0 0 0 0 0 
-bct 6 9 2 0 0 0 0 0 0
-bct 6 9 2 0 0 0 0 0 0
+bct 6 9 3
+bct 6 9 3 
+bct 6 9 3 0
+bct 6 9 3 0 
+bct 6 9 3 0 0
+bct 6 9 3 0 0 
+bct 6 9 3 0 0 0
+bct 6 9 3 0 0 0 
+bct 6 9 3 0 0 0 0
+bct 6 9 3 0 0 0 0 
+bct 6 9 3 0 0 0 0 0
+bct 6 9 3 0 0 0 0 0 
+bct 6 9 3 0 0 0 0 0 0
+bct 6 9 3 0 0 0 0 0 0
 
-Tile 6 9 has 2 0 0 0 0 0 0
+Tile 6 9 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -2366,22 +2365,22 @@ bct 7
 bct 7 
 bct 7 9
 bct 7 9 
-bct 7 9 2
-bct 7 9 2 
-bct 7 9 2 0
-bct 7 9 2 0 
-bct 7 9 2 0 0
-bct 7 9 2 0 0 
-bct 7 9 2 0 0 0
-bct 7 9 2 0 0 0 
-bct 7 9 2 0 0 0 1
-bct 7 9 2 0 0 0 1 
-bct 7 9 2 0 0 0 1 0
-bct 7 9 2 0 0 0 1 0 
-bct 7 9 2 0 0 0 1 0 0
-bct 7 9 2 0 0 0 1 0 0
+bct 7 9 3
+bct 7 9 3 
+bct 7 9 3 0
+bct 7 9 3 0 
+bct 7 9 3 0 0
+bct 7 9 3 0 0 
+bct 7 9 3 0 0 0
+bct 7 9 3 0 0 0 
+bct 7 9 3 0 0 0 0
+bct 7 9 3 0 0 0 0 
+bct 7 9 3 0 0 0 0 0
+bct 7 9 3 0 0 0 0 0 
+bct 7 9 3 0 0 0 0 0 0
+bct 7 9 3 0 0 0 0 0 0
 
-Tile 7 9 has 2 0 0 0 1 0 0
+Tile 7 9 has 3 0 0 0 0 0 0
 b
 bc
 bct
@@ -2390,22 +2389,22 @@ bct 8
 bct 8 
 bct 8 9
 bct 8 9 
-bct 8 9 2
-bct 8 9 2 
-bct 8 9 2 0
-bct 8 9 2 0 
-bct 8 9 2 0 0
-bct 8 9 2 0 0 
-bct 8 9 2 0 0 1
-bct 8 9 2 0 0 1 
-bct 8 9 2 0 0 1 0
-bct 8 9 2 0 0 1 0 
-bct 8 9 2 0 0 1 0 0
-bct 8 9 2 0 0 1 0 0 
-bct 8 9 2 0 0 1 0 0 0
-bct 8 9 2 0 0 1 0 0 0
+bct 8 9 7
+bct 8 9 7 
+bct 8 9 7 0
+bct 8 9 7 0 
+bct 8 9 7 0 0
+bct 8 9 7 0 0 
+bct 8 9 7 0 0 1
+bct 8 9 7 0 0 1 
+bct 8 9 7 0 0 1 0
+bct 8 9 7 0 0 1 0 
+bct 8 9 7 0 0 1 0 0
+bct 8 9 7 0 0 1 0 0 
+bct 8 9 7 0 0 1 0 0 0
+bct 8 9 7 0 0 1 0 0 0
 
-Tile 8 9 has 2 0 0 1 0 0 0
+Tile 8 9 has 7 0 0 1 0 0 0
 b
 bc
 bct
@@ -2414,22 +2413,22 @@ bct 9
 bct 9 
 bct 9 9
 bct 9 9 
-bct 9 9 2
-bct 9 9 2 
-bct 9 9 2 0
-bct 9 9 2 0 
-bct 9 9 2 0 0
-bct 9 9 2 0 0 
-bct 9 9 2 0 0 0
-bct 9 9 2 0 0 0 
-bct 9 9 2 0 0 0 0
-bct 9 9 2 0 0 0 0 
-bct 9 9 2 0 0 0 0 0
-bct 9 9 2 0 0 0 0 0 
-bct 9 9 2 0 0 0 0 0 0
-bct 9 9 2 0 0 0 0 0 0
+bct 9 9 3
+bct 9 9 3 
+bct 9 9 3 0
+bct 9 9 3 0 
+bct 9 9 3 0 0
+bct 9 9 3 0 0 
+bct 9 9 3 0 0 0
+bct 9 9 3 0 0 0 
+bct 9 9 3 0 0 0 0
+bct 9 9 3 0 0 0 0 
+bct 9 9 3 0 0 0 0 1
+bct 9 9 3 0 0 0 0 1 
+bct 9 9 3 0 0 0 0 1 0
+bct 9 9 3 0 0 0 0 1 0
 
-Tile 9 9 has 2 0 0 0 0 0 0
+Tile 9 9 has 3 0 0 0 0 1 0
 t
 tn
 tna
@@ -2453,4 +2452,76 @@ tna toto
 tna toto
 
 Teams names: toto
+
+p
+pn
+pnw
+pnw 
+pnw 5
+pnw 5 
+pnw 5 3
+pnw 5 3 
+pnw 5 3 9
+pnw 5 3 9 
+pnw 5 3 9 4
+pnw 5 3 9 4 
+pnw 5 3 9 4 1
+pnw 5 3 9 4 1 
+pnw 5 3 9 4 1 t
+pnw 5 3 9 4 1 to
+pnw 5 3 9 4 1 tot
+pnw 5 3 9 4 1 toto
+pnw 5 3 9 4 1 toto
+
+Trantorian 5 is born with orientation4
+creer Tranto x: 3 y: 9
+pin 5
+
+p
+pi
+pin
+pin 
+pin 5
+pin 5 
+pin 5 3
+pin 5 3 
+pin 5 3 9
+pin 5 3 9 
+pin 5 3 9 6
+pin 5 3 9 6 
+pin 5 3 9 6 0
+pin 5 3 9 6 0 
+pin 5 3 9 6 0 0
+pin 5 3 9 6 0 0 
+pin 5 3 9 6 0 0 0
+pin 5 3 9 6 0 0 0 
+pin 5 3 9 6 0 0 0 0
+pin 5 3 9 6 0 0 0 0 
+pin 5 3 9 6 0 0 0 0 0
+pin 5 3 9 6 0 0 0 0 0 
+pin 5 3 9 6 0 0 0 0 0 0
+pin 5 3 9 6 0 0 0 0 0 0
+
+inventory of5
+sst 5
+
+s
+sg
+sgt
+sgt 
+sgt 5
+sgt 5
+
+frequency : 5
+
+sst 5
+
+s
+sg
+sgt
+sgt 
+sgt 5
+sgt 5
+
+frequency : 5
 
