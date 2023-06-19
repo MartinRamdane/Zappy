@@ -26,53 +26,81 @@ Display::~Display()
 
 void Display::createMap(int width, int height)
 {
-    width += 2; height += 2;
-    std::vector<std::string> array(height);
-    for (int i = 0; i < height; i++) {
-        array[i] = std::string(width, 'g');
-        for (int j = 0; j < width; j++) {
-            if (i == 1 && j == 1) {
+    int waterWidth = 0;
+    int waterHeight = 0;
+    if (width == 10) {
+        waterWidth = 6 * width;
+    }
+    if (height == 10) {
+        waterHeight = 6 * height;
+    }
+    if (width > 10 && width < 20) {
+        waterWidth = 4 * width;
+    }
+    if (height > 10 && height < 20) {
+        waterHeight = 4 * height;
+    }
+    if (width >= 20) {
+        waterWidth = width / 2;
+    }
+    if (height >= 20) {
+        waterHeight = height / 2;
+    }
+
+
+    std::vector<std::string> array(height + 2 * waterHeight);
+
+    for (int i = 0; i < height + 2 * waterHeight; i++) {
+        array[i] = std::string(width + 2 * waterWidth, 'r');
+    }
+
+    for (int i = waterHeight; i < height + waterHeight; i++) {
+        for (int j = waterWidth; j < width + waterWidth; j++) {
+            if (i == waterHeight && j == waterWidth) {
                 array[i][j] = 'h';
-            } else if (i == 1 && j == width - 2) {
+            } else if (i == waterHeight && j == width + waterWidth - 1) {
                 array[i][j] = 'i';
-            } else if (i == height - 2 && j == 1) {
+            } else if (i == height + waterHeight - 1 && j == waterWidth) {
                 array[i][j] = 'j';
-            } else if (i == height - 2 && j == width - 2) {
+            } else if (i == height + waterHeight - 1 && j == width + waterWidth - 1) {
                 array[i][j] = 'k';
-            } else if (i == 1) {
+            } else if (i == waterHeight) {
                 array[i][j] = 'l';
-            } else if (j == 1) {
+            } else if (j == waterWidth) {
                 array[i][j] = 'm';
-            } else if (j == width - 2) {
+            } else if (j == width + waterWidth - 1) {
                 array[i][j] = 'n';
-            } else if (i == height - 2) {
+            } else if (i == height + waterHeight - 1) {
                 array[i][j] = 'o';
-            }
-            if (i == 0 && j == 0) {
-                array[i][j] = 'w';
-            } else if (i == 0 && j == width - 1) {
-                array[i][j] = 'x';
-            } else if (i == 0 && j != 0) {
-                array[i][j] = 'q';
-            } else if (i == height - 1 && j == 0) {
-                array[i][j] = 's';
-            } else if (i == height - 1 && j == width - 1) {
-                array[i][j] = 'd';
-            } else if (i == height - 1 && j != 0) {
-                array[i][j] = 'a';
-            } else if (i != 0 && j == 0) {
-                array[i][j] = 'p';
-            } else if (i != 0 && j == width - 1) {
-                array[i][j] = 'z';
+            } else {
+                array[i][j] = 'g';
             }
         }
     }
     array.push_back("");
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++)
-            this->_map.push_back(std::make_unique<STile>(x - 1, y - 1, array[y][x]));
+    array[waterHeight - 1][waterWidth - 1] = 'w';
+    for (int i = waterWidth; i < width + waterWidth; i++) {
+        array[waterHeight - 1][i] = 'q';
+        array[height + waterHeight][i] = 'a';
     }
+
+    for (int i = waterHeight; i < height + waterHeight; i++) {
+        array[i][waterWidth - 1] = 'p';
+        array[i][width + waterWidth] = 'z';
+    }
+    array[waterHeight - 1][width + waterWidth] = 'x';
+    array[height + waterHeight][waterWidth - 1] = 's';
+    array[height + waterHeight][width + waterWidth] = 'd';
+
+    for (int y = 0; y < height + 2 * waterHeight; y++) {
+        for (int x = 0; x < width + 2 * waterWidth; x++)
+            this->_map.push_back(std::make_unique<STile>(x - waterWidth, y - waterHeight, array[y][x]));
+    }
+}
+
+void Display::createOcean(int width, int height)
+{
 }
 
 void Display::createViews(int map_width, int map_height)
@@ -94,6 +122,8 @@ void Display::render()
         return a.first < b.first;
     });
     this->_window->clear(sf::Color::Black);
+    for (auto &sprite : this->_ocean)
+        sprite->draw(*this->_window, this->_view);
     for (auto &sprite : this->_map)
        sprite->draw(*this->_window, this->_view);
     for (auto &sprite : sortedTrantorians)
@@ -208,6 +238,7 @@ void Display::update(MapT *cache)
     const sf::Time targetFrameTime = sf::seconds(1.0f / cache->getFrequency());
     if (this->_mapCreated == false && cache->getX() != 0 && cache->getY() != 0) {
         this->createMap(cache->getX(), cache->getY());
+        this->createOcean(cache->getX(), cache->getY());
         this->createViews(cache->getX(), cache->getY());
         this->_mapCreated = true;
     }
@@ -235,13 +266,9 @@ void Display::update(MapT *cache)
         this->_bottomMenu->update(cache->getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
     for (auto &sprite : this->_trantorians) {
         if (sprite.first == this->_trantorian_clicked.x) {
-            if (this->_trantorian_clicked.x != -1 && this->_trantorian_clicked.y != -1) {
-                STrantorian *trantorian = dynamic_cast<STrantorian *>(this->_trantorians[this->_trantorian_clicked.x].get());
-                this->_inventory->setTrantorianTexture(trantorian->getTexture());
-                this->_inventory->update(cache->getTrantorian(this->_trantorian_clicked.x).getStocks(), cache->getTrantorian(this->_trantorian_clicked.x).getTeam(), cache->getTrantorian(this->_trantorian_clicked.x).getLvl());
-            }
-        } else {
-            this->_trantorian_clicked = sf::Vector2i(-1, -1);
+            STrantorian *trantorian = dynamic_cast<STrantorian *>(this->_trantorians[this->_trantorian_clicked.x].get());
+            this->_inventory->setTrantorianTexture(trantorian->getTexture());
+            this->_inventory->update(cache->getTrantorian(this->_trantorian_clicked.x).getStocks(), cache->getTrantorian(this->_trantorian_clicked.x).getTeam(), cache->getTrantorian(this->_trantorian_clicked.x).getLvl());
         }
     }
     this->_slider->update(cache);

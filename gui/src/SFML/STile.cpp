@@ -73,6 +73,9 @@ void STile::createSprite()
         case 'd':
             this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_right.png");
             break;
+        case 'r':
+            this->_texture.loadFromFile("gui/assets/map/ocean.png");
+            break;
         default:
             break;
     }
@@ -162,7 +165,7 @@ void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
 {
     if (event.type == sf::Event::MouseMoved) {
         if (this->_type == 'g' || this->_type == 'h' || this->_type == 'i' || this->_type == 'j' || this->_type == 'k' || this->_type == 'l' || this->_type == 'm' || this->_type == 'n' || this->_type == 'o') {
-            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+            sf::Vector2i pixelPos = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
             sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
             if (this->_sprite.getGlobalBounds().contains(sf::Vector2f(worldPos.x, worldPos.y))) {
                 this->_sprite.setColor(sf::Color(255, 255, 255, 128));

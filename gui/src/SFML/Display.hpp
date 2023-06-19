@@ -28,6 +28,7 @@ class Display {
         std::unique_ptr<sf::RenderWindow> &getWindow();
         void eventHandler(MapT cache);
         void createMap(int width, int height);
+        void createOcean(int width, int height);
         void update(MapT *cache);
         void keyHandler(MapT cache);
         void clickHandler(MapT cache);
@@ -41,6 +42,7 @@ class Display {
         sf::Event _event;
         std::map<int, std::unique_ptr<IEntity>> _trantorians;
         std::vector<std::unique_ptr<IEntity>> _map;
+        std::vector<std::unique_ptr<IEntity>> _ocean;
         std::unique_ptr<SSide_menu> _bottomMenu;
         std::unique_ptr<SInventory> _inventory;
         std::unique_ptr<SSlider> _slider;
