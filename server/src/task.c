@@ -99,8 +99,6 @@ void execute_tasks(server_t *server)
             strcmp(tmp->cmd, "Incantation") == 0) {
                 send_task_response(server, tmp, tmp->cmd);
                 LIST_REMOVE(tmp, next);
-                free(tmp->cmd);
-                free(tmp);
                 return execute_tasks(server);
             }
         }

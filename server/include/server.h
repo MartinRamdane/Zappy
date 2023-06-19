@@ -83,7 +83,7 @@ typedef struct player {
 typedef struct player_queue {
     player *player;
     LIST_ENTRY(player_queue) next;
-} player_queue;
+} t_player_queue;
 
 extern LIST_HEAD(player_listhead, player_queue) player_head;
 extern LIST_HEAD(eggs_list, egg) eggs_head;
@@ -99,7 +99,6 @@ typedef struct tile {
     int phiras;
     int thystame;
     struct player_listhead player_head;
-    player_queue *players;
 } tile;
 
 typedef struct client {
@@ -251,7 +250,7 @@ void move_player(player *p, tile **map, int *pos, server_t *s_infos);
 int get_case(server_t *server, char dir, int tile, int diff);
 int get_nb_tiles_per_level(int level);
 int get_first_case_id_per_level(server_t *server, int tile, char dir, int level);
-char *get_all_tile_infos(tile *target);
+char *get_all_tile_infos(tile *target, int x, int y);
 char *get_all_tiles_per_level(server_t *server, client_t *client, int level);
 int set_object(server_t *server, client_t *client, char *buffer);
 int take_object(server_t *server, client_t *client, char *buffer);

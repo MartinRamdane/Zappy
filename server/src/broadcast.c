@@ -55,7 +55,7 @@ int compare_listen_tiles(l_tile *listen_tiles, int x, int y)
         if (listen_tiles[i].x == x && listen_tiles[i].y == y)
             return listen_tiles[i].id;
     for (int i = 0; i < 8; i++) {
-        diff[i] = malloc(sizeof(int) * 2);
+        diff[i] = malloc(sizeof(int) * 4);
         target_tiles[i] = malloc(sizeof(int) * 4);
     }
     for (int i = 0; i < 8; i++) {

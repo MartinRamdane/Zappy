@@ -10,8 +10,10 @@
 tile **generate_map(server_t *infos)
 {
     tile **map = malloc(sizeof(tile *) * infos->width);
+    memset(map, 0, sizeof(tile *) * infos->width);
     for (int x = 0; x < infos->width; x++) {
         map[x] = malloc(sizeof(tile) * infos->height);
+        memset(map[x], 0, sizeof(tile) * infos->height);
         for (int y = 0; y < infos->height; y++) {
             map[x][y].x = x; map[x][y].y = y;
             map[x][y].food = 0;
@@ -22,7 +24,7 @@ tile **generate_map(server_t *infos)
             map[x][y].phiras = 0;
             map[x][y].thystame = 0;
             LIST_INIT(&map[x][y].player_head);
-            map[x][y].players = NULL;
+            printf("DATA IN TARGET x %d y %d food %d : linemate %d: \n", map[x][y].x, map[x][y].y, map[x][y].food, map[x][y].linemate);
         }
     }
     return map;
