@@ -186,6 +186,8 @@ l_tile *get_west_case(server_t *server, l_tile *listen_tiles);
 int get_nb_players_on_tile(tile *tile);
 int check_can_incantation(server_t *server, client_t *client);
 void update_incantation(server_t *server, client_t *client);
+void update_incantation_2(client_t *client, tile *_tile, server_t *server);
+void update_incantation_3(client_t *client, tile *_tile, server_t *server);
 
 // SERVER
 server_t *create_server_struct(void);

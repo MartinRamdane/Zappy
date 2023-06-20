@@ -7,7 +7,7 @@
 
 #include "../include/server.h"
 
-void update_incantation_3(client_t *client, tile *_tile)
+void update_incantation_3(client_t *client, tile *_tile, server_t *server)
 {
     if (client->player->level == 6) {
         _tile->linemate -= 1; _tile->deraumere -= 2;
@@ -18,9 +18,10 @@ void update_incantation_3(client_t *client, tile *_tile)
         _tile->sibur -= 2; _tile->phiras -= 2;
         _tile->mendiane -= 2; _tile->thystame -= 1;
     }
+    send_map_content_to_all_gui(server);
 }
 
-void update_incantation_2(client_t *client, tile *_tile)
+void update_incantation_2(client_t *client, tile *_tile, server_t *server)
 {
     if (client->player->level == 4) {
         _tile->linemate -= 1; _tile->deraumere -= 1;
@@ -30,7 +31,7 @@ void update_incantation_2(client_t *client, tile *_tile)
         _tile->linemate -= 1; _tile->deraumere -= 2;
         _tile->sibur -= 1; _tile->mendiane -= 3;
     }
-    check_can_incantation_3(client, _tile);
+    update_incantation_3(client, _tile, server);
 }
 
 void update_incantation(server_t *server, client_t *client)
@@ -46,5 +47,5 @@ void update_incantation(server_t *server, client_t *client)
     if (client->player->level == 3) {
         _tile->linemate -= 2; _tile->sibur -= 1; _tile->phiras -= 2;
     }
-    check_can_incantation_2(client, _tile);
+    update_incantation_2(client, _tile, server);
 }
