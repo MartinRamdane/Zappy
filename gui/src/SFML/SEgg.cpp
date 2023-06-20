@@ -50,7 +50,7 @@ void SEgg::setSpriteRotation(float angle)
     this->_sprite.setRotation(angle);
 }
 
-void SEgg::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
+void SEgg::setSpriteTexture(std::shared_ptr<sf::Texture> &texture)
 {
     this->_sprite.setTexture(*texture);
 }

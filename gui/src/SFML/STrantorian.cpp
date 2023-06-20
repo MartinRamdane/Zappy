@@ -192,7 +192,7 @@ void STrantorian::setSpriteRotation(float angle)
     this->_sprite.setRotation(angle);
 }
 
-void STrantorian::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
+void STrantorian::setSpriteTexture(std::shared_ptr<sf::Texture> &texture)
 {
     this->_sprite.setTexture(*texture);
 }
@@ -320,7 +320,7 @@ sf::Vector2f STrantorian::getSpritePosition()
     return this->_sprite.getPosition();
 }
 
-std::shared_ptr<sf::Texture> STrantorian::getTexture()
+std::shared_ptr<sf::Texture> &STrantorian::getTexture()
 {
     return this->_textures["down" + std::to_string(this->_level)];
 }

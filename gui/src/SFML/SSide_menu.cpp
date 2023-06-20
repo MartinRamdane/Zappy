@@ -16,6 +16,12 @@ SSide_menu::SSide_menu(int w_width, int w_height)
 
 SSide_menu::~SSide_menu()
 {
+    for (auto it = this->_textures.begin(); it != this->_textures.end(); it++)
+        it->second.reset();
+    for (auto it = this->_sprites.begin(); it != this->_sprites.end(); it++)
+        it->second.reset();
+    for (auto it = this->_texts.begin(); it != this->_texts.end(); it++)
+        it->second.reset();
 }
 
 void SSide_menu::createSprite(int w_width, int w_height)

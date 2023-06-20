@@ -25,8 +25,8 @@ class Gui {
 
     protected:
     private:
-        Socket _socket;
+        std::unique_ptr<Socket> _socket;
         std::string _message;
-        Display _display;
-        Parsing _p;
+        std::unique_ptr<Display> _display;
+        std::unique_ptr<Parsing> _p;
 };

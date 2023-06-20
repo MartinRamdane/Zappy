@@ -11,7 +11,7 @@
 
 class SGem : public IEntity {
     public:
-        SGem(enum GemType type);
+        SGem(std::shared_ptr<sf::Texture> texture, GemType type);
         ~SGem();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -19,19 +19,19 @@ class SGem : public IEntity {
         void setSpriteScale(sf::Vector2f scale);
         void setSpriteOrigin(sf::Vector2f origin);
         void setSpriteRotation(float angle);
-        void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
+        void setSpriteTexture(std::shared_ptr<sf::Texture> &texture);
         void draw(sf::RenderWindow &window, sf::View &view);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         void update(MapT *cache);
         sf::Vector2i getClicked(){return sf::Vector2i(0, 0);};
         void moveSprite(MapT *cache){};
-        sf::Vector2f getSpritePosition(){return this->_sprite.getPosition();}
-        GemType getType(){return this->_type;}
+        sf::Vector2f getSpritePosition(){return this->_sprite.getPosition();};
+        GemType getType(){return this->_type;};
 
     protected:
     private:
         sf::Sprite _sprite;
-        sf::Texture _texture;
+        std::shared_ptr<sf::Texture> _texture;
         sf::IntRect _rect;
         enum GemType _type;
 };

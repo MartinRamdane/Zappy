@@ -28,13 +28,14 @@ class Display {
         std::unique_ptr<sf::RenderWindow> &getWindow();
         void eventHandler(MapT cache);
         void createMap(int width, int height);
-        void createOcean(int width, int height);
         void update(MapT *cache);
         void keyHandler(MapT cache);
         void clickHandler(MapT cache);
         void createViews(int map_width, int map_height);
         std::string getMessage();
         void resetMessage();
+        void loadGemsTexture();
+        void loadTilesTexture();
 
     protected:
     private:
@@ -60,4 +61,6 @@ class Display {
         sf::Vector2i _click_pos = sf::Vector2i(-1, -1);
         std::string _message;
         sf::Vector2i _trantorian_clicked = sf::Vector2i(-1, -1);
+        std::map<std::string, std::shared_ptr<sf::Texture>> _gemsTexture;
+        std::map<char, std::shared_ptr<sf::Texture>> _tilesTexture;
 };

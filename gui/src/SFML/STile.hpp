@@ -14,7 +14,7 @@
 class STile : public IEntity {
 
     public:
-        STile(int x, int y, int type);
+        STile(int x, int y, int type, std::map<std::string, std::shared_ptr<sf::Texture>> &gemsTextures, std::shared_ptr<sf::Texture> &tilesTexture);
         ~STile();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -22,7 +22,7 @@ class STile : public IEntity {
         void setSpriteScale(sf::Vector2f scale);
         void setSpriteOrigin(sf::Vector2f origin);
         void setSpriteRotation(float angle);
-        void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
+        void setSpriteTexture(std::shared_ptr<sf::Texture> &texture);
         void draw(sf::RenderWindow &window, sf::View &view);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         void update(MapT *cache);
@@ -36,12 +36,13 @@ class STile : public IEntity {
     protected:
     private:
         sf::Sprite _sprite;
-        sf::Texture _texture;
+        std::shared_ptr<sf::Texture> _texture;
         sf::IntRect _rect;
         sf::Texture _oceanTexture;
         sf::Sprite _oceanTile;
         std::vector<std::unique_ptr<IEntity>> _gems;
         std::vector<std::unique_ptr<IEntity>> _eggs;
+        std::map<std::string, std::shared_ptr<sf::Texture>> _gemsTexture;
         int _x;
         int _y;
         char _type;

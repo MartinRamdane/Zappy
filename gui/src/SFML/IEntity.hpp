@@ -27,7 +27,7 @@ class IEntity {
         virtual void setSpriteScale(sf::Vector2f scale) = 0;
         virtual void setSpriteOrigin(sf::Vector2f origin) = 0;
         virtual void setSpriteRotation(float angle) = 0;
-        virtual void setSpriteTexture(std::shared_ptr<sf::Texture> texture) = 0;
+        virtual void setSpriteTexture(std::shared_ptr<sf::Texture> &texture) = 0;
         virtual void draw(sf::RenderWindow &window, sf::View &view) = 0;
         virtual void eventHandler(sf::Event event, sf::RenderWindow &window) = 0;
         virtual void update(MapT *cache) = 0;

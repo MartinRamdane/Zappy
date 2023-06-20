@@ -20,7 +20,7 @@ class STrantorian : public IEntity {
         void setSpriteScale(sf::Vector2f scale);
         void setSpriteOrigin(sf::Vector2f origin);
         void setSpriteRotation(float angle);
-        void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
+        void setSpriteTexture(std::shared_ptr<sf::Texture> &texture);
         void draw(sf::RenderWindow &window, sf::View &view);
         void setOrientation(int orientation);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
@@ -28,7 +28,7 @@ class STrantorian : public IEntity {
         sf::Vector2i getClicked();
         void moveSprite(MapT *cache);
         sf::Vector2f getSpritePosition();
-        std::shared_ptr<sf::Texture> getTexture();
+        std::shared_ptr<sf::Texture> &getTexture();
 
     protected:
     private:

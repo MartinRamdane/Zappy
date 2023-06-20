@@ -347,7 +347,7 @@ void SInventory::fadeOut(bool isFading)
     this->_isFadingOut = isFading;
 }
 
-void SInventory::setTrantorianTexture(std::shared_ptr<sf::Texture> texture)
+void SInventory::setTrantorianTexture(std::shared_ptr<sf::Texture> &texture)
 {
     this->_sprites["trantorian"]->setTexture(*texture);
 }

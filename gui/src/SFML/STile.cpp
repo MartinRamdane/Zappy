@@ -7,79 +7,32 @@
 
 #include "STile.hpp"
 
-STile::STile(int x, int y, int type) : _x(x), _y(y), _type(type)
+STile::STile(int x, int y, int type, std::map<std::string, std::shared_ptr<sf::Texture>> &gemTextures,
+std::shared_ptr<sf::Texture> &tilesTextures) : _x(x), _y(y), _type(type)
 {
-    // this->createOcean();
+    this->_texture = tilesTextures;
     this->createSprite();
     this->_rect = sf::IntRect(0, 0, 32, 32);
     this->setSpriteRect(this->_rect);
+    this->_gemsTexture = gemTextures;
 }
 
 STile::~STile()
 {
+    if (this->_gems.size() > 0) {
+        for (auto &sprite : this->_gems)
+            delete sprite.get();
+    }
+    if (this->_eggs.size() > 0) {
+        for (auto &sprite : this->_eggs)
+            delete sprite.get();
+    }
+    this->_texture.reset();
 }
 
 void STile::createSprite()
 {
-    switch(this->_type) {
-        case 'g':
-            this->_texture.loadFromFile("gui/assets/map/grass.png");
-            break;
-        case 'h':
-            this->_texture.loadFromFile("gui/assets/map/grass_left_top.png");
-            break;
-        case 'i':
-            this->_texture.loadFromFile("gui/assets/map/grass_right_top.png");
-            break;
-        case 'j':
-            this->_texture.loadFromFile("gui/assets/map/grass_left_down.png");
-            break;
-        case 'k':
-            this->_texture.loadFromFile("gui/assets/map/grass_right_down.png");
-            break;
-        case 'l':
-            this->_texture.loadFromFile("gui/assets/map/grass_middle_top.png");
-            break;
-        case 'm':
-            this->_texture.loadFromFile("gui/assets/map/grass_middle_left.png");
-            break;
-        case 'n':
-            this->_texture.loadFromFile("gui/assets/map/grass_middle_right.png");
-            break;
-        case 'o':
-            this->_texture.loadFromFile("gui/assets/map/grass_middle_down.png");
-            break;
-        case 'p':
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_left_middle.png");
-            break;
-        case 'q':
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_middle.png");
-            break;
-        case 'w':
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_left.png");
-            break;
-        case 'x':
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_top_right.png");
-            break;
-        case 'z':
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_right_middle.png");
-            break;
-        case 'a':
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_middle.png");
-            break;
-        case 's':
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_left.png");
-            break;
-        case 'd':
-            this->_texture.loadFromFile("gui/assets/map/ocean_terrain_bottom_right.png");
-            break;
-        case 'r':
-            this->_texture.loadFromFile("gui/assets/map/ocean.png");
-            break;
-        default:
-            break;
-    }
-    this->_sprite.setTexture(this->_texture);
+    this->_sprite.setTexture(*this->_texture);
     this->_sprite.setPosition(sf::Vector2f(this->_x * 96, this->_y * 96));
     this->_sprite.setScale(sf::Vector2f(3, 3));
     this->_sprite.setColor(sf::Color(255, 255, 255, 255));
@@ -110,7 +63,7 @@ void STile::setSpriteRotation(float angle)
     this->_sprite.setRotation(angle);
 }
 
-void STile::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
+void STile::setSpriteTexture(std::shared_ptr<sf::Texture> &texture)
 {
     this->_sprite.setTexture(*texture);
 }
@@ -120,23 +73,26 @@ void STile::draw(sf::RenderWindow &window, sf::View &view)
     std::vector<std::pair<int, IEntity*>> sortedGems;
     std::vector<std::pair<int, IEntity*>> sortedEggs;
 
-    for (auto &gem : this->_gems) {
-        SGem tmp = dynamic_cast<SGem&>(*gem);
-        if (tmp.getType() != FOOD)
-            sortedGems.push_back(std::make_pair(gem->getSpritePosition().y, gem.get()));
+    if (this->_gems.size() > 0) {
+        for (auto &gem : this->_gems) {
+            SGem tmp = dynamic_cast<SGem&>(*gem);
+            if (tmp.getType() != FOOD)
+                sortedGems.push_back(std::make_pair(gem->getSpritePosition().y, gem.get()));
+        }
+        std::sort(sortedGems.begin(), sortedGems.end(), [](const auto& a, const auto& b) {
+            return a.first < b.first;
+        });
+    }
+    if (this->_eggs.size() > 0) {
+        for (auto &egg : this->_eggs) {
+            sortedEggs.push_back(std::make_pair(egg->getSpritePosition().y, egg.get()));
+        }
+        std::sort(sortedEggs.begin(), sortedEggs.end(), [](const auto& a, const auto& b) {
+            return a.first < b.first;
+        });
     }
 
-    for (auto &egg : this->_eggs) {
-        sortedEggs.push_back(std::make_pair(egg->getSpritePosition().y, egg.get()));
-    }
 
-    std::sort(sortedGems.begin(), sortedGems.end(), [](const auto& a, const auto& b) {
-        return a.first < b.first;
-    });
-
-    std::sort(sortedEggs.begin(), sortedEggs.end(), [](const auto& a, const auto& b) {
-        return a.first < b.first;
-    });
     int drawed_food = 0;
     window.draw(this->_sprite);
     if (this->_gems.size() > 0) {
@@ -192,19 +148,19 @@ void STile::createGem(std::string name, int quantity)
         sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 55), this->_sprite.getGlobalBounds().top + 10 + (rand() % 53));
 
         if (name == "linemate") {
-            gem = std::make_unique<SGem>(LINEMATE);
+            gem = std::make_unique<SGem>(this->_gemsTexture["linemate"], LINEMATE);
         } else if (name == "deraumere") {
-            gem = std::make_unique<SGem>(DERAUMERE);
+            gem = std::make_unique<SGem>(this->_gemsTexture["deraumere"], DERAUMERE);
         } else if (name == "sibur") {
-            gem = std::make_unique<SGem>(SIBUR);
+            gem = std::make_unique<SGem>(this->_gemsTexture["sibur"], SIBUR);
         } else if (name == "mendiane") {
-            gem = std::make_unique<SGem>(MENDIANE);
+            gem = std::make_unique<SGem>(this->_gemsTexture["mendiane"], MENDIANE);
         } else if (name == "phiras") {
-            gem = std::make_unique<SGem>(PHIRAS);
+            gem = std::make_unique<SGem>(this->_gemsTexture["phiras"], PHIRAS);
         } else if (name == "thystame") {
-            gem = std::make_unique<SGem>(THYSTAME);
+            gem = std::make_unique<SGem>(this->_gemsTexture["thystame"], THYSTAME);
         } else if (name == "food") {
-            gem = std::make_unique<SGem>(FOOD);
+            gem = std::make_unique<SGem>(this->_gemsTexture["food"], FOOD);
         }
 
         if (gem) {
@@ -214,6 +170,7 @@ void STile::createGem(std::string name, int quantity)
     }
 
 }
+
 
 void STile::createEgg(int id, bool isHatched)
 {
@@ -249,7 +206,6 @@ void STile::update(MapT *cache)
         if (this->_gems.size() != totalGems) {
             for (auto &sprite : this->_gems)
                 delete sprite.get();
-            this->_gems.clear();
             for (auto &gem : stocks) {
                 createGem(gem.first, gem.second);
             }
@@ -258,7 +214,6 @@ void STile::update(MapT *cache)
         if (this->_eggs.size() != cache->getEggsFromPos(this->_x, this->_y)) {
             for (auto &sprite : this->_eggs)
                 delete sprite.get();
-            this->_eggs.clear();
             for (auto &egg : eggs) {
                 if (egg.getX() == this->_x && egg.getY() == this->_y) {
                     createEgg(egg.getId(), egg.getHatched());

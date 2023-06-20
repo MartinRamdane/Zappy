@@ -7,8 +7,9 @@
 
 #include "SGem.hpp"
 
-SGem::SGem(enum GemType type) : _type(type)
+SGem::SGem(std::shared_ptr<sf::Texture> texture, GemType type) : _type(type)
 {
+    this->_texture = texture;
     this->createSprite();
 }
 
@@ -18,33 +19,7 @@ SGem::~SGem()
 
 void SGem::createSprite()
 {
-    switch (this->_type)
-    {
-        case LINEMATE:
-            this->_texture.loadFromFile("gui/assets/gems/linemate.png");
-            break;
-        case DERAUMERE:
-            this->_texture.loadFromFile("gui/assets/gems/deraumere.png");
-            break;
-        case SIBUR:
-            this->_texture.loadFromFile("gui/assets/gems/sibur.png");
-            break;
-        case MENDIANE:
-            this->_texture.loadFromFile("gui/assets/gems/mendiane.png");
-            break;
-        case PHIRAS:
-            this->_texture.loadFromFile("gui/assets/gems/phiras.png");
-            break;
-        case THYSTAME:
-            this->_texture.loadFromFile("gui/assets/gems/thystame.png");
-            break;
-        case FOOD:
-            this->_texture.loadFromFile("gui/assets/gems/food.png");
-            break;
-        default:
-            break;
-    }
-    this->_sprite.setTexture(this->_texture);
+    this->_sprite.setTexture(*this->_texture);
     this->_sprite.setScale(sf::Vector2f(2, 2));
     this->_rect = sf::IntRect(0, 0, 16, 16);
     this->setSpriteRect(this->_rect);
@@ -75,7 +50,7 @@ void SGem::setSpriteRotation(float angle)
     this->_sprite.setRotation(angle);
 }
 
-void SGem::setSpriteTexture(std::shared_ptr<sf::Texture> texture)
+void SGem::setSpriteTexture(std::shared_ptr<sf::Texture> &texture)
 {
     this->_sprite.setTexture(*texture);
 }

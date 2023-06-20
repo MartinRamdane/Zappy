@@ -12,6 +12,8 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w_width, w_height), "Zappy");
     this->_window->setFramerateLimit(60);
     this->_window->setActive(false);
+    this->loadGemsTexture();
+    this->loadTilesTexture();
     this->_view.setSize(sf::Vector2f(w_width, w_height));
     this->_bottomMenu = std::make_unique<SSide_menu>(w_width, w_height);
     this->_inventory = std::make_unique<SInventory>(w_width, w_height);
@@ -20,7 +22,6 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_clock_trantorian.restart();
     if (!music.openFromFile("gui/assets/sounds/main_theme.ogg"))
         exit(84);
-    // music.openFromFile("gui/assets/sounds/main_theme.ogg");
     music.setVolume(50);
     music.setLoop(true);
     music.play();
@@ -28,6 +29,23 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
 
 Display::~Display()
 {
+    if (this->_trantorians.size() > 0) {
+        for (auto &sprite : this->_trantorians)
+            delete sprite.second.get();
+    }
+    if (this->_ocean.size() > 0) {
+        for (auto &sprite : this->_ocean)
+            delete sprite.get();
+    }
+    if (this->_gemsTexture.size() > 0) {
+        for (auto &texture : this->_gemsTexture)
+            texture.second.reset();
+    }
+    if (this->_tilesTexture.size() > 0) {
+        for (auto &texture : this->_tilesTexture)
+            texture.second.reset();
+    }
+    this->_window.reset();
 }
 
 void Display::createMap(int width, int height)
@@ -101,12 +119,8 @@ void Display::createMap(int width, int height)
 
     for (int y = 0; y < height + 2 * waterHeight; y++) {
         for (int x = 0; x < width + 2 * waterWidth; x++)
-            this->_map.push_back(std::make_unique<STile>(x - waterWidth, y - waterHeight, array[y][x]));
+           this->_map.push_back(std::make_unique<STile>(x - waterWidth, y - waterHeight, array[y][x], this->_gemsTexture, this->_tilesTexture[array[y][x]]));
     }
-}
-
-void Display::createOcean(int width, int height)
-{
 }
 
 void Display::createViews(int map_width, int map_height)
@@ -122,18 +136,22 @@ void Display::createViews(int map_width, int map_height)
 void Display::render()
 {
     std::vector<std::pair<int, IEntity *>> sortedTrantorians;
-    for (auto &sprite : this->_trantorians)
-        sortedTrantorians.push_back(std::make_pair(sprite.second->getSpritePosition().y, sprite.second.get()));
-    std::sort(sortedTrantorians.begin(), sortedTrantorians.end(), [](const auto& a, const auto& b) {
-        return a.first < b.first;
-    });
+    if (this->_trantorians.size() > 0) {
+        for (auto &sprite : this->_trantorians)
+            sortedTrantorians.push_back(std::make_pair(sprite.second->getSpritePosition().y, sprite.second.get()));
+        std::sort(sortedTrantorians.begin(), sortedTrantorians.end(), [](const auto& a, const auto& b) {
+            return a.first < b.first;
+        });
+    }
     this->_window->clear(sf::Color::Black);
     for (auto &sprite : this->_ocean)
         sprite->draw(*this->_window, this->_view);
     for (auto &sprite : this->_map)
        sprite->draw(*this->_window, this->_view);
-    for (auto &sprite : sortedTrantorians)
-        sprite.second->draw(*this->_window, this->_view);
+    if (this->_trantorians.size() > 0) {
+        for (auto &sprite : sortedTrantorians)
+            sprite.second->draw(*this->_window, this->_view);
+    }
     this->_window->setView(this->_bottomMenuView);
     if (this->_click_pos.x != -1 && this->_click_pos.y != -1)
         this->_bottomMenu->draw(*this->_window);
@@ -231,8 +249,10 @@ void Display::eventHandler(MapT cache)
     while (this->_window->pollEvent(this->_event)) {
         if (this->_event.type == sf::Event::Closed)
             this->_window->close();
-        for (auto &sprite : this->_trantorians)
-            sprite.second->eventHandler(this->_event, *this->_window);
+        if (this->_trantorians.size() > 0) {
+            for (auto &sprite : this->_trantorians)
+                sprite.second->eventHandler(this->_event, *this->_window);
+        }
         for (auto &sprite : this->_map)
             sprite->eventHandler(this->_event, *this->_window);
         this->keyHandler(cache);
@@ -245,7 +265,6 @@ void Display::update(MapT *cache)
     const sf::Time targetFrameTime = sf::seconds(1.0f / cache->getFrequency());
     if (this->_mapCreated == false && cache->getX() != 0 && cache->getY() != 0) {
         this->createMap(cache->getX(), cache->getY());
-        this->createOcean(cache->getX(), cache->getY());
         this->createViews(cache->getX(), cache->getY());
         this->_mapCreated = true;
     }
@@ -266,23 +285,82 @@ void Display::update(MapT *cache)
     if (this->_trantorians.size() != cache->getTrantorians().size()) {
         for (auto &sprite : this->_trantorians)
             delete sprite.second.get();
-        this->_trantorians.clear();
         for (auto &trantor : cache->getTrantorians())
             this->_trantorians[trantor.getId()] = std::make_unique<STrantorian>(trantor);
     }
     if (this->_click_pos.x != -1 && this->_click_pos.y != -1)
         this->_bottomMenu->update(cache->getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
-    for (auto &sprite : this->_trantorians) {
-        if (sprite.first == this->_trantorian_clicked.x) {
-            STrantorian *trantorian = dynamic_cast<STrantorian *>(this->_trantorians[this->_trantorian_clicked.x].get());
-            this->_inventory->setTrantorianTexture(trantorian->getTexture());
-            this->_inventory->update(cache->getTrantorian(this->_trantorian_clicked.x).getStocks(), cache->getTrantorian(this->_trantorian_clicked.x).getTeam(), cache->getTrantorian(this->_trantorian_clicked.x).getLvl());
+    if (this->_trantorians.size() > 0) {
+        for (auto &sprite : this->_trantorians) {
+            if (sprite.first == this->_trantorian_clicked.x) {
+                STrantorian *trantorian = dynamic_cast<STrantorian *>(this->_trantorians[this->_trantorian_clicked.x].get());
+                this->_inventory->setTrantorianTexture(trantorian->getTexture());
+                this->_inventory->update(cache->getTrantorian(this->_trantorian_clicked.x).getStocks(), cache->getTrantorian(this->_trantorian_clicked.x).getTeam(), cache->getTrantorian(this->_trantorian_clicked.x).getLvl());
+            }
         }
     }
     this->_slider->update(cache);
     if (this->_inventory->getOpacity() == 0) {
         this->_trantorian_clicked = sf::Vector2i(-1, -1);
     }
+}
+
+void Display::loadGemsTexture()
+{
+    this->_gemsTexture["linemate"] = std::make_shared<sf::Texture>();
+    this->_gemsTexture["linemate"]->loadFromFile("gui/assets/gems/linemate.png");
+    this->_gemsTexture["deraumere"] = std::make_shared<sf::Texture>();
+    this->_gemsTexture["deraumere"]->loadFromFile("gui/assets/gems/deraumere.png");
+    this->_gemsTexture["sibur"] = std::make_shared<sf::Texture>();
+    this->_gemsTexture["sibur"]->loadFromFile("gui/assets/gems/sibur.png");
+    this->_gemsTexture["mendiane"] = std::make_shared<sf::Texture>();
+    this->_gemsTexture["mendiane"]->loadFromFile("gui/assets/gems/mendiane.png");
+    this->_gemsTexture["phiras"] = std::make_shared<sf::Texture>();
+    this->_gemsTexture["phiras"]->loadFromFile("gui/assets/gems/phiras.png");
+    this->_gemsTexture["thystame"] = std::make_shared<sf::Texture>();
+    this->_gemsTexture["thystame"]->loadFromFile("gui/assets/gems/thystame.png");
+    this->_gemsTexture["food"] = std::make_shared<sf::Texture>();
+    this->_gemsTexture["food"]->loadFromFile("gui/assets/gems/food.png");
+}
+
+void Display::loadTilesTexture()
+{
+    this->_tilesTexture['g'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['g']->loadFromFile("gui/assets/map/grass.png");
+    this->_tilesTexture['h'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['h']->loadFromFile("gui/assets/map/grass_left_top.png");
+    this->_tilesTexture['i'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['i']->loadFromFile("gui/assets/map/grass_right_top.png");
+    this->_tilesTexture['j'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['j']->loadFromFile("gui/assets/map/grass_left_down.png");
+    this->_tilesTexture['k'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['k']->loadFromFile("gui/assets/map/grass_right_down.png");
+    this->_tilesTexture['l'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['l']->loadFromFile("gui/assets/map/grass_middle_top.png");
+    this->_tilesTexture['m'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['m']->loadFromFile("gui/assets/map/grass_middle_left.png");
+    this->_tilesTexture['n'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['n']->loadFromFile("gui/assets/map/grass_middle_right.png");
+    this->_tilesTexture['o'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['o']->loadFromFile("gui/assets/map/grass_middle_down.png");
+    this->_tilesTexture['p'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['p']->loadFromFile("gui/assets/map/ocean_terrain_left_middle.png");
+    this->_tilesTexture['q'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['q']->loadFromFile("gui/assets/map/ocean_terrain_top_middle.png");
+    this->_tilesTexture['w'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['w']->loadFromFile("gui/assets/map/ocean_terrain_top_left.png");
+    this->_tilesTexture['x'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['x']->loadFromFile("gui/assets/map/ocean_terrain_top_right.png");
+    this->_tilesTexture['z'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['z']->loadFromFile("gui/assets/map/ocean_terrain_right_middle.png");
+    this->_tilesTexture['a'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['a']->loadFromFile("gui/assets/map/ocean_terrain_bottom_middle.png");
+    this->_tilesTexture['s'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['s']->loadFromFile("gui/assets/map/ocean_terrain_bottom_left.png");
+    this->_tilesTexture['d'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['d']->loadFromFile("gui/assets/map/ocean_terrain_bottom_right.png");
+    this->_tilesTexture['r'] = std::make_shared<sf::Texture>();
+    this->_tilesTexture['r']->loadFromFile("gui/assets/map/ocean.png");
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()

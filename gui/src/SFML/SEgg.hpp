@@ -20,7 +20,7 @@ class SEgg : public IEntity {
         void setSpriteScale(sf::Vector2f scale);
         void setSpriteOrigin(sf::Vector2f origin);
         void setSpriteRotation(float angle);
-        void setSpriteTexture(std::shared_ptr<sf::Texture> texture);
+        void setSpriteTexture(std::shared_ptr<sf::Texture> &texture);
         void draw(sf::RenderWindow &window, sf::View &view);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         void update(MapT *cache);

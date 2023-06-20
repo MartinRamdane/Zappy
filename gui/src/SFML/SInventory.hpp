@@ -23,7 +23,7 @@ class SInventory {
         void createTexts();
         void fadeIn(bool isFading);
         void fadeOut(bool isFading);
-        void setTrantorianTexture(std::shared_ptr<sf::Texture> texture);
+        void setTrantorianTexture(std::shared_ptr<sf::Texture> &texture);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         bool isFading(){return _isFading;};
         bool isFadingOut(){return _isFadingOut;};
