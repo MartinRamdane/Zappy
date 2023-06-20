@@ -11,7 +11,8 @@
 
 class SGem : public IEntity {
     public:
-        SGem(std::shared_ptr<sf::Texture> texture, GemType type);
+        SGem(sf::Sprite sprite, GemType type);
+        SGem(){};
         ~SGem();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -31,7 +32,6 @@ class SGem : public IEntity {
     protected:
     private:
         sf::Sprite _sprite;
-        std::shared_ptr<sf::Texture> _texture;
         sf::IntRect _rect;
         enum GemType _type;
 };

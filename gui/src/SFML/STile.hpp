@@ -10,11 +10,13 @@
 #include "IEntity.hpp"
 #include "SGem.hpp"
 #include "SEgg.hpp"
+#include <SFML/Graphics.hpp>
+#include "ResourceManager.hpp"
 
 class STile : public IEntity {
 
     public:
-        STile(int x, int y, int type, std::map<std::string, std::shared_ptr<sf::Texture>> &gemsTextures, std::shared_ptr<sf::Texture> &tilesTexture);
+        STile(int x, int y, int type, std::shared_ptr<sf::Texture> &tilesTexture, ResourceManager *_resourceManager);
         ~STile();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -40,11 +42,11 @@ class STile : public IEntity {
         sf::IntRect _rect;
         sf::Texture _oceanTexture;
         sf::Sprite _oceanTile;
-        std::vector<std::unique_ptr<IEntity>> _gems;
+        std::vector<SGem> _gems;
         std::vector<std::unique_ptr<IEntity>> _eggs;
-        std::map<std::string, std::shared_ptr<sf::Texture>> _gemsTexture;
         int _x;
         int _y;
         char _type;
         bool _isClicked = false;
+        ResourceManager *_resourceManager;
 };

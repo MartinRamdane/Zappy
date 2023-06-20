@@ -7,9 +7,9 @@
 
 #include "SGem.hpp"
 
-SGem::SGem(std::shared_ptr<sf::Texture> texture, GemType type) : _type(type)
+SGem::SGem(sf::Sprite sprite, GemType type) : _type(type)
 {
-    this->_texture = texture;
+    this->_sprite = sprite;
     this->createSprite();
 }
 
@@ -19,7 +19,6 @@ SGem::~SGem()
 
 void SGem::createSprite()
 {
-    this->_sprite.setTexture(*this->_texture);
     this->_sprite.setScale(sf::Vector2f(2, 2));
     this->_rect = sf::IntRect(0, 0, 16, 16);
     this->setSpriteRect(this->_rect);

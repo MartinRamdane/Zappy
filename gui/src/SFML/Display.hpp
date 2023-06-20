@@ -19,6 +19,7 @@
 #include "SSide_menu.hpp"
 #include "SInventory.hpp"
 #include "SSlider.hpp"
+#include "ResourceManager.hpp"
 
 class Display {
     public:
@@ -63,4 +64,5 @@ class Display {
         sf::Vector2i _trantorian_clicked = sf::Vector2i(-1, -1);
         std::map<std::string, std::shared_ptr<sf::Texture>> _gemsTexture;
         std::map<char, std::shared_ptr<sf::Texture>> _tilesTexture;
+        ResourceManager *_resourceManager;
 };

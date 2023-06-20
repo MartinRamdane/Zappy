@@ -7,14 +7,13 @@
 
 #include "STile.hpp"
 
-STile::STile(int x, int y, int type, std::map<std::string, std::shared_ptr<sf::Texture>> &gemTextures,
-std::shared_ptr<sf::Texture> &tilesTextures) : _x(x), _y(y), _type(type)
+STile::STile(int x, int y, int type, std::shared_ptr<sf::Texture> &tilesTextures, ResourceManager *_resourceManager) : _x(x), _y(y), _type(type)
 {
     this->_texture = tilesTextures;
     this->createSprite();
     this->_rect = sf::IntRect(0, 0, 32, 32);
     this->setSpriteRect(this->_rect);
-    this->_gemsTexture = gemTextures;
+    this->_resourceManager = _resourceManager;
 }
 
 STile::~STile()
@@ -68,9 +67,9 @@ void STile::draw(sf::RenderWindow &window, sf::View &view)
 
     if (this->_gems.size() > 0) {
         for (auto &gem : this->_gems) {
-            SGem tmp = dynamic_cast<SGem&>(*gem);
+            SGem tmp = dynamic_cast<SGem&>(gem);
             if (tmp.getType() != FOOD)
-                sortedGems.push_back(std::make_pair(gem->getSpritePosition().y, gem.get()));
+                sortedGems.push_back(std::make_pair(gem.getSpritePosition().y, &gem));
         }
         std::sort(sortedGems.begin(), sortedGems.end(), [](const auto& a, const auto& b) {
             return a.first < b.first;
@@ -90,10 +89,10 @@ void STile::draw(sf::RenderWindow &window, sf::View &view)
     window.draw(this->_sprite);
     if (this->_gems.size() > 0) {
         for (auto &gem : this->_gems) {
-            SGem tmp = dynamic_cast<SGem&>(*gem);
+            SGem tmp = dynamic_cast<SGem&>(gem);
             if (tmp.getType() == FOOD) {
                 if (drawed_food < 2) {
-                    gem->draw(window, view);
+                    gem.draw(window, view);
                     drawed_food++;
                 }
             }
@@ -139,28 +138,27 @@ void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
 void STile::createGem(std::string name, int quantity)
 {
     for (int i = 0; i < quantity; i++) {
-        std::unique_ptr<SGem> gem;
+        SGem *gem = nullptr;
         sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 55), this->_sprite.getGlobalBounds().top + 10 + (rand() % 53));
 
         if (name == "linemate") {
-            gem = std::make_unique<SGem>(this->_gemsTexture["linemate"], LINEMATE);
+            gem = new SGem(this->_resourceManager->getGemSprite("linemate"), LINEMATE);
         } else if (name == "deraumere") {
-            gem = std::make_unique<SGem>(this->_gemsTexture["deraumere"], DERAUMERE);
+            gem = new SGem(this->_resourceManager->getGemSprite("deraumere"), DERAUMERE);
         } else if (name == "sibur") {
-            gem = std::make_unique<SGem>(this->_gemsTexture["sibur"], SIBUR);
+            gem = new SGem(this->_resourceManager->getGemSprite("sibur"), SIBUR);
         } else if (name == "mendiane") {
-            gem = std::make_unique<SGem>(this->_gemsTexture["mendiane"], MENDIANE);
+            gem = new SGem(this->_resourceManager->getGemSprite("mendiane"), MENDIANE);
         } else if (name == "phiras") {
-            gem = std::make_unique<SGem>(this->_gemsTexture["phiras"], PHIRAS);
+            gem = new SGem(this->_resourceManager->getGemSprite("phiras"), PHIRAS);
         } else if (name == "thystame") {
-            gem = std::make_unique<SGem>(this->_gemsTexture["thystame"], THYSTAME);
+            gem = new SGem(this->_resourceManager->getGemSprite("thystame"), THYSTAME);
         } else if (name == "food") {
-            gem = std::make_unique<SGem>(this->_gemsTexture["food"], FOOD);
+            gem = new SGem(this->_resourceManager->getGemSprite("food"), FOOD);
         }
-
         if (gem) {
             gem->setSpritePosition(position);
-            this->_gems.push_back(std::move(gem));
+            this->_gems.push_back(*gem);
         }
     }
 
@@ -216,7 +214,7 @@ void STile::update(MapT *cache)
     }
     if (this->_gems.size() > 0) {
         for (auto &gem : this->_gems) {
-            gem->update(cache);
+            gem.update(cache);
         }
     }
     if (this->_eggs.size() > 0) {
