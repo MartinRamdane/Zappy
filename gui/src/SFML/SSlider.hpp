@@ -22,15 +22,12 @@ class SSlider
         void createSprite(int w_width, int w_height);
         void draw(sf::RenderWindow &window);
         void update(MapT *cache);
-        // void createTexts();
         void fadeIn(bool isFading);
         void fadeOut(bool isFading);
         std::map<std::string, std::shared_ptr<sf::RectangleShape>> getRect();
         void setRect(std::string S, std::shared_ptr<sf::RectangleShape> r);
         bool getIsDragging1();
         void setIsDragging1(bool drag);
-        // bool getIsDragging2();
-        // void setIsDragging2(bool drag);
     private:
         sf::Font _font;
         std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
@@ -40,7 +37,6 @@ class SSlider
 
         sf::Clock _clock;
         bool _isDragging1 = false;
-        // bool _isDragging2 = false;
         int _opacity = 0;
         bool _isFading = false;
         bool _isFadingOut = false;

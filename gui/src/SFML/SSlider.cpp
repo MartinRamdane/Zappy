@@ -15,14 +15,10 @@ SSlider::SSlider(int w_width, int w_height)
 
 SSlider::~SSlider()
 {
-    for (auto &sprite : this->_sprites)
-        sprite.second.reset();
-    for (auto &text : this->_texts)
-        text.second.reset();
-    for (auto &rect : this->_rects)
-        rect.second.reset();
-    for (auto &texture : this->_textures)
-        texture.second.reset();
+    this->_rects.clear();
+    this->_sprites.clear();
+    this->_textures.clear();
+    this->_texts.clear();
 }
 
 void SSlider::createSprite(int w_width, int w_height)

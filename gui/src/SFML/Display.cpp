@@ -29,23 +29,6 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
 
 Display::~Display()
 {
-    if (this->_trantorians.size() > 0) {
-        for (auto &sprite : this->_trantorians)
-            delete sprite.second.get();
-    }
-    if (this->_ocean.size() > 0) {
-        for (auto &sprite : this->_ocean)
-            delete sprite.get();
-    }
-    if (this->_gemsTexture.size() > 0) {
-        for (auto &texture : this->_gemsTexture)
-            texture.second.reset();
-    }
-    if (this->_tilesTexture.size() > 0) {
-        for (auto &texture : this->_tilesTexture)
-            texture.second.reset();
-    }
-    this->_window.reset();
 }
 
 void Display::createMap(int width, int height)
@@ -283,8 +266,7 @@ void Display::update(MapT *cache)
             sprite->update(cache);
     }
     if (this->_trantorians.size() != cache->getTrantorians().size()) {
-        for (auto &sprite : this->_trantorians)
-            delete sprite.second.get();
+        this->_trantorians.clear();
         for (auto &trantor : cache->getTrantorians())
             this->_trantorians[trantor.getId()] = std::make_unique<STrantorian>(trantor);
     }

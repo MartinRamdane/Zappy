@@ -19,15 +19,8 @@ std::shared_ptr<sf::Texture> &tilesTextures) : _x(x), _y(y), _type(type)
 
 STile::~STile()
 {
-    if (this->_gems.size() > 0) {
-        for (auto &sprite : this->_gems)
-            delete sprite.get();
-    }
-    if (this->_eggs.size() > 0) {
-        for (auto &sprite : this->_eggs)
-            delete sprite.get();
-    }
-    this->_texture.reset();
+    this->_gems.clear();
+    this->_eggs.clear();
 }
 
 void STile::createSprite()
@@ -141,6 +134,8 @@ void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
     }
 }
 
+//weak ptr
+
 void STile::createGem(std::string name, int quantity)
 {
     for (int i = 0; i < quantity; i++) {
@@ -204,16 +199,14 @@ void STile::update(MapT *cache)
         int totalGems = cache->getTile(this->_x, this->_y).getNbrTotalGems();
         std::map<std::string, int> stocks = cache->getTile(this->_x, this->_y).getStocks();
         if (this->_gems.size() != totalGems) {
-            for (auto &sprite : this->_gems)
-                delete sprite.get();
+            this->_gems.clear();
             for (auto &gem : stocks) {
                 createGem(gem.first, gem.second);
             }
         }
         std::vector<Egg> eggs = cache->getEggs();
         if (this->_eggs.size() != cache->getEggsFromPos(this->_x, this->_y)) {
-            for (auto &sprite : this->_eggs)
-                delete sprite.get();
+            this->_eggs.clear();
             for (auto &egg : eggs) {
                 if (egg.getX() == this->_x && egg.getY() == this->_y) {
                     createEgg(egg.getId(), egg.getHatched());
