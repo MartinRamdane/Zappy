@@ -12,8 +12,6 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w_width, w_height), "Zappy");
     this->_window->setFramerateLimit(60);
     this->_window->setActive(false);
-    // this->loadGemsTexture();
-    this->loadTilesTexture();
     this->_view.setSize(sf::Vector2f(w_width, w_height));
     this->_bottomMenu = std::make_unique<SSide_menu>(w_width, w_height);
     this->_inventory = std::make_unique<SInventory>(w_width, w_height);
@@ -104,7 +102,7 @@ void Display::createMap(int width, int height)
 
     for (int y = 0; y < height + 2 * waterHeight; y++) {
         for (int x = 0; x < width + 2 * waterWidth; x++)
-           this->_map.push_back(std::make_unique<STile>(x - waterWidth, y - waterHeight, array[y][x], this->_tilesTexture[array[y][x]], this->_resourceManager));
+           this->_map.push_back(std::make_unique<STile>(x - waterWidth, y - waterHeight, array[y][x], this->_resourceManager));
     }
 }
 
@@ -287,64 +285,6 @@ void Display::update(MapT *cache)
     if (this->_inventory->getOpacity() == 0) {
         this->_trantorian_clicked = sf::Vector2i(-1, -1);
     }
-}
-
-void Display::loadGemsTexture()
-{
-    this->_gemsTexture["linemate"] = std::make_shared<sf::Texture>();
-    this->_gemsTexture["linemate"]->loadFromFile("gui/assets/gems/linemate.png");
-    this->_gemsTexture["deraumere"] = std::make_shared<sf::Texture>();
-    this->_gemsTexture["deraumere"]->loadFromFile("gui/assets/gems/deraumere.png");
-    this->_gemsTexture["sibur"] = std::make_shared<sf::Texture>();
-    this->_gemsTexture["sibur"]->loadFromFile("gui/assets/gems/sibur.png");
-    this->_gemsTexture["mendiane"] = std::make_shared<sf::Texture>();
-    this->_gemsTexture["mendiane"]->loadFromFile("gui/assets/gems/mendiane.png");
-    this->_gemsTexture["phiras"] = std::make_shared<sf::Texture>();
-    this->_gemsTexture["phiras"]->loadFromFile("gui/assets/gems/phiras.png");
-    this->_gemsTexture["thystame"] = std::make_shared<sf::Texture>();
-    this->_gemsTexture["thystame"]->loadFromFile("gui/assets/gems/thystame.png");
-    this->_gemsTexture["food"] = std::make_shared<sf::Texture>();
-    this->_gemsTexture["food"]->loadFromFile("gui/assets/gems/food.png");
-}
-
-void Display::loadTilesTexture()
-{
-    this->_tilesTexture['g'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['g']->loadFromFile("gui/assets/map/grass.png");
-    this->_tilesTexture['h'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['h']->loadFromFile("gui/assets/map/grass_left_top.png");
-    this->_tilesTexture['i'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['i']->loadFromFile("gui/assets/map/grass_right_top.png");
-    this->_tilesTexture['j'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['j']->loadFromFile("gui/assets/map/grass_left_down.png");
-    this->_tilesTexture['k'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['k']->loadFromFile("gui/assets/map/grass_right_down.png");
-    this->_tilesTexture['l'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['l']->loadFromFile("gui/assets/map/grass_middle_top.png");
-    this->_tilesTexture['m'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['m']->loadFromFile("gui/assets/map/grass_middle_left.png");
-    this->_tilesTexture['n'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['n']->loadFromFile("gui/assets/map/grass_middle_right.png");
-    this->_tilesTexture['o'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['o']->loadFromFile("gui/assets/map/grass_middle_down.png");
-    this->_tilesTexture['p'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['p']->loadFromFile("gui/assets/map/ocean_terrain_left_middle.png");
-    this->_tilesTexture['q'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['q']->loadFromFile("gui/assets/map/ocean_terrain_top_middle.png");
-    this->_tilesTexture['w'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['w']->loadFromFile("gui/assets/map/ocean_terrain_top_left.png");
-    this->_tilesTexture['x'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['x']->loadFromFile("gui/assets/map/ocean_terrain_top_right.png");
-    this->_tilesTexture['z'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['z']->loadFromFile("gui/assets/map/ocean_terrain_right_middle.png");
-    this->_tilesTexture['a'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['a']->loadFromFile("gui/assets/map/ocean_terrain_bottom_middle.png");
-    this->_tilesTexture['s'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['s']->loadFromFile("gui/assets/map/ocean_terrain_bottom_left.png");
-    this->_tilesTexture['d'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['d']->loadFromFile("gui/assets/map/ocean_terrain_bottom_right.png");
-    this->_tilesTexture['r'] = std::make_shared<sf::Texture>();
-    this->_tilesTexture['r']->loadFromFile("gui/assets/map/ocean.png");
 }
 
 std::unique_ptr<sf::RenderWindow> &Display::getWindow()

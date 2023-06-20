@@ -16,7 +16,7 @@
 class STile : public IEntity {
 
     public:
-        STile(int x, int y, int type, std::shared_ptr<sf::Texture> &tilesTexture, ResourceManager *_resourceManager);
+        STile(int x, int y, int type, ResourceManager *_resourceManager);
         ~STile();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -38,7 +38,6 @@ class STile : public IEntity {
     protected:
     private:
         sf::Sprite _sprite;
-        std::shared_ptr<sf::Texture> _texture;
         sf::IntRect _rect;
         sf::Texture _oceanTexture;
         sf::Sprite _oceanTile;

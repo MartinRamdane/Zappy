@@ -19,10 +19,18 @@ class ResourceManager {
         ~ResourceManager();
         void loadGemsTextures();
         void createGemsSprites();
+        void loadTilesTextures();
+        void createTilesSprites();
         sf::Sprite getGemSprite(std::string gemName);
+        sf::Sprite getTileSprite(char tileType);
+        int getGemsSpritesSize();
+        int getTilesSpritesSize();
 
     protected:
     private:
         std::map<std::string, sf::Texture> _gemsTextures;
         std::map<std::string, sf::Sprite> _gemsSprites;
+
+        std::map<char, sf::Texture> _tilesTextures;
+        std::map<char, sf::Sprite> _tilesSprites;
 };

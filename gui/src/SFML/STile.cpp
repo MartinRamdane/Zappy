@@ -7,13 +7,12 @@
 
 #include "STile.hpp"
 
-STile::STile(int x, int y, int type, std::shared_ptr<sf::Texture> &tilesTextures, ResourceManager *_resourceManager) : _x(x), _y(y), _type(type)
+STile::STile(int x, int y, int type, ResourceManager *_resourceManager) : _x(x), _y(y), _type(type)
 {
-    this->_texture = tilesTextures;
+    this->_resourceManager = _resourceManager;
     this->createSprite();
     this->_rect = sf::IntRect(0, 0, 32, 32);
     this->setSpriteRect(this->_rect);
-    this->_resourceManager = _resourceManager;
 }
 
 STile::~STile()
@@ -24,7 +23,7 @@ STile::~STile()
 
 void STile::createSprite()
 {
-    this->_sprite.setTexture(*this->_texture);
+    this->_sprite = this->_resourceManager->getTileSprite(this->_type);
     this->_sprite.setPosition(sf::Vector2f(this->_x * 96, this->_y * 96));
     this->_sprite.setScale(sf::Vector2f(3, 3));
     this->_sprite.setColor(sf::Color(255, 255, 255, 255));
