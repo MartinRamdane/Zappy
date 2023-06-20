@@ -45,7 +45,7 @@ void respawn_map_2(server_t infos, tile **map, int *resources)
         put_phiras_resource(infos, map, to_add);
     }
     if (resources[6] < (infos.width * infos.height * 0.05)) {
-        int to_add = (infos.width * infos.height * 0.05) - resources[5];
+        int to_add = (infos.width * infos.height * 0.05) - resources[6];
         printf("[DEBUG]: Respawn thystame %d\n", to_add);
         put_thystame_resource(infos, map, to_add);
     }

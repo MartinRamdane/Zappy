@@ -23,9 +23,9 @@ void fork_command(client_t *client, server_t *server)
 
 void life_cycle_command(server_t *server, client_t *client)
 {
-    if (client->player->inv->food > 0) {
+    if (client->player->inv->food > 0 && client->player->state == ALIVE) {
         client->player->inv->food--;
-    } else {
+    } else if (client->player->inv->food <= 0) {
         send(client->socket, "dead\n", 5, 0);
         client->player->is_dead = true;
         close(client->socket);

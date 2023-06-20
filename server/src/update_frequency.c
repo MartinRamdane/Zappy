@@ -20,7 +20,6 @@ void change_time_unit(client_t *cli, server_t *server, char *buff)
     send(cli->socket, buffer, strlen(buffer), 0);
     send_time_unit_to_all_guis(server);
     free(buffer);
-    update_freq_for_tasks(server);
 }
 
 void send_time_unit_to_all_guis(server_t *server)
