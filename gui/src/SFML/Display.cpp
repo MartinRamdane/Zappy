@@ -13,12 +13,12 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_window->setFramerateLimit(60);
     this->_window->setActive(false);
     this->_view.setSize(sf::Vector2f(w_width, w_height));
+    this->_resourceManager = new ResourceManager();
     this->_bottomMenu = std::make_unique<SSide_menu>(w_width, w_height);
-    this->_inventory = std::make_unique<SInventory>(w_width, w_height);
+    this->_inventory = std::make_unique<SInventory>(w_width, w_height, this->_resourceManager);
     this->_slider = std::make_unique<SSlider>(w_width, w_height);
     this->_clock_map.restart();
     this->_clock_trantorian.restart();
-    this->_resourceManager = new ResourceManager();
     if (!music.openFromFile("gui/assets/sounds/main_theme.ogg"))
         exit(84);
     music.setVolume(50);
@@ -28,6 +28,7 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
 
 Display::~Display()
 {
+    std::cout << "Display destroyed" << std::endl;
     delete this->_resourceManager;
 }
 

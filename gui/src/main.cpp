@@ -61,5 +61,6 @@ int main(int ac, char **av)
         return (e.getErrorCode());
     }
     gui->loop();
+    std::cout << "end"<< std::endl;
     return (0);
 }

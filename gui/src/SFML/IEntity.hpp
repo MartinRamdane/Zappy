@@ -20,7 +20,7 @@
 
 class IEntity {
     public:
-        ~IEntity() = default;
+        virtual ~IEntity() = default;
         virtual void createSprite() = 0;
         virtual void setSpriteRect(sf::IntRect rect) = 0;
         virtual void setSpritePosition(sf::Vector2f pos) = 0;

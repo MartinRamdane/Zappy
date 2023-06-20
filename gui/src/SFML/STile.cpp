@@ -76,7 +76,7 @@ void STile::draw(sf::RenderWindow &window, sf::View &view)
     }
     if (this->_eggs.size() > 0) {
         for (auto &egg : this->_eggs) {
-            sortedEggs.push_back(std::make_pair(egg->getSpritePosition().y, egg.get()));
+            sortedEggs.push_back(std::make_pair(egg.getSpritePosition().y, &egg));
         }
         std::sort(sortedEggs.begin(), sortedEggs.end(), [](const auto& a, const auto& b) {
             return a.first < b.first;
@@ -132,52 +132,41 @@ void STile::eventHandler(sf::Event event, sf::RenderWindow &window)
     }
 }
 
-//weak ptr
-
 void STile::createGem(std::string name, int quantity)
 {
     for (int i = 0; i < quantity; i++) {
-        SGem *gem = nullptr;
+        GemType type;
         sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 55), this->_sprite.getGlobalBounds().top + 10 + (rand() % 53));
 
         if (name == "linemate") {
-            gem = new SGem(this->_resourceManager->getGemSprite("linemate"), LINEMATE);
+            type = LINEMATE;
         } else if (name == "deraumere") {
-            gem = new SGem(this->_resourceManager->getGemSprite("deraumere"), DERAUMERE);
+            type = DERAUMERE;
         } else if (name == "sibur") {
-            gem = new SGem(this->_resourceManager->getGemSprite("sibur"), SIBUR);
+            type = SIBUR;
         } else if (name == "mendiane") {
-            gem = new SGem(this->_resourceManager->getGemSprite("mendiane"), MENDIANE);
+            type = MENDIANE;
         } else if (name == "phiras") {
-            gem = new SGem(this->_resourceManager->getGemSprite("phiras"), PHIRAS);
+            type = PHIRAS;
         } else if (name == "thystame") {
-            gem = new SGem(this->_resourceManager->getGemSprite("thystame"), THYSTAME);
+            type = THYSTAME;
         } else if (name == "food") {
-            gem = new SGem(this->_resourceManager->getGemSprite("food"), FOOD);
+            type = FOOD;
         }
-        if (gem) {
-            gem->setSpritePosition(position);
-            this->_gems.push_back(*gem);
-        }
+        this->_gems.push_back(SGem(this->_resourceManager->getGemSprite(name), type));
+        this->_gems.back().setSpritePosition(position);
     }
-
 }
-
 
 void STile::createEgg(int id, bool isHatched)
 {
-    std::unique_ptr<SEgg> egg;
     sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 55), this->_sprite.getGlobalBounds().top + 10 + (rand() % 53));
 
-    egg = std::make_unique<SEgg>();
-
-    if (egg) {
-        egg->setSpritePosition(position);
-        egg->setId(id);
-        if (isHatched)
-            egg->setSpriteRect(sf::IntRect(160, 0, 160, 160));
-        this->_eggs.push_back(std::move(egg));
-    }
+    this->_eggs.push_back(SEgg());
+    this->_eggs.back().setSpritePosition(position);
+    this->_eggs.back().setId(id);
+    if (isHatched)
+        this->_eggs.back().setSpriteRect(sf::IntRect(160, 0, 160, 160));
 }
 
 sf::Vector2i STile::getClicked()
@@ -218,7 +207,7 @@ void STile::update(MapT *cache)
     }
     if (this->_eggs.size() > 0) {
         for (auto &egg : this->_eggs) {
-            egg->update(cache);
+            egg.update(cache);
         }
     }
 }

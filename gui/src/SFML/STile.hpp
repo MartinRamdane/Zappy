@@ -42,7 +42,7 @@ class STile : public IEntity {
         sf::Texture _oceanTexture;
         sf::Sprite _oceanTile;
         std::vector<SGem> _gems;
-        std::vector<std::unique_ptr<IEntity>> _eggs;
+        std::vector<SEgg> _eggs;
         int _x;
         int _y;
         char _type;

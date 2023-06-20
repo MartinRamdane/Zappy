@@ -27,9 +27,9 @@ class SSide_menu {
     protected:
     private:
         sf::Font _font;
-        std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
-        std::map<std::string, std::shared_ptr<sf::Sprite>> _sprites;
-        std::map<std::string, std::shared_ptr<sf::Text>> _texts;
+        std::map<std::string, sf::Texture> _textures;
+        std::map<std::string, sf::Sprite> _sprites;
+        std::map<std::string, sf::Text> _texts;
         sf::Clock _clock;
         int _opacity = 0;
         bool _isFading = false;
