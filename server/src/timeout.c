@@ -51,12 +51,6 @@ void recalculate_task_time_after_timeout(server_t *server)
 {
     task_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->task_head, next) {
-        // if (strcmp(tmp->cmd, "LifeCycle") == 0) {
-        //     printf("recalc : before : %f\n", tmp->time);
-        // }
         tmp->time -= server->old_timeout;
-        // if (strcmp(tmp->cmd, "LifeCycle") == 0) {
-        //     printf("recalc : after : %f\n", tmp->time);
-        // }
     }
 }

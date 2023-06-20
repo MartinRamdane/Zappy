@@ -59,8 +59,8 @@ void loop_server(server_t *s_infos)
         add_clients_to_set(&readfds, s_infos);
         int select_val = select(1000, &readfds, NULL, NULL, s_infos->tv);
         if (select_val <= 0) {
-            execute_tasks(s_infos);
             recalculate_task_time_after_timeout(s_infos);
+            execute_tasks(s_infos);
             continue;
         } else {
             recalculate_task_time(s_infos);
