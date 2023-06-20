@@ -133,13 +133,13 @@ class Ai:
         self.inventory = data_dict
         if self.level == 1 and self.inventory["food"] < 25:
             self.seachFood = True
-        if self.inventory["food"] < 15 and not "Incantation\n" in self.path:
+        if self.inventory["food"] < 25 and not "Incantation\n" in self.path:
             self.seachFood = True
 
     def look(self, receive):
         print("PATH IN LOOK: ", self.path, file = self.sourceFile)
         self.getObjectsAround(receive)
-        if self.count >= 12:
+        if self.count >= 14:
             self.count = 0
             self.waitingForReponse = False
             if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
@@ -174,7 +174,6 @@ class Ai:
         self.path = []
         self.haveBroadcast = False
         self.waitingForReponse = False
-        self.count = 0
         self.canIncantation = False
         self.toJoin = False
         self.prepareIncantation = False
@@ -251,6 +250,7 @@ class Ai:
             tmp = decrypted.split(" ")
             wantedLevel = int(tmp[5])
             if wantedLevel == self.level + 1:
+                self.count = 0
                 self.direction = mess[1]
                 self.prepareIncantation = False
                 self.waitingForReponse = False
@@ -302,6 +302,7 @@ class Ai:
             self.path.append("Fork\n")
             print("FORK from " + self.debug + ", I'm level " + str(self.level))
         self.nbFork += 1
+        self.askForLevel = False
 
     def eject(self, receive):
         self.path = []
@@ -361,6 +362,18 @@ class Ai:
                 if self.levelManager.checkTileForIncanation(self.objectsAround[0], self.level + 1):
                     self.path = ["Incantation\n"]
                     return
+                if self.count >= 12:
+                    self.count = 0
+                    self.haveBroadcast = False
+                    self.waitingForReponse = False
+                    self.canIncantation = False
+                    self.toJoin = False
+                    self.prepareIncantation = False
+                    self.nbMatesAvailable = 1
+                    self.tosendJoin = False
+                    self.haveStones = False
+                    self.nbMatesAvailableForIncantation = 1
+                    self.askForLevel = False
                 return
             if self.prepareIncantation:
                 # remove unnecessary stones from the tile an set stone needed for incantation from the inventory to the tile
