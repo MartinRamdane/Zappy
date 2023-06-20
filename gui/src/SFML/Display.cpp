@@ -28,7 +28,6 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
 
 Display::~Display()
 {
-    std::cout << "Display destroyed" << std::endl;
     delete this->_resourceManager;
 }
 

@@ -33,7 +33,7 @@ z_server:
 	cd server && make
 	mv server/$(SERVER_NAME) .
 	@echo "$(COLOUR_GREEN)Server build$(END_COLOR)"
-
+\
 z_gui:
 	$(compile_gui)
 	mv gui/$(CLIENT_NAME) .
