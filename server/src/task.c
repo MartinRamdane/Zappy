@@ -12,8 +12,9 @@ void add_task(server_t *server, char *cmd, double t_time, client_t *cli)
     if (check_task_nb(server, cli) == false) return;
     if (strcmp(cmd, "Incantation") == 0) {
         event_player_incantation_start(cli, server);
+        cli->player->state = INCANTATION;
         if (check_can_incantation(server, cli) == 0) {
-            send(cli->socket, "ko\n", 3, 0); cli->player->state = INCANTATION;
+            send(cli->socket, "ko\n", 3, 0);
             //event_player_incantation_end(cli, server, 0);
         } else
             send(cli->socket, "Elevation underway\n", 19, 0);

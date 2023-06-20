@@ -109,4 +109,5 @@ void incantation_command(client_t *client, server_t *server)
     sprintf(buff, "Current level: %d\n", client->player->level);
     send(client->socket, buff, strlen(buff), 0);
     event_player_incantation_end(client, server, 1);
+    free(buff);
 }
