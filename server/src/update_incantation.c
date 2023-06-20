@@ -7,13 +7,23 @@
 
 #include "../include/server.h"
 
+int has_incantating_players_on_tile(tile *tile)
+{
+    t_player_queue *tmp = NULL;
+    LIST_FOREACH(tmp, &tile->player_head, next) {
+        if (tmp->player->state == INCANTATION)
+            return 1;
+    }
+    return 0;
+}
+
 void update_incantation_3(client_t *client, tile *_tile, server_t *server)
 {
-    if (client->player->level == 6) {
+    if (client->player->level ==  6 && has_incantating_players_on_tile(_tile) == 0) {
         _tile->linemate -= 1; _tile->deraumere -= 2;
         _tile->sibur -= 3; _tile->phiras -= 1;
     }
-    if (client->player->level == 7) {
+    if (client->player->level == 7 && has_incantating_players_on_tile(_tile) == 0) {
         _tile->linemate -= 2; _tile->deraumere -= 2;
         _tile->sibur -= 2; _tile->phiras -= 2;
         _tile->mendiane -= 2; _tile->thystame -= 1;
@@ -23,11 +33,11 @@ void update_incantation_3(client_t *client, tile *_tile, server_t *server)
 
 void update_incantation_2(client_t *client, tile *_tile, server_t *server)
 {
-    if (client->player->level == 4) {
+    if (client->player->level == 4 && has_incantating_players_on_tile(_tile) == 0) {
         _tile->linemate -= 1; _tile->deraumere -= 1;
         _tile->sibur -= 2; _tile->phiras -= 1;
     }
-    if (client->player->level == 5) {
+    if (client->player->level == 5 && has_incantating_players_on_tile(_tile) == 0) {
         _tile->linemate -= 1; _tile->deraumere -= 2;
         _tile->sibur -= 1; _tile->mendiane -= 3;
     }
@@ -41,10 +51,10 @@ void update_incantation(server_t *server, client_t *client)
     if (client->player->level == 1) {
         _tile->linemate -= 1;
     }
-    if (client->player->level == 2) {
+    if (client->player->level == 2 && has_incantating_players_on_tile(_tile) == 0) {
         _tile->linemate -= 1; _tile->deraumere -= 1; _tile->sibur -= 1;
     }
-    if (client->player->level == 3) {
+    if (client->player->level == 3 && has_incantating_players_on_tile(_tile) == 0) {
         _tile->linemate -= 2; _tile->sibur -= 1; _tile->phiras -= 2;
     }
     update_incantation_2(client, _tile, server);
