@@ -108,5 +108,6 @@ void incantation_command(client_t *client, server_t *server)
     char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);
     sprintf(buff, "Current level: %d\n", client->player->level);
     send(client->socket, buff, strlen(buff), 0);
+    update_incantation(server, client);
     event_player_incantation_end(client, server, 1);
 }

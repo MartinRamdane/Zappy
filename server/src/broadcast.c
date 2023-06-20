@@ -109,7 +109,8 @@ void broadcast_command(server_t *server, client_t *client, char *msg)
         if (tmp->player == NULL) {
             continue;
         }
-        if (tmp->player->state != INCANTATION && strcmp(tmp->player->uid, client->player->uid) != 0) {
+        if (tmp->player->state != INCANTATION
+            && strcmp(tmp->player->uid, client->player->uid) != 0) {
             send_broadcast(server, client, tmp, msg);
         }
     }
