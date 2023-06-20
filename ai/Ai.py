@@ -20,7 +20,7 @@ class Ai:
         self.objectsAround = []
         self.levelManager = Level()
         self.nbFork = 0
-        self.lookInventoryFood = 0
+        self.lookInventoryFood = 7
         self.haveBroadcast = False
         self.waitingForReponse = False
         self.count = 0
@@ -38,6 +38,7 @@ class Ai:
         self.askForLevel = False
         self.lastReceive = ""
         self.elevationInProgress = False
+        self.takeFood = False
 
     def joinGame(self):
         self.client = Client(self.machine, self.port)
@@ -58,7 +59,12 @@ class Ai:
         if not self.skipSend and not self.elevationInProgress:
             print("HERE", file = self.sourceFile)
             self.message = "Take food\n"
-            if self.lookInventoryFood >= 8 and not self.prepareIncantation and not self.toJoin:
+            if not self.inventory:
+                self.message = "Inventory\n"
+            elif self.inventory["food"] < 25 and self.level == 1 and not self.seachFood and not self.takeFood:
+                self.path = []
+                self.message = "Inventory\n"
+            elif self.lookInventoryFood >= 8 and not self.prepareIncantation and not self.toJoin:
                 self.message = "Inventory\n"
                 self.lookInventoryFood = 0
             elif self.seachFood and not self.path and not self.prepareIncantation:
@@ -107,6 +113,7 @@ class Ai:
         self.objectsAround = result_list
 
     def getFood(self):
+        self.takeFood = True
         nearestFood = getNearestObject("food", self.objectsAround)
         if nearestFood is None:
             self.path.append("Forward\n")
@@ -124,13 +131,15 @@ class Ai:
             value = int(data_list[i+1])
             data_dict[key] = value
         self.inventory = data_dict
-        if self.inventory["food"] < 13 and not "Incantation\n" in self.path:
+        if self.level == 1 and self.inventory["food"] < 25:
+            self.seachFood = True
+        if self.inventory["food"] < 15 and not "Incantation\n" in self.path:
             self.seachFood = True
 
     def look(self, receive):
         print("PATH IN LOOK: ", self.path, file = self.sourceFile)
         self.getObjectsAround(receive)
-        if self.count >= 10:
+        if self.count >= 12:
             self.count = 0
             self.waitingForReponse = False
             if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
@@ -146,6 +155,7 @@ class Ai:
         if self.seachFood:
             self.getFood()
         else:
+            self.takeFood = False
             self.makeIncantation()()
 
     def elevation(self, receive):
@@ -158,6 +168,8 @@ class Ai:
         print("LEVEL UPDATING from " + self.debug + " to LEVEL " + str(self.level + 1))
         self.level = int(receive[15])
         print("Level: " + str(self.level), file = self.sourceFile)
+        if self.level == 8:
+            sys.exit(0)
         self.nbFork = 0
         self.path = []
         self.haveBroadcast = False
@@ -324,7 +336,8 @@ class Ai:
             self.path.append("Forward\n")
             return
         self.path += getPathtoObject(nearestIncantation)
-        self.path.append("Look\n")
+        if "Forward\n" in self.path:
+            self.path.append("Look\n")
         self.path.append("Incantation\n")
 
     def makeIncantationOtherLevels(self):
