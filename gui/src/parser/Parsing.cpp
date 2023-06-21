@@ -159,7 +159,6 @@ void Parsing::pbc(std::string arg)
     while (ss >> part) {
         parts.push_back(part);
     }
-    std::cout << "message from " << parts[0] << ": " << parts[1] << std::endl;
     mapt.setTrantorianMessage(std::stoi(parts[0]), parts[1]);
 }
 
@@ -194,9 +193,7 @@ void Parsing::pie(std::string arg)
     while (ss >> part) {
         parts.push_back(part);
     }
-    // Tile tile = mapt.getTile(std::stoi(parts[0]), std::stoi(parts[1]));
     std::vector<Trantorian> trantorian = mapt.getTrantorians();
-    std::cout << "test" << std::endl;
     for (auto &tranto : trantorian) {
         if (tranto.getX() == std::stoi(parts[0]) && tranto.getY() == std::stoi(parts[1])) {
             if (tranto.getCanEvolve() == true) {

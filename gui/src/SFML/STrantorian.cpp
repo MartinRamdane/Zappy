@@ -10,7 +10,7 @@
 STrantorian::STrantorian(Trantorian trantorian, ResourceManager *resourceManager) : _broadcast(resourceManager)
 {
     this->_resourceManager = resourceManager;
-    this->createSprite();
+    this->_textures = resourceManager->getTrantorianTextures();
     this->setSpritePosition(sf::Vector2f((-40) + (96 * (trantorian.getX())), (-90) + ((96) * (trantorian.getY()))));
     this->setOrientation(trantorian.getOrientation());
     this->setSpriteScale(sf::Vector2f(3.5, 3.5));
@@ -27,61 +27,6 @@ STrantorian::~STrantorian()
 
 void STrantorian::createSprite()
 {
-    for (int i = 1; i != 9; i++) {
-        _textures["down" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["down" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIdle" + std::to_string(i) + ".png");
-        _textures["left" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["left" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftIdle" + std::to_string(i) + ".png");
-        _textures["up" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["up" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpIdle" + std::to_string(i) + ".png");
-        _textures["right" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["right" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightIdle" + std::to_string(i) + ".png");
-
-        _textures["Wdown" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Wdown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownRun" + std::to_string(i) + ".png");
-        _textures["Wleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Wleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftRun" + std::to_string(i) + ".png");
-        _textures["Wup" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Wup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpRun" + std::to_string(i) + ".png");
-        _textures["Wright" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Wright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightRun" + std::to_string(i) + ".png");
-
-        _textures["Idown" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Idown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownIncantation" + std::to_string(i) + ".png");
-        _textures["Ileft" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Ileft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftIncantation" + std::to_string(i) + ".png");
-        _textures["Iup" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Iup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpIncantation" + std::to_string(i) + ".png");
-        _textures["Iright" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Iright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightIncantation" + std::to_string(i) + ".png");
-
-        _textures["Edown" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Edown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownEjection" + std::to_string(i) + ".png");
-        _textures["Eleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Eleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftEjection" + std::to_string(i) + ".png");
-        _textures["Eup" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Eup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpEjection" + std::to_string(i) + ".png");
-        _textures["Eright" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Eright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightEjection" + std::to_string(i) + ".png");
-
-        _textures["Ddown" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Ddown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownDeath" + std::to_string(i) + ".png");
-        _textures["Dleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Dleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftDeath" + std::to_string(i) + ".png");
-        _textures["Dup" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Dup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpDeath" + std::to_string(i) + ".png");
-        _textures["Dright" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Dright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightDeath" + std::to_string(i) + ".png");
-
-        _textures["Hdown" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Hdown" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianDownHurt" + std::to_string(i) + ".png");
-        _textures["Hleft" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Hleft" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianLeftHurt" + std::to_string(i) + ".png");
-        _textures["Hup" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Hup" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianUpHurt" + std::to_string(i) + ".png");
-        _textures["Hright" + std::to_string(i)] = std::make_shared<sf::Texture>();
-        _textures["Hright" + std::to_string(i)]->loadFromFile("gui/assets/trantorian/TrantorianRightHurt" + std::to_string(i) + ".png");
-    }
 }
 
 void STrantorian::update(MapT *cache)

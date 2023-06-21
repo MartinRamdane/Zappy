@@ -66,7 +66,6 @@ void SBroadcast::eventHandler(sf::Event event, sf::RenderWindow &window)
 
 void SBroadcast::update(MapT *cache)
 {
-    std::cout << "update broadcast" << std::endl;
     if (this->_rect.left >= 840)
         this->_rect.left = 280;
     else
