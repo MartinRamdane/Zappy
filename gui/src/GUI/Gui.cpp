@@ -13,6 +13,8 @@ Gui::Gui(int port, std::string ip)
     this->_socket = std::make_unique<Socket>(port, ip);
     this->_p = std::make_unique<Parsing>();
     this->_socket->connectToServer();
+    Menu menu(*this->_display.getWindow());
+    menu.loop();
 }
 
 Gui::~Gui()
