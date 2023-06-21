@@ -13,7 +13,6 @@
 #include "../socket/Socket.hpp"
 #include "../parser/Parsing.hpp"
 #include "../cache/Map.hpp"
-#include "../menu/menu.hpp"
 #include <thread>
 
 class Gui {

@@ -194,16 +194,30 @@ void Parsing::pie(std::string arg)
     while (ss >> part) {
         parts.push_back(part);
     }
-    Tile tile = mapt.getTile(std::stoi(parts[0]), std::stoi(parts[1]));
-    if (parts[2] == "1") {
-        for (int i = 0; i < tile.getPlayers().size(); i++) {
-            mapt.setTrantorianLvl(tile.getPlayers()[i], tile.getLvlEvo());
-        }
-    } else {
-        for (int i = 0; i < tile.getPlayers().size(); i++) {
-            mapt.setTrantorianCanEvolve(tile.getPlayers()[i], false);
+    // Tile tile = mapt.getTile(std::stoi(parts[0]), std::stoi(parts[1]));
+    std::vector<Trantorian> trantorian = mapt.getTrantorians();
+    std::cout << "test" << std::endl;
+    for (auto &tranto : trantorian) {
+        if (tranto.getX() == std::stoi(parts[0]) && tranto.getY() == std::stoi(parts[1])) {
+            if (tranto.getCanEvolve() == true) {
+                if (std::stoi(parts[2]) == 1) {
+                    mapt.setTrantorianLvl(tranto.getId(), tranto.getLvl() + 1);
+                    mapt.setTrantorianCanEvolve(tranto.getId(), false);
+                } else {
+                    mapt.setTrantorianCanEvolve(tranto.getId(), false);
+                }
+            }
         }
     }
+    // if (parts[2] == "1") {
+    //     for (int i = 0; i < tile.getPlayers().size(); i++) {
+    //         mapt.setTrantorianLvl(tile.getPlayers()[i], tile.getLvlEvo());
+    //     }
+    // } else {
+    //     for (int i = 0; i < tile.getPlayers().size(); i++) {
+    //         mapt.setTrantorianCanEvolve(tile.getPlayers()[i], false);
+    //     }
+    // }
 }
 
 void Parsing::pfk(std::string arg)
