@@ -11,6 +11,28 @@ class Type(Enum):
     CONNECTED = 8
     EJECT = 9
 
+class Message(Enum):
+    LEVELASKED = 1
+    LEVELANSWER = 2
+    ALLSTONES = 3
+    JOINME = 4
+    COMINGJOIN = 5
+
+def getTypeOfMessage(message, key) -> Message:
+    tmpList = message.split(",")
+    decrypted = decrypt(tmpList[1], key)
+    if "Is anyone is level" in decrypted:
+        return Message.LEVELASKED
+    if "Yes I'm level" in decrypted:
+        return Message.LEVELANSWER
+    if "I have all stones for level" in decrypted:
+        return Message.ALLSTONES
+    if "Join me for level" in decrypted:
+        return Message.JOINME
+    if "I'm coming to join you for level" in decrypted:
+        return Message.COMINGJOIN
+    return None
+
 def getTypeOfReponse(receive) -> Type:
     if receive == "dead":
         return Type.DEAD
