@@ -278,14 +278,19 @@ void Display::update(MapT *cache)
     }
     if (this->_click_pos.x != -1 && this->_click_pos.y != -1)
         this->_bottomMenu->update(cache->getTile(this->_click_pos.x, this->_click_pos.y).getStocks());
+    bool notFound = true;
     if (this->_trantorians.size() > 0) {
         for (auto &sprite : this->_trantorians) {
             if (sprite.first == this->_trantorian_clicked.x) {
+                notFound = false;
                 STrantorian *trantorian = dynamic_cast<STrantorian *>(this->_trantorians[this->_trantorian_clicked.x].get());
                 this->_inventory->setTrantorianTexture(trantorian->getTexture());
                 this->_inventory->update(cache->getTrantorian(this->_trantorian_clicked.x).getStocks(), cache->getTrantorian(this->_trantorian_clicked.x).getTeam(), cache->getTrantorian(this->_trantorian_clicked.x).getLvl());
             }
         }
+    }
+    if (notFound == true) {
+        this->_trantorian_clicked = sf::Vector2i(-1, -1);
     }
     this->_slider->update(cache);
     if (this->_inventory->getOpacity() == 0) {
