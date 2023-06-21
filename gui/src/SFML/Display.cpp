@@ -211,7 +211,6 @@ void Display::clickHandler(MapT cache)
     // sf::Vector2f worldPos = this->_windowmapPixelToCoords(pixelPos);
     if (this->_event.type == sf::Event::MouseButtonPressed) {
         if (this->_event.mouseButton.button == sf::Mouse::Left) {
-                std::cout << "lll x: " << this->_slider->getRect()["zslider_bar1"]->getPosition().x << " " << pixelPos.x << " y: " << this->_slider->getRect()["zslider_bar1"]->getPosition().y << " " << pixelPos.y << std::endl;
             if (this->_slider->getRect()["zslider_bar1"]->getGlobalBounds().contains(pixelPos.x, pixelPos.y)) {
                 this->_slider->setIsDragging1(true);
             }
