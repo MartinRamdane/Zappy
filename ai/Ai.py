@@ -407,6 +407,7 @@ class Ai:
                 return
             if self.prepareIncantation:
                 self.prepareIncantation()
+                return
             self.getStones()
 
     def makeIncantation(self):
