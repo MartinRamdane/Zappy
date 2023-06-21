@@ -46,9 +46,7 @@ class Ai:
             self.client.send_message(self.teamName + "\n")
         receive = self.client.receive_message()
 
-    def communication(self):
-        receive = ""
-        self.canFork = False
+    def sendMsg(self):
         if not self.skipSend and not self.elevationInProgress:
             self.message = "Take food\n"
             if not self.inventory:
@@ -70,6 +68,9 @@ class Ai:
             elif "Is anyone is level" in decrypt(self.message, ord(self.teamName[0])) or "Yes I'm level" in decrypt(self.message, ord(self.teamName[0])):
                 self.askForLevel = True
             self.client.send_message(self.message)
+
+    def receiveMsg(self):
+        receive = ""
         receive = self.client.receive_message()
         if receive[-1] != '\n':
             receive += self.client.receive_message()
@@ -85,6 +86,11 @@ class Ai:
         self.lookInventoryFood += 1
         if self.haveBroadcast:
             self.count += 1
+
+    def communication(self):
+        self.canFork = False
+        self.sendMsg()
+        self.receiveMsg()
         return self.canFork
 
     def getObjectsAround(self, receive):
@@ -150,8 +156,6 @@ class Ai:
 
     def levelUpdating(self, receive):
         self.level = int(receive[15])
-        if self.level == 8:
-            sys.exit(0)
         self.nbFork = 0
         self.path = []
         self.haveBroadcast = False
