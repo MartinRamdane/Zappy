@@ -46,7 +46,9 @@ class Ai:
             self.client.send_message(self.teamName + "\n")
         receive = self.client.receive_message()
 
-    def sendMsg(self):
+    def communication(self):
+        receive = ""
+        self.canFork = False
         if not self.skipSend and not self.elevationInProgress:
             self.message = "Take food\n"
             if not self.inventory:
@@ -68,9 +70,6 @@ class Ai:
             elif "Is anyone is level" in decrypt(self.message, ord(self.teamName[0])) or "Yes I'm level" in decrypt(self.message, ord(self.teamName[0])):
                 self.askForLevel = True
             self.client.send_message(self.message)
-
-    def receiveMsg(self):
-        receive = ""
         receive = self.client.receive_message()
         if receive[-1] != '\n':
             receive += self.client.receive_message()
@@ -86,11 +85,6 @@ class Ai:
         self.lookInventoryFood += 1
         if self.haveBroadcast:
             self.count += 1
-
-    def communication(self):
-        self.canFork = False
-        self.sendMsg()
-        self.receiveMsg()
         return self.canFork
 
     def getObjectsAround(self, receive):
@@ -178,95 +172,79 @@ class Ai:
         for item in val:
             self.path.append(item)
 
-    def levelAsked(self, decrypted):
-        code = decrypted.split(" ")
-        wantedLevel = int(code[5])
-        if self.level == wantedLevel:
-            self.count = 0
-            if not self.askForLevel and not ("Broadcast " + encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0])) + "\n") in self.path:
-                encode = encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0]))
-                self.path.insert(0, "Broadcast " + encode + "\n")
-                self.askForLevel = True
-                self.haveBroadcast = True
-                self.waitingForReponse = True
-            self.nbMatesAvailable += 1
-            if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
-                self.canIncantation = True
-                self.nbMatesAvailable = 1
-                self.waitingForReponse = False
-
-    def levelAnswer(self, decrypted):
-        code = decrypted.split(" ")
-        wantedLevel = int(code[4])
-        if self.level == wantedLevel:
-            self.count = 0
-            self.nbMatesAvailable += 1
-        if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
-            self.canIncantation = True
-            self.nbMatesAvailable = 1
-            self.waitingForReponse = False
-
-    def allStones(self, decrypted):
-        tmp = decrypted.split(" ")
-        wantedLevel = int(tmp[7])
-        if wantedLevel == self.level + 1 and not self.prepareIncantation:
-            self.path = []
-            food = int(tmp[9])
-            if (not self.toJoin or ("I'm coming to join you for level " + str(self.level + 1) + "\n") in self.path) and not self.tosendJoin:
-                tmp = False
-                if self.haveStones:
-                    if food > self.inventory["food"]:
-                        tmp = True
-                else:
-                    tmp = True
-                if tmp:
-                    self.path.append("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
-                    self.path.append("Inventory\n")
-
-    def joinMe(self, decrypted):
-        tmp = decrypted.split(" ")
-        wantedLevel = int(tmp[5])
-        if wantedLevel == self.level + 1:
-            self.count = 0
-            self.prepareIncantation = False
-            self.waitingForReponse = False
-            self.canIncantation = True
-            self.path = []
-            self.goToDir(int(self.direction))
-            self.path.append("Look\n")
-            self.toJoin = True
-            self.haveBroadcast = True
-
-    def comingJoin(self, decrypted):
-        tmp = decrypted.split(" ")
-        wantedLevel = int(tmp[8])
-        if wantedLevel == self.level + 1:
-            self.nbMatesAvailableForIncantation += 1
-            if self.nbMatesAvailableForIncantation >= self.levelManager.matesNeeded[self.level + 1] and self.haveStones and not self.tosendJoin:
-                self.path = ["Broadcast " + encrypt("Join me for level " + str(self.level + 1), ord(self.teamName[0])) + "\n"]
-                self.prepareIncantation = True
-                self.seachFood = False
-                self.waitingForReponse = False
-                self.canIncantation = True
-
-    def getMessage(self, messageType):
-        switch = {
-            Message.LEVELASKED: self.levelAsked,
-            Message.LEVELANSWER: self.levelAnswer,
-            Message.ALLSTONES: self.allStones,
-            Message.JOINME: self.joinMe,
-            Message.COMINGJOIN: self.comingJoin
-        }
-        return switch.get(messageType, lambda: "Invalid type")
-
     def ReceiveMessage(self, receive):
         self.skipSend = True
         tmpList = receive.split(",")
         decrypted = decrypt(tmpList[1], ord(self.teamName[0]))
         self.count = 0
-        self.direction = tmpList[0].split(" ")[1]
-        messageType = getTypeOfMessage(receive, ord(self.teamName[0]))
-        self.getMessage(messageType)(decrypted)
+        mess = tmpList[0].split(" ")
+        if "Is anyone is level" in decrypted:
+            code = decrypted.split(" ")
+            wantedLevel = int(code[5])
+            if self.level == wantedLevel:
+                self.count = 0
+                if not self.askForLevel and not ("Broadcast " + encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0])) + "\n") in self.path:
+                    encode = encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0]))
+                    self.path.insert(0, "Broadcast " + encode + "\n")
+                    self.askForLevel = True
+                    self.haveBroadcast = True
+                    self.waitingForReponse = True
+                self.nbMatesAvailable += 1
+                if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
+                    self.canIncantation = True
+                    self.nbMatesAvailable = 1
+                    self.waitingForReponse = False
+        if "Yes I'm level" in decrypted:
+            code = decrypted.split(" ")
+            wantedLevel = int(code[4])
+            if self.level == wantedLevel:
+                self.count = 0
+                self.nbMatesAvailable += 1
+            if self.nbMatesAvailable >= self.levelManager.matesNeeded[self.level + 1]:
+                self.canIncantation = True
+                self.nbMatesAvailable = 1
+                self.waitingForReponse = False
+        if "I have all stones for level" in decrypted:
+            tmp = decrypted.split(" ")
+            wantedLevel = int(tmp[7])
+            if wantedLevel == self.level + 1 and not self.prepareIncantation:
+                self.path = []
+                food = int(tmp[9])
+                if (not self.toJoin or ("I'm coming to join you for level " + str(self.level + 1) + "\n") in self.path) and not self.tosendJoin:
+                    tmp = False
+                    if self.haveStones:
+                        if food > self.inventory["food"]:
+                            tmp = True
+                    else:
+                        tmp = True
+                    if tmp:
+                        self.path.append("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
+                        self.path.append("Inventory\n")
+        if "Join me for level" in decrypted:
+            tmp = decrypted.split(" ")
+            wantedLevel = int(tmp[5])
+            if wantedLevel == self.level + 1:
+                self.count = 0
+                self.direction = mess[1]
+                self.prepareIncantation = False
+                self.waitingForReponse = False
+                self.canIncantation = True
+                self.path = []
+                self.goToDir(int(self.direction))
+                self.path.append("Look\n")
+                self.toJoin = True
+                self.haveBroadcast = True
+        if "I'm coming to join you for level" in decrypted:
+            tmp = decrypted.split(" ")
+            wantedLevel = int(tmp[8])
+            if wantedLevel == self.level + 1:
+                self.nbMatesAvailableForIncantation += 1
+                if self.nbMatesAvailableForIncantation >= self.levelManager.matesNeeded[self.level + 1] and self.haveStones and not self.tosendJoin:
+                    self.path = ["Broadcast " + encrypt("Join me for level " + str(self.level + 1), ord(self.teamName[0])) + "\n"]
+                    self.prepareIncantation = True
+                    self.seachFood = False
+                    self.waitingForReponse = False
+                    self.canIncantation = True
 
     def other(self, receive):
         if self.elevationInProgress and "ko" in receive:
@@ -326,57 +304,6 @@ class Ai:
             self.path.append("Look\n")
         self.path.append("Incantation\n")
 
-    def prepareIncantation(self):
-        if self.levelManager.checkTileForIncanation(self.objectsAround[0], self.level + 1):
-            self.path = ["Incantation\n"]
-            return
-        needed = self.levelManager.getDictfromLevel(self.level + 1)
-        items = listToDict(self.objectsAround[0])
-        for tmp in needed:
-            if tmp in items:
-                if items[tmp] < needed[tmp]:
-                    for i in range(needed[tmp] - items[tmp]):
-                        self.path.append("Set " + tmp + "\n")
-            else:
-                for i in range(needed[tmp]):
-                    self.path.append("Set " + tmp + "\n")
-        self.path.append("Look\n")
-        self.seachFood = False
-        if self.countLook >= 6:
-            self.path.insert(0, "Broadcast " + encrypt("Join me for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
-            self.countLook = 0
-        else:
-            self.countLook += 1
-        return
-
-    def getStones(self):
-        val = self.levelManager.checkIfCanLevelUp(self.inventory, self.level + 1)
-        if ("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n") in self.path:
-            return
-        if val == True and not self.tosendJoin:
-            self.path = ["Look\n"]
-            self.path.insert(0, "Broadcast " + encrypt("I have all stones for level " + str(self.level + 1) + " food " + str(self.inventory["food"]), ord(self.teamName[0])) + "\n")
-            return
-        stonesNeeded = self.levelManager.getLevel[self.level + 1]
-        take = False
-        if ("Broadcast " + encrypt(("Yes I'm level " + str(self.level) + "\n"), ord(self.teamName[0]))) in self.path:
-            self.path = [encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0])) + "\n"]
-        else:
-            self.path = []
-        for stone in stonesNeeded:
-            if stone in self.inventory and self.inventory[stone] >= checkNbElemInList(stonesNeeded, stone):
-                continue
-            ifStone = getNearestObject(stone, self.objectsAround)
-            if ifStone != None:
-                self.path += getPathtoObject(ifStone)
-                self.path.append("Take " + stone + "\n")
-                take = True
-                break
-        if not take:
-            self.path.append("Forward\n")
-        else:
-            self.path.append("Inventory\n")
-
     def makeIncantationOtherLevels(self):
         if not self.haveBroadcast and not self.waitingForReponse:
             self.path.append("Broadcast " + encrypt("Is anyone is level " + str(self.level) + " ?", ord(self.teamName[0])) + "\n")
@@ -406,13 +333,56 @@ class Ai:
                     self.askForLevel = False
                 return
             if self.prepareIncantation:
-                self.prepareIncantation()
+                if self.levelManager.checkTileForIncanation(self.objectsAround[0], self.level + 1):
+                    self.path = ["Incantation\n"]
+                    return
+                needed = self.levelManager.getDictfromLevel(self.level + 1)
+                items = listToDict(self.objectsAround[0])
+                for tmp in needed:
+                    if tmp in items:
+                        if items[tmp] < needed[tmp]:
+                            for i in range(needed[tmp] - items[tmp]):
+                                self.path.append("Set " + tmp + "\n")
+                    else:
+                        for i in range(needed[tmp]):
+                            self.path.append("Set " + tmp + "\n")
+                self.path.append("Look\n")
+                self.seachFood = False
+                if self.countLook >= 6:
+                    self.path.insert(0, "Broadcast " + encrypt("Join me for level " + str(self.level + 1), ord(self.teamName[0])) + "\n")
+                    self.countLook = 0
+                else:
+                    self.countLook += 1
                 return
-            self.getStones()
+            val = self.levelManager.checkIfCanLevelUp(self.inventory, self.level + 1)
+            if ("Broadcast " + encrypt("I'm coming to join you for level " + str(self.level + 1), ord(self.teamName[0])) + "\n") in self.path:
+                return
+            if val == True and not self.tosendJoin:
+                self.path = ["Look\n"]
+                self.path.insert(0, "Broadcast " + encrypt("I have all stones for level " + str(self.level + 1) + " food " + str(self.inventory["food"]), ord(self.teamName[0])) + "\n")
+                return
+            stonesNeeded = self.levelManager.getLevel[self.level + 1]
+            take = False
+            if ("Broadcast " + encrypt(("Yes I'm level " + str(self.level) + "\n"), ord(self.teamName[0]))) in self.path:
+                self.path = [encrypt("Yes I'm level " + str(self.level), ord(self.teamName[0])) + "\n"]
+            else:
+                self.path = []
+            for stone in stonesNeeded:
+                if stone in self.inventory and self.inventory[stone] >= checkNbElemInList(stonesNeeded, stone):
+                    continue
+                ifStone = getNearestObject(stone, self.objectsAround)
+                if ifStone != None:
+                    self.path += getPathtoObject(ifStone)
+                    self.path.append("Take " + stone + "\n")
+                    take = True
+                    break
+            if not take:
+                self.path.append("Forward\n")
+            else:
+                self.path.append("Inventory\n")
 
     def makeIncantation(self):
         if self.level + 1 == 2:
             return self.makeIncantationLevel2
         else:
             return self.makeIncantationOtherLevels
-
