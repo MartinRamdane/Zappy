@@ -178,6 +178,13 @@ void Display::keyHandler(MapT cache)
         } else if (this->_event.key.code == sf::Keyboard::I) {
             this->_inventory->fadeIn(false);
             this->_inventory->fadeOut(true);
+        } else if (this->_event.key.code == sf::Keyboard::C) {
+            this->_message = "sst " + std::to_string(cache.getFrequency() - 1) + "\n";
+        } else if (this->_event.key.code == sf::Keyboard::V) {
+            this->_message = "sst " + std::to_string(cache.getFrequency() + 1) + "\n";
+        } else if (this->_event.key.code == sf::Keyboard::M) {
+            this->_slider->fadeIn(false);
+            this->_slider->fadeOut(true);
         }
     }
 }
