@@ -7,8 +7,9 @@
 
 #include "STrantorian.hpp"
 
-STrantorian::STrantorian(Trantorian trantorian)
+STrantorian::STrantorian(Trantorian trantorian, ResourceManager *resourceManager) : _broadcast(resourceManager)
 {
+    this->_resourceManager = resourceManager;
     this->createSprite();
     this->setSpritePosition(sf::Vector2f((-40) + (96 * (trantorian.getX())), (-90) + ((96) * (trantorian.getY()))));
     this->setOrientation(trantorian.getOrientation());
@@ -112,6 +113,23 @@ void STrantorian::update(MapT *cache)
             this->_rect.left = 0;
         else
             this->_rect.left += 48;
+    }
+    if (this->_broadcasting == false)
+        this->_clockBroadcast.restart();
+    if (cache->getTrantorian(this->_id).getMessage() != "") {
+        this->_broadcasting = true;
+        this->_broadcast.setSpritePosition(sf::Vector2f(this->_sprite.getPosition().x + 20, this->_sprite.getPosition().y - 20));
+    }
+    if (this->_broadcasting == true) {
+        if (this->_broadcast.getSpriteRect().left >= 840) {
+            this->_broadcasting = false;
+            this->_broadcast.createSprite();
+            cache->setTrantorianMessage(this->_id, "");
+        }
+        if (this->_clockBroadcast.getElapsedTime().asSeconds() >= 0.8) {
+            this->_broadcast.update(cache);
+            this->_clockBroadcast.restart();
+        }
     }
     this->setSpriteRect(this->_rect);
 }
@@ -312,6 +330,8 @@ void STrantorian::eventHandler(sf::Event event, sf::RenderWindow &window)
 void STrantorian::draw(sf::RenderWindow &window, sf::View &view)
 {
     window.draw(this->_sprite);
+    if (this->_broadcasting == true)
+        this->_broadcast.draw(window, view);
 }
 
 sf::Vector2f STrantorian::getSpritePosition()

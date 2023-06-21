@@ -132,10 +132,8 @@ void MapT::addEgg(Egg egg)
 
 void MapT::removeEgg(int e)
 {
-    std::cout << "remove egg" << std::endl;
     for (int i = 0; i < this->eggs.size(); i++) {
         if (this->eggs[i].getId() == e) {
-            std::cout << "egg id: " << this->eggs[i].getId() << " removed" << std::endl;
             this->eggs.erase(this->eggs.begin() + i);
         }
     }

@@ -13,6 +13,8 @@ ResourceManager::ResourceManager()
     this->createGemsSprites();
     this->loadTilesTextures();
     this->createTilesSprites();
+    this->loadBroadcastTexture();
+    this->createBroadcastSprite();
 }
 
 ResourceManager::~ResourceManager()
@@ -135,6 +137,18 @@ void ResourceManager::createTilesSprites()
     this->_tilesSprites['r'].setTexture(this->_tilesTextures['r']);
 }
 
+void ResourceManager::loadBroadcastTexture()
+{
+    this->_broadcastTexture = sf::Texture();
+    this->_broadcastTexture.loadFromFile("gui/assets/trantorian/broadcast.png");
+}
+
+void ResourceManager::createBroadcastSprite()
+{
+    this->_broadcastSprite = sf::Sprite();
+    this->_broadcastSprite.setTexture(this->_broadcastTexture);
+}
+
 sf::Sprite ResourceManager::getGemSprite(std::string gemName)
 {
     return (this->_gemsSprites[gemName]);
@@ -154,4 +168,9 @@ sf::Sprite ResourceManager::getTileSprite(char tileType)
 int ResourceManager::getTilesSpritesSize()
 {
     return (this->_tilesSprites.size());
+}
+
+sf::Sprite ResourceManager::getBroadcastSprite()
+{
+    return (this->_broadcastSprite);
 }

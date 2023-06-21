@@ -159,6 +159,7 @@ void Parsing::pbc(std::string arg)
     while (ss >> part) {
         parts.push_back(part);
     }
+    std::cout << "message from " << parts[0] << ": " << parts[1] << std::endl;
     mapt.setTrantorianMessage(std::stoi(parts[0]), parts[1]);
 }
 

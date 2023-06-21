@@ -8,11 +8,13 @@
 #pragma once
 
 #include "IEntity.hpp"
+#include "ResourceManager.hpp"
+#include "SBroadcast.hpp"
 #include <cmath>
 
 class STrantorian : public IEntity {
     public:
-        STrantorian(Trantorian trantorian);
+        STrantorian(Trantorian trantorian, ResourceManager *resourceManager);
         ~STrantorian();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -49,4 +51,8 @@ class STrantorian : public IEntity {
         Animation _lastAnimation = IDLE;
         int _level = 1;
         bool _isClicked = false;
+        SBroadcast _broadcast;
+        ResourceManager *_resourceManager;
+        bool _broadcasting = false;
+        sf::Clock _clockBroadcast;
 };
