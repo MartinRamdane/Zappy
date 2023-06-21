@@ -158,7 +158,7 @@ void Display::keyHandler(MapT cache)
             this->_view.move(-10, 0);
         } else if (this->_event.key.code == sf::Keyboard::Right) {
             this->_view.move(10, 0);
-        } else if (this->_event.key.code == sf::Keyboard::Z) {
+        } else if (this->_event.key.code == sf::Keyboard::W) {
             this->_view.zoom(0.9);
         } else if (this->_event.key.code == sf::Keyboard::X) {
             this->_view.zoom(1.1);
@@ -172,7 +172,7 @@ void Display::keyHandler(MapT cache)
         } else if (this->_event.key.code == sf::Keyboard::B) {
             this->_bottomMenu->fadeIn(false);
             this->_bottomMenu->fadeOut(true);
-        } else if (this->_event.key.code == sf::Keyboard::P) {
+        } else if (this->_event.key.code == sf::Keyboard::F) {
             this->_slider->fadeOut(false);
             this->_slider->fadeIn(true);
         } else if (this->_event.key.code == sf::Keyboard::I) {
