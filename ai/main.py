@@ -25,27 +25,22 @@ def main():
     port = int(sys.argv[2])
     name = sys.argv[4]
     machine = sys.argv[6]
-    ai = Ai(name, machine, port, name)
+    ai = Ai(name, machine, port)
     ai.joinGame()
     while True:
         canFork = ai.communication()
         if canFork:
-            # FORK HERE
-            tmp:str = "toto"
-            p = multiprocessing.Process(target=ai_computation, args=("toto", machine, port, tmp + str(random.randint(0, 999))))
+            p = multiprocessing.Process(target=ai_computation, args=(name, machine, port))
             p.start()
         canFork = False
 
-def ai_computation(name, machine, port, teamName):
-    # Code pour le traitement de l'IA forkée
-    ai = Ai(name, machine, port, teamName)
+def ai_computation(name, machine, port):
+    ai = Ai(name, machine, port)
     ai.joinGame()
     while True:
         canFork = ai.communication()
         if canFork:
-            # FORK HERE
-            tmp:str = "toto"
-            p = multiprocessing.Process(target=ai_computation, args=(tmp, machine, port, tmp + str(random.randint(0, 999))))
+            p = multiprocessing.Process(target=ai_computation, args=(name, machine, port))
             p.start()
         canFork = False
 

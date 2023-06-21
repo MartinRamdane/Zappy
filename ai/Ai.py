@@ -4,7 +4,7 @@ from Utilities import *
 import sys
 
 class Ai:
-    def __init__(self, teamName, machine, port, filename):
+    def __init__(self, teamName, machine, port):
         self.teamName = teamName
         self.machine = machine
         self.port = port
@@ -13,8 +13,6 @@ class Ai:
         self.level = 1
         self.client = None
         self.tiles = {0: ["Look\n"], 1: ["Forward\n"], 2: ["Forward\n", "Left\n", "Forward\n"], 3: ["Left\n", "Forward\n"], 4: ["Left\n", "Forward\n", "Left\n", "Forward\n"], 5: ["Left\n", "Left\n", "Forward\n"], 6: ["Left\n", "Left\n", "Forward\n", "Left\n", "Forward\n"], 7: ["Right\n", "Forward\n"], 8: ["Forward\n", "Right\n", "Forward\n"]}
-        self.sourceFile = open(filename + '.log', 'w')
-        self.debug = filename
         self.inventory = {}
         self.canFork = False
         self.objectsAround = []
