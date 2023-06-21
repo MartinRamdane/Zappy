@@ -92,6 +92,8 @@ double calculate_time_for_task(server_t *server, char *buffer)
 
 void execute_tasks(server_t *server)
 {
+    if (server->game->end)
+        return;
     task_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->task_head, next) {
         if (tmp->time <= 0) {

@@ -122,6 +122,7 @@ extern LIST_HEAD(list_head, client) head;
 extern LIST_HEAD(team_listhead, team) team_head;
 typedef struct game {
     tile **map;
+    bool end;
 } game_t;
 
 typedef struct task {
@@ -188,6 +189,8 @@ int check_can_incantation(server_t *server, client_t *client);
 void update_incantation(server_t *server, client_t *client);
 void update_incantation_2(client_t *client, tile *_tile, server_t *server);
 void update_incantation_3(client_t *client, tile *_tile, server_t *server);
+void make_incantation_for_all_players(server_t *server, client_t *client);
+void remove_incantation_task_for_player(server_t *server, client_t *client);
 
 // SERVER
 server_t *create_server_struct(void);
@@ -329,3 +332,8 @@ void send_egg_connection_to_guis(server_t *server, t_egg *egg);
 int count_default_eggs(server_t *s_infos, char *team);
 void regenerate_eggs(server_t *s_infos);
 int count_all_eggs(server_t *s_infos, char *team);
+
+//WIN
+team_t *get_nbr_of_lvl_eight_per_team(server_t *server);
+void send_win_condition_to_gui(server_t *server, team_t *team);
+void check_win_condition(server_t *server);

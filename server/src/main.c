@@ -64,6 +64,7 @@ int main(int ac, char **av)
         fetch_arguments(s_infos, arg, av, ac);
     }
     check_args(s_infos); s_infos->game->map = generate_map(s_infos);
+    s_infos->game->end = false;
     fill_map(*s_infos, s_infos->game->map); init_server(s_infos);
     char *buffer_respawn = strdup("Respawn");
     double task_time = calculate_time_for_task(s_infos, buffer_respawn);

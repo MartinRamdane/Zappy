@@ -98,17 +98,19 @@ void left_command(client_t *client)
 
 void incantation_command(client_t *client, server_t *server)
 {
-    client->player->state = ALIVE;
     if (check_can_incantation(server, client) == 0) {
+        client->player->state = ALIVE;
         send(client->socket, "ko\n", 3, 0);
         event_player_incantation_end(client, server, 0);
         return;
     }
+    make_incantation_for_all_players(server, client);
     update_incantation(server, client);
-    client->player->level++;
-    char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);
-    sprintf(buff, "Current level: %d\n", client->player->level);
-    send(client->socket, buff, strlen(buff), 0);
-    event_player_incantation_end(client, server, 1);
-    free(buff);
+    // client->player->level++;
+    // char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);
+    // sprintf(buff, "Current level: %d\n", client->player->level);
+    // send(client->socket, buff, strlen(buff), 0);
+    // event_player_incantation_end(client, server, 1);
+    // free(buff);
+    check_win_condition(server);
 }
