@@ -49,6 +49,10 @@ void Gui::displayThread()
 
 void Gui::loop()
 {
+    //set here the loop of the menu
+    //menu loop
+    
+
     std::thread socketThread(&Gui::socketThread, this);
     std::thread displayThread(&Gui::displayThread, this);
 
