@@ -62,6 +62,9 @@ class MapT
         void setHasHatched(int id);
         void setTrantorianEjection(int id, bool ejecting);
         void setTrantorianDeath(int id);
-        void setWinner(std::string winner){this->winner = winner;};
+        void setWinner(std::string winner){
+            this->winner = winner;
+            this->winner.erase(this->winner.size() - 1);
+        };
         std::string getWinner(){return this->winner;};
 };

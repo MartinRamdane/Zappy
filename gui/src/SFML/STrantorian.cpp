@@ -31,6 +31,7 @@ void STrantorian::createSprite()
 
 void STrantorian::update(MapT *cache)
 {
+    this->setSpriteRect(this->_rect);
     if (this->_animation == DEATH) {
         if (this->_rect.left >= 10 * 48) {
             cache->removeTrantorian(this->_id);
@@ -81,6 +82,7 @@ void STrantorian::update(MapT *cache)
 
 void STrantorian::moveSprite(MapT *cache)
 {
+    this->setSpriteRect(this->_rect);
     Trantorian t = cache->getTrantorian(this->_id);
     int freq = cache->getFrequency();
 
@@ -274,6 +276,7 @@ void STrantorian::eventHandler(sf::Event event, sf::RenderWindow &window)
 
 void STrantorian::draw(sf::RenderWindow &window, sf::View &view)
 {
+    this->setSpriteRect(this->_rect);
     window.draw(this->_sprite);
     if (this->_broadcasting == true)
         this->_broadcast.draw(window, view);
