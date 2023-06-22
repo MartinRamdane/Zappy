@@ -28,6 +28,8 @@ class SSlider
         void setRect(std::string S, std::shared_ptr<sf::RectangleShape> r);
         bool getIsDragging1();
         void setIsDragging1(bool drag);
+        void eventHandler(sf::Event event, sf::RenderWindow &window);
+
     private:
         sf::Font _font;
         std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
