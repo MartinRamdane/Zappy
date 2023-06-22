@@ -3,4 +3,8 @@
 zappy_server
 zappy_ai
 zappy_gui
+zappy_server_exemple
+zappy_server_example
+ai/__pycache__
+*.log
 .vscode/
