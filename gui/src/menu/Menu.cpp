@@ -43,7 +43,7 @@ void Menu::setState(MenuState state)
 int Menu::render(sf::RenderWindow &window)
 {
     // render all entities
-    for (auto &i: _entities) {
+    for (auto &i: this->_entities) {
         i.second->draw(window);
     }
     window.display();
