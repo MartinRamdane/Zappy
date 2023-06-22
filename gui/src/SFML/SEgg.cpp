@@ -7,8 +7,11 @@
 
 #include "SEgg.hpp"
 
-SEgg::SEgg()
+
+SEgg::SEgg(ResourceManager *resourceManager)
 {
+    this->_resourceManager = resourceManager;
+    this->_sprite = this->_resourceManager->getEggSprite();
     this->createSprite();
 }
 
@@ -18,8 +21,6 @@ SEgg::~SEgg()
 
 void SEgg::createSprite()
 {
-    this->_texture.loadFromFile("gui/assets/trantorian/egg.png");
-    this->_sprite.setTexture(this->_texture);
     this->_sprite.setScale(sf::Vector2f(1.3, 1.3));
     this->_rect = sf::IntRect(0, 0, 40, 39);
     this->setSpriteRect(this->_rect);

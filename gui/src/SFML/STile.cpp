@@ -162,7 +162,7 @@ void STile::createEgg(int id, bool isHatched)
 {
     sf::Vector2f position(this->_sprite.getGlobalBounds().left + 10 + (rand() % 55), this->_sprite.getGlobalBounds().top + 10 + (rand() % 53));
 
-    this->_eggs.push_back(SEgg());
+    this->_eggs.push_back(SEgg(this->_resourceManager));
     this->_eggs.back().setSpritePosition(position);
     this->_eggs.back().setId(id);
     if (isHatched)

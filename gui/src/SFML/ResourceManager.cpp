@@ -16,10 +16,24 @@ ResourceManager::ResourceManager()
     this->loadBroadcastTexture();
     this->createBroadcastSprite();
     this->loadTrantoriansTexture();
+    this->loadEggTexture();
+    this->createEggSprite();
 }
 
 ResourceManager::~ResourceManager()
 {
+}
+
+void ResourceManager::loadEggTexture()
+{
+    this->_eggTexture = sf::Texture();
+    this->_eggTexture.loadFromFile("gui/assets/trantorian/egg.png");
+}
+
+void ResourceManager::createEggSprite()
+{
+    this->_eggSprite = sf::Sprite();
+    this->_eggSprite.setTexture(this->_eggTexture);
 }
 
 void ResourceManager::loadTrantoriansTexture()
@@ -238,4 +252,9 @@ sf::Sprite ResourceManager::getBroadcastSprite()
 std::map<std::string, std::shared_ptr<sf::Texture>> ResourceManager::getTrantorianTextures()
 {
     return (this->_trantorianTextures);
+}
+
+sf::Sprite ResourceManager::getEggSprite()
+{
+    return (this->_eggSprite);
 }

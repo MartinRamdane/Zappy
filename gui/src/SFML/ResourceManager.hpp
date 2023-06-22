@@ -24,9 +24,12 @@ class ResourceManager {
         void loadBroadcastTexture();
         void createBroadcastSprite();
         void loadTrantoriansTexture();
+        void createEggSprite();
+        void loadEggTexture();
         sf::Sprite getGemSprite(std::string gemName);
         sf::Sprite getTileSprite(char tileType);
         sf::Sprite getBroadcastSprite();
+        sf::Sprite getEggSprite();
         std::map<std::string, std::shared_ptr<sf::Texture>> getTrantorianTextures();
         int getGemsSpritesSize();
         int getTilesSpritesSize();
@@ -36,9 +39,11 @@ class ResourceManager {
         std::map<std::string, sf::Texture> _gemsTextures;
         std::map<std::string, sf::Sprite> _gemsSprites;
         sf::Sprite _broadcastSprite;
+        sf::Sprite _eggSprite;
 
         std::map<char, sf::Texture> _tilesTextures;
         std::map<char, sf::Sprite> _tilesSprites;
         sf::Texture _broadcastTexture;
         std::map<std::string, std::shared_ptr<sf::Texture>> _trantorianTextures;
+        sf::Texture _eggTexture;
 };

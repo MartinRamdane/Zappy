@@ -9,10 +9,11 @@
 
 #include "IEntity.hpp"
 #include "../cache/Egg.hpp"
+#include "ResourceManager.hpp"
 
 class SEgg : public IEntity {
     public:
-        SEgg();
+        SEgg(ResourceManager *resourceManager);
         ~SEgg();
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -37,4 +38,5 @@ class SEgg : public IEntity {
         sf::IntRect _rect;
         enum EggMode _mode;
         int _id;
+        ResourceManager *_resourceManager;
 };
