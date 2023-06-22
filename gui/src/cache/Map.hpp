@@ -31,7 +31,7 @@ class MapT
         std::vector<Trantorian> trantorians;
         std::vector<Egg> eggs;
         int frequency = 0;
-        std::string winner = "a";
+        std::string winner = "";
     public:
         MapT();
         ~MapT();
