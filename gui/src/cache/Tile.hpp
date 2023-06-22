@@ -15,6 +15,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <vector>
+#include <map>
 
 class Tile
 {
@@ -31,5 +32,7 @@ class Tile
         void setPlayers(std::vector<int> players);
         Stock getStock();
         int getLvlEvo();
+        std::map<std::string, int> getStocks();
         std::vector<int> getPlayers();
+        int getNbrTotalGems();
 };

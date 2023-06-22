@@ -7,7 +7,7 @@
 
 #include "Map.hpp"
 
-MapT::MapT(/* args */)
+MapT::MapT()
 {
 }
 
@@ -65,7 +65,7 @@ std::vector<Trantorian> MapT::getTrantorians()
     return (this->trantorians);
 }
 
-void MapT::setTrantorianPos(int id, int x, int y, char orientation)
+void MapT::setTrantorianPos(int id, int x, int y, int orientation)
 {
     for (int i = 0; i < this->trantorians.size(); i++) {
         if (this->trantorians[i].getId() == id) {
@@ -81,6 +81,7 @@ void MapT::setTrantorianLvl(int id, int lvl)
     for (int i = 0; i < this->trantorians.size(); i++) {
         if (this->trantorians[i].getId() == id) {
             this->trantorians[i].setLvl(lvl);
+            this->trantorians[i].setCanEvolve(false);
         }
     }
 }
@@ -138,6 +139,15 @@ void MapT::removeEgg(int e)
     }
 }
 
+void MapT::setHasHatched(int id)
+{
+    for (int i = 0; i < this->eggs.size(); i++) {
+        if (this->eggs[i].getId() == id) {
+            this->eggs[i].setHatched();
+        }
+    }
+}
+
 std::vector<Egg> MapT::getEggs()
 {
     return (this->eggs);
@@ -148,6 +158,54 @@ void MapT::removeTeam(std::string team)
     for (int i = 0; i < this->teams.size(); i++) {
         if (this->teams[i].getName() == team) {
             this->teams.erase(this->teams.begin() + i);
+        }
+    }
+}
+
+void MapT::setFrequency(int frequency)
+{
+    this->frequency = frequency;
+}
+
+int MapT::getFrequency()
+{
+    return (this->frequency);
+}
+
+int MapT::getEggsFromPos(int x, int y)
+{
+    int num = 0;
+    for (int i = 0; i < this->eggs.size(); i++) {
+        if (this->eggs[i].getX() == x && this->eggs[i].getY() == y) {
+            num++;
+        }
+    }
+    return (num);
+}
+
+void MapT::setTrantorianCanEvolve(int id, bool canEvolve)
+{
+    for (int i = 0; i < this->trantorians.size(); i++) {
+        if (this->trantorians[i].getId() == id) {
+            this->trantorians[i].setCanEvolve(canEvolve);
+        }
+    }
+}
+
+void MapT::setTrantorianEjection(int id, bool ejecting)
+{
+    for (int i = 0; i < this->trantorians.size(); i++) {
+        if (this->trantorians[i].getId() == id) {
+            this->trantorians[i].setEjection(ejecting);
+        }
+    }
+}
+
+void MapT::setTrantorianDeath(int id)
+{
+    for (int i = 0; i < this->trantorians.size(); i++) {
+        if (this->trantorians[i].getId() == id) {
+            this->trantorians[i].setDeath();
         }
     }
 }

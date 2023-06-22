@@ -25,3 +25,8 @@ Stock::Stock(/* args */)
 Stock::~Stock()
 {
 }
+
+int Stock::getTotalGem()
+{
+    return (this->linemate + this->deraumere + this->sibur + this->mendiane + this->phiras + this->thystame);
+}

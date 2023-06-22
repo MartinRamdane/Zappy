@@ -7,7 +7,7 @@
 
 #include "Trantorians.hpp"
 
-Trantorian::Trantorian(Stock stock, int id, char orientation, int lvl, bool canEvolve, int x, int y, std::string team)
+Trantorian::Trantorian(Stock stock, int id, int orientation, int lvl, bool canEvolve, int x, int y, std::string team)
 {
     this->x = x;
     this->y = y;
@@ -39,7 +39,7 @@ void Trantorian::setY(int y)
     this->y = y;
 }
 
-void Trantorian::setOrientation(char orientation)
+void Trantorian::setOrientation(int orientation)
 {
     this->orientation = orientation;
 }
@@ -64,7 +64,7 @@ int Trantorian::getY()
     return (this->y);
 }
 
-char Trantorian::getOrientation()
+int Trantorian::getOrientation()
 {
     return (this->orientation);
 }
@@ -84,11 +84,6 @@ void Trantorian::setStock(Stock stock)
     this->stock = stock;
 }
 
-Stock Trantorian::getStock()
-{
-    return (this->stock);
-}
-
 void Trantorian::setId(int id)
 {
     this->id = id;
@@ -98,7 +93,6 @@ int Trantorian::getId()
 {
     return (this->id);
 }
-
 void Trantorian::setCanEvolve(bool canEvolve)
 {
     this->canEvolve = canEvolve;
@@ -117,4 +111,65 @@ void Trantorian::setMessage(std::string message)
 std::string Trantorian::getMessage()
 {
     return (this->message);
+}
+
+int Trantorian::getLevel()
+{
+    return (this->lvl);
+}
+
+void Trantorian::setEjection(bool ejecting)
+{
+    this->ejecting = ejecting;
+}
+
+bool Trantorian::getEjection()
+{
+    return (this->ejecting);
+}
+
+void Trantorian::setDeath()
+{
+    this->death = true;
+}
+
+bool Trantorian::getDeath()
+{
+    return (this->death);
+}
+
+Stock Trantorian::getStock()
+{
+    return (this->stock);
+}
+
+#include <iostream>
+
+std::map<std::string, int> Trantorian::getStocks()
+{
+    std::map<std::string, int> stocks;
+
+    if (this->stock.food != 0) {
+        stocks["food"] = this->stock.food;
+    }
+    if (this->stock.linemate != 0) {
+        stocks["linemate"] = this->stock.linemate;
+    }
+    if (this->stock.deraumere != 0) {
+        stocks["deraumere"] = this->stock.deraumere;
+    }
+    if (this->stock.sibur != 0) {
+        stocks["sibur"] = this->stock.sibur;
+    }
+    if (this->stock.mendiane != 0) {
+        stocks["mendiane"] = this->stock.mendiane;
+    }
+    if (this->stock.phiras != 0) {
+        stocks["phiras"] = this->stock.phiras;
+    }
+    if (this->stock.thystame != 0) {
+        stocks["thystame"] = this->stock.thystame;
+    }
+
+    return (stocks);
 }

@@ -9,6 +9,7 @@
 
 #include "Stock.hpp"
 #include "Teams.hpp"
+#include <map>
 #include <string>
 
 class Trantorian
@@ -16,21 +17,23 @@ class Trantorian
     private:
         Stock stock;
         int id;
-        char orientation;
+        int orientation;
         int lvl;
         bool canEvolve;
         int x;
         int y;
         std::string team;
         std::string message;
+        bool ejecting = false;
+        bool death = false;
 
     public:
         Trantorian();
-        Trantorian(Stock stock, int id, char orientation, int lvl, bool canEvolve, int x, int y, std::string team);
+        Trantorian(Stock stock, int id, int orientation, int lvl, bool canEvolve, int x, int y, std::string team);
         ~Trantorian();
         void setStock(Stock stock);
         void setId(int id);
-        void setOrientation(char orientation);
+        void setOrientation(int orientation);
         void setLvl(int lvl);
         void setCanEvolve(bool canEvolve);
         void setX(int x);
@@ -39,11 +42,17 @@ class Trantorian
         void setMessage(std::string message);
         Stock getStock();
         int getId();
-        char getOrientation();
+        int getOrientation();
         int getLvl();
         bool getCanEvolve();
         int getX();
         int getY();
         std::string getTeam();
         std::string getMessage();
+        int getLevel();
+        void setEjection(bool ejecting);
+        bool getEjection();
+        void setDeath();
+        bool getDeath();
+        std::map<std::string, int> getStocks();
 };
