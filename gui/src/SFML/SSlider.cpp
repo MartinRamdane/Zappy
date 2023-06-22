@@ -45,33 +45,28 @@ void SSlider::createSprite(int w_width, int w_height, int zoom)
     this->_texts["frequencyV"].setFillColor(sf::Color(13, 144, 104, this->_opacity));
     this->_texts["frequencyV"].setPosition(sf::Vector2f(this->_texts["frequency"].getPosition().x + 200, this->_texts["frequency"].getPosition().y));
 
-    this->_rects["slider_slide1"] = sf::RectangleShape();
-    this->_rects["slider_slide1"].setSize(sf::Vector2f(50, 30));
-    this->_rects["slider_slide1"].setPosition(sf::Vector2f(this->_texts["frequency"].getPosition().x, this->_texts["frequency"].getPosition().y + 70));
-    sf::Color c(13, 144, 104);
-    c.a = this->_opacity;
-    this->_rects["slider_slide1"].setFillColor(c);
+    this->_sprites["bar"] = sf::Sprite();
+    this->_textures["bar"] = sf::Texture();
+    this->_textures["bar"].loadFromFile("gui/assets/slider/bar.png");
+    this->_sprites["bar"].setTexture(this->_textures["bar"]);
+    this->_sprites["bar"].setScale(sf::Vector2f(0.3, 0.3));
+    this->_sprites["bar"].setPosition(sf::Vector2f(this->_texts["frequency"].getPosition().x, this->_texts["frequency"].getPosition().y + 70));
+    this->_sprites["bar"].setColor(sf::Color(255, 255, 255, this->_opacity));
 
-    this->_rects["zslider_bar1"] = sf::RectangleShape();
-    this->_rects["zslider_bar1"].setSize(sf::Vector2f(10, 30));
-    this->_rects["zslider_bar1"].setPosition(sf::Vector2f(this->_rects["slider_slide1"].getPosition().x + this->_rects["slider_slide1"].getSize().x, this->_rects["slider_slide1"].getPosition().y));
-    sf::Color color(105,105,105);
-    color.a = this->_opacity;
-    this->_rects["zslider_bar1"].setFillColor(color);
-
-    this->_rects["slider_back1"] = sf::RectangleShape();
-    this->_rects["slider_back1"].setSize(sf::Vector2f(200, 30));
-    this->_rects["slider_back1"].setPosition(sf::Vector2f(this->_rects["slider_slide1"].getPosition().x, this->_rects["slider_slide1"].getPosition().y));
-    color = sf::Color::Black;
-    color.a = this->_opacity;
-    this->_rects["slider_back1"].setFillColor(color);
+    this->_sprites["slider"] = sf::Sprite();
+    this->_textures["slider"] = sf::Texture();
+    this->_textures["slider"].loadFromFile("gui/assets/slider/slider.png");
+    this->_sprites["slider"].setTexture(this->_textures["slider"]);
+    this->_sprites["slider"].setScale(sf::Vector2f(0.3, 0.3));
+    this->_sprites["slider"].setPosition(sf::Vector2f(this->_sprites["bar"].getPosition().x + 5, this->_sprites["bar"].getPosition().y + 2.5));
+    this->_sprites["slider"].setColor(sf::Color(255, 255, 255, this->_opacity));
 
     this->_texts["zoom"] = sf::Text();
     this->_texts["zoom"].setFont(this->_font);
     this->_texts["zoom"].setString("Zoom :");
     this->_texts["zoom"].setCharacterSize(40);
     this->_texts["zoom"].setFillColor(sf::Color(13, 144, 104, this->_opacity));
-    this->_texts["zoom"].setPosition(this->_sprites["aslider_menu"].getPosition().x + this->_textures["aslider_menu"].getSize().x + 20, this->_rects["slider_back1"].getPosition().y + 60);
+    this->_texts["zoom"].setPosition(this->_sprites["aslider_menu"].getPosition().x + this->_textures["aslider_menu"].getSize().x + 20, this->_sprites["bar"].getPosition().y + 60);
 
     this->_sprites["button_minus"] = sf::Sprite();
     this->_textures["button_minus"] = sf::Texture();
@@ -146,42 +141,16 @@ void SSlider::update(MapT *cache)
     }
 
     this->_texts["frequencyV"].setString(std::to_string(cache->getFrequency()));
-    if (cache->getFrequency() == 5)
+    if (cache->getFrequency() <= 5)
         this->_texts["frequencyV"].setString("2");
-    if (cache->getFrequency() == 995)
+    if (cache->getFrequency() >= 995)
         this->_texts["frequencyV"].setString("1000");
-    // this->_rects["zslider_bar1"].setPosition(sf::Vector2f(1550 + cache.getFrequency() / 5, 940));
-    // if (this->_isDragging1) {
-    //     int x = sf::Mouse::getPosition().x;
-    //     if (x < 1550)
-    //         x = 1551;
-    //     if (x > 1750)
-    //         x = 1749;
-    //     this->_rects["zslider_bar1"].setPosition(sf::Vector2f(x, 940));
-    // }
-    // this->_rects["slider_slide1"].setSize(sf::Vector2f(this->_rects["zslider_bar1"].getPosition().x - 1550, 30));
 }
 
 void SSlider::eventHandler(sf::Event event, sf::RenderWindow &window)
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
     sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-    if (event.type == sf::Event::MouseButtonPressed) {
-        if (event.mouseButton.button == sf::Mouse::Left) {
-            if (this->_rects["slider_bar1"].getLocalBounds().contains(mousePosF)) {
-                std::cout << "slider_pressed" << std::endl;
-                this->_isDragging1 = true;
-            }
-        }
-    }
-    if (event.type == sf::Event::MouseButtonReleased) {
-        if (event.mouseButton.button == sf::Mouse::Left) {
-            int freq = this->_rects["slider_slide1"].getPosition().x * 5;
-            // this->_message = "sst " + std::to_string(freq) + "\n";
-            this->_isDragging1 = false;
-            std::cout << "slider_released" << std::endl;
-        }
-    }
 
     if (this->_sprites["button_minus"].getGlobalBounds().contains(mousePosF)) {
         this->_sprites["button_minus"].setTexture(this->_textures["button_minus_hover"]);
@@ -236,13 +205,3 @@ void SSlider::setIsDragging1(bool drag)
 {
     this->_isDragging1 = drag;
 }
-
-// bool SSlider::getIsDragging2()
-// {
-//     return (this->_isDragging2);
-// }
-
-// void SSlider::setIsDragging2(bool drag)
-// {
-//     this->_isDragging2 = drag;
-// }
