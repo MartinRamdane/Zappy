@@ -1,38 +1,44 @@
 /*
 ** EPITECH PROJECT, 2023
-** Menu.hpp
+** B-YEP-400-MAR-4-1-zappy-martin.ramdane
 ** File description:
 ** Menu
 */
 
-#ifndef MENU_HEADER_GUARD
-    #define MENU_HEADER_GUARD
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include <memory>
-#include <vector>
 #include <map>
-#include "IEntity.hpp"
+#include "IObject.hpp"
+#include "Image.hpp"
+#include "Button.hpp"
 
 class Menu {
     public:
         enum MenuState {
             MAIN,
-            HELP,
-            PLAY
+            SETTINGS,
+            GAME,
+            EXIT
         };
         Menu();
         ~Menu();
+        int render(sf::RenderWindow &window);
         void setState(MenuState state);
+        void setMainEntities();
+        void setSettingsEntities();
+        void setGameEntities(); // TODO: implement all requirememnts entities for the GAME state
+        void setExitEntities();
+        int eventHandler(sf::RenderWindow &window);
 
     protected:
     private:
         MenuState _currentState;
         MenuState _previousState;
-        std::map<std::string, std::unique_ptr<IEntity>> _entities;
-        std::unique_ptr<sf::RenderWindow> _window;
+        std::map<std::string , std::unique_ptr<IObject>> _entities;
+        sf::Event _event;
 };
-
-#endif /* !MENU_HEADER_GUARD */

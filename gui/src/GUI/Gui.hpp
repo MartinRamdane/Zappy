@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <string>
+#include "../menu/Menu.hpp"
 #include "../SFML/Display.hpp"
 #include "../socket/Socket.hpp"
 #include "../parser/Parsing.hpp"
@@ -25,8 +26,10 @@ class Gui {
 
     protected:
     private:
-        std::unique_ptr<Socket> _socket;
+        std::unique_ptr<Socket> _socket = nullptr;
         std::string _message;
-        std::unique_ptr<Display> _display;
-        std::unique_ptr<Parsing> _p;
+        std::unique_ptr<Display> _display = nullptr;
+        std::unique_ptr<Parsing> _p = nullptr;
+        bool _isMenu = true;
+        std::unique_ptr<Menu> _menu = nullptr;
 };

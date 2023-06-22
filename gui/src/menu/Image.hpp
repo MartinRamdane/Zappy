@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** B-YEP-400-MAR-4-1-zappy-martin.ramdane
 ** File description:
-** Button
+** Image
 */
 
 #pragma once
@@ -10,10 +10,10 @@
 #include "IObject.hpp"
 #include <string>
 
-class Button: public IObject {
+class Image: public IObject {
     public:
-        Button(std::string textureFile, std::string textureFileHover, bool hover = false);
-        ~Button() {};
+        Image(std::string targetTexture);
+        ~Image() {};
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
         void setSpritePosition(sf::Vector2f pos);
@@ -24,13 +24,12 @@ class Button: public IObject {
         void draw(sf::RenderWindow &window);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
         void update();
+        sf::Vector2i getClicked();
+        void moveSprite();
         sf::Vector2f getSpritePosition();
-    
+
+    protected:
     private:
-        std::string _textureFile;
-        std::string _textureFileHover;
         sf::Sprite _sprite;
         sf::Texture _texture;
-        sf::Texture _textureHover;
-        bool _hover;
 };

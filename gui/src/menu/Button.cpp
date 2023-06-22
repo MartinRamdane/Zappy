@@ -1,36 +1,26 @@
 /*
 ** EPITECH PROJECT, 2023
-** AButton.cpp
+** B-YEP-400-MAR-4-1-zappy-martin.ramdane
 ** File description:
-** AButton
+** Button
 */
 
 #include "Button.hpp"
 
-Button::Button(std::string name, std::string idleTexture, std::string hoverTexture)
+Button::Button(std::string textureFile, std::string textureFileHover, bool hover): _textureFile(textureFile), _textureFileHover(textureFileHover), _hover(hover)
 {
-    _name = name;
-    _isHovered = false;
-    this->createSprite(idleTexture, hoverTexture);
+    createSprite();
 }
 
-Button::~Button()
+void Button::createSprite()
 {
-}
-
-void Button::setHover(bool state)
-{
-    _isHovered = state;
-}
-
-void Button::createSprite(std::string idlePath, std::string hoverPath)
-{
-    this->_idleTexture.loadFromFile(idlePath);
-    this->_hoverTexture.loadFromFile(hoverPath);
-    this->_sprite.setTexture(this->_idleTexture);
-    this->_sprite.setScale(sf::Vector2f(1.3, 1.3));
-    this->_rect = sf::IntRect(0, 0, 40, 39);
-    this->setSpriteRect(this->_rect);
+    _texture.loadFromFile(_textureFile);
+    _textureHover.loadFromFile(_textureFileHover);
+    if (_hover)
+        _sprite.setTexture(_texture);
+    else
+        _sprite.setTexture(_textureHover);
+    // _sprite.setOrigin(_sprite.getLocalBounds().width / 2, _sprite.getLocalBounds().height / 2);
 }
 
 void Button::setSpriteRect(sf::IntRect rect)
@@ -63,27 +53,28 @@ void Button::setSpriteTexture(std::shared_ptr<sf::Texture> &texture)
     this->_sprite.setTexture(*texture);
 }
 
-void Button::draw(sf::RenderWindow &window, sf::View &view)
+void Button::draw(sf::RenderWindow &window)
 {
     window.draw(this->_sprite);
 }
 
 void Button::eventHandler(sf::Event event, sf::RenderWindow &window)
 {
+    sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition());
+    if (_sprite.getGlobalBounds().contains(mousePos)) {
+        _sprite.setTexture(_textureHover);
+    } else {
+        _sprite.setTexture(_texture);
+    }
 }
 
 void Button::update()
 {
-    if (_isHovered) {
-        this->_sprite.setTexture(this->_hoverTexture);
-    } else {
-        this->_sprite.setTexture(this->_idleTexture);
-    }
+    ;
+    
 }
 
-void Button::onClick(Menu::MenuState state)
+sf::Vector2f Button::getSpritePosition()
 {
-    if (_menu) {
-        _menu->setState(state);
-    }
+    return _sprite.getPosition();
 }
