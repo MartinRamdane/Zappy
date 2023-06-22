@@ -11,6 +11,7 @@ SRC = src/*.cpp \
 	src/SFML/*.cpp \
 	src/parser/*.cpp \
 	src/cache/*.cpp \
+	src/menu/*.cpp \
 
 NAME = zappy_gui
 

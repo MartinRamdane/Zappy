@@ -13,6 +13,7 @@ Gui::Gui(int port, std::string ip)
     this->_socket = std::make_unique<Socket>(port, ip);
     this->_p = std::make_unique<Parsing>();
     this->_socket->connectToServer();
+    this->_menu = std::make_unique<Menu>();
 }
 
 Gui::~Gui()
@@ -41,17 +42,19 @@ void Gui::socketThread()
 void Gui::displayThread()
 {
     while (this->_display->getWindow()->isOpen()) {
-        this->_display->update(this->_p->getMapPtr());
-        this->_display->eventHandler(this->_p->getMap());
-        this->_display->render();
+        if (_isMenu) {
+            this->_menu->render(*this->_display->getWindow());
+            this->_menu->eventHandler(*this->_display->getWindow());
+        } else {
+            this->_display->update(this->_p->getMapPtr());
+            this->_display->eventHandler(this->_p->getMap());
+            this->_display->render();
+        }
     }
 }
 
 void Gui::loop()
 {
-    //set here the loop of the menu
-    //menu loop
-    
 
     std::thread socketThread(&Gui::socketThread, this);
     std::thread displayThread(&Gui::displayThread, this);
