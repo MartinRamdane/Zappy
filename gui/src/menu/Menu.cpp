@@ -13,7 +13,7 @@ Menu::Menu()
 
 Menu::~Menu()
 {
-}
+} // t'avais une tentative de merge ou pas N? 
 
 void Menu::setState(MenuState state)
 {
