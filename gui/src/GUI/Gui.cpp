@@ -20,9 +20,7 @@ Gui::~Gui()
 
 void Gui::socketThread()
 {
-    int port = 4242;
-    std::string ip = "";
-    this->_socket = std::make_unique<Socket>(port, ip);
+    this->_socket = std::make_unique<Socket>(_port, _ip);
     this->_socket->connectToServer();
     while (this->_display->getWindow()->isOpen()) {
         this->_socket->socketSelect();
@@ -43,14 +41,24 @@ void Gui::socketThread()
 
 void Gui::displayThread()
 {
+    bool firstTime = true;
     while (this->_display->getWindow()->isOpen()) {
         if (_isMenu) {
             this->_menu->render(*this->_display->getWindow());
-            this->_menu->update();
-            this->_menu->eventHandler(*this->_display->getWindow());
+            if (this->_menu->update() == 1) {
+                _isMenu = false;
+                _ip = this->_menu->getIp();
+                _port = this->_menu->getPort();
+                this->_display->getWindow()->clear();
+            } else
+                this->_menu->eventHandler(*this->_display->getWindow());
         } else {
-            // std::thread socketThread(&Gui::socketThread, this);
-            // socketThread.join();
+            if (firstTime) {
+                std::thread socketThread(&Gui::socketThread, this);
+                socketThread.join();
+                firstTime = false;
+            }
+            std::cout << "LAZONE" << std::endl;
             this->_display->update(this->_p->getMapPtr());
             this->_display->eventHandler(this->_p->getMap());
             this->_display->render();

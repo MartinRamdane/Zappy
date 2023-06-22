@@ -92,7 +92,7 @@ void Input::eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &s
         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Backspace && !this->_value.empty())
             this->_value = this->_value.substr(0, this->_value.size() - 1);
         if (event.type == sf::Event::TextEntered && event.text.unicode == '.')
-            this->_value += '.';
+            this->_value += ".";
         else if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::Backspace)
             event.type == sf::Event::KeyPressed ? this->_value += keys[event.key.code] : this->_value;
 

@@ -77,7 +77,6 @@ void Menu::setGameEntities()
     this->_entities["C_input1"]->setSpritePosition(sf::Vector2f(597, 580));
     this->_entities["C_input2"] = std::make_unique<Input>("gui/assets/menu/input_background.png", "gui/assets/menu/input_background_hover.png");
     this->_entities["C_input2"]->setSpritePosition(sf::Vector2f(1037, 580));
-
 }
 
 void Menu::setSettingsEntities()
@@ -99,18 +98,27 @@ void Menu::setState(MenuState state)
 int Menu::update()
 {
     if (_currentState != _previousState) {
-        clear();
         if (_currentState == GAME) {
+            clear();
             setGameEntities();
         } else if (_currentState == SETTINGS) {
+            clear();
             setSettingsEntities();
-        } else if (_currentState == EXIT) {
-            exit(84); // TODO: check if it's the right way to exit the program
         } else if (_currentState == MAIN) {
+            clear();
             setMainEntities();
+        } else if (_currentState == INGAME) {
+            Input *ipInput = dynamic_cast<Input *>((this->_entities["C_input1"]).get());
+            Input *portInput = dynamic_cast<Input *>((this->_entities["C_input2"]).get());
+            _ip = ipInput->getText();
+            _port = atoi(portInput->getText().c_str());
+            std::cout << "IP: " << _ip << std::endl;
+            std::cout << "Port: " << _port << std::endl;
+            return 1;
         }
         _previousState = _currentState;
     }
+    return 0;
 }
 
 int Menu::render(sf::RenderWindow &window)

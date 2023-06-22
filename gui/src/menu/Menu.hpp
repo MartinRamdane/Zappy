@@ -33,6 +33,8 @@ class Menu {
         int update();
         void eventHandler(sf::RenderWindow &window);
         void clear();
+        std::string getIp() { return _ip; };
+        int getPort() { return _port; };
 
     protected:
     private:
@@ -41,6 +43,8 @@ class Menu {
         MenuState _previousState;
         std::map<std::string, std::unique_ptr<IObject>> _entities;
         sf::Event _event;
+        std::string _ip;
+        int _port;
 };
 
 #endif // MENU_HEADER_GUARD

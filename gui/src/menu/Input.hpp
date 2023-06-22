@@ -23,6 +23,7 @@ class Input: public IObject {
         void draw(sf::RenderWindow &window);
         void eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &state);
         void update();
+        std::string getText() { return _value;};
         sf::Vector2f getSpritePosition();
 
     protected:
