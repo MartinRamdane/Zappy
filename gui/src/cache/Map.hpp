@@ -31,6 +31,7 @@ class MapT
         std::vector<Trantorian> trantorians;
         std::vector<Egg> eggs;
         int frequency = 0;
+        std::string winner = "a";
     public:
         MapT();
         ~MapT();
@@ -61,5 +62,6 @@ class MapT
         void setHasHatched(int id);
         void setTrantorianEjection(int id, bool ejecting);
         void setTrantorianDeath(int id);
-        Stock getInventory(int id);
+        void setWinner(std::string winner){this->winner = winner;};
+        std::string getWinner(){return this->winner;};
 };

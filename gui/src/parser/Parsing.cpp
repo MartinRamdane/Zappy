@@ -206,15 +206,6 @@ void Parsing::pie(std::string arg)
             }
         }
     }
-    // if (parts[2] == "1") {
-    //     for (int i = 0; i < tile.getPlayers().size(); i++) {
-    //         mapt.setTrantorianLvl(tile.getPlayers()[i], tile.getLvlEvo());
-    //     }
-    // } else {
-    //     for (int i = 0; i < tile.getPlayers().size(); i++) {
-    //         mapt.setTrantorianCanEvolve(tile.getPlayers()[i], false);
-    //     }
-    // }
 }
 
 void Parsing::pfk(std::string arg)
@@ -355,7 +346,7 @@ void Parsing::sst(std::string arg)
 
 void Parsing::seg(std::string arg)
 {
-    mapt.removeTeam(arg);
+    mapt.setWinner(arg);
 }
 
 void Parsing::smg(std::string arg)

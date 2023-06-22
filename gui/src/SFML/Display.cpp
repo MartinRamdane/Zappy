@@ -17,13 +17,24 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_bottomMenu = std::make_unique<SSide_menu>(w_width, w_height);
     this->_inventory = std::make_unique<SInventory>(w_width, w_height, this->_resourceManager);
     this->_slider = std::make_unique<SSlider>(w_width, w_height, 1);
+    this->_winnerBackground.setSize(sf::Vector2f(w_width, w_height));
+    this->_winnerBackground.setFillColor(sf::Color(0, 0, 0, 200));
     this->_clock_map.restart();
     this->_clock_trantorian.restart();
     if (!music.openFromFile("gui/assets/sounds/main_theme.ogg"))
         exit(84);
+    this->_font.loadFromFile("gui/assets/fonts/fibberish.ttf");
     music.setVolume(50);
     music.setLoop(true);
     music.play();
+    this->_winnerSprite = sf::Sprite();
+    this->_winnerTexture = sf::Texture();
+    this->_winnerTexture.loadFromFile("gui/assets/Confetti.png");
+    this->_winnerSprite.setTexture(this->_winnerTexture);
+    this->_winnerRectangle = sf::IntRect(0, 0, 512, 512);
+    this->_winnerSprite.setTextureRect(this->_winnerRectangle);
+    this->_winnerSprite.setScale(sf::Vector2f(4, 4));
+    this->_winnerSprite.setPosition(sf::Vector2f(this->_width / 2 - this->_winnerSprite.getGlobalBounds().width / 2, this->_height - this->_winnerSprite.getGlobalBounds().height / 2 - 100));
 }
 
 Display::~Display()
@@ -148,6 +159,11 @@ void Display::render()
     if (this->_trantorian_clicked.x != -1 && this->_trantorian_clicked.y != -1)
         this->_inventory->draw(*this->_window);
     this->_slider->draw(*this->_window);
+    if (this->_winner != "") {
+        this->_window->draw(this->_winnerBackground);
+        this->_window->draw(this->_winnerSprite);
+        this->_window->draw(this->_winnerText);
+    }
     this->_window->display();
     this->_window->setView(this->_view);
 }
@@ -225,8 +241,6 @@ void Display::clickHandler(MapT cache)
             }
         }
     }
-    // this->_bottomMenu->eventHandler(this->_event, *this->_window);
-    // cache.setFrequency(1550 - this->_slider->getRect()["zslider_bar1"]->getPosition().x * 5);
 }
 
 void Display::eventHandler(MapT cache)
@@ -234,6 +248,15 @@ void Display::eventHandler(MapT cache)
     while (this->_window->pollEvent(this->_event)) {
         if (this->_event.type == sf::Event::Closed)
             this->_window->close();
+        if (cache.getWinner() != "") {
+            this->_inventory->fadeIn(false);
+            this->_inventory->fadeOut(true);
+            this->_bottomMenu->fadeIn(false);
+            this->_bottomMenu->fadeOut(true);
+            this->_slider->fadeIn(false);
+            this->_slider->fadeOut(true);
+            return;
+        }
         this->clickHandler(cache);
         if (this->_zoom == this->_slider->getZoom()) {
             if (this->_trantorians.size() > 0) {
@@ -293,6 +316,26 @@ void Display::update(MapT *cache)
     this->_slider->update(cache);
     if (this->_inventory->getOpacity() == 0) {
         this->_trantorian_clicked = sf::Vector2i(-1, -1);
+    }
+
+    if (cache->getWinner() != "") {
+        this->_winner = cache->getWinner();
+        this->_winnerText.setFont(this->_font);
+        this->_winnerText.setCharacterSize(100);
+        this->_winnerText.setFillColor(sf::Color::White);
+        this->_winnerText.setString(cache->getWinner() + " won the game !");
+        this->_winnerText.setPosition(sf::Vector2f(this->_width / 2 - this->_winnerText.getGlobalBounds().width / 2, this->_height / 2 - 100));
+    }
+
+    if (this->_winner != "" && this->_clock_confetti.getElapsedTime().asSeconds() > 0.05) {
+        if (this->_winnerRectangle.left >= 3584 && this->_winnerRectangle.top <= 4096) {
+            this->_winnerRectangle.left = 512;
+            this->_winnerRectangle.top += 512;
+        } else {
+            this->_winnerRectangle.left += 512;
+        }
+        this->_winnerSprite.setTextureRect(this->_winnerRectangle);
+        this->_clock_confetti.restart();
     }
 }
 

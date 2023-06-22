@@ -51,6 +51,7 @@ class Display {
         sf::View _bottomMenuView;
         sf::Clock _clock_map;
         sf::Clock _clock_trantorian;
+        sf::Clock _clock_confetti;
         sf::Time _time;
         int _width;
         int _height;
@@ -62,4 +63,11 @@ class Display {
         sf::Vector2i _trantorian_clicked = sf::Vector2i(-1, -1);
         ResourceManager *_resourceManager;
         float _zoom = 1;
+        std::string _winner = "";
+        sf::Text _winnerText;
+        sf::Font _font;
+        sf::RectangleShape _winnerBackground;
+        sf::Sprite _winnerSprite;
+        sf::Texture _winnerTexture;
+        sf::IntRect _winnerRectangle;
 };
