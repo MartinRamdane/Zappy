@@ -1,0 +1,45 @@
+/*
+** EPITECH PROJECT, 2023
+** B-YEP-400-MAR-4-1-zappy-martin.ramdane [WSL: Ubuntu]
+** File description:
+** remove_player
+*/
+
+#include "../include/server.h"
+
+void remove_client(int socket, server_t *s_infos)
+{
+    struct client *tmp;
+    LIST_FOREACH(tmp, &s_infos->head, next) {
+        if (tmp->socket == socket) {
+            if (tmp->player != NULL)
+                remove_player_from_tile(tmp, s_infos);
+            remove_client_from_team(tmp, s_infos);
+            if (tmp->socket != -1)
+                close(tmp->socket);
+            if (tmp->buffer)
+                free(tmp->buffer);
+            if (tmp->uid)
+                free(tmp->uid);
+            if (tmp->team_name)
+                free(tmp->team_name);
+            if (tmp->player)
+                free(tmp->player);
+            if (tmp->gui_player)
+                free(tmp->gui_player);
+            LIST_REMOVE(tmp, next);
+            return;
+        }
+    }
+}
+
+void remove_player_from_tile(client_t *cli, server_t *s_infos)
+{
+    player_queue *tmp = NULL;
+    LIST_FOREACH(tmp, &s_infos->game->map[cli->player->x][cli->player->y].player_head, next) {
+        if (tmp->player->uid == cli->player->uid) {
+            LIST_REMOVE(tmp, next);
+            return;
+        }
+    }
+}

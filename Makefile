@@ -29,6 +29,8 @@ z_server:
 	@echo "$(COLOUR_GREEN)Server build$(END_COLOR)"
 
 z_gui:
+	cd gui && make
+	mv gui/$(CLIENT_NAME) .
 	@echo "$(COLOUR_RED)gui: Add make command in main makefile$(END_COLOR)"
 
 z_ai:

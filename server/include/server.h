@@ -10,6 +10,124 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <getopt.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <dirent.h>
+#include <sys/queue.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <stdbool.h>
+#include <uuid/uuid.h>
+#include <time.h>
+#include <math.h>
+
+#define ARG_COND ; optind < ac \
+&& av[optind][0] != '-'; optind++
+#define MAX_BODY_LENGTH 1024
+enum state {
+    DEAD,
+    EGG,
+    INCANTATION,
+    ALIVE,
+};
+
+typedef struct inventory {
+    int food;
+    int linemate;
+    int deraumere;
+    int sibur;
+    int mendiane;
+    int phiras;
+    int thystame;
+} inventory;
+
+typedef struct gui_player {
+    int x;
+    int y;
+    int socket;
+} gui_player;
+
+typedef struct egg {
+    int x;
+    int y;
+    int time;
+    int level;
+    int max_level;
+} egg;
+
+typedef struct player {
+    int x;
+    int y;
+    int level;
+    inventory *inv;
+    int is_dead;
+    char orientation;
+    char *team_name;
+    int socket;
+    enum state state;
+    char *uid;
+} player;
+
+typedef struct player_queue {
+    player *player;
+    LIST_ENTRY(player_queue) next;
+} player_queue;
+
+extern LIST_HEAD(player_listhead, player_queue) player_head;
+
+typedef struct tile {
+    int x;
+    int y;
+    int food;
+    int linemate;
+    int deraumere;
+    int sibur;
+    int mendiane;
+    int phiras;
+    int thystame;
+    struct player_listhead player_head;
+    player_queue *players;
+} tile;
+
+typedef struct client {
+    int socket;
+    char *uid;
+    char *buffer;
+    char *team_name;
+    player *player;
+    gui_player *gui_player;
+    LIST_ENTRY(client) next;
+} client_t;
+
+typedef struct team {
+    char *name;
+    int max_clients;
+    int clients;
+    LIST_ENTRY(team) next;
+} team_t;
+
+extern LIST_HEAD(list_head, client) head;
+extern LIST_HEAD(team_listhead, team) team_head;
+typedef struct game {
+    tile **map;
+} game_t;
+
+typedef struct task {
+    char *cmd;
+    int id;
+    double time;
+    client_t *client;
+    LIST_ENTRY(task) next;
+} task_t;
+extern LIST_HEAD(task_listhead, task) task_head;
 
 typedef struct server_s {
     int port;
@@ -18,7 +136,128 @@ typedef struct server_s {
     char **sname;
     int clientsNb;
     int freq;
+    int socket;
+    int task_id;
+    int task_stack;
+    struct list_head head;
+    struct team_listhead team_head;
+    struct task_listhead task_head;
+    struct timespec server_time;
+    client_t *clients;
+    game_t *game;
+    task_t *tasks;
+    team_t *teams; // TODO: Implement teams when the server loads
 } server_t;
 
-void print_help();
-void fetch_arguments(server_t *s_infos, char **av);
+typedef struct listen_tile {
+    int x;
+    int y;
+    int id;
+    player *player;
+} l_tile;
+
+
+// MISC
+void print_help(void);
+void fetch_arguments(server_t *s_infos, int arg, char **av, int ac);
+void check_args(server_t *s_infos);
+int my_arrlen(char **arr);
+int *create_tuple(int x, int y);
+int get_diff_y_per_level(int level, char dir);
+int get_diff_x_per_level(int level, char dir);
+int get_nb_tiles_per_level(int level);
+int check_if_is_resources(char *cmd);
+char *generate_uuid(void);
+void remove_player_from_tile(client_t *cli, server_t *s_infos);
+void remove_client(int socket, server_t *s_infos);
+l_tile *get_north_case(server_t *server, l_tile *listen_tiles);
+l_tile *get_south_case(server_t *server, l_tile *listen_tiles);
+l_tile *get_east_case(server_t *server, l_tile *listen_tiles);
+l_tile *get_west_case(server_t *server, l_tile *listen_tiles);
+int get_nb_players_on_tile(tile *tile);
+int check_can_incantation(server_t *server, client_t *client);
+
+// SERVER
+server_t *create_server_struct(void);
+void init_server(server_t *s_infos);
+void add_client(server_t *s_infos);
+void loop_server(server_t *s_infos);
+
+// CLIENT
+void add_client(server_t *s_infos);
+client_t *generate_client(int socket);
+void check_command(client_t *cli, server_t *s_infos);
+void handle_client_data(server_t *s_infos, fd_set *readfds);
+void generate_teams(server_t *server, struct team_listhead *team_head);
+team_t *generate_team(char *name, int maxclient);
+int commands(server_t *server, client_t *client, char *buffer);
+int add_client_to_team(server_t *s_infos, char *team, client_t *cli);
+int get_available_slots_in_team(server_t *s_infos, char *team);
+int does_team_has_space(server_t *s_infos, char *team);
+int does_team_exists(server_t *s_infos, char *team);
+void remove_client_from_team(client_t *cli, server_t *s_infos);
+
+// MAP
+tile **generate_map(server_t *infos);
+void fill_map(server_t infos, tile **map);
+
+// MAP RESOURCES
+int *get_resources_quantities(int *ratio, server_t infos);
+int *get_remaining_resources(int *ratio, server_t infos);
+void put_food_resource(server_t infos, tile **map, int r);
+void put_linemate_resource(server_t infos, tile **map, int r);
+void put_deraumere_resource(server_t infos, tile **map, int r);
+void put_sibur_resource(server_t infos, tile **map, int r);
+void put_mendiane_resource(server_t infos, tile **map, int r);
+void put_phiras_resource(server_t infos, tile **map, int r);
+void put_thystame_resource(server_t infos, tile **map, int r);
+
+// TASK
+void add_task(server_t *server, char *cmd, double time, client_t *cli);
+void execute_tasks(server_t *server);
+void send_task_response(server_t *server, task_t *task, char *cmd);
+void forward_command(server_t *server, client_t *client);
+void right_command(client_t *client);
+void left_command(client_t *client);
+bool check_task_nb(server_t *server, client_t *client);
+void inventory_command(client_t *client);
+void look_command(server_t *server, client_t *client);
+void set_command(server_t *server, client_t *client, char *buffer);
+void take_command(server_t *server, client_t *client, char *buffer);
+void eject_command(server_t *server, client_t *client);
+void broadcast_command(server_t *server, client_t *client, char *msg);
+void incantation_command(client_t *client);
+
+// CMD
+void move_player(player *p, tile **map, int *pos, server_t *s_infos);
+int get_case(server_t *server, char dir, int tile, int diff);
+int get_nb_tiles_per_level(int level);
+int get_first_case_id_per_level(server_t *server, int tile, char dir, int level);
+char *get_all_tile_infos(tile *target);
+char *get_all_tiles_per_level(server_t *server, client_t *client, int level);
+int set_object(server_t *server, client_t *client, char *buffer);
+int take_object(server_t *server, client_t *client, char *buffer);
+void eject_all_players(server_t *server, client_t *client, int x, int y);
+int eject_player(server_t *server, client_t *client);
+int check_instant_commands(char *buffer, client_t *client, server_t *server);
+l_tile *get_all_listen_tiles_position(server_t *server, player *player);
+int *compare_diff(int **diff);
+int compare_listen_tiles(l_tile *listen_tiles, int x, int y);
+void send_broadcast(server_t *server, client_t *sender, client_t *client, char *msg);
+
+// PLAYER
+void generate_player(server_t *server, client_t *cli, int socket, char *team_name);
+void generate_gui_player(client_t *cli, int socket);
+int check_if_solo_on_tile(server_t *server, client_t *cli);
+void add_player_from_queue(tile *tile, player *player);
+void remove_player_from_queue(tile *tile, player *player);
+
+// DEBUG
+void debug_print_map(server_t *s_infos, tile **map);
+void debug_print_gui_player(client_t *cli);
+void debug_print_player(client_t *cli);
+void debug_print_task_queue(server_t *server);
+void debug_print_player_inventory(client_t *cli);
+
+//TIME
+double calculate_time_for_task(server_t *server, char *buffer);

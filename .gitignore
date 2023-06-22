@@ -7,3 +7,4 @@ zappy_server_exemple
 zappy_server_example
 ai/__pycache__
 *.log
+.vscode/
