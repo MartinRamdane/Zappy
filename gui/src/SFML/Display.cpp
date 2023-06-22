@@ -175,9 +175,9 @@ void Display::keyHandler(MapT cache)
             this->_view.move(-10, 0);
         } else if (this->_event.key.code == sf::Keyboard::Right) {
             this->_view.move(10, 0);
-        } else if (this->_event.key.code == sf::Keyboard::Z) {
-            this->_view.zoom(0.9);
         } else if (this->_event.key.code == sf::Keyboard::X) {
+            this->_view.zoom(0.9);
+        } else if (this->_event.key.code == sf::Keyboard::W) {
             this->_view.zoom(1.1);
         } else if (this->_event.key.code == sf::Keyboard::R) {
             this->_view.rotate(1);

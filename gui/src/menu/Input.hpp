@@ -1,20 +1,18 @@
 /*
 ** EPITECH PROJECT, 2023
-** B-YEP-400-MAR-4-1-zappy-martin.ramdane
+** Input.hpp
 ** File description:
-** Image
+** Input
 */
 
-#ifndef IMAGE_HEADER_GUARD
-#define IMAGE_HEADER_GUARD
-
+#ifndef INPUT_HEADER_GUARD
+#define INPUT_HEADER_GUARD
 #include "IObject.hpp"
-#include <string>
 
-class Image: public IObject {
+class Input: public IObject {
     public:
-        Image(std::string targetTexture);
-        ~Image() {};
+        Input(std::string texture, std::string textureHover);
+        ~Input() {};
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
         void setSpritePosition(sf::Vector2f pos);
@@ -25,14 +23,21 @@ class Image: public IObject {
         void draw(sf::RenderWindow &window);
         void eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &state);
         void update();
-        sf::Vector2i getClicked();
-        void moveSprite();
         sf::Vector2f getSpritePosition();
 
     protected:
     private:
-        sf::Sprite _sprite;
+        std::string _value;
+        std::string _textureFile;
+        std::string _textureFileHover;
         sf::Texture _texture;
+        sf::Texture _textureHover;
+        sf::Sprite _sprite;
+        bool _isActive;
+        static std::map<sf::Keyboard::Key, std::string> keys;
+        sf::Font _font;
+        sf::Text _text;
+        bool _hover;
 };
 
-#endif //IMAGE_HEADER_GUARD
+#endif /* !INPUT_HEADER_GUARD */

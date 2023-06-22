@@ -54,7 +54,7 @@ void Image::draw(sf::RenderWindow &window)
     window.draw(this->_sprite);
 }
 
-void Image::eventHandler(sf::Event event, sf::RenderWindow &window)
+void Image::eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &state)
 {
     return;
 }
@@ -62,7 +62,6 @@ void Image::eventHandler(sf::Event event, sf::RenderWindow &window)
 void Image::update()
 {
     ;
-    
 }
 
 sf::Vector2f Image::getSpritePosition()

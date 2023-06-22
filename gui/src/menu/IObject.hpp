@@ -5,7 +5,8 @@
 ** IObject
 */
 
-#pragma once
+#ifndef IOBJECT_HEADER_GUARD
+#define IOBJECT_HEADER_GUARD
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -17,6 +18,7 @@
 #include <string>
 #include <iostream>
 #include "../cache/Map.hpp"
+#include "MenuState.hpp"
 
 class IObject {
     public:
@@ -29,10 +31,12 @@ class IObject {
         virtual void setSpriteRotation(float angle) = 0;
         virtual void setSpriteTexture(std::shared_ptr<sf::Texture> &texture) = 0;
         virtual void draw(sf::RenderWindow &window) = 0;
-        virtual void eventHandler(sf::Event event, sf::RenderWindow &window) = 0;
+        virtual void eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &state) = 0;
         virtual void update() = 0;
         virtual sf::Vector2f getSpritePosition() = 0;
 
     protected:
     private:
 };
+
+#endif //IOBJECT_HEADER_GUARD

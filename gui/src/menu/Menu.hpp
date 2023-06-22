@@ -5,7 +5,8 @@
 ** Menu
 */
 
-#pragma once
+#ifndef MENU_HEADER_GUARD
+#define MENU_HEADER_GUARD
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -13,18 +14,14 @@
 #include <SFML/Audio.hpp>
 #include <memory>
 #include <map>
-#include "IObject.hpp"
 #include "Image.hpp"
 #include "Button.hpp"
+#include "Input.hpp"
+
+class IObject;
 
 class Menu {
     public:
-        enum MenuState {
-            MAIN,
-            SETTINGS,
-            GAME,
-            EXIT
-        };
         Menu();
         ~Menu();
         int render(sf::RenderWindow &window);
@@ -33,12 +30,17 @@ class Menu {
         void setSettingsEntities();
         void setGameEntities(); // TODO: implement all requirememnts entities for the GAME state
         void setExitEntities();
-        int eventHandler(sf::RenderWindow &window);
+        int update();
+        void eventHandler(sf::RenderWindow &window);
+        void clear();
 
     protected:
     private:
+        sf::Font _font;
         MenuState _currentState;
         MenuState _previousState;
-        std::map<std::string , std::unique_ptr<IObject>> _entities;
+        std::map<std::string, std::unique_ptr<IObject>> _entities;
         sf::Event _event;
 };
+
+#endif // MENU_HEADER_GUARD
