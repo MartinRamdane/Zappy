@@ -16,7 +16,7 @@ Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
     this->_resourceManager = new ResourceManager();
     this->_bottomMenu = std::make_unique<SSide_menu>(w_width, w_height);
     this->_inventory = std::make_unique<SInventory>(w_width, w_height, this->_resourceManager);
-    this->_slider = std::make_unique<SSlider>(w_width, w_height);
+    this->_slider = std::make_unique<SSlider>(w_width, w_height, 1);
     this->_clock_map.restart();
     this->_clock_trantorian.restart();
     if (!music.openFromFile("gui/assets/sounds/main_theme.ogg"))
@@ -135,6 +135,13 @@ void Display::render()
         for (auto &sprite : sortedTrantorians)
             sprite.second->draw(*this->_window, this->_view);
     }
+    if (this->_zoom < this->_slider->getZoom()) {
+        this->_view.zoom(0.9);
+        this->_zoom = this->_slider->getZoom();
+    } else if (this->_zoom > this->_slider->getZoom()) {
+        this->_view.zoom(1.1);
+        this->_zoom = this->_slider->getZoom();
+    }
     this->_window->setView(this->_bottomMenuView);
     if (this->_click_pos.x != -1 && this->_click_pos.y != -1)
         this->_bottomMenu->draw(*this->_window);
@@ -172,9 +179,14 @@ void Display::keyHandler(MapT cache)
         } else if (this->_event.key.code == sf::Keyboard::B) {
             this->_bottomMenu->fadeIn(false);
             this->_bottomMenu->fadeOut(true);
-        } else if (this->_event.key.code == sf::Keyboard::F) {
-            this->_slider->fadeOut(false);
-            this->_slider->fadeIn(true);
+        } else if (this->_event.key.code == sf::Keyboard::P) {
+            if (this->_slider->getOpacity() == 0) {
+                this->_slider->fadeOut(false);
+                this->_slider->fadeIn(true);
+            } else if (this->_slider->getOpacity() == 255) {
+                this->_slider->fadeOut(true);
+                this->_slider->fadeIn(false);
+            }
         } else if (this->_event.key.code == sf::Keyboard::I) {
             this->_inventory->fadeIn(false);
             this->_inventory->fadeOut(true);
@@ -182,9 +194,6 @@ void Display::keyHandler(MapT cache)
             this->_message = "sst " + std::to_string(cache.getFrequency() - 1) + "\n";
         } else if (this->_event.key.code == sf::Keyboard::V) {
             this->_message = "sst " + std::to_string(cache.getFrequency() + 1) + "\n";
-        } else if (this->_event.key.code == sf::Keyboard::M) {
-            this->_slider->fadeIn(false);
-            this->_slider->fadeOut(true);
         }
     }
 }
@@ -192,28 +201,31 @@ void Display::keyHandler(MapT cache)
 void Display::clickHandler(MapT cache)
 {
     bool clicked = false;
-    for (auto &sprite : this->_trantorians) {
-        sf::Vector2i click = sprite.second->getClicked();
-        if (click.x  != -1 && click.y != -1) {
-            clicked = true;
-            this->_trantorian_clicked = click;
-            this->_inventory->fadeOut(false);
-            this->_inventory->fadeIn(true);
-            this->_message = "pin " + std::to_string(click.x) + "\n";
+    this->_slider->eventHandler(this->_event, *this->_window);
+
+    if (this->_zoom == this->_slider->getZoom()) {
+        for (auto &sprite : this->_trantorians) {
+            sf::Vector2i click = sprite.second->getClicked();
+            if (click.x  != -1 && click.y != -1) {
+                clicked = true;
+                this->_trantorian_clicked = click;
+                this->_inventory->fadeOut(false);
+                this->_inventory->fadeIn(true);
+                this->_message = "pin " + std::to_string(click.x) + "\n";
+            }
         }
-    }
-    int opacity = this->_inventory->getOpacity();
-    this->_inventory->eventHandler(this->_event, *this->_window);
-    for (auto &sprite : this->_map) {
-        sf::Vector2i click = sprite->getClicked();
-        if (click.x != -1 && click.y != -1 && clicked == false && (opacity == 0 || this->_inventory->isFadingOut() == false)) {
-            this->_click_pos = click;
-            this->_bottomMenu->fadeOut(false);
-            this->_bottomMenu->fadeIn(true);
+        int opacity = this->_inventory->getOpacity();
+        this->_inventory->eventHandler(this->_event, *this->_window);
+        for (auto &sprite : this->_map) {
+            sf::Vector2i click = sprite->getClicked();
+            if (click.x != -1 && click.y != -1 && clicked == false && (opacity == 0 || this->_inventory->isFadingOut() == false)) {
+                this->_click_pos = click;
+                this->_bottomMenu->fadeOut(false);
+                this->_bottomMenu->fadeIn(true);
+            }
         }
     }
     // this->_bottomMenu->eventHandler(this->_event, *this->_window);
-    this->_slider->eventHandler(this->_event, *this->_window);
     // cache.setFrequency(1550 - this->_slider->getRect()["zslider_bar1"]->getPosition().x * 5);
 }
 
@@ -222,14 +234,16 @@ void Display::eventHandler(MapT cache)
     while (this->_window->pollEvent(this->_event)) {
         if (this->_event.type == sf::Event::Closed)
             this->_window->close();
-        if (this->_trantorians.size() > 0) {
-            for (auto &sprite : this->_trantorians)
-                sprite.second->eventHandler(this->_event, *this->_window);
-        }
-        for (auto &sprite : this->_map)
-            sprite->eventHandler(this->_event, *this->_window);
-        this->keyHandler(cache);
         this->clickHandler(cache);
+        if (this->_zoom == this->_slider->getZoom()) {
+            if (this->_trantorians.size() > 0) {
+                for (auto &sprite : this->_trantorians)
+                    sprite.second->eventHandler(this->_event, *this->_window);
+            }
+            for (auto &sprite : this->_map)
+                sprite->eventHandler(this->_event, *this->_window);
+        }
+        this->keyHandler(cache);
     }
 }
 

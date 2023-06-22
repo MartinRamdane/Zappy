@@ -61,4 +61,5 @@ class Display {
         std::string _message;
         sf::Vector2i _trantorian_clicked = sf::Vector2i(-1, -1);
         ResourceManager *_resourceManager;
+        float _zoom = 1;
 };

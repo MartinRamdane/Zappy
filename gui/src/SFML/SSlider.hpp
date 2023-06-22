@@ -17,25 +17,27 @@
 class SSlider
 {
     public:
-        SSlider(int w_width, int w_height);
+        SSlider(int w_width, int w_height, int zoom);
         ~SSlider();
-        void createSprite(int w_width, int w_height);
+        void createSprite(int w_width, int w_height, int zoom);
         void draw(sf::RenderWindow &window);
         void update(MapT *cache);
         void fadeIn(bool isFading);
         void fadeOut(bool isFading);
-        std::map<std::string, std::shared_ptr<sf::RectangleShape>> getRect();
-        void setRect(std::string S, std::shared_ptr<sf::RectangleShape> r);
+        std::map<std::string, sf::RectangleShape> getRect();
+        void setRect(std::string s, sf::RectangleShape r);
         bool getIsDragging1();
         void setIsDragging1(bool drag);
         void eventHandler(sf::Event event, sf::RenderWindow &window);
+        float getZoom(){return _zoom;};
+        int getOpacity(){return _opacity;};
 
     private:
         sf::Font _font;
-        std::map<std::string, std::shared_ptr<sf::Texture>> _textures;
-        std::map<std::string, std::shared_ptr<sf::Sprite>> _sprites;
-        std::map<std::string, std::shared_ptr<sf::RectangleShape>> _rects;
-        std::map<std::string, std::shared_ptr<sf::Text>> _texts;
+        std::map<std::string, sf::Texture> _textures;
+        std::map<std::string, sf::Sprite> _sprites;
+        std::map<std::string, sf::RectangleShape> _rects;
+        std::map<std::string, sf::Text> _texts;
 
         sf::Clock _clock;
         bool _isDragging1 = false;
@@ -44,5 +46,6 @@ class SSlider
         bool _isFadingOut = false;
         float _w_width;
         float _w_height;
+        float _zoom;
 };
 
