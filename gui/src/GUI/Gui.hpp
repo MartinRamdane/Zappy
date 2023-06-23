@@ -32,4 +32,6 @@ class Gui {
         std::unique_ptr<Parsing> _p = nullptr;
         bool _isMenu = true;
         std::unique_ptr<Menu> _menu = nullptr;
+        std::string _ip;
+        int _port;
 };
