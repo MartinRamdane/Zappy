@@ -22,6 +22,7 @@ compile_gui = cd gui && make
 
 ifeq ($(shell uname -s),Darwin)
 	compile_gui = $(shell cd gui && mkdir build && cd build && cmake .. && cmake --build .)
+endif
 
 compile_server = cd server && make
 ifeq ($(shell uname -s),Darwin)
