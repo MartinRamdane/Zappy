@@ -11,8 +11,7 @@ class Client:
         try:
             self.socket.close()
         except OSError:
-            pass
-        sys.exit("Connexion fermée")
+            sys.exit("Connexion fermée")
 
     def connect(self):
         try:
@@ -38,6 +37,5 @@ class Client:
         try:
             self.socket.close()
         except OSError:
-            pass
-        sys.exit("Connexion fermée")
+            sys.exit("Connexion fermée")
 
