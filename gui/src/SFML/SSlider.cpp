@@ -58,8 +58,9 @@ void SSlider::createSprite(int w_width, int w_height, int zoom)
     this->_textures["slider"].loadFromFile("gui/assets/slider/slider.png");
     this->_sprites["slider"].setTexture(this->_textures["slider"]);
     this->_sprites["slider"].setScale(sf::Vector2f(0.3, 0.3));
-    this->_sprites["slider"].setPosition(sf::Vector2f(this->_sprites["bar"].getPosition().x + 5, this->_sprites["bar"].getPosition().y + 2.5));
+    this->_sprites["slider"].setPosition(sf::Vector2f(this->_sprites["bar"].getPosition().x + 9, this->_sprites["bar"].getPosition().y + 8));
     this->_sprites["slider"].setColor(sf::Color(255, 255, 255, this->_opacity));
+    this->_sprites["slider"].setOrigin(sf::Vector2f(this->_sprites["slider"].getGlobalBounds().width / 2, this->_sprites["slider"].getGlobalBounds().height / 2));
 
     this->_texts["zoom"] = sf::Text();
     this->_texts["zoom"].setFont(this->_font);
@@ -140,6 +141,10 @@ void SSlider::update(MapT *cache)
         this->_clock.restart();
     }
 
+    auto pos = this->_sprites["slider"].getPosition();
+    pos.x = (this->_sprites["bar"].getPosition().x) + 10 + ((cache->getFrequency() * (((800 * 0.3)) - 37)) / 1000);
+    this->_sprites["slider"].setPosition(pos);
+
     this->_texts["frequencyV"].setString(std::to_string(cache->getFrequency()));
     if (cache->getFrequency() <= 5)
         this->_texts["frequencyV"].setString("2");
@@ -151,6 +156,31 @@ void SSlider::eventHandler(sf::Event event, sf::RenderWindow &window)
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
     sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+
+    if (this->_sprites["slider"].getGlobalBounds().contains(mousePosF)) {
+        if (event.type == sf::Event::MouseButtonPressed) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                this->_isDragging1 = true;
+            }
+        }
+    }
+
+    if (event.type == sf::Event::MouseButtonReleased) 
+        this->_isDragging1 = false;
+    
+    if (this->_isDragging1) {
+        sf::Vector2f pos = this->_sprites["slider"].getPosition();
+        if (mousePosF.x < (this->_sprites["bar"].getPosition().x + 9)) {
+            pos.x = this->_sprites["bar"].getPosition().x + 9;
+            this->_sprites["slider"].setPosition(pos);
+        } else if (mousePosF.x > (this->_sprites["bar"].getPosition().x + (792 * 0.3) - 37)) {
+            pos.x = this->_sprites["bar"].getPosition().x + (792 * 0.3) - 37;
+            this->_sprites["slider"].setPosition(pos);
+        } else {
+            pos.x = mousePosF.x;
+            this->_sprites["slider"].setPosition(pos);
+        }
+    }
 
     if (this->_sprites["button_minus"].getGlobalBounds().contains(mousePosF)) {
         this->_sprites["button_minus"].setTexture(this->_textures["button_minus_hover"]);

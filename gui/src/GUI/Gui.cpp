@@ -60,7 +60,6 @@ void Gui::displayThread()
             } else
                 this->_menu->eventHandler(*this->_display->getWindow());
         } else {
-            std::cout << "LAZONE" << std::endl;
             this->_display->update(this->_p->getMapPtr());
             this->_display->eventHandler(this->_p->getMap());
             this->_display->render();
