@@ -31,5 +31,9 @@ class Client:
             return None
 
     def close(self):
-        self.socket.close()
+        try:
+            self.socket.close()
+        except OSError:
+            pass
         sys.exit("Connexion fermée")
+
