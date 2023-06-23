@@ -10,8 +10,10 @@
 tile **generate_map(server_t *infos)
 {
     tile **map = malloc(sizeof(tile *) * infos->width);
+    memset(map, 0, sizeof(tile *) * infos->width);
     for (int x = 0; x < infos->width; x++) {
         map[x] = malloc(sizeof(tile) * infos->height);
+        memset(map[x], 0, sizeof(tile) * infos->height);
         for (int y = 0; y < infos->height; y++) {
             map[x][y].x = x; map[x][y].y = y;
             map[x][y].food = 0;
@@ -22,7 +24,7 @@ tile **generate_map(server_t *infos)
             map[x][y].phiras = 0;
             map[x][y].thystame = 0;
             LIST_INIT(&map[x][y].player_head);
-            map[x][y].players = NULL;
+         //   printf("DATA IN TARGET x %d y %d food %d : linemate %d: \n", map[x][y].x, map[x][y].y, map[x][y].food, map[x][y].linemate);
         }
     }
     return map;
@@ -57,10 +59,10 @@ void fill_map(server_t infos, tile **map)
     int *r = get_remaining_resources(ratio, infos);
     for (int i = 0; i < infos.width; i++) {
         for (int j = 0; j < infos.height; j++) {
-            map[i][j].food = q[0]; map[i][j].linemate = q[1];
-            map[i][j].deraumere = q[2]; map[i][j].sibur = q[3];
-            map[i][j].mendiane = q[4]; map[i][j].phiras = q[5];
-            map[i][j].thystame = q[6];
+            map[i][j].food += q[0]; map[i][j].linemate += q[1];
+            map[i][j].deraumere += q[2]; map[i][j].sibur += q[3];
+            map[i][j].mendiane += q[4]; map[i][j].phiras += q[5];
+            map[i][j].thystame += q[6];
         }
     }
     srand(time(0));
@@ -72,6 +74,6 @@ void fill_map(server_t infos, tile **map)
     put_phiras_resource(infos, map, r[5]);
     put_thystame_resource(infos, map, r[6]);
     free(ratio);
+    free(q);
+    free(r);
 }
-
-
