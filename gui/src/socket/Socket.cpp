@@ -39,8 +39,11 @@ void Socket::defineAddress()
 
 void Socket::connectToServer()
 {
-    if (connect(this->_socket, (struct sockaddr *)&this->_address, sizeof(this->_address)) < 0)
-        throw gui::exception("Connection failed");
+    if (connect(this->_socket, (struct sockaddr *)&this->_address, sizeof(this->_address)) < 0) {
+        this->_connected = false;
+    } else {
+        this->_connected = true;
+    }
 }
 
 void Socket::sendToServer(std::string message)

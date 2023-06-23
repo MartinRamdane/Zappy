@@ -18,7 +18,7 @@
 
 class Gui {
     public:
-        Gui(int port, std::string ip);
+        Gui();
         ~Gui();
         void loop();
         void socketThread();

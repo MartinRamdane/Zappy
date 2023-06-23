@@ -7,7 +7,7 @@
 
 #include "Gui.hpp"
 
-Gui::Gui(int port, std::string ip)
+Gui::Gui()
 {
     this->_display = std::make_unique<Display>(1920, 1080);
     this->_p = std::make_unique<Parsing>();
@@ -25,7 +25,11 @@ void Gui::socketThread()
             return;
     }
     this->_socket = std::make_unique<Socket>(_port, _ip);
-    this->_socket->connectToServer();
+    while (this->_socket->getConnected() == false) {
+        if (!this->_display->getWindow()->isOpen())
+            return;
+        this->_socket->connectToServer();
+    }
     while (this->_display->getWindow()->isOpen()) {
         this->_socket->socketSelect();
         std::string msg = this->_socket->getMessage();

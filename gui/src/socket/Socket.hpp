@@ -31,6 +31,7 @@ class Socket {
         void socketSelect();
         std::string getMessage() const;
         void resetMessage();
+        bool getConnected() const{ return _connected;};
 
     protected:
     private:
@@ -41,4 +42,5 @@ class Socket {
         fd_set _readfds;
         std::string _message;
         struct timeval _tv;
+        bool _connected = false;
 };
