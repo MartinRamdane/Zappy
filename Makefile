@@ -22,6 +22,10 @@ compile_gui = cd gui && make
 
 ifeq ($(shell uname -s),Darwin)
 	compile_gui = $(shell cd gui && mkdir build && cd build && cmake .. && cmake --build .)
+
+compile_server = cd server && make
+ifeq ($(shell uname -s),Darwin)
+	compile_server = $(shell cd server && mkdir build && cd build && cmake .. && cmake --build .)
 endif
 
 all: compile
@@ -30,7 +34,7 @@ all: compile
 compile: z_server z_gui z_ai
 
 z_server:
-	cd server && make
+	$(compile_server)
 	mv server/$(SERVER_NAME) .
 	@echo "$(COLOUR_GREEN)Server build$(END_COLOR)"
 \
@@ -40,15 +44,17 @@ z_gui:
 	@echo "$(COLOUR_GREEN)Gui build$(COLOUR_GREEN)"
 
 z_ai:
-	cp ai/main.py ./
-	mv main.py $(AI_NAME)
-	chmod +x $(AI_NAME)
+	echo "#/bin/bash" > zappy_ai
+	echo 'python3 ai/main.py $$1 $$2 $$3 $$4 $$5 $$6' >> zappy_ai
+	chmod +x zappy_ai
 	@echo "$(COLOUR_GREEN)AI build$(COLOUR_GREEN)"
 
 # Clean target
 clean:
 	@rm -f *~ | rm -f *.o
 	@rm -rf gui/build
+	@rm -rf server/build
+  
 	@echo "$(COLOUR_GREEN)Clean done.$(END_COLOR)"
 
 fclean: clean

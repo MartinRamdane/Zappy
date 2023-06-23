@@ -4,7 +4,11 @@ zappy_server
 zappy_ai
 zappy_gui
 vg*
-.vscode
 zappy_server_example
 build
 *.txt
+zappy_server_exemple
+zappy_server_example
+ai/__pycache__
+*.log
+.vscode/
