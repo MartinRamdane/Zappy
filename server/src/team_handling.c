@@ -45,11 +45,11 @@ int get_available_slots_in_team(server_t *s_infos, char *team)
 int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
 {
     if (strcmp(team, "GRAPHIC") == 0) {
-        cli->team_name = strdup(team); generate_gui_player(cli, cli->socket);
-        return 1;
+        cli->team_name = strdup(team);
+        generate_gui_player(cli, cli->socket, s_infos); return 1;
     }
     if (cli->team_name != NULL) return 0;
-    int available_slots = get_available_slots_in_team(s_infos, team) - 1;
+    int available_slots = count_all_eggs(s_infos, team);
     char *buff = malloc(sizeof(char) * 100);
     sprintf(buff, "%d\n", available_slots);
     if (does_team_exists(s_infos, team) == 0) return -1;
@@ -60,12 +60,17 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
     LIST_FOREACH(tmp, &s_infos->team_head, next) {
         if (strcmp(tmp->name, team) == 0) {
             tmp->clients++; cli->team_name = strdup(team);
-            send(cli->socket, buff, strlen(buff), 0);
+            // send(cli->socket, buff, strlen(buff), 0);
             generate_player(s_infos, cli, cli->socket, team);
-            sprintf(buff, "%d %d\n", s_infos->width, s_infos->height);
-            send(cli->socket, buff, strlen(buff), 0); return 1;
+            char *buffer_life = strdup("LifeCycle");
+            double task_food_time = calculate_time_for_task(s_infos, buffer_life);
+            add_task(s_infos, buffer_life, task_food_time, cli);
+            sprintf(buff, "%d\n%d %d\n", available_slots, s_infos->width, s_infos->height);
+            send(cli->socket, buff, strlen(buff), 0);
+            send_new_player_connected(s_infos, cli); free(buffer_life);
+            free(buff); return 1;
         }
-    } return 0;
+    } free(buff); return 0;
 }
 
 void remove_client_from_team(client_t *cli, server_t *s_infos)

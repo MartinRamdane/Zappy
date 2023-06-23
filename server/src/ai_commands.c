@@ -10,34 +10,45 @@
 void send_task_response(server_t *server, task_t *task, char *cmd)
 {
     if (strcmp(cmd, "Forward") == 0) {
-        forward_command(server, task->client); return;
+        forward_command(server, task->client);
+        printf("[DEBUG]: id: %d x: %d y: %d\n", task->client->socket, task->client->player->x, task->client->player->y);
+        send_new_player_pos(task->client, server);
     }
     if (strcmp(cmd, "Right") == 0) {
-        right_command(task->client); return;
+        right_command(task->client); send_new_player_pos(task->client, server);
     }
     if (strcmp(cmd, "Left") == 0) {
-        left_command(task->client); return;
+        left_command(task->client); send_new_player_pos(task->client, server);
     }
     if (strcmp(cmd, "Inventory") == 0) {
-        inventory_command(task->client); return;
+        inventory_command(task->client);
     }
     if (strcmp(cmd, "Look") == 0) {
-        look_command(server, task->client); return;
+        look_command(server, task->client);
     }
     if (strstr(cmd, "Set")) {
-        set_command(server, task->client, cmd); return;
+        set_command(server, task->client, cmd);
     }
     if (strstr(cmd, "Take")) {
-        take_command(server, task->client, cmd); return;
+        take_command(server, task->client, cmd);
     }
     if (strcmp(cmd, "Eject") == 0) {
-        eject_command(server, task->client); return;
+        eject_command(server, task->client);
     }
     if (strstr(cmd, "Broadcast")) {
         broadcast_command(server, task->client, cmd); return;
     }
     if (strcmp(cmd, "Incantation") == 0) {
-        incantation_command(task->client); return;
+        incantation_command(task->client, server); return;
+    }
+    if (strcmp(cmd, "Respawn") == 0) {
+        respawn_task(server); return;
+    }
+    if (strcmp(cmd, "LifeCycle") == 0) {
+        life_cycle_command(server, task->client); return;
+    }
+    if (strcmp(cmd, "Fork") == 0) {
+        fork_command(task->client, server); return;
     }
 }
 
@@ -85,11 +96,21 @@ void left_command(client_t *client)
     send(client->socket, "ok\n", 3, 0);
 }
 
-void incantation_command(client_t *client)
+void incantation_command(client_t *client, server_t *server)
 {
-    client->player->state = ALIVE;
-    client->player->level ++;
-    char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);
-    sprintf(buff, "Current level: %d\n", client->player->level);
-    send(client->socket, buff, strlen(buff), 0);
+    if (check_can_incantation(server, client) == 0) {
+        client->player->state = ALIVE;
+        send(client->socket, "ko\n", 3, 0);
+        event_player_incantation_end(client, server, 0);
+        return;
+    }
+    make_incantation_for_all_players(server, client);
+    update_incantation(server, client);
+    // client->player->level++;
+    // char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);
+    // sprintf(buff, "Current level: %d\n", client->player->level);
+    // send(client->socket, buff, strlen(buff), 0);
+    // event_player_incantation_end(client, server, 1);
+    // free(buff);
+    check_win_condition(server);
 }

@@ -16,6 +16,7 @@ void inventory_command(client_t *client)
     client->player->inv->sibur, client->player->inv->mendiane,
     client->player->inv->phiras, client->player->inv->thystame);
     send(client->socket, response, strlen(response), 0);
+    free(response);
 }
 
 void look_command(server_t *server, client_t *client)
@@ -23,6 +24,7 @@ void look_command(server_t *server, client_t *client)
     char *buff = get_all_tiles_per_level(server, client, client->player->level);
     send(client->socket, buff, strlen(buff), 0);
     send(client->socket, "\n", 1, 0);
+    free(buff);
 }
 
 void set_command(server_t *server, client_t *client, char *buffer)
@@ -32,21 +34,21 @@ void set_command(server_t *server, client_t *client, char *buffer)
     if (val == 0) {
         send(client->socket, "ko\n", 3, 0);
     } else {
-        debug_print_map(server, server->game->map);
-        debug_print_player_inventory(client);
+        //debug_print_map(server, server->game->map);
+        //debug_print_player_inventory(client);
         send(client->socket, "ok\n", 3, 0);
     }
 }
 
 void take_command(server_t *server, client_t *client, char *buffer)
 {
-    debug_print_player_inventory(client);
+    //debug_print_player_inventory(client);
     int val = take_object(server, client, buffer);
     if (val == 0) {
         send(client->socket, "ko\n", 3, 0);
     } else {
-        debug_print_map(server, server->game->map);
-        debug_print_player_inventory(client);
+        //debug_print_map(server, server->game->map);
+        //debug_print_player_inventory(client);
         send(client->socket, "ok\n", 3, 0);
     }
 }
@@ -55,6 +57,7 @@ void eject_command(server_t *server, client_t *client)
 {
     if (eject_player(server, client) == 1) {
         send(client->socket, "ok\n", 3, 0);
+        event_player_expulsion(client, server);
     } else {
         send(client->socket, "ko\n", 3, 0);
     }
