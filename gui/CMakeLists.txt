@@ -10,8 +10,6 @@
 # add_executable(plazza ${SRC_LIST})
 
 # if (APPLE)
-#     include_directories(/usr/local/Cellar/sfml/2.5.1_2/include)
-#     link_directories(/usr/local/Cellar/sfml/2.5.1_2/lib)
 # endif()
 cmake_minimum_required(VERSION 3.16)
 
@@ -23,6 +21,11 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
 # Chemin vers les bibliothèques SFML
 set(SFML_DIR "/usr/local/Cellar/sfml/2.5.1_2")
+include_directories(/usr/local/Cellar/sfml/2.5.1_2/include)
+link_directories(/usr/local/Cellar/sfml/2.5.1_2/lib)
+
+# Chemin vers le framework freetype
+set(FREETYPE_FRAMEWORK_PATH /Library/SFML/extlibs/libs-osx/Frameworks/freetype.framework)
 
 # Recherche des packages SFML
 find_package(SFML 2.5 COMPONENTS graphics window system audio REQUIRED)
@@ -38,7 +41,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 add_executable(zappy_gui ${SRC_LIST})
 
 # Inclusion des headers SFML
-target_include_directories(zappy_gui PRIVATE ${SFML_INCLUDE_DIRS})
+target_include_directories(zappy_gui PRIVATE ${SFML_INCLUDE_DIRS} ${FREETYPE_FRAMEWORK_PATH}/Headers)
 
 # Liaison des bibliothèques SFML
-target_link_libraries(zappy_gui PRIVATE sfml-graphics sfml-window sfml-system sfml-audio)
+target_link_libraries(zappy_gui PRIVATE sfml-graphics sfml-window sfml-system sfml-audio ${FREETYPE_FRAMEWORK_PATH})

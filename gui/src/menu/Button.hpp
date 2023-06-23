@@ -5,14 +5,15 @@
 ** Button
 */
 
-#pragma once
+#ifndef BUTTON_HEADER_GUARD
+#define BUTTON_HEADER_GUARD
 
 #include "IObject.hpp"
 #include <string>
 
 class Button: public IObject {
     public:
-        Button(std::string textureFile, std::string textureFileHover, bool hover = false);
+        Button(std::string textureFile, std::string textureFileHover, MenuState state, bool hover = false);
         ~Button() {};
         void createSprite();
         void setSpriteRect(sf::IntRect rect);
@@ -22,10 +23,10 @@ class Button: public IObject {
         void setSpriteRotation(float angle);
         void setSpriteTexture(std::shared_ptr<sf::Texture> &texture);
         void draw(sf::RenderWindow &window);
-        void eventHandler(sf::Event event, sf::RenderWindow &window);
+        void eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &state);
         void update();
         sf::Vector2f getSpritePosition();
-    
+
     private:
         std::string _textureFile;
         std::string _textureFileHover;
@@ -33,4 +34,7 @@ class Button: public IObject {
         sf::Texture _texture;
         sf::Texture _textureHover;
         bool _hover;
+        MenuState _state;
 };
+
+#endif //BUTTON_HEADER_GUARD
