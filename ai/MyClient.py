@@ -8,7 +8,10 @@ class Client:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def __del__(self):
-        self.close()
+        try:
+            self.socket.close()
+        except OSError:
+            sys.exit("Connexion fermée")
 
     def connect(self):
         try:
@@ -34,6 +37,5 @@ class Client:
         try:
             self.socket.close()
         except OSError:
-            pass
-        sys.exit("Connexion fermée")
+            sys.exit("Connexion fermée")
 
