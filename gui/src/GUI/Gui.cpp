@@ -71,7 +71,6 @@ void Gui::displayThread()
             this->_display->render();
         }
     }
-    std::cout << "END" << std::endl;
 }
 
 void Gui::loop()
