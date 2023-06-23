@@ -49,7 +49,7 @@ void SSlider::createSprite(int w_width, int w_height, int zoom)
     this->_textures["bar"] = sf::Texture();
     this->_textures["bar"].loadFromFile("gui/assets/slider/bar.png");
     this->_sprites["bar"].setTexture(this->_textures["bar"]);
-    this->_sprites["bar"].setScale(sf::Vector2f(0.3, 0.3));
+    this->_sprites["bar"].setScale(sf::Vector2f(0.31, 0.3));
     this->_sprites["bar"].setPosition(sf::Vector2f(this->_texts["frequency"].getPosition().x, this->_texts["frequency"].getPosition().y + 70));
     this->_sprites["bar"].setColor(sf::Color(255, 255, 255, this->_opacity));
 
@@ -58,7 +58,7 @@ void SSlider::createSprite(int w_width, int w_height, int zoom)
     this->_textures["slider"].loadFromFile("gui/assets/slider/slider.png");
     this->_sprites["slider"].setTexture(this->_textures["slider"]);
     this->_sprites["slider"].setScale(sf::Vector2f(0.3, 0.3));
-    this->_sprites["slider"].setPosition(sf::Vector2f(this->_sprites["bar"].getPosition().x + 9, this->_sprites["bar"].getPosition().y + 8));
+    this->_sprites["slider"].setPosition(sf::Vector2f(this->_sprites["bar"].getPosition().x + 10, this->_sprites["bar"].getPosition().y + 8));
     this->_sprites["slider"].setColor(sf::Color(255, 255, 255, this->_opacity));
     this->_sprites["slider"].setOrigin(sf::Vector2f(this->_sprites["slider"].getGlobalBounds().width / 2, this->_sprites["slider"].getGlobalBounds().height / 2));
 
@@ -141,10 +141,31 @@ void SSlider::update(MapT *cache)
         this->_clock.restart();
     }
 
-    auto pos = this->_sprites["slider"].getPosition();
-    pos.x = (this->_sprites["bar"].getPosition().x) + 10 + ((cache->getFrequency() * (((800 * 0.3)) - 37)) / 1000);
-    this->_sprites["slider"].setPosition(pos);
-
+    // if (this->_isDragging1) {
+    //     // int frequency = this->_sprites["slider"].getPosition().x * 1000 / (((800 * 0.3)) - 37);
+    //     int frequency = (this->_sprites["slider"].getPosition().x - this->_sprites["bar"].getPosition().x) * 1000 / ((800 * 0.3) - 37);
+    //     std::cout << "Frequency: " << frequency << std::endl;
+    //     cache->setFrequency(frequency);
+    // }
+    // if (!this->_isDragging1) {
+    //     auto pos = this->_sprites["slider"].getPosition();
+    //     pos.x = (this->_sprites["bar"].getPosition().x) + 10 + ((cache->getFrequency() * (((800 * 0.3)) - 37)) / 1000);
+    //     this->_sprites["slider"].setPosition(pos);
+    // }
+    if (!this->_isDragging1) {
+        auto pos = this->_sprites["slider"].getPosition();
+        pos.x = (this->_sprites["bar"].getPosition().x) + 10 + (cache->getFrequency() / 5);
+        this->_sprites["slider"].setPosition(pos);
+    }
+    if (this->_isDragging1) {
+        int frequency = (this->_sprites["slider"].getPosition().x - this->_sprites["bar"].getPosition().x - 10) * 5;
+        if (frequency <= 5)
+            frequency = 2;
+        if (frequency >= 995)
+            frequency = 1000;
+        std::cout << "Frequency: " << frequency << std::endl;
+        cache->setFrequency(frequency);
+    }
     this->_texts["frequencyV"].setString(std::to_string(cache->getFrequency()));
     if (cache->getFrequency() <= 5)
         this->_texts["frequencyV"].setString("2");
@@ -170,16 +191,26 @@ void SSlider::eventHandler(sf::Event event, sf::RenderWindow &window)
     
     if (this->_isDragging1) {
         sf::Vector2f pos = this->_sprites["slider"].getPosition();
-        if (mousePosF.x < (this->_sprites["bar"].getPosition().x + 9)) {
-            pos.x = this->_sprites["bar"].getPosition().x + 9;
+        if (mousePosF.x < (this->_sprites["bar"].getPosition().x + 10)) {
+            pos.x = this->_sprites["bar"].getPosition().x + 10;
             this->_sprites["slider"].setPosition(pos);
-        } else if (mousePosF.x > (this->_sprites["bar"].getPosition().x + (792 * 0.3) - 37)) {
-            pos.x = this->_sprites["bar"].getPosition().x + (792 * 0.3) - 37;
+        } else if (mousePosF.x > (this->_sprites["bar"].getPosition().x + 210)) {
+            pos.x = this->_sprites["bar"].getPosition().x + 210;
             this->_sprites["slider"].setPosition(pos);
         } else {
             pos.x = mousePosF.x;
             this->_sprites["slider"].setPosition(pos);
         }
+        // if (mousePosF.x < (this->_sprites["bar"].getPosition().x + 9)) {
+        //     pos.x = this->_sprites["bar"].getPosition().x + 9;
+        //     this->_sprites["slider"].setPosition(pos);
+        // } else if (mousePosF.x > (this->_sprites["bar"].getPosition().x + (792 * 0.3) - 37)) {
+        //     pos.x = this->_sprites["bar"].getPosition().x + (792 * 0.3) - 37;
+        //     this->_sprites["slider"].setPosition(pos);
+        // } else {
+        //     pos.x = mousePosF.x;
+        //     this->_sprites["slider"].setPosition(pos);
+        // }
     }
 
     if (this->_sprites["button_minus"].getGlobalBounds().contains(mousePosF)) {

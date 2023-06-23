@@ -16,7 +16,7 @@
 
 class Socket {
     public:
-        Socket(int socket, std::string ip);
+        Socket(int port, std::string _ip);
         ~Socket();
         void createSocket();
         void closeSocket();
@@ -32,6 +32,7 @@ class Socket {
         std::string getMessage() const;
         void resetMessage();
         bool getConnected() const{ return _connected;};
+        void initialize(int port, std::string _ip);
 
     protected:
     private:

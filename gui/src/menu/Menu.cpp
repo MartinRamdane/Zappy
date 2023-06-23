@@ -130,6 +130,7 @@ int Menu::render(sf::RenderWindow &window)
         i.second->draw(window);
     }
     window.display();
+    return 0;
 }
 
 void Menu::eventHandler(sf::RenderWindow &window)
