@@ -95,9 +95,8 @@ void execute_tasks(server_t *server)
     if (server->game->end)
         return;
     task_t *tmp = NULL;
-    double limit = 0.00;
     LIST_FOREACH(tmp, &server->task_head, next) {
-        if (tmp->time <= limit) {
+        if (tmp->time <= 0) {
                 send_task_response(server, tmp, tmp->cmd);
                 LIST_REMOVE(tmp, next);
         }
