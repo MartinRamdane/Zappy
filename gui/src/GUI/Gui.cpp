@@ -20,7 +20,10 @@ Gui::~Gui()
 
 void Gui::socketThread()
 {
-    while(this->_isMenu);
+    while(this->_isMenu) {
+        if (!this->_display->getWindow()->isOpen())
+            return;
+    }
     this->_socket = std::make_unique<Socket>(_port, _ip);
     this->_socket->connectToServer();
     while (this->_display->getWindow()->isOpen()) {
@@ -59,6 +62,7 @@ void Gui::displayThread()
             this->_display->render();
         }
     }
+    std::cout << "END" << std::endl;
 }
 
 void Gui::loop()
@@ -68,6 +72,8 @@ void Gui::loop()
     std::thread socketThread(&Gui::socketThread, this);
     socketThread.join();
     displayThread.join();
+    if (this->_isMenu)
+        return;
     this->_socket->sendToServer("QUIT\n");
     this->_socket->closeSocket();
 }
