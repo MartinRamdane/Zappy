@@ -9,27 +9,18 @@
 
 #include <iostream>
 #include <string>
-#include "../menu/Menu.hpp"
-#include "../SFML/Display.hpp"
 #include "../socket/Socket.hpp"
 #include "../parser/Parsing.hpp"
-#include "../cache/Map.hpp"
-#include <thread>
 
 class Gui {
     public:
         Gui(int port, std::string ip);
         ~Gui();
         void loop();
-        void socketThread();
-        void displayThread();
 
     protected:
     private:
-        std::unique_ptr<Socket> _socket = nullptr;
+        Socket _socket;
         std::string _message;
-        std::unique_ptr<Display> _display = nullptr;
-        std::unique_ptr<Parsing> _p = nullptr;
-        bool _isMenu = true;
-        std::unique_ptr<Menu> _menu = nullptr;
+        Parsing p;
 };

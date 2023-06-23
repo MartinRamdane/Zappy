@@ -8,12 +8,12 @@
 #pragma once
 
 #include "../cache/Map.hpp"
+
 #include <string>
 #include <vector>
 #include <map>
 #include <iostream>
 #include <sstream>
-#include "../SFML/Display.hpp"
 
 class Parsing
 {
@@ -45,11 +45,8 @@ class Parsing
         void smg(std::string arg);
         void suc(std::string arg);
         void sbp(std::string arg);
-        void eht(std::string arg);
         Parsing();
         ~Parsing();
         void parse(std::string str);
-        MapT getMap();
-        MapT *getMapPtr();
 };
 

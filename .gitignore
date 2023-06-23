@@ -5,6 +5,3 @@ zappy_ai
 zappy_gui
 vg*
 .vscode
-zappy_server_example
-build
-*.txt

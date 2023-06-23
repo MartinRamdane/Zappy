@@ -47,13 +47,3 @@ int Egg::getY()
 {
     return (this->y);
 }
-
-void Egg::setHatched()
-{
-    this->hatched = true;
-}
-
-bool Egg::getHatched()
-{
-    return (this->hatched);
-}

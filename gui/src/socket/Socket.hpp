@@ -39,6 +39,6 @@ class Socket {
         std::string _machine;
         struct sockaddr_in _address;
         fd_set _readfds;
-        std::string _message;
         struct timeval _tv;
+        std::string _message;
 };

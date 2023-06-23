@@ -13,7 +13,6 @@ class Egg
         int id;
         int x;
         int y;
-        bool hatched;
     public:
         Egg(int id, int x, int y);
         ~Egg();
@@ -23,7 +22,5 @@ class Egg
         int getX();
         int getY();
         int getId();
-        void setHatched();
-        bool getHatched();
 };
 
