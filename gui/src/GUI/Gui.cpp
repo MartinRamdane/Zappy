@@ -49,9 +49,9 @@ void Gui::displayThread()
         if (_isMenu) {
             this->_menu->render(*this->_display->getWindow());
             if (this->_menu->update() == 1) {
-                _isMenu = false;
                 _ip = this->_menu->getIp();
                 _port = this->_menu->getPort();
+                _isMenu = false;
                 this->_display->getWindow()->clear();
             } else
                 this->_menu->eventHandler(*this->_display->getWindow());

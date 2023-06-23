@@ -74,6 +74,7 @@ void Input::eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &s
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
     sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+
     if (_sprite.getGlobalBounds().contains(mousePosF)) {
             _hover = true;
             if (event.type == sf::Event::MouseButtonPressed) {
@@ -93,8 +94,15 @@ void Input::eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &s
             this->_value = this->_value.substr(0, this->_value.size() - 1);
         if (event.type == sf::Event::TextEntered && event.text.unicode == '.')
             this->_value += ".";
-        else if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::Backspace)
-            event.type == sf::Event::KeyPressed ? this->_value += keys[event.key.code] : this->_value;
+        else if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::Backspace) {
+            if (event.type == sf::Event::KeyPressed && event.key.code == 51) {
+                this->_value += "4";
+            } else {
+                std::cout << keys[event.key.code] << std::endl;
+                std::cout << event.key.code << std::endl;
+                event.type == sf::Event::KeyPressed ? this->_value += keys[event.key.code] : this->_value;
+            }
+        }
 
     }
     _text.setString(_value);
@@ -157,5 +165,5 @@ std::map<sf::Keyboard::Key, std::string> Input::keys = {
     {sf::Keyboard::Numpad6, "6"},
     {sf::Keyboard::Numpad7, "7"},
     {sf::Keyboard::Numpad8, "8"},
-    {sf::Keyboard::Numpad9, "9"}
+    {sf::Keyboard::Numpad9, "9"},
 };

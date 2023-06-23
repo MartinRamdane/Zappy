@@ -16,7 +16,7 @@ SRC = src/*.cpp \
 NAME = zappy_gui
 
 all:
-	g++ -o $(NAME) $(SRC) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -g3 -fsanitize=leak -llsan
+	g++ -o $(NAME) $(SRC) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -g3
 	# -fsanitize=address -lasan -fsanitize=leak -llsan
 
 clean:
