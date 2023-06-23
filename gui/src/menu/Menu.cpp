@@ -18,6 +18,7 @@ Menu::Menu()
     this->_entities["B_logo"]->setSpritePosition(sf::Vector2f(668, 100));
     this->_entities["B_credits"] = std::make_unique<Image>("gui/assets/menu/credits.png");
     this->_entities["B_credits"]->setSpritePosition(sf::Vector2f(784, 950));
+    this->_font.loadFromFile("gui/assets/fonts/fibberish.ttf");
     setMainEntities();
 }
 
@@ -108,6 +109,7 @@ int Menu::update()
             clear();
             setMainEntities();
         } else if (_currentState == INGAME) {
+            // _music.stop();
             Input *ipInput = dynamic_cast<Input *>((this->_entities["C_input1"]).get());
             Input *portInput = dynamic_cast<Input *>((this->_entities["C_input2"]).get());
             _ip = ipInput->getText();

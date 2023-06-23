@@ -95,13 +95,7 @@ void Input::eventHandler(sf::Event event, sf::RenderWindow &window, MenuState &s
         if (event.type == sf::Event::TextEntered && event.text.unicode == '.')
             this->_value += ".";
         else if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::Backspace) {
-            if (event.type == sf::Event::KeyPressed && event.key.code == 51) {
-                this->_value += "4";
-            } else {
-                std::cout << keys[event.key.code] << std::endl;
-                std::cout << event.key.code << std::endl;
-                event.type == sf::Event::KeyPressed ? this->_value += keys[event.key.code] : this->_value;
-            }
+            event.type == sf::Event::KeyPressed ? this->_value += keys[event.key.code] : this->_value;
         }
 
     }
@@ -151,6 +145,7 @@ std::map<sf::Keyboard::Key, std::string> Input::keys = {
     {sf::Keyboard::Num2, "2"},
     {sf::Keyboard::Num3, "3"},
     {sf::Keyboard::Num4, "4"},
+    {sf::Keyboard::Quote, "4"},
     {sf::Keyboard::Num5, "5"},
     {sf::Keyboard::Num6, "6"},
     {sf::Keyboard::Num7, "7"},
