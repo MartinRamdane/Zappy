@@ -163,7 +163,6 @@ void SSlider::update(MapT *cache)
             frequency = 2;
         if (frequency >= 995)
             frequency = 1000;
-        std::cout << "Frequency: " << frequency << std::endl;
         cache->setFrequency(frequency);
     }
     this->_texts["frequencyV"].setString(std::to_string(cache->getFrequency()));
