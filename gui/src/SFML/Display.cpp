@@ -9,7 +9,7 @@
 
 Display::Display(int w_width, int w_height) : _width(w_width), _height(w_height)
 {
-    this->_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w_width, w_height), "Zappy");
+    this->_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(w_width, w_height), "Zappy", sf::Style::Titlebar | sf::Style::Close);
     this->_window->setFramerateLimit(60);
     this->_window->setActive(false);
     this->_view.setSize(sf::Vector2f(w_width, w_height));

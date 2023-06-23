@@ -51,7 +51,13 @@ void Gui::displayThread()
             if (this->_menu->update() == 1) {
                 _ip = this->_menu->getIp();
                 _port = this->_menu->getPort();
-                _isMenu = false;
+                std::string command = "nc -zv " + std::string(_ip) + " " + std::to_string(_port);
+                int output = std::system(command.c_str());
+                if (output == 0) {
+                    _isMenu = false;
+                } else {
+                    this->_menu->setState(MenuState::GAME);
+                }
                 this->_display->getWindow()->clear();
             } else
                 this->_menu->eventHandler(*this->_display->getWindow());
@@ -61,7 +67,6 @@ void Gui::displayThread()
             this->_display->render();
         }
     }
-    std::cout << "END" << std::endl;
 }
 
 void Gui::loop()
