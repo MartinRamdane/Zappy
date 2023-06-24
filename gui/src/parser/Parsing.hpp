@@ -19,6 +19,8 @@ class Parsing
 {
     private:
         MapT mapt;
+        sf::Music death; // Si gabriel vois ca j avais pas le choix ^^ DO BRASSIIIIIILLLL
+        sf::Music push;
 
     public:
         void msz(std::string arg);

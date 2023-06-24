@@ -9,6 +9,10 @@
 
 Parsing::Parsing()
 {
+    if (!death.openFromFile("gui/assets/sounds/mort.ogg"))
+        exit(84);
+    if (!push.openFromFile("gui/assets/sounds/push.ogg"))
+        exit(84);
 }
 
 Parsing::~Parsing()
@@ -148,6 +152,9 @@ void Parsing::pin(std::string arg)
 
 void Parsing::pex(std::string arg)
 {
+    if (death.getStatus() != sf::Music::Playing) {
+        death.play();
+    }
     mapt.setTrantorianEjection(std::stoi(arg), true);
 }
 
@@ -303,6 +310,9 @@ void Parsing::pgt(std::string arg)
 
 void Parsing::pdi(std::string arg)
 {
+    if (death.getStatus() != sf::Music::Playing) {
+        death.play();
+    }
     mapt.setTrantorianDeath(std::stoi(arg));
 }
 
