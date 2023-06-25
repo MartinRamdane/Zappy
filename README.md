@@ -15,6 +15,9 @@ The AI program allows you to control an AI agent in the Zappy game. It can be la
 - `name` is the name of the team.
 - `machine` is the name of the machine (localhost by default).
 
+**Code:**
+The code is in the AI subdirectory.
+
 ## Server Program
 
 The Server program is responsible for managing the Zappy game server. It can be launched using the following command:
@@ -30,12 +33,17 @@ The Server program is responsible for managing the Zappy game server. It can be 
 - `clientsNb` is the number of authorized clients per team.
 - `freq` is the reciprocal of the time unit for execution of actions.
 
+**Code:**
+The code is in the server subdirectory.
+
 ## GUI Program
 
 The GUI program provides a graphical interface to visualize the Zappy game. It can be launched using the following command:
 
 ./zappy_gui
 
+**Code:**
+The code is in the GUI subdirectory.
 
 **Note:** The whole Zappy project requires Python3, SFML, and LibUUID to be installed. It has been tested on Debian, Ubuntu, Fedora & WSL2.
 
