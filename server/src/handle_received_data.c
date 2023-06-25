@@ -28,6 +28,7 @@ int check_instant_commands(char *buffer, client_t *client, server_t *server)
     if (strcmp(buffer, "Connect_nbr") == 0) {
         int nb = count_all_eggs(server, client->team_name);
         char *buff = malloc(sizeof(char) * 100);
+        buff == NULL ? exit(84) : 0;
         memset(buff, 0, 100);
         sprintf(buff, "%d\n", nb);
         send(client->socket, buff, strlen(buff), 0);
@@ -50,7 +51,6 @@ int commands(server_t *server, client_t *client, char *buffer)
         add_task(server, buffer, task_time, client);
     } else {
         send(client->socket, "ko\n", 3, 0);
-        printf("no AI command\n"); // TODO: Implement GUI commands
     }
     return 0;
 }

@@ -13,6 +13,7 @@ void send_new_player_pos(client_t *cli, server_t *server)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "ppo %d %d %d %d\n", cli->player->id,
             cli->player->x, cli->player->y,
@@ -29,6 +30,7 @@ void send_ressource_collect(client_t *cli, int ressource, server_t *server)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "pgt %d %d\n", cli->player->id, ressource);
             send(tmp->socket, buff, strlen(buff), 0);
@@ -44,6 +46,7 @@ void send_ressource_dropped(client_t *cli, int ressource, server_t *server)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "pdr %d %d\n", cli->player->id, ressource);
             send(tmp->socket, buff, strlen(buff), 0);

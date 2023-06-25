@@ -34,6 +34,7 @@ int check_gui_commands(char *buffer, client_t *client, server_t *server)
 void send_map_size(client_t *client, server_t *server)
 {
     char *buffer = malloc(sizeof(char) * 100);
+    buffer == NULL ? exit(84) : 0;
     memset(buffer, 0, 100);
     sprintf(buffer, "msz %d %d\n", server->width, server->height);
     send(client->socket, buffer, strlen(buffer), 0);
@@ -44,6 +45,7 @@ void send_map_size(client_t *client, server_t *server)
 void send_time_unit(client_t *client, server_t *server)
 {
     char *buffer = malloc(sizeof(char) * 100);
+    buffer == NULL ? exit(84) : 0;
     memset(buffer, 0, 100);
     sprintf(buffer, "sgt %f\n", server->freq);
     send(client->socket, buffer, strlen(buffer), 0);
@@ -54,6 +56,7 @@ void send_time_unit(client_t *client, server_t *server)
 void send_teams(client_t *client, server_t *server)
 {
     char *buffer = malloc(sizeof(char) * 100);
+    buffer == NULL ? exit(84) : 0;
     memset(buffer, 0, 100);
     team_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->team_head, next) {
@@ -78,6 +81,7 @@ void send_tile_content(client_t *client, server_t *server, char *msg)
     int x = atoi(x_val);
     int y = atoi(y_val);
     char *buffer = malloc(sizeof(char) * 100);
+    buffer == NULL ? exit(84) : 0;
     memset(buffer, 0, 100);
     tile val = server->game->map[x][y];
     sprintf(buffer, "bct %d %d %d %d %d %d %d %d %d\n", x, y, val.food,

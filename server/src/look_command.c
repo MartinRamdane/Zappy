@@ -73,6 +73,7 @@ int get_first_case_id_per_level(server_t *server, int tile, char dir, int level)
 char *get_all_tile_infos(tile *target)
 {
     char *buffer = malloc((sizeof(char) * MAX_BODY_LENGTH) * 2);
+    buffer == NULL ? exit(84) : 0;
     memset(buffer, 0, MAX_BODY_LENGTH * 2);
     int len = 0;
     t_player_queue *tmp = NULL;
@@ -100,10 +101,6 @@ char *get_all_tile_infos(tile *target)
     for (int i = 0; i < target->thystame; i++) {
         strcat(buffer, " thystame"); len += 9;
     }
-    // if (len > 0) {
-    //     buffer[len] = ',';
-    // } else
-    //     buffer[0] = ',';
     return buffer;
 }
 

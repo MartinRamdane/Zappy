@@ -10,14 +10,17 @@
 server_t *create_server_struct(void)
 {
     server_t *s_infos = malloc(sizeof(server_t));
+    s_infos == NULL ? exit(84) : 0;
     s_infos->port = -1;
     s_infos->width = -1;
     s_infos->height = -1;
     s_infos->sname = malloc(sizeof(char *) * 100);
+    s_infos->sname == NULL ? exit(84) : 0;
     s_infos->clientsNb = -1;
     s_infos->freq = -1;
     s_infos->player_id = 0; s_infos->egg_id = 0;
     s_infos->game = malloc(sizeof(game_t));
+    s_infos->game == NULL ? exit(84) : 0;
     memset(s_infos->sname, 0, 100);
     return (s_infos);
 }

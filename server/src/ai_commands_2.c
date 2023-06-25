@@ -11,6 +11,7 @@ void inventory_command(client_t *client)
 {
     if (client->player->state == INCANTATION) return;
     char *response = malloc(sizeof(char) * MAX_BODY_LENGTH);
+    response == NULL ? exit(84) : 0;
     sprintf(response, "[food %d, linemate %d, deraumere %d, sibur %d, mendiane %d, phiras %d, thystame %d]\n", client->player->inv->food,
     client->player->inv->linemate, client->player->inv->deraumere,
     client->player->inv->sibur, client->player->inv->mendiane,
@@ -34,21 +35,16 @@ void set_command(server_t *server, client_t *client, char *buffer)
     if (val == 0) {
         send(client->socket, "ko\n", 3, 0);
     } else {
-        //debug_print_map(server, server->game->map);
-        //debug_print_player_inventory(client);
         send(client->socket, "ok\n", 3, 0);
     }
 }
 
 void take_command(server_t *server, client_t *client, char *buffer)
 {
-    //debug_print_player_inventory(client);
     int val = take_object(server, client, buffer);
     if (val == 0) {
         send(client->socket, "ko\n", 3, 0);
     } else {
-        //debug_print_map(server, server->game->map);
-        //debug_print_player_inventory(client);
         send(client->socket, "ok\n", 3, 0);
     }
 }

@@ -13,6 +13,7 @@ void send_player_death(client_t *player, server_t *server)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "pdi %d\n", player->player->id);
             send(tmp->socket, buff, strlen(buff), 0);

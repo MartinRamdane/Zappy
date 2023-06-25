@@ -16,6 +16,7 @@ void change_time_unit(client_t *cli, server_t *server, char *buff)
     }
     server->freq = atoi(time);
     char *buffer = malloc(sizeof(char) * 100); memset(buffer, 0, 100);
+    buffer == NULL ? exit(84) : 0;
     sprintf(buffer, "sst %f\n", server->freq);
     send(cli->socket, buffer, strlen(buffer), 0);
     send_time_unit_to_all_guis(server);

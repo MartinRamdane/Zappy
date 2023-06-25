@@ -10,6 +10,7 @@
 int *take_all_resources_from_map(server_t infos)
 {
     int *resources = malloc(sizeof(int) * 7);
+    resources == NULL ? exit(84) : 0;
     for (int i = 0; i < 7; i++) {
         resources[i] = 0;
     }

@@ -13,6 +13,7 @@ void event_end_of_game(server_t *server, team_t *winners)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "seg %s\n", winners->name);
             send(tmp->socket, buff, strlen(buff), 0);

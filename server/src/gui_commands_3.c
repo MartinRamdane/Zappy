@@ -29,6 +29,7 @@ void send_player_pos(client_t *cli, server_t *server, char *buff)
         return;
     }
     char *buffer = malloc(sizeof(char) * 100); memset(buffer, 0, 100);
+    buffer == NULL ? exit(84) : 0;
     client_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->player && tmp->player->id == atoi(id)) {
@@ -51,6 +52,7 @@ void send_player_level(client_t *cli, server_t *server, char *buff)
         return;
     }
     char *buffer = malloc(sizeof(char) * 100); memset(buffer, 0, 100);
+    buffer == NULL ? exit(84) : 0;
     client_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->player && tmp->player->id == atoi(id)) {
@@ -72,7 +74,7 @@ void send_player_inventory(client_t *cli, server_t *server, char *buff)
         return;
     }
     char *buffer = malloc(sizeof(char) * 100); memset(buffer, 0, 100);
-    client_t *tmp = NULL;
+    buffer == NULL ? exit(84) : 0; client_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->player && tmp->player->id == atoi(id)) {
             sprintf(buffer, "pin %d %d %d %d %d %d %d %d %d %d\n",

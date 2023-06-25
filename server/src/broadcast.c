@@ -10,6 +10,7 @@
 l_tile *get_all_listen_tiles_position(server_t *server, player *player)
 {
     l_tile *listen_tiles = malloc(sizeof(l_tile) * 8);
+    listen_tiles == NULL ? exit(84) : 0;
     int _x = player->x; int _y = player->y;
     for (int i = 0; i < 8; i++) {
         listen_tiles[i].x = _x; listen_tiles[i].y = _y;
@@ -29,13 +30,12 @@ l_tile *get_all_listen_tiles_position(server_t *server, player *player)
 int *compare_diff(int **diff)
 {
     int *res = malloc(sizeof(int) * 4);
+    res == NULL ? exit(84) : 0;
     res[0] = 1000; res[1] = 1000;
     for (int i = 0; i < 8; i++) {
-        //printf("diff[%d][0] = %d diff[%d][1] = %d\n", i, diff[i][0], i, diff[i][1]);
         if (diff[i][0] < res[0]) {
             res[0] = diff[i][0]; res[2] = diff[i][2];
         } if (diff[i][0] == res[0]) {
-          //  printf("same y: %d\n", diff[i][0]);
             if (diff[i][1] < res[1]) {
                 res[1] = diff[i][1];
                 res[3] = diff[i][3];
@@ -48,15 +48,19 @@ int *compare_diff(int **diff)
 int compare_listen_tiles(l_tile *listen_tiles, int x, int y)
 {
     int **diff = malloc(sizeof(int *) * 8);
+    diff == NULL ? exit(84) : 0;
     memset(diff, 0, sizeof(int *) * 8);
     int **target_tiles = malloc(sizeof(int *) * 8);
+    target_tiles == NULL ? exit(84) : 0;
     memset(target_tiles, 0, sizeof(int *) * 8);
     for (int i = 0; i < 8; i++)
         if (listen_tiles[i].x == x && listen_tiles[i].y == y)
             return listen_tiles[i].id;
     for (int i = 0; i < 8; i++) {
         diff[i] = malloc(sizeof(int) * 4);
+        diff[i] == NULL ? exit(84) : 0;
         target_tiles[i] = malloc(sizeof(int) * 4);
+        target_tiles[i] == NULL ? exit(84) : 0;
     }
     for (int i = 0; i < 8; i++) {
         if (listen_tiles[i].x > x) {

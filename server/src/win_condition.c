@@ -30,6 +30,7 @@ team_t *get_nbr_of_lvl_eight_per_team(server_t *server)
 void send_win_condition_to_gui(server_t *server, team_t *team)
 {
     char *buffer = malloc(sizeof(char) * 100);
+    buffer == NULL ? exit(84) : 0;
     sprintf(buffer, "seg %s\n", team->name);
     client_t *tmp = NULL;
     LIST_FOREACH(tmp, &server->head, next) {

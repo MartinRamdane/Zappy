@@ -18,6 +18,7 @@ void generate_teams(server_t *server, struct team_listhead *team_head)
 team_t *generate_team(char *name, int maxclient)
 {
     team_t *team = malloc(sizeof(team_t));
+    team == NULL ? exit(84) : 0;
     team->name = strdup(name);
     team->max_clients = maxclient;
     team->clients = 0;

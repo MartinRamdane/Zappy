@@ -26,7 +26,7 @@ int does_team_has_space(server_t *s_infos, char *team)
                 return (1);
         }
     }
-    return (1); //TODO : Enforce team size limit
+    return (1);
 }
 
 int get_available_slots_in_team(server_t *s_infos, char *team)
@@ -60,7 +60,6 @@ int add_client_to_team(server_t *s_infos, char *team, client_t *cli)
     LIST_FOREACH(tmp, &s_infos->team_head, next) {
         if (strcmp(tmp->name, team) == 0) {
             tmp->clients++; cli->team_name = strdup(team);
-            // send(cli->socket, buff, strlen(buff), 0);
             generate_player(s_infos, cli, cli->socket, team);
             char *buffer_life = strdup("LifeCycle");
             double task_food_time = calculate_time_for_task(s_infos, buffer_life);

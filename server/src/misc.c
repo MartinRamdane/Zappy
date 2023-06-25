@@ -10,6 +10,7 @@
 int *create_tuple(int x, int y)
 {
     int *tuple = malloc(sizeof(int) * 2);
+    tuple == NULL ? exit(84) : 0;
     tuple[0] = x;
     tuple[1] = y;
     return (tuple);

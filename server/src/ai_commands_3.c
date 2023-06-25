@@ -10,6 +10,7 @@
 void fork_command(client_t *client, server_t *server)
 {
     t_egg *egg = malloc(sizeof(t_egg));
+    egg == NULL ? exit(84) : 0;
     egg->team_name = client->player->team_name;
     egg->x = client->player->x;
     egg->y = client->player->y;

@@ -64,7 +64,7 @@ void loop_server(server_t *s_infos)
             continue;
         } else {
             recalculate_task_time(s_infos);
-        }    // Erreur / timeout sur le select
+        }
         if (FD_ISSET(s_infos->socket, &readfds)) {
             add_client(s_infos);
         } else {

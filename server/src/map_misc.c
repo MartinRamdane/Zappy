@@ -10,6 +10,7 @@
 int *get_resources_quantities(int *ratio, server_t infos)
 {
     int *q = malloc(sizeof(int) * 7);
+    q == NULL ? exit(84) : 0;
     q[0] = ratio[0] / (infos.width * infos.height);
     q[1] = ratio[1] / (infos.width * infos.height);
     q[2] = ratio[2] / (infos.width * infos.height);
@@ -23,6 +24,7 @@ int *get_resources_quantities(int *ratio, server_t infos)
 int *get_remaining_resources(int *ratio, server_t infos)
 {
     int *q = malloc(sizeof(int) * 7);
+    q == NULL ? exit(84) : 0;
     q[0] = ratio[0] % (infos.width * infos.height);
     q[1] = ratio[1] % (infos.width * infos.height);
     q[2] = ratio[2] % (infos.width * infos.height);

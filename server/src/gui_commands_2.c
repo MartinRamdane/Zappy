@@ -19,6 +19,7 @@ void send_map_content(client_t *client, server_t *server)
 void send_tile_with_pos(client_t *client, server_t *server, int x, int y)
 {
     char *buffer = malloc(sizeof(char) * 100);
+    buffer == NULL ? exit(84) : 0;
     memset(buffer, 0, 100);
     tile val = server->game->map[x][y];
     sprintf(buffer, "bct %d %d %d %d %d %d %d %d %d\n", x, y, val.food,
@@ -43,6 +44,7 @@ void send_new_player_connected(server_t *server, client_t *player)
 void send_playerdata_to_gui(client_t *cli, client_t *pl)
 {
     char *buffer = malloc(sizeof(char) * 100);
+    buffer == NULL ? exit(84) : 0;
     memset(buffer, 0, 100);
     sprintf(buffer, "pnw %d %d %d %d %d %s\n", pl->player->id, pl->player->x,
     pl->player->y, orientation_to_number(pl->player->orientation),

@@ -11,6 +11,7 @@ void send_new_egg_to_guis(server_t *server, t_egg *egg)
 {
     client_t *tmp = NULL;
     char *buff = malloc(sizeof(char) * 100);
+    buff == NULL ? exit(84) : 0;
     sprintf(buff, "enw %d %d %d %d\n", egg->id, egg->parent_id, egg->x, egg->y);
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL)
@@ -23,6 +24,7 @@ void send_egg_death_to_guis(server_t *server, t_egg *egg)
 {
     client_t *tmp = NULL;
     char *buff = malloc(sizeof(char) * 100);
+    buff == NULL ? exit(84) : 0;
     memset(buff, 0, 100);
     sprintf(buff, "edi %d\n", egg->id);
     LIST_FOREACH(tmp, &server->head, next) {
@@ -36,6 +38,7 @@ void send_egg_connection_to_guis(server_t *server, t_egg *egg)
 {
     client_t *tmp = NULL;
     char *buff = malloc(sizeof(char) * 100);
+    buff == NULL ? exit(84) : 0;
     memset(buff, 0, 100);
     sprintf(buff, "ebo %d\n", egg->id);
     LIST_FOREACH(tmp, &server->head, next) {

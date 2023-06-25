@@ -15,7 +15,6 @@ void add_task(server_t *server, char *cmd, double t_time, client_t *cli)
         cli->player->state = INCANTATION;
         if (check_can_incantation(server, cli) == 0) {
             send(cli->socket, "ko\n", 3, 0);
-            //event_player_incantation_end(cli, server, 0);
         } else
             send(cli->socket, "Elevation underway\n", 19, 0);
     }

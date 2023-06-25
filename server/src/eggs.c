@@ -13,6 +13,7 @@ void generate_eggs(server_t *s_infos)
     LIST_FOREACH(tmp, &s_infos->team_head, next) {
         for (int i = 0; i < s_infos->clientsNb; i++) {
             t_egg *egg = malloc(sizeof(t_egg));
+            egg == NULL ? exit(84) : 0;
             egg->team_name = tmp->name;
             egg->x = rand() % s_infos->width;
             egg->y = rand() % s_infos->height;
@@ -33,6 +34,7 @@ void regenerate_eggs(server_t *s_infos)
         if (counter != s_infos->clientsNb) {
             for (int i = 0; i < s_infos->clientsNb - counter; i++) {
                 t_egg *egg = malloc(sizeof(t_egg));
+                egg == NULL ? exit(84) : 0;
                 egg->team_name = tmp->name;
                 egg->x = rand() % s_infos->width;
                 egg->y = rand() % s_infos->height;

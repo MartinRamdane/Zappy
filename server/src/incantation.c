@@ -23,6 +23,7 @@ void make_incantation_for_all_players(server_t *server, client_t *client)
     for (int j = 0; j < i; j++) {
         clientList[j]->player->level++;
         char *buff = malloc(sizeof(char) * MAX_BODY_LENGTH);
+        buff == NULL ? exit(84) : 0;
         sprintf(buff, "Current level: %d\n", clientList[j]->player->level);
         send(clientList[j]->socket, buff, strlen(buff), 0);
         event_player_incantation_end(clientList[j], server, 1);

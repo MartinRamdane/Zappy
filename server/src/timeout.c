@@ -24,7 +24,7 @@ void calculate_timeout_val(server_t *server)
     if (tmp == NULL)
         return;
     server->tv->tv_sec = tmp->time;
-    server->tv->tv_usec = (suseconds_t)((tmp->time - (time_t)tmp->time) * 1000000);  // Set the microseconds part
+    server->tv->tv_usec = (suseconds_t)((tmp->time - (time_t)tmp->time) * 1000000);
     server->old_timeout = tmp->time;
 }
 

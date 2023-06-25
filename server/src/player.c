@@ -10,8 +10,10 @@
 void generate_player(server_t *server, client_t *cli, int socket, char *team_name)
 {
     cli->player = malloc(sizeof(player));
+    cli->player == NULL ? exit(84) : 0;
     cli->player->level = 1;
     cli->player->inv = malloc(sizeof(inventory));
+    cli->player->inv == NULL ? exit(84) : 0;
     cli->player->inv->food = 10; cli->player->inv->linemate = 0;
     cli->player->inv->deraumere = 0; cli->player->inv->sibur = 0;
     cli->player->inv->mendiane = 0; cli->player->inv->phiras = 0;
@@ -25,6 +27,7 @@ void generate_player(server_t *server, client_t *cli, int socket, char *team_nam
 void generate_gui_player(client_t *cli, int socket, server_t *s_infos)
 {
     cli->gui_player = malloc(sizeof(gui_player));
+    cli->gui_player == NULL ? exit(84) : 0;
     cli->gui_player->x = 0;
     cli->gui_player->y = 0;
     cli->gui_player->socket = socket;
@@ -51,6 +54,7 @@ int check_if_solo_on_tile(server_t *server, client_t *cli)
 void add_player_from_queue(tile *tile, player *player)
 {
     t_player_queue *p_queue = malloc(sizeof(t_player_queue));
+    p_queue == NULL ? exit(84) : 0;
     p_queue->player = player;
     LIST_INSERT_HEAD(&tile->player_head, p_queue, next);
 }

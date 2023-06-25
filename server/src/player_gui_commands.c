@@ -13,6 +13,7 @@ void event_player_expulsion(client_t *cli, server_t *server)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "pex %d\n", cli->player->id);
             send(tmp->socket, buff, strlen(buff), 0);
@@ -27,6 +28,7 @@ void event_player_broadcast(client_t *cli, server_t *server, char *msg)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "pbc %d %s\n", cli->player->id, msg);
             send(tmp->socket, buff, strlen(buff), 0);
@@ -41,6 +43,7 @@ void event_player_incantation_start(client_t *cli, server_t *server)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "pic %d %d %d %d\n", cli->player->x, cli->player->y,
             cli->player->level, cli->player->id);
@@ -56,6 +59,7 @@ void event_player_incantation_end(client_t *cli, server_t *server, int res)
     LIST_FOREACH(tmp, &server->head, next) {
         if (tmp->gui_player != NULL) {
             char *buff = malloc(sizeof(char) * 100);
+            buff == NULL ? exit(84) : 0;
             memset(buff, 0, 100);
             sprintf(buff, "pie %d %d %d\n", cli->player->x, cli->player->y,
             res);

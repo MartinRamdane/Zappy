@@ -10,6 +10,7 @@
 client_t *generate_client(int socket)
 {
     client_t *client = malloc(sizeof(client_t));
+    client == NULL ? exit(84) : 0;
     client->socket = socket;
     client->uid = generate_uuid();
     client->buffer = NULL;
@@ -17,6 +18,7 @@ client_t *generate_client(int socket)
     client->player = NULL;
     client->gui_player = NULL;
     client->buffer = malloc(sizeof(char) * MAX_BODY_LENGTH);
+    client->buffer == NULL ? exit(84) : 0;
     memset(client->buffer, 0, MAX_BODY_LENGTH);
     return client;
 }
@@ -24,6 +26,7 @@ client_t *generate_client(int socket)
 char *generate_uuid(void)
 {
     char *uuid = malloc(sizeof(char) * 37);
+    uuid == NULL ? exit(84) : 0;
     memset(uuid, 0, 37);
     uuid_t binuuid;
     uuid_generate_random(binuuid);
