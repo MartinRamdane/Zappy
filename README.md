@@ -58,3 +58,4 @@ The Zappy project was developed by the following team members:
 - Florian GRIMA (florian.grima@epitech.eu)
 - Gabriel MORAIS (gabriel.de-souza-morais@epitech.eu)
 - Martin RAMDANE (martin.ramdane@epitech.eu)
+- Lucas RIZZUTO (lucas.rizzuto@epitech.eu)
